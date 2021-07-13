@@ -13,6 +13,7 @@
         <div class="navigation-btns">
           <v-btn   v-for="(item,index) in items" :to="item.target" :key="index"
                  class="navigation-btn"
+                
           >
 
 
@@ -22,7 +23,6 @@
               {{ item.text }}
             </div>
           </v-btn>
-
         </div>
       </div>
     </v-parallax>
@@ -83,6 +83,7 @@ export default {
   min-height: 100px;
 
   margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
 
 
 }
@@ -103,6 +104,8 @@ export default {
 
 .navigation-btn:hover {
   transform: scale(1.1);
+  background-color: lightblue;
+
 
 }
 
