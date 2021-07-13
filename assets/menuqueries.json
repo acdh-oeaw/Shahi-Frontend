@@ -1,0 +1,52 @@
+[
+  {
+    "icon": "mdi-account-group",
+    "text": "Actors",
+    "target": {
+      "name": "list-q",
+      "params": {
+        "q": "{ \"codes\": \"actor\" }"
+      }
+    }
+  },
+  {
+    "icon": "mdi-text-box",
+    "text": "Sources",
+    "target": {
+      "name": "list-q",
+      "params": {
+        "q": "{ \"codes\": \"source\" }"
+      }
+    }
+  },
+  {
+    "icon": "mdi-calendar",
+    "text": "Events",
+    "target": {
+      "name": "list-q",
+      "params": {
+        "q": "{ \"codes\": \"event\" }"
+      }
+    }
+  },
+  {
+    "icon": "mdi-map-marker",
+    "text": "Places",
+    "target": {
+      "name": "map-q",
+      "params": {
+        "q": "{ \"codes\": \"place\" }"
+      }
+    }
+  },
+  {
+    "icon": "mdi-shape",
+    "text": "Artifacts",
+    "target": {
+      "name": "map-q",
+      "params": {
+        "q": "{ \"codes\": \"artifact\" }"
+      }
+    }
+  }
+]

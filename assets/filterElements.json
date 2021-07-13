@@ -1,0 +1,219 @@
+[
+  {
+    "en": "Actor",
+    "systemClass": "actor",
+    "selected": true,
+    "items": [
+      {
+        "en": "Name",
+        "label": "name",
+        "type": "text",
+        "values": [
+          {
+            "en": "Name",
+            "id": "name",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "like"
+          }
+        ]
+      },
+      {
+        "en": "Description",
+        "label": "description",
+        "type": "text",
+        "values": [
+          {
+            "en": "Description",
+            "id": "description",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "like"
+          }
+        ]
+      },
+      {
+        "label": "Sex",
+        "en": "Sex",
+        "type": "multiple",
+        "values": [
+          {
+            "en": "Female",
+            "id": "24",
+            "value": false,
+            "concatOperator": "and",
+            "logicalOperator": "eq"
+          },
+          {
+            "en": "Male",
+            "id": "25",
+            "value": false,
+            "concatOperator": "and",
+            "logicalOperator": "eq"
+          }
+        ]
+      },
+      {
+        "label": "Begin/End",
+        "en": "Begin/End",
+        "type": "text",
+        "values": [
+          {
+            "en": "Begin",
+            "id": "begin_from",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "ge"
+          },
+          {
+            "en": "End",
+            "id": "end_to",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "le"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "en": "Artifact",
+    "systemClass": "artifact",
+    "selected": false,
+    "items": [
+      {
+        "en": "Name",
+        "label": "name",
+        "type": "text",
+        "values": [
+          {
+            "en": "Name",
+            "id": "name",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "like"
+          }
+        ]
+      },
+      {
+        "en": "Description",
+        "label": "description",
+        "type": "text",
+        "values": [
+          {
+            "en": "Description",
+            "id": "description",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "like"
+          }
+        ]
+      },
+      {
+        "label": "Sex",
+        "en": "Sex",
+        "type": "multiple",
+        "values": [
+          {
+            "en": "Female",
+            "id": "24",
+            "value": false,
+            "concatOperator": "and",
+            "logicalOperator": "eq"
+          },
+          {
+            "en": "Male",
+            "id": "25",
+            "value": false,
+            "concatOperator": "and",
+            "logicalOperator": "eq"
+          }
+        ]
+      },
+      {
+        "label": "Begin/End",
+        "en": "Begin/End",
+        "type": "text",
+        "values": [
+          {
+            "en": "Begin",
+            "id": "begin_from",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "ge"
+          },
+          {
+            "en": "End",
+            "id": "end_to",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "le"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "en": "Places",
+    "systemClass": "place",
+    "selected": false,
+    "items": [
+      {
+        "en": "Name",
+        "label": "name",
+        "type": "text",
+        "values": [
+          {
+            "en": "Name",
+            "id": "name",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "like"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "en": "Sources",
+    "systemClass": "source",
+    "selected": false,
+    "items": [
+      {
+        "en": "Name",
+        "label": "name",
+        "type": "text",
+        "values": [
+          {
+            "en": "Name",
+            "id": "name",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "like"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "en": "Events",
+    "systemClass": "event",
+    "selected": false,
+    "items": [
+      {
+        "en": "Name",
+        "label": "name",
+        "type": "text",
+        "values": [
+          {
+            "en": "Name",
+            "id": "name",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "like"
+          }
+        ]
+      }
+    ]
+  }
+]

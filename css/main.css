@@ -1,0 +1,22 @@
+/* Page transisitions
+   https://nuxtjs.org/guides/features/transitions/#global-settings
+*/
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+/* Global Presets */
+
+html {
+  overflow: auto;
+}
+
+a {
+  text-decoration: none;
+}
