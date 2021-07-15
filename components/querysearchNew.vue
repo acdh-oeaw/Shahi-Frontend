@@ -26,8 +26,12 @@
 
       >
 
-        <span>
-       {{ item.en }} : {{item.value}}  {{item.group}}
+        <span class="text-body-1" v-if="item.value !== true & item.value !== false">
+            {{item.value}} 
+        </span>
+
+        <span class="text-body-1" v-else>
+            {{item.en}} 
         </span>
         <v-icon
           v-if="!item.codes"
