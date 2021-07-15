@@ -1,6 +1,6 @@
 [
   {
-    "en": "Actor",
+    "en": "Actors",
     "systemClass": "actor",
     "selected": true,
     "items": [
@@ -77,7 +77,7 @@
     ]
   },
   {
-    "en": "Artifact",
+    "en": "Artifacts",
     "systemClass": "artifact",
     "selected": false,
     "items": [

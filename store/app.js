@@ -72,6 +72,15 @@ export const mutations = {
     const vals = state.filterelements[selectedClass].items[selectedProperty].values;
     vals.filter((x) => x.id === key)[0].value = value[key];
   },
+  setSelectedFilterClass(state,name){
+    state.filterelements.forEach( (c) =>{
+      
+      if(c.en === name)
+        c.selected = true;
+      else
+        c.selected = false;
+    } )
+  }
 };
 
 export const actions = {};

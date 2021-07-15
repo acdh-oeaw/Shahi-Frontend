@@ -40,7 +40,7 @@
             :key="i"
             link
             :to="item.target"
-            @click="$store.commit('app/closeQueryDrawer')"
+            @click="clickOnItem(item)"
           >
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
@@ -120,6 +120,12 @@ export default {
         name,
         params: this.$route.params,
     })
+    },
+    clickOnItem(item){
+      this.view = item.target.name
+      this.$store.commit('app/closeQueryDrawer')
+this.$store.commit('app/setSelectedFilterClass', item.text
+      );
     }
   },
   watch:{
