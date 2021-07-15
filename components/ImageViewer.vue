@@ -37,8 +37,11 @@ export default {
         tileSize: 310,
       },
       infoUrl: 'https://stacks.stanford.edu/image/iiif/hg676jb4964%2F0380_796-44/info.json',
-      images: ['http://localhost:8182/iiif/3/shahi1.jpg/', 'http://localhost:8182/iiif/3/shahi2.jpg/'],
-      selected: 'http://localhost:8182/iiif/3/shahi1.jpg/info.json',
+      images: ['http://localhost:8182/iiif/3/sculpture1.jpg/', 
+                'http://localhost:8182/iiif/3/sculpture2.jpg/', 
+                'http://localhost:8182/iiif/3/sculpture3.jpg/', 
+                'http://localhost:8182/iiif/3/sculpture4.jpg/', ],
+      selected: 'http://localhost:8182/iiif/3/sculpture1.jpg/info.json',
     };
 
   },
