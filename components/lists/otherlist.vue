@@ -13,8 +13,8 @@
         </v-list-item-title>
 
         <v-row>
-          <v-col cols="6" v-for="(type, index) in getTypesBySystemClass(item.features[0].systemClass)" :key="index">
-            {{ type.hierarchy }}: {{ (getValueFromType(item, type.hierarchy)) }}
+          <v-col cols="6" v-for="(type, index) in item.features[0].types" :key="index">
+            {{ type.hierarchy}} : {{type.label}}
           </v-col>
         </v-row>
         <div v-if="item.features[0].description">{{ item.features[0].description[0].value }}</div>
