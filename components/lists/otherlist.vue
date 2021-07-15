@@ -3,7 +3,7 @@
   <v-list>
     <v-list-item v-for="(item,index) in items" :key="index">
 
-      <v-img class="mr-5"  max-width="120px" :src="'http://localhost:8182/iiif/3/shahi' + Math.ceil(Math.random() * 3) + '.jpg/full/120,/0/default.jpg'"></v-img>
+      <v-img class="mr-5"  max-width="120px" :src="'http://localhost:8182/iiif/3/' + ['sculpture','plate'][Math.floor(Math.random() * 2)]  + '1.jpg/full/120,/0/default.jpg'"></v-img>
       <v-list-item-content>
         <v-list-item-title class="headline mb-1 pink--text">
           {{ item.features[0].properties.title }}
