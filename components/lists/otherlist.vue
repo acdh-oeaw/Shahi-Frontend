@@ -58,7 +58,8 @@ export default {
     const p = await this.$api.Entities.get_api_0_2_query_({
       limit: itemsPerPage,
       first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
-      filter: this.filter,
+      codes: this.getSystemClassForFilter,
+      filter:this.getFilterList,
       column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
       sort: sortDesc[0] ? 'desc' : 'asc',
     });
@@ -118,6 +119,8 @@ export default {
       'getLabelBySystemClass',
       'getCRMClassBySystemClass',
       'getSortColumnByPath',
+       'getSystemClassForFilter',
+      'getFilterList',
     ]),
   },
 };
