@@ -1,12 +1,14 @@
 <template>
 <div>
-  <v-list>
-    <v-list-item v-for="(item,index) in items" :key="index">
+  <v-list >
+    <v-list-item v-for="(item,index) in items" :key="index" class="ma-5 list-element">
 
-      <v-img class="mr-5"  max-width="120px" :src="'http://localhost:8182/iiif/3/' + ['sculpture','plate'][Math.floor(Math.random() * 2)]  + '1.jpg/full/120,/0/default.jpg'"></v-img>
+      <v-img class="ma-2 mr-5"  max-width="120px" :src="'http://localhost:8182/iiif/3/' + ['sculpture','plate'][Math.floor(Math.random() * 2)]  + '1.jpg/full/120,/0/default.jpg'"></v-img>
       <v-list-item-content>
         <v-list-item-title class="headline mb-1 pink--text">
+         <router-link :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}`">
           {{ item.features[0].properties.title }}
+          </router-link>
         </v-list-item-title>
         <v-list-item-title class="title mb-1">{{ item.features[0].when.timespans[0].start.earliest }} -
           {{ item.features[0].when.timespans[0].end.latest }}
@@ -18,7 +20,6 @@
           </v-col>
         </v-row>
         <div v-if="item.features[0].description">{{ item.features[0].description[0].value }}</div>
-        <v-btn :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}`" text>More Details</v-btn>
       </v-list-item-content>
 
 
@@ -125,3 +126,11 @@ export default {
   },
 };
 </script>
+<style scoped>
+.list-element:hover{
+  transform: scale(1.005)
+}
+.list-element{
+  transition: all 0.5s;
+}
+</style>
