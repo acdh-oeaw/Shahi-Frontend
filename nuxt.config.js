@@ -1,7 +1,8 @@
 import colors from 'vuetify/es5/util/colors';
 export default {
   server:{
-    port: process.env.PORT || 3000
+    port: process.env.PORT || 3000,
+    host: process.env.GITLAB_ENVIRONMENT_NAME ? '0.0.0.0' : 'localhost'
   },
   /*
   ** Nuxt rendering mode
