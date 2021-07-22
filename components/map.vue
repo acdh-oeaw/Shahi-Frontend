@@ -1,7 +1,7 @@
 <template>
   <client-only>
     <div class="mapcontainer">
-      <l-map ref="map" :zoom="13" :center="center" :options="options">
+      <l-map ref="map" :zoom="7" :center="center" :options="options">
         <l-tile-layer :url="url" />
         <l-feature-group ref="features">
           <l-geo-json
