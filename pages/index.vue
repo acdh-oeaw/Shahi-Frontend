@@ -22,6 +22,11 @@
         <qmap/>
         </div>
 
+    <v-img
+    class="my-15"
+      height="100"
+      src="https://shahimaterialculture.univie.ac.at/fileadmin/_processed_/csm_1__Gilgit_MS_Banner_2ba90c6442.jpg"
+    ></v-img>
 
     <p class="text-h3">Artifacts</p>
     <v-row>
@@ -33,13 +38,15 @@
       ></v-skeleton-loader>
       </v-col>
     </v-row>
-    </v-container>
-    <v-parallax
+  
+
+    <v-img
       height="100"
+      class="my-15"
       src="https://shahimaterialculture.univie.ac.at/fileadmin/_processed_/csm_1__Gilgit_MS_Banner_2ba90c6442.jpg"
-    ></v-parallax>
-    <v-container>
-    <p class="text-h3">Artifacts</p>
+    ></v-img>
+ 
+    <p class="text-h3">Sites</p>
     <v-row>
       <v-col v-for="item in [1,2,3]" :key="item">
         <v-skeleton-loader
@@ -50,11 +57,7 @@
       </v-col>
     </v-row>
     </v-container>
-    <v-parallax
-      height="100"
 
-      src="https://shahimaterialculture.univie.ac.at/fileadmin/_processed_/csm_1__Gilgit_MS_Banner_2ba90c6442.jpg"
-    ></v-parallax>
   </div>
 </template>
 
