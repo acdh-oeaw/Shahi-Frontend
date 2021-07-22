@@ -19,6 +19,8 @@
       erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
       sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
 <div class="full-width" style="height:500px;">
+        <qmap/>
+        </div>
 
 
     <p class="text-h3">Artifacts</p>
@@ -50,21 +52,9 @@
     </v-container>
     <v-parallax
       height="100"
+
       src="https://shahimaterialculture.univie.ac.at/fileadmin/_processed_/csm_1__Gilgit_MS_Banner_2ba90c6442.jpg"
     ></v-parallax>
-    <!--    <v-layout-->
-    <!--      column-->
-    <!--      justify-center-->
-    <!--      align-center-->
-    <!--    >-->
-    <!--      <div class="text-center ontop splashtext">-->
-    <!--        <logo />-->
-    <!--        <div v-html="body" />-->
-    <!--      </div>-->
-    <!--    </v-layout>-->
-    <!--    <div class="bgmap">-->
-    <!--      <qmap v-if="!loading" :geojsonitems="items" :options="{ zoomControl: false }" />-->
-    <!--    </div>-->
   </div>
 </template>
 
@@ -74,7 +64,7 @@ import qmap from '~/components/map.vue';
 
 export default {
   components: {
-
+    qmap
   },
   data() {
     return {
@@ -110,6 +100,10 @@ export default {
   width: 100%;
   position: absolute;
   top: 0px;
+}
+
+.container {
+  max-width: 1500px;
 }
 
 

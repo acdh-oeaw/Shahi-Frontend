@@ -38,7 +38,7 @@ export default {
       show: true,
       enableTooltip: true,
       zoom: 6,
-      center: [48.2082, 16.3738],
+      center: [32.962949, 67.954916],
       url: 'https://tile.jawg.io/jawg-light/{z}/{x}/{y}.png?access-token=TUhizWedCN04NDjuRQtXfgE0HSuYwHzro3NRUDa3LMUlLbymREaTyUW2lpuoNnMz',
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
