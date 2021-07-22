@@ -9,32 +9,17 @@
       app
       color="grey lighten-4"
     >
-      <v-list
-        dense
-        class="grey lighten-4"
-      >
+      <v-list dense class="grey lighten-4">
         <template v-for="(item, i) in items">
-          <v-row
-            v-if="item.heading"
-            :key="i"
-            align="center"
-          >
+          <v-row v-if="item.heading" :key="i" align="center">
             <v-col cols="6">
               <v-subheader v-if="item.heading">
                 {{ item.heading }}
               </v-subheader>
             </v-col>
-            <v-col
-              cols="6"
-              class="text-right"
-            />
+            <v-col cols="6" class="text-right" />
           </v-row>
-          <v-divider
-            v-else-if="item.divider"
-            :key="i"
-            dark
-            class="my-4"
-          />
+          <v-divider v-else-if="item.divider" :key="i" dark class="my-4" />
           <v-list-item
             v-else
             :key="i"
@@ -55,32 +40,116 @@
       </v-list>
     </v-navigation-drawer>
     <v-expand-transition>
-    <v-app-bar app clipped-left class="ontop" v-if="hideOnMainPage">
-      <v-app-bar-nav-icon @click="$store.commit('app/toggleQueryDrawer')" />
-      <nuxt-link to="/" @click="$store.commit('app/closeQueryDrawer')">
-        <div class="logocaption d-none d-sm-flex">
-          <img class="barlogo ml-1 mr-1" alt="logo" src="/OpenAtlasDiscovery_logo.png">
-        </div>
-      </nuxt-link>
+      <v-app-bar app clipped-left class="ontop" v-if="hideOnMainPage">
+        <v-app-bar-nav-icon @click="$store.commit('app/toggleQueryDrawer')" />
+        <nuxt-link to="/" @click="$store.commit('app/closeQueryDrawer')">
+          <div class="logocaption d-none d-sm-flex">
+            <img
+              class="barlogo ml-1 mr-1"
+              alt="logo"
+              src="/OpenAtlasDiscovery_logo.png"
+            />
+          </div>
+        </nuxt-link>
 
-      <querysearch />
-      <v-spacer />
-      <v-fade-transition>
-      <v-btn-toggle v-if="['list-q','map-q','detaillist-q'].includes($route.name)"    v-model="view">
-        <v-btn value="list-q">Table</v-btn>
-        <v-btn value="map-q">Map</v-btn>
-        <v-btn value="detaillist-q">List</v-btn>
-      </v-btn-toggle>
-      </v-fade-transition>
-    </v-app-bar>
+        <querysearch />
+        <v-spacer />
+        <v-fade-transition>
+          <v-btn-toggle
+            v-if="['list-q', 'map-q', 'detaillist-q'].includes($route.name)"
+            v-model="view"
+          >
+            <v-btn value="list-q">Table</v-btn>
+            <v-btn value="map-q">Map</v-btn>
+            <v-btn value="detaillist-q">List</v-btn>
+          </v-btn-toggle>
+        </v-fade-transition>
+      </v-app-bar>
     </v-expand-transition>
     <v-main>
       <nuxt />
     </v-main>
+    <div class="grey lighten-3 mt-15">
+      <div style="max-width: 1600px" class="ma-auto my-5">
+        <v-row no-gutters class="ma-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-message-circle"
+          >
+            <path
+              d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+            ></path>
+          </svg>
+          Contact
+        </v-row>
+        <v-divider></v-divider>
+        <v-row no-gutters class="my-5 mx-2">
+          <v-col cols="3"
+            ><img
+              src="https://fundament.acdh.oeaw.ac.at/common-assets/images/acdh_logo.svg"
+              class="image"
+              alt="ACDH Logo"
+              style="max-width: 100%; height: auto"
+              title="ACDH Logo"
+          /></v-col>
+          <v-col cols="6">
+            <div>
+              <p>
+                ACDH-CH
+                <br />
+                Austrian Centre for Digital Humanities <br />
+                and Cultural Heritage
+                <br />
+                Austrian Academy of Sciences
+              </p>
+              <p>
+                Sonnenfelsgasse 19,
+                <br />
+                1010 Vienna
+              </p>
+              <p>
+                T: +43 1 51581-2200
+                <br />
+                E: <a href="mailto:acdh@oeaw.ac.at">acdh@oeaw.ac.at</a>
+              </p>
+            </div>
+          </v-col>
+          <v-col cols="3">
+            <div class="textwidget custom-html-widget">
+              <h6>HELPDESK</h6>
+              <p>
+                ACDH-CH runs a helpdesk offering advice for questions related to
+                various digital humanities topics.
+              </p>
+              <p>
+                <a
+                  class="helpdesk-button"
+                  href="mailto:acdh-helpdesk@oeaw.ac.at"
+                  >ASK US!</a
+                >
+              </p>
+            </div>
+          </v-col>
+        </v-row>
+        <div class="text-center text-caption">
+          © Copyright OEAW |<nuxt-link to="/imprint">
+            Impressum/Imprint</nuxt-link
+          >
+        </div>
+      </div>
+    </div>
   </v-app>
 </template>
 <script>
-import querysearch from '~/components/querysearchNew.vue';
+import querysearch from "~/components/querysearchNew.vue";
 export default {
   components: {
     querysearch,
@@ -89,61 +158,61 @@ export default {
     return {
       drawer: false,
       view: undefined,
-      items: [
-        { heading: 'Sample Queries' },
-      ].concat(this.$store.state.app.menuitems),
-      title: '',
-      windowTop:0,
+      items: [{ heading: "Sample Queries" }].concat(
+        this.$store.state.app.menuitems
+      ),
+      title: "",
+      windowTop: 0,
     };
   },
   async mounted() {
     const content = await this.$api.Content.get_api_0_2_content_({});
-    this.$store.commit('app/setSiteName', content.body['site-name']);
-    this.title = content.body['site-name'];
-    window.addEventListener("scroll", this.onScroll)
+    this.$store.commit("app/setSiteName", content.body["site-name"]);
+    this.title = content.body["site-name"];
+    window.addEventListener("scroll", this.onScroll);
   },
   beforeDestroy() {
-    window.removeEventListener("scroll", this.onScroll)
+    window.removeEventListener("scroll", this.onScroll);
   },
   head() {
     return { title: this.title };
   },
-  methods:{
+  methods: {
     onScroll(e) {
-      this.windowTop = window.top.scrollY /* or: e.target.documentElement.scrollTop */
+      this.windowTop =
+        window.top.scrollY; /* or: e.target.documentElement.scrollTop */
     },
-    changeMode(){
-      let name = 'list-q';
-      if(this.$route.name === 'list-q')
-        name = 'map-q'
+    changeMode() {
+      let name = "list-q";
+      if (this.$route.name === "list-q") name = "map-q";
       this.$router.push({
         name,
         params: this.$route.params,
-    })
+      });
     },
-    clickOnItem(item){
-      this.view = item.target.name
-      this.$store.commit('app/closeQueryDrawer')
-this.$store.commit('app/setSelectedFilterClass', item.text
-      );
-    }
+    clickOnItem(item) {
+      this.view = item.target.name;
+      this.$store.commit("app/closeQueryDrawer");
+      this.$store.commit("app/setSelectedFilterClass", item.text);
+    },
   },
-  watch:{
+  watch: {
     view: {
       handler(name) {
         this.$router.push({
           name,
           params: this.$route.params,
-        })
+        });
       },
       immediate: true,
     },
   },
-  computed:{
-    hideOnMainPage(){
-     return this.$route.name != 'index' || this.windowTop >=300
-    }
-  }};
+  computed: {
+    hideOnMainPage() {
+      return this.$route.name != "index" || this.windowTop >= 300;
+    },
+  },
+};
 </script>
 <style lang="scss">
 td {
@@ -160,7 +229,7 @@ td {
 }
 
 .ontop {
-  z-index: 401!important;
+  z-index: 401 !important;
 }
 
 .logocaption {
@@ -172,5 +241,24 @@ td {
   height: 53px;
   top: 2px;
   position: relative;
+}
+
+a.helpdesk-button:hover,
+a.helpdesk-button:focus {
+  background-color: #88dbdf;
+  color: #fff;
+  text-decoration: none;
+}
+a.helpdesk-button {
+  display: block;
+  background-color: #fff;
+  border: 1px solid #88dbdf;
+  border-radius: 20px;
+  padding: 0.25rem 1.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #88dbdf;
+  max-width: 16rem;
+  transition: background-color ease 0.2s, color ease 0.2s;
 }
 </style>
