@@ -69,3 +69,13 @@ in the [Vue Router Documentation](https://router.vuejs.org/guide/essentials/hist
 
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+## Using the generated container image
+
+Nuxt.js by default binds to localhost. This is not going to work in a container environment because in such an environment the service has to bind to an ip address assigned to that containber.
+This repository is setup to bind to any address if the container is run in an environment where the variable GITLAB_ENVIRONMENT_NAME is set (the value does not matter).
+E. g. for the latest master branch image on Windows or Linux using docker you can run the service like this
+
+```bash
+docker run --rm -it -p 8080:8080 -e PORT=8080 -e GITLAB_ENVIRONMENT_NAME=something registry.gitlab.com/acdh-oeaw/shahi/shahi-frontend/master 
+```
