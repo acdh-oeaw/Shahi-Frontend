@@ -56,12 +56,13 @@
         <v-spacer />
         <v-fade-transition>
           <v-btn-toggle
-            v-if="['list-q', 'map-q', 'detaillist-q'].includes($route.name)"
+            v-if="['list-q', 'map-q', 'detaillist-q', 'gallery-q'].includes($route.name)"
             v-model="view"
           >
             <v-btn value="list-q">Table</v-btn>
             <v-btn value="map-q">Map</v-btn>
             <v-btn value="detaillist-q">List</v-btn>
+            <v-btn value="gallery-q">Gallery</v-btn>
           </v-btn-toggle>
         </v-fade-transition>
       </v-app-bar>
