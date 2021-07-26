@@ -28,7 +28,6 @@ export const getters = {
         }
       });
     });
-    console.log(filterList);
     return filterList;
   },
   getIconBySystemClass: (s) => (c) => s.classes.find((item) => item.systemClass === c).icon,

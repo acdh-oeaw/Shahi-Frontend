@@ -136,10 +136,8 @@ export default {
     computed: {},
   },
   beforeMount() {
-    console.log('BEforeMount');
 
     this.filterElements = JSON.parse(JSON.stringify(this.$store.state.app.filterelements));
-    console.log(this.filterElements);
   },
   methods: {
     chunk(arr, size) {
