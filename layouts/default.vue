@@ -213,6 +213,19 @@ export default {
       },
       immediate: true,
     },
+    "$route.path": {
+      handler(s) {
+        if (s) {
+          const view = s.slice(1) + '-q';
+          if (this.$store.state.app.viewelements.map(x => x.route).includes(view))
+          {
+            this.view = view
+          }
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   computed: {
     hideOnMainPage() {
