@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mt-15 mx-5 gallery-columns" :style="cssVars">
+    <div v-if="!loading" class="mt-15 mx-5 gallery-columns" :style="cssVars">
       <div class="gallery-column" v-for="(item, index) in items" :key="index">
         <div class="gallery-content +">
           <p class="text-center">{{ item.features[0].properties.title }}</p>
@@ -12,10 +12,21 @@
             #{{ index }}
           </div>
         </div>
-        <nuxt-link :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}`">
-        <div class="gallery-background"></div>
-</nuxt-link>
+        <nuxt-link
+          :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}`"
+        >
+          <div class="gallery-background"></div>
+        </nuxt-link>
       </div>
+    </div>
+    <div v-else style="width: 100vw; height: 60vh">
+      <v-progress-circular
+        style="position: absolute; top: 0; right: 0; bottom: 0; left: 0"
+        class="ma-auto"
+        :size="150"
+        
+        indeterminate
+      ></v-progress-circular>
     </div>
     <v-pagination
       v-model="options.page"
@@ -39,6 +50,7 @@ export default {
     this.loading = true;
     const { sortBy, sortDesc, page, itemsPerPage } = this.options;
     // eslint-disable-next-line no-underscore-dangle
+    window.scrollTo(0, 0);
     const p = await this.$api.Entities.get_api_0_2_query_({
       limit: itemsPerPage,
       first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
@@ -109,19 +121,29 @@ export default {
       "getFilterList",
     ]),
 
-    cssVars(){
+    cssVars() {
       let colCount = 3;
-       switch (this.$vuetify.breakpoint.name) {
-          case 'xs': colCount = 1; break;
-          case 'sm': colCount = 2; break;
-          case 'md': colCount = 3; break;
-          case 'lg': colCount = 4; break;
-          case 'xl': colCount = 4; break;
-        }
-      return {
-        "--column-count" : colCount 
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          colCount = 1;
+          break;
+        case "sm":
+          colCount = 2;
+          break;
+        case "md":
+          colCount = 3;
+          break;
+        case "lg":
+          colCount = 4;
+          break;
+        case "xl":
+          colCount = 4;
+          break;
       }
-    }
+      return {
+        "--column-count": colCount,
+      };
+    },
   },
 };
 </script>
@@ -129,7 +151,7 @@ export default {
 .gallery-columns {
   -moz-column-count: 4;
   -webkit-column-count: 4;
-  column-count: var(--column-count);;
+  column-count: var(--column-count);
 }
 
 .gallery-column {
@@ -141,9 +163,9 @@ export default {
 }
 .gallery-content {
   position: relative;
-  padding-bottom: 20px;;
+  padding-bottom: 20px;
   z-index: 20;
-  pointer-events: none
+  pointer-events: none;
 }
 
 .gallery-background {

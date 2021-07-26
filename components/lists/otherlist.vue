@@ -6,18 +6,18 @@
       outlined
       rounded="lg"
       class="ma-2 mr-5"
-      style="overflow:hidden;"
+      style="overflow: hidden"
     >
       <v-row no-gutters>
         <v-col cols="12" sm="3" md="2">
-                  <v-img
-          max-width="100%"
-          :src="
-            'http://localhost:8182/iiif/3/' +
-            ['sculpture', 'plate'][Math.floor(Math.random() * 2)] +
-            '1.jpg/full/400,/0/default.jpg'
-          "
-        ></v-img>
+          <v-img
+            max-width="100%"
+            :src="
+              'http://localhost:8182/iiif/3/' +
+              ['sculpture', 'plate'][Math.floor(Math.random() * 2)] +
+              '1.jpg/full/400,/0/default.jpg'
+            "
+          ></v-img>
         </v-col>
         <v-col cols="12" sm="9" md="10">
           <v-card-title
@@ -29,7 +29,7 @@
               {{ item.features[0].properties.title }}
             </router-link></v-card-title
           >
-          <v-card-text style="min-width: 100vw;" class="text-body-1">
+          <v-card-text style="min-width: 100vw" class="text-body-1">
             <p
               class="mb-1"
               v-if="item.features[0].when.timespans[0].start.earliest"
@@ -57,7 +57,8 @@
               </v-col>
             </v-row>
           </v-card-text>
-        </v-col></v-row>
+        </v-col></v-row
+      >
     </v-card>
 
     <v-pagination
@@ -96,6 +97,7 @@ export default {
     this.itemIndex = p.body.pagination.index;
     this.totalItems = p.body.pagination.entities;
     this.loading = false;
+    window.scrollTo(0, 0);
   },
   data() {
     return {
