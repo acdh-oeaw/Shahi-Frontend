@@ -1,51 +1,65 @@
 <template>
-  <div>
-    <v-list>
-      <v-list-item
-        v-for="(item, index) in items"
-        :key="index"
-        class="ma-5 list-element"
-      >
-        <v-img
-          class="ma-2 mr-5"
-          max-width="120px"
+  <div class="mt-4">
+    <v-card
+      v-for="(item, index) in items"
+      :key="index"
+      outlined
+      rounded="lg"
+      class="ma-2 mr-5"
+      style="overflow:hidden;"
+    >
+      <v-row no-gutters>
+        <v-col cols="12" sm="3" md="2">
+                  <v-img
+          max-width="100%"
           :src="
             'http://localhost:8182/iiif/3/' +
             ['sculpture', 'plate'][Math.floor(Math.random() * 2)] +
-            '1.jpg/full/120,/0/default.jpg'
+            '1.jpg/full/400,/0/default.jpg'
           "
         ></v-img>
-        <v-list-item-content>
-          <v-list-item-title class="headline mb-1 pink--text">
-            <router-link
+        </v-col>
+        <v-col cols="12" sm="9" md="10">
+          <v-card-title
+            ><router-link
               :to="`/single/${
                 item.features[0]['@id'].split('/').splice(-1)[0]
               }`"
             >
               {{ item.features[0].properties.title }}
-            </router-link>
-          </v-list-item-title>
-          <v-list-item-title class="title mb-1"
-            >{{ item.features[0].when.timespans[0].start.earliest }} -
-            {{ item.features[0].when.timespans[0].end.latest }}
-          </v-list-item-title>
-
-          <v-row>
-            <v-col
-              cols="6"
-              v-for="(type, index) in item.features[0].types"
-              :key="index"
+            </router-link></v-card-title
+          >
+          <v-card-text style="min-width: 100vw;" class="text-body-1">
+            <p
+              class="mb-1"
+              v-if="item.features[0].when.timespans[0].start.earliest"
             >
-              {{ type.hierarchy }} : {{ type.label }}
-            </v-col>
-          </v-row>
-          <div v-if="item.features[0].description">
-            {{ item.features[0].description[0].value }}
-          </div>
-        </v-list-item-content>
-      </v-list-item>
-      <v-list-item @click="options.page++"> Load more </v-list-item>
-    </v-list>
+              from {{ item.features[0].when.timespans[0].start.earliest }}
+            </p>
+
+            <p
+              class="mb-1"
+              v-if="item.features[0].when.timespans[0].end.latest"
+            >
+              to {{ item.features[0].when.timespans[0].end.latest }}
+            </p>
+
+            <div v-if="item.features[0].description">
+              {{ item.features[0].description[0].value }}
+            </div>
+            <v-row>
+              <v-col
+                cols="6"
+                v-for="(type, index) in item.features[0].types"
+                :key="index"
+              >
+                {{ type.hierarchy }} : {{ type.label }}
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </v-col></v-row>
+    </v-card>
+
     <v-pagination
       v-model="options.page"
       :length="Math.floor(totalItems / options.itemsPerPage)"
@@ -142,7 +156,6 @@ export default {
 </script>
 <style scoped>
 .list-element:hover {
-  transform: scale(1.005);
 }
 .list-element {
   transition: all 0.1s;
