@@ -66,29 +66,29 @@ export default {
     },
   },
   async fetch() {
-    this.loading = true;
+     this.loading = true;
     const {
       sortBy,
       sortDesc,
       page,
       itemsPerPage,
     } = this.options;
-    // eslint-disable-next-line no-underscore-dangle
-    const p = await this.$api.Entities.get_api_0_2_query_({
+    const query = {
       limit: itemsPerPage,
-      first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].start_id : null,
+      first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
       codes: this.getSystemClassForFilter,
       filter:this.getFilterList,
       column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
       sort: sortDesc[0] ? 'desc' : 'asc',
-    });
+    };
+    // eslint-disable-next-line no-underscore-dangle
+    const p = await this.$api.Entities.get_api_0_2_query_(query);
     // eslint-disable-next-line prefer-destructuring
-    console.log(p.body);
-    console.log(this.filter)
     this.items = p.body.results;
     this.itemIndex = p.body.pagination.index;
     this.totalItems = p.body.pagination.entities;
     this.loading = false;
+   
   },
   data() {
     return {

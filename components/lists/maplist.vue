@@ -78,7 +78,7 @@ export default {
     // eslint-disable-next-line no-underscore-dangle
     const p = await this.$api.Entities.get_api_0_2_query_({
       limit: itemsPerPage,
-      first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].start_id : null,
+      first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
       codes: this.getSystemClassForFilter,
       filter:this.getFilterList,
       column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
