@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mt-15 mx-5 gallery-columns">
+    <div class="mt-15 mx-5 gallery-columns" :style="cssVars">
       <div class="gallery-column" v-for="(item, index) in items" :key="index">
         <div class="gallery-content +">
           <p class="text-center">{{ item.features[0].properties.title }}</p>
@@ -108,6 +108,20 @@ export default {
       "getSystemClassForFilter",
       "getFilterList",
     ]),
+
+    cssVars(){
+      let colCount = 3;
+       switch (this.$vuetify.breakpoint.name) {
+          case 'xs': colCount = 1; break;
+          case 'sm': colCount = 2; break;
+          case 'md': colCount = 3; break;
+          case 'lg': colCount = 4; break;
+          case 'xl': colCount = 4; break;
+        }
+      return {
+        "--column-count" : colCount 
+      }
+    }
   },
 };
 </script>
@@ -115,7 +129,7 @@ export default {
 .gallery-columns {
   -moz-column-count: 4;
   -webkit-column-count: 4;
-  column-count: 4;
+  column-count: var(--column-count);;
 }
 
 .gallery-column {
