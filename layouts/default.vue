@@ -98,8 +98,8 @@
           Contact
         </v-row>
         <v-divider></v-divider>
-        <v-row no-gutters class="my-5 mx-2">
-          <v-col cols="3"
+        <v-row class="my-5 mx-2">
+          <v-col cols="12" sm="3"
             ><img
               src="https://fundament.acdh.oeaw.ac.at/common-assets/images/acdh_logo.svg"
               class="image"
@@ -107,7 +107,7 @@
               style="max-width: 100%; height: auto"
               title="ACDH Logo"
           /></v-col>
-          <v-col cols="6">
+          <v-col cols="12" sm="6">
             <div>
               <p>
                 ACDH-CH
@@ -129,7 +129,7 @@
               </p>
             </div>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" sm="3">
             <div class="textwidget custom-html-widget">
               <h6>HELPDESK</h6>
               <p>
