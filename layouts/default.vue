@@ -1,7 +1,7 @@
 <template>
   <v-app light>
     <v-navigation-drawer
-      v-if="hideOnMainPage"
+     
       v-model="$store.state.app.queryDrawer"
       class="ontop"
       :disable-resize-watcher="true"
@@ -40,7 +40,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-expand-transition>
-      <v-app-bar app clipped-left class="ontop" v-if="hideOnMainPage">
+      <v-app-bar app clipped-left class="ontop" >
         <v-app-bar-nav-icon @click="$store.commit('app/toggleQueryDrawer')" />
         <nuxt-link to="/" @click="$store.commit('app/closeQueryDrawer')">
           <div class="logocaption d-none d-sm-flex">
