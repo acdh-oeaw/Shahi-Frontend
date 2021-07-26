@@ -1,0 +1,18 @@
+[
+    {
+        "en": "Table",
+        "route": "list-q"
+    },
+    {
+        "en":"List",
+        "route":"detaillist-q"
+    },
+    {
+        "en": "Map",
+        "route": "map-q"
+    },
+    {
+        "en": "Gallery",
+        "route": "gallery-q"
+    }
+]

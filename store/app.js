@@ -3,6 +3,7 @@ import classes from '../assets/classes.json';
 import tableheaders from '../assets/tableheaders.json';
 import templateprops from '../assets/templateprops.json';
 import filterelements from '../assets/filterElements.json';
+import viewelements from '../assets/viewelements.json';
 
 /* eslint-disable no-param-reassign,no-shadow */
 export const state = () => ({
@@ -13,6 +14,7 @@ export const state = () => ({
   tableheaders,
   templateprops,
   filterelements,
+  viewelements,
 });
 
 export const getters = {
