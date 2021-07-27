@@ -2,21 +2,20 @@
   <div>
     <div>
       <v-layout column justify-center align-center style="height: 100%">
-        <div
-          class="text-center ontop splashtext"
-          :class="showContent ? 'fullSize' : ''"
-        >
-          <v-fade-transition>
+        <div class="text-center ontop splashtext" :class="animationClasses">
+          <transition name="fade">
             <div v-if="!showContent">
               <logo />
               <div v-html="body" />
               <v-btn @click="showContent = !showContent">more</v-btn>
+              <v-icon style="position:absolute; right:10px; top:10px" @click="close = !close">mdi-close</v-icon>
+              <div style="position:absolute; left:0; top:0; right:0;bottom:0;" v-if="close" @click="close = !close" ></div>
             </div>
-          </v-fade-transition>
+          </transition>
           <transition name="fade">
             <div v-if="showContent" class="main-content">
               <ImageNavigation></ImageNavigation>
-
+              <v-btn @click="showContent = !showContent"></v-btn>
               <v-container>
                 <p class="text-h3">Title</p>
                 <p class="text-body-1">
@@ -112,6 +111,8 @@ export default {
       body: "loading...",
       loading: true,
       showContent: false,
+      close: false,
+      animationClasses: "",
     };
   },
   async mounted() {
@@ -125,6 +126,20 @@ export default {
     const content = await this.$api.Content.get_api_0_2_content_({});
     this.body = content.body.intro;
     this.loading = false;
+  },
+  watch: {
+    showContent() {
+      if(this.showContent)
+        this.animationClasses = "expand"
+      else
+        this.animationClasses ="shrink"
+    },
+    close() {
+      if(this.close)
+        this.animationClasses = "closed"
+      else
+        this.animationClasses ="open"
+    },
   },
 };
 </script>
@@ -143,8 +158,13 @@ html {
   height: 400px;
 }
 
-.fullSize {
+.expand {
   animation: heightStretch 0.1s linear;
+  animation-fill-mode: forwards;
+}
+
+.shrink {
+  animation: heightShrink 0.1s linear;
   animation-fill-mode: forwards;
 }
 
@@ -167,6 +187,71 @@ html {
     background-color: rgba(255, 255, 255, 1);
   }
 }
+
+@keyframes heightShrink {
+  0% {
+    top: 0;
+
+    height: 100%;
+    background-color: rgba(255, 255, 255, 1);
+  }
+  1% {
+    top: 0;
+    background-color: rgba(255, 255, 255, 1);
+
+    height: 100vh;
+  }
+  100% {
+    height: 400px;
+    top: 15vh;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.closed {
+  animation: moveRight 0.1s linear;
+    transition: transform 100ms ease-in-out;
+    cursor: pointer;
+
+  animation-fill-mode: forwards;
+}
+
+.closed:hover{
+  transform: translateX(-5%);
+}
+
+.open {
+  animation: moveCenter 0.1s linear;
+  animation-fill-mode: forwards;
+}
+
+@keyframes moveRight {
+  0% {
+    left: 0;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.8);
+
+  }
+  100% {
+    left: 95%;
+    background-color: rgba(255, 255, 255, 1);
+  }
+ 
+}
+
+@keyframes moveCenter {
+  100% {
+    left: 0;
+    height: 400px;
+    background-color: rgba(255, 255, 255, 0.8);
+
+  }
+  0%{
+    left: 90%;
+    background-color: rgba(255, 255, 255, 1);
+
+  }
+}
 .bgmap {
   height: calc(100vh - 64px);
   width: 100%;
@@ -179,12 +264,11 @@ html {
 }
 
 .fade-leave-active {
-  transition: opacity 0.5s;
 }
 
 .fade-enter-active {
-  transition: opacity 0.5s;
-  transition-delay: 0.4s;
+  transition: opacity 0.2s;
+  transition-delay: 0.2s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
