@@ -40,7 +40,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-expand-transition>
-      <v-app-bar app clipped-left class="ontop" >
+      <v-app-bar app clipped-left style="z-index:9999" >
         <v-app-bar-nav-icon @click="$store.commit('app/toggleQueryDrawer')" />
         <nuxt-link to="/?mode=information" @click="$store.commit('app/closeQueryDrawer')">
           <div class="logocaption d-none d-sm-flex">
