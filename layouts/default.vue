@@ -42,7 +42,7 @@
     <v-expand-transition>
       <v-app-bar app clipped-left class="ontop" >
         <v-app-bar-nav-icon @click="$store.commit('app/toggleQueryDrawer')" />
-        <nuxt-link to="/" @click="$store.commit('app/closeQueryDrawer')">
+        <nuxt-link to="/?mode=information" @click="$store.commit('app/closeQueryDrawer')">
           <div class="logocaption d-none d-sm-flex">
             <img
               class="barlogo ml-1 mr-1"

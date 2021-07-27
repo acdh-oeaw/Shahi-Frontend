@@ -7,7 +7,7 @@
       <div class="image-content">
         <div class="image-header text-h2">Shahi Kingdom</div>
         <div class="navigation-btns">
-          <v-btn @click="$emit('backToMap')" class="navigation-btn">
+          <v-btn @click="$router.push('')" class="navigation-btn">
             <v-icon large>mdi-map</v-icon>
 
             <div>

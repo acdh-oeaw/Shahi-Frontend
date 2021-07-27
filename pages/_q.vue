@@ -1,12 +1,9 @@
 <template>
   <div>
     <div>
-      <v-layout column justify-center align-center >
+      <v-layout column justify-center align-center style="height: 100%">
         <div class="text-center ontop splashtext" :class="animationClasses">
-              {{asdf}}
-
           <transition name="fade">
-            
             <div v-if="!showContent">
               <logo />
               <div v-html="body" />
@@ -16,8 +13,8 @@
             </div>
           </transition>
           <transition name="fade">
-            <div v-if="showContent">
-              <ImageNavigation></ImageNavigation>
+            <div v-if="showContent" class="main-content">
+              <ImageNavigation @backToMap="showContent=false"></ImageNavigation>
               <v-container>
                 <p class="text-h3">Title</p>
                 <p class="text-body-1">
@@ -112,6 +109,7 @@ export default {
       items: [],
       body: "loading...",
       loading: true,
+      showContent: false,
       close: false,
       animationClasses: "",
     };
@@ -144,26 +142,22 @@ export default {
   },
   methods:{
     openContent(){
-      const name = 'index'
+      console.log(this.$route.params)
+      const name = 'index-q'
        this.$router.push({
          name,
-        query: {
-          mode: "information"
+        params: {
+          q: true,
         },
     })
-      console.log(this.$route.query)
+      console.log(this.$route.params.q)
 
     }
   },
   computed:{
-    showContent(){
-      if(this.$route.query?.mode === 'information' ){
-        this.animationClasses = 'expand'
-        return true
-      }
-      else
-        return false
-      
+    asdf(){
+      console.log(this.$route.params.q)
+      return this.$route.params.q
     }
   }
 
