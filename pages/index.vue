@@ -7,15 +7,14 @@
             <div v-if="!showContent">
               <logo />
               <div v-html="body" />
-              <v-btn @click="showContent = !showContent">more</v-btn>
+              <v-btn text @click="showContent = !showContent">more Information</v-btn>
               <v-icon style="position:absolute; right:10px; top:10px" @click="close = !close">mdi-close</v-icon>
               <div style="position:absolute; left:0; top:0; right:0;bottom:0;" v-if="close" @click="close = !close" ></div>
             </div>
           </transition>
           <transition name="fade">
             <div v-if="showContent" class="main-content">
-              <ImageNavigation></ImageNavigation>
-              <v-btn @click="showContent = !showContent"></v-btn>
+              <ImageNavigation @backToMap="showContent=false"></ImageNavigation>
               <v-container>
                 <p class="text-h3">Title</p>
                 <p class="text-body-1">
@@ -233,7 +232,7 @@ html {
 
   }
   100% {
-    left: 95%;
+    left: 95vw;
     background-color: rgba(255, 255, 255, 1);
   }
  

@@ -1,22 +1,25 @@
 <template>
   <div>
-
     <v-parallax
       height="500"
       src="https://shahimaterialculture.univie.ac.at/fileadmin/_processed_/csm_1__Gilgit_MS_Banner_2ba90c6442.jpg"
-
     >
       <div class="image-content">
-        <div class="image-header text-h2">
-          Shahi Kingdom
-        </div>
+        <div class="image-header text-h2">Shahi Kingdom</div>
         <div class="navigation-btns">
-          <v-btn   v-for="(item,index) in items" :to="item.target" :key="index"
-                 class="navigation-btn"
-                
+          <v-btn @click="$emit('backToMap')" class="navigation-btn">
+            <v-icon large>mdi-map</v-icon>
+
+            <div>
+              Map
+            </div>
+          </v-btn>
+          <v-btn
+            v-for="(item, index) in items"
+            :to="item.target"
+            :key="index"
+            class="navigation-btn"
           >
-
-
             <v-icon large>{{ item.icon }}</v-icon>
 
             <div>
@@ -26,47 +29,38 @@
         </div>
       </div>
     </v-parallax>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ImageNavigation',
+  name: "ImageNavigation",
   data() {
     return {
-      items: [{
-        text: 'Collections',
-        icon: '$artifact',
-        target: {
-          'name': 'list-q',
-          'params': {
-            'q': '{ "codes": "actor" }'
-          }
-        }
-      },
+      items: [
         {
-          text: 'Map',
-          icon: 'mdi-map',
+          text: "Collections",
+          icon: "$artifact",
           target: {
-            'name': 'detaillist-q',
-            'params': {
-              'q': '{ "codes": "actor" }'
-            }
-          }
+            name: "list-q",
+            params: {
+              q: '{ "codes": "actor" }',
+            },
+          },
         },
         {
-          text: 'Artifact',
-          icon: '$artifact',
+          text: "Artifact",
+          icon: "$artifact",
           target: {
-            'name': 'detaillist-q',
-            'params': {
-              'q': '{ "codes": "artifact" }'
-            }
-          }
-        }]
+            name: "detaillist-q",
+            params: {
+              q: '{ "codes": "artifact" }',
+            },
+          },
+        },
+      ],
     };
-  }
+  },
 };
 </script>
 
@@ -84,13 +78,10 @@ export default {
 
   margin-bottom: 10px;
   background-color: rgba(255, 255, 255, 0.5);
-
-
 }
-.navigation-btn >>> .v-btn__content{
+.navigation-btn >>> .v-btn__content {
   display: flex;
   flex-direction: column;
-
 }
 
 .image-header {
@@ -105,18 +96,14 @@ export default {
 .navigation-btn:hover {
   transform: scale(1.1);
   background-color: lightblue;
-
-
 }
 
 .v-btn__content {
-
 }
 
 .image-content {
   position: relative;
   height: 100%;
   max-width: 1500px;
-
 }
 </style>
