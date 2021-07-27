@@ -11,6 +11,7 @@
           />
         </l-feature-group>
       </l-map>
+      <p class="demo-text">This is just a demo map</p>
     </div>
   </client-only>
 </template>
@@ -74,6 +75,7 @@ export default {
 .mapcontainer {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
  #vizTreeV circle {
@@ -88,6 +90,15 @@ export default {
   fill: none;
   stroke: #ccc;
   stroke-width: 2px;
+}
+
+.demo-text{
+  position:absolute;
+  color: red;
+  z-index: 400;
+  font-size: 100;
+  top:0;
+  left:0;
 }
 
 </style>
