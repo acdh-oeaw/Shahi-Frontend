@@ -77,8 +77,8 @@
       <nuxt />
     </v-main>
     <div class="grey lighten-3 mt-15">
-      <div style="max-width: 1600px" class="ma-auto my-5">
-        <v-row no-gutters class="ma-2">
+      <div style="max-width: 1600px" class="ma-auto">
+        <v-row no-gutters class="mx-2 mt-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -97,16 +97,18 @@
           </svg>
           Contact
         </v-row>
-        <v-divider></v-divider>
-        <v-row class="my-5 mx-2">
+        <v-divider class="my-3"></v-divider>
+        <v-row class="mx-2">
           <v-col cols="12" sm="3"
-            ><img
+            >
+            <a href="https://www.oeaw.ac.at/acdh/acdh-ch-home" target="_blank">
+            <img
               src="https://fundament.acdh.oeaw.ac.at/common-assets/images/acdh_logo.svg"
               class="image"
               alt="ACDH Logo"
               style="max-width: 100%; height: auto"
               title="ACDH Logo"
-          /></v-col>
+          /></a></v-col>
           <v-col cols="12" sm="6">
             <div>
               <p>
@@ -146,6 +148,48 @@
             </div>
           </v-col>
         </v-row>
+        <v-divider class="my-3"></v-divider>
+          <v-row no-gutters>
+            <v-col cols=12 class="text-center">
+            <a href="https://www.univie.ac.at/" target="_blank">
+
+            <img
+              class="footerlogo mr-2 ml-2"
+              alt="university_vienna_logo"
+              src="/UniVienna_logo.png"
+            /></a>
+            <a href="https://www.oeaw.ac.at/oesterreichische-akademie-der-wissenschaften" target="_blank">
+
+            <img
+              class="footerlogo ml-2 mr-2"
+              alt="ÖAW logo"
+              src="/Oeaw_logo.png"
+            /></a>
+
+             <a href="https://www.fwf.ac.at/" target="_blank">
+
+            <img
+              class="footerlogo ml-2 mr-2"
+              alt="FWF logo"
+              src="/Fwf_logo.gif"
+            /></a>
+            <a href="https://www.khm.at/" target="_blank">
+
+            <img
+              class="footerlogo ml-2 mr-2"
+              alt="Kunst Historisches Museum logo"
+              src="/Khm_logo.png"
+            /></a>
+            <a href="https://www.univie.ac.at/cirdis/8-cirdis" target="_blank">
+            <img
+              class="footerlogo ml-2 mr-2"
+              alt="Cirdis logo"
+              src="/Cirdis_logo.png"
+            /></a>
+            </v-col>
+        </v-row>
+        <v-divider class="my-3"></v-divider>
+
         <div class="text-center text-caption">
           © Copyright OEAW |<nuxt-link to="/imprint">
             Impressum/Imprint</nuxt-link
@@ -259,6 +303,13 @@ td {
 
 .barlogo {
   height: 53px;
+  top: 2px;
+  position: relative;
+}
+
+.footerlogo {
+  max-height: 53px;
+  max-width: 100%;
   top: 2px;
   position: relative;
 }
