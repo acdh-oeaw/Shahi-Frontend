@@ -15,7 +15,7 @@
   },
   "servers": [
     {
-      "url": "https://demo.openatlas.eu/",
+      "url": "https://shahi.openatlas.eu//",
       "description": "Demo Server"
     }
   ],
