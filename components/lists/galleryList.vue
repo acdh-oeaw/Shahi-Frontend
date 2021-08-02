@@ -48,14 +48,13 @@ export default {
   },
   async fetch() {
     this.loading = true;
+    window.screenTo(0,0);
     const { sortBy, sortDesc, page, itemsPerPage } = this.options;
     // eslint-disable-next-line no-underscore-dangle
-    window.scrollTo(0, 0);
     const p = await this.$api.Entities.get_api_0_2_query_({
       limit: itemsPerPage,
       first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
-      codes: this.getSystemClassForFilter,
-      filter: this.getFilterList,
+      filter: this.filter,
       column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
       sort: sortDesc[0] ? "desc" : "asc",
     });
