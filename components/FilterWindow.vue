@@ -11,22 +11,22 @@
     class="transition"
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-icon
-        v-bind="attrs"
-        v-on="on"
-      >
-        mdi-tune
-      </v-icon>
+      <v-icon v-bind="attrs" v-on="on"> mdi-tune </v-icon>
     </template>
     <div class="all">
-      <div class="tik " />
+      <div class="tik" />
 
-      <v-card elevation="4" class="content" max-height="800px" @keydown.enter="search">
+      <v-card
+        elevation="4"
+        class="content"
+        max-height="800px"
+        @keydown.enter="search"
+      >
         <v-card-text>
           <v-btn
-            v-for="(systemClass,index) in filterElements"
+            v-for="(systemClass, index) in filterElements"
             :key="index"
-            :color="index===selectedClass ? 'grey' : ''"
+            :color="index === selectedClass ? 'grey' : ''"
             elevation="0"
             @click="selectedClass = index"
           >
@@ -37,11 +37,9 @@
           <v-row no-gutters>
             <v-col cols="auto" style="min-width: 200px">
               <v-list max-width="200px" class="grey lighten-4">
-                <v-list-item-group
-                  v-model="selected"
-                >
+                <v-list-item-group v-model="selected">
                   <v-expand-transition
-                    v-for="(item,index) in filterElements[selectedClass].items"
+                    v-for="(item, index) in filterElements[selectedClass].items"
                     :key="item.systemClass"
                     appear
                   >
@@ -58,7 +56,7 @@
               </v-list>
             </v-col>
             <v-expand-x-transition>
-              <v-col v-if="selected !=undefined" style="width: 500px">
+              <v-col v-if="selected != undefined" style="width: 500px">
                 <v-card v-if="selectedClass != undefined" flat>
                   <v-card-title>
                     {{ filterElements[selectedClass].items[selected].en }}
@@ -66,8 +64,12 @@
                   <v-card-text class="pb-10">
                     <v-row not gutters>
                       <v-col
-                        v-for="(item,index) in filterElements[selectedClass].items[selected].values"
-                        v-if="filterElements[selectedClass].items[selected].type == 'multiple'"
+                        v-for="(item, index) in filterElements[selectedClass]
+                          .items[selected].values"
+                        v-if="
+                          filterElements[selectedClass].items[selected].type ==
+                          'multiple'
+                        "
                         :key="item.id"
                       >
                         <v-btn
@@ -76,26 +78,24 @@
                           @click="item.value = !item.value"
                         >
                           {{ item.en }}
-                          <v-icon
-                            v-if="item.value"
-                            class="pl-2"
-                            small
-                          >
+                          <v-icon v-if="item.value" class="pl-2" small>
                             $delete
                           </v-icon>
                         </v-btn>
                       </v-col>
 
                       <v-col
-                        v-for="(item) in filterElements[selectedClass].items[selected].values"
-                        v-if="filterElements[selectedClass].items[selected].type == 'text'"
+                        v-for="item in filterElements[selectedClass].items[
+                          selected
+                        ].values"
+                        v-if="
+                          filterElements[selectedClass].items[selected].type ==
+                          'text'
+                        "
                         :key="item.id"
                         cols="12"
                       >
-                        <v-text-field
-                          v-model="item.value"
-                          :label="item.en"
-                        />
+                        <v-text-field v-model="item.value" :label="item.en" />
                       </v-col>
                     </v-row>
                   </v-card-text>
@@ -114,13 +114,14 @@
 </template>
 
 <script>
-import filterelements from 'assets/filterElements.json';
+import filterelements from "assets/filterElements.json";
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'FilterWindow',
+  name: "FilterWindow",
   data() {
     return {
-      color: 'lightgrey',
+      color: "lightgrey",
       open: false,
 
       selected: 0,
@@ -136,28 +137,44 @@ export default {
     computed: {},
   },
   beforeMount() {
-
-    this.filterElements = JSON.parse(JSON.stringify(this.$store.state.app.filterelements));
+    this.filterElements = JSON.parse(
+      JSON.stringify(this.$store.state.app.filterelements)
+    );
   },
   methods: {
     chunk(arr, size) {
-      return arr.reduce((acc, e, i) => (i % size ? acc[acc.length - 1].push(e) : acc.push([e]), acc), []);
+      return arr.reduce(
+        (acc, e, i) => (
+          i % size ? acc[acc.length - 1].push(e) : acc.push([e]), acc
+        ),
+        []
+      );
     },
 
     search() {
-      this.filterElements.forEach((item) => item.selected = false);
+      this.filterElements.forEach((item) => (item.selected = false));
       this.filterElements[this.selectedClass].selected = true;
 
-      this.$store.commit('app/setFilterElements', JSON.parse(JSON.stringify(this.filterElements)));
-      this.open = false;
+      this.$store.commit(
+        "app/setFilterElements",
+        JSON.parse(JSON.stringify(this.filterElements))
+      );
 
-      const name = 'list-q';
+      this.open = false;
+      const name = "list-q";
+      let filterString =""
+       if (this.getFilterList.length != 0)
+        filterString = `, "filter":["${this.getFilterList.join('","')}"]`
+
       this.$router.push({
         name,
+        params: {
+          q: `{"codes": "${this.getSystemClassForFilter}" ${filterString}}`,
+        },
       });
     },
     updateFilter(selectedClass, selectedProperty, value) {
-      this.$store.commit('app/updateFilterValue', {
+      this.$store.commit("app/updateFilterValue", {
         selectedClass,
         selectedProperty,
         value,
@@ -171,12 +188,13 @@ export default {
       return returnValue;
     },
   },
-
+  computed: {
+    ...mapGetters("app", ["getFilterList","getSystemClassForFilter"]),
+  },
 };
 </script>
 
 <style>
-
 .all {
   padding-top: 5px;
   position: relative;
@@ -194,12 +212,11 @@ export default {
   box-shadow: 0px 0px 4px 2px rgba(0, 0, 0, 0.1);
   clip-path: polygon(-50% 150%, 150% -50%, -50% -50%);
   z-index: 4;
-
 }
 
 .content {
   position: relative;
-  margin-top: 6px;;
+  margin-top: 6px;
   box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.4);
   z-index: -0;
 }
@@ -207,8 +224,6 @@ export default {
 .transition {
   width: auto;
   height: auto;
-  transition: height .5s linear;
-
+  transition: height 0.5s linear;
 }
-
 </style>

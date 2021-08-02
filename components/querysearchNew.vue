@@ -50,7 +50,7 @@
 
 <script>
 import FilterWindow from '@/components/FilterWindow';
-
+import {mapGetters} from "vuex";
 export default {
   components: { FilterWindow },
   data() {
@@ -113,13 +113,32 @@ export default {
         selectedProperty,
         value
       });
+       const name = this.$route.name
+      
+      let filterString = ""
+
+      if (this.getFilterList.length != 0)
+        filterString = `, "filter":["${this.getFilterList.join('","')}"]`
+
+      this.$router.push({
+        name,
+        params: {
+          q: `{"codes": "actor" ${filterString}}`,
+        },
+      });
     },
     updateFilterstring() {
       const newFilterString = this.filterArray.map((e) => `"${Object.entries(e)[0][0]}" : "${Object.entries(e)[0][1]}"`)
         .join();
       this.filterstring = `{ ${newFilterString}}`;
       this.updateQuery(this.filterstring);
+     
     },
+  },
+    computed: {
+    ...mapGetters('app', [
+      'getFilterList',
+    ]),
   },
 
 };
