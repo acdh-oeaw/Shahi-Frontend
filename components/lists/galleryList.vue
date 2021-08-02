@@ -48,7 +48,8 @@ export default {
   },
   async fetch() {
     this.loading = true;
-    window.screenTo(0,0);
+    window.scrollTo(0, 0);
+    
     const { sortBy, sortDesc, page, itemsPerPage } = this.options;
     // eslint-disable-next-line no-underscore-dangle
     const p = await this.$api.Entities.get_api_0_2_query_({
