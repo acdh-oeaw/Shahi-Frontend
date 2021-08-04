@@ -33,25 +33,32 @@
         ]
       },
       {
-        "label": "Sex",
-        "en": "Sex",
+        "label": "Material",
+        "en": "Material",
         "type": "multiple",
+        "id": "119",
         "values": [
           {
-            "en": "Female",
+            "en": "Bone",
             "id": "24",
             "value": false,
             "concatOperator": "and",
             "logicalOperator": "eq"
           },
           {
-            "en": "Male",
-            "id": "25",
+            "en": "Ceramic",
+            "id": "27",
             "value": false,
             "concatOperator": "and",
             "logicalOperator": "eq"
-          }
-        ]
+          },
+          {
+            "en": "Clay",
+            "id": "28",
+            "value": false,
+            "concatOperator": "and",
+            "logicalOperator": "eq"
+          }]
       },
       {
         "label": "Begin/End",
@@ -110,25 +117,46 @@
         ]
       },
       {
-        "label": "Sex",
-        "en": "Sex",
+        "label": "Material",
+        "en": "Material",
         "type": "multiple",
-        "values": [
-          {
-            "en": "Female",
-            "id": "24",
-            "value": false,
-            "concatOperator": "and",
-            "logicalOperator": "eq"
-          },
-          {
-            "en": "Male",
-            "id": "25",
-            "value": false,
-            "concatOperator": "and",
-            "logicalOperator": "eq"
-          }
-        ]
+        "id": "119",
+        "values": []
+      },
+      {
+        "label": "Technique",
+        "en": "Technique",
+        "type": "multiple",
+        "id": "183",
+        "values": []
+      },
+      {
+        "label": "Artifact",
+        "en": "Artifact",
+        "type": "multiple",
+        "id": "107",
+        "values": []
+      },
+      {
+        "label": "Category of Authenticity",
+        "en": "Category of Authenticity",
+        "type": "multiple",
+        "id": "1090",
+        "values": []
+      },
+      {
+        "label": "Religious affiliation",
+        "en": "Religious affiliation",
+        "type": "multiple",
+        "id": "112",
+        "values": []
+      },
+      {
+        "label": "Period",
+        "en": "Period",
+        "type": "multiple",
+        "id": "185",
+        "values": []
       },
       {
         "label": "Begin/End",

@@ -136,10 +136,36 @@ export default {
     },
     computed: {},
   },
-  beforeMount() {
+  async beforeMount() {
     this.filterElements = JSON.parse(
       JSON.stringify(this.$store.state.app.filterelements)
     );
+
+    const p = await this.$api.Nodes.get_api_0_2_type_tree_();
+    const typeTree = p.body.typeTree;
+    this.filterElements.forEach((element) => {
+      element.items.forEach((item) => {
+        if (item.id) {
+          console.log(item.id);
+          const types = typeTree.filter(
+            (x) => x[Object.keys(x)[0]].root[0] == item.id
+          );
+          item.values = types.map((x) => {
+            const element = x[Object.keys(x)[0]]
+            let type = {
+              en: element.name,
+              id: element.id,
+              value: false,
+              count: element.count,
+              concatOperator: "and",
+              logicalOperator: "eq",
+            };
+
+            return type;
+          });
+        }
+      });
+    });
   },
   methods: {
     chunk(arr, size) {
@@ -162,9 +188,9 @@ export default {
 
       this.open = false;
       const name = "list-q";
-      let filterString =""
-       if (this.getFilterList.length != 0)
-        filterString = `, "filter":["${this.getFilterList.join('","')}"]`
+      let filterString = "";
+      if (this.getFilterList.length != 0)
+        filterString = `, "filter":["${this.getFilterList.join('","')}"]`;
 
       this.$router.push({
         name,
@@ -189,7 +215,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("app", ["getFilterList","getSystemClassForFilter"]),
+    ...mapGetters("app", ["getFilterList", "getSystemClassForFilter"]),
   },
 };
 </script>
