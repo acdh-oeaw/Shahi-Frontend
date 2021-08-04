@@ -61,7 +61,7 @@
                   <v-card-title>
                     {{ filterElements[selectedClass].items[selected].en }}
                   </v-card-title>
-                  <v-card-text class="pb-10">
+                  <v-card-text class="pb-10 hidden" style="overflow:auto; max-height:370px" >
                     <v-row not gutters>
                       <v-col
                         v-for="(item, index) in filterElements[selectedClass]
