@@ -33,14 +33,16 @@
             <span
                   v-if="item.features[0].when.timespans[0].start.earliest"
                 >
-                  from {{ item.features[0].when.timespans[0].start.earliest }}
+                  from {{ item.features[0].when.timespans[0].start.earliest.split('-')[0].replace(/^0+/, '')  }}
                 </span>
 
                 <span
-
-                  v-if="item.features[0].when.timespans[0].end.latest"
-                >
-                  to {{ item.features[0].when.timespans[0].end.latest }}
+ v-if="item.features[0].when.timespans[0].end.latest || item.features[0].when.timespans[0].end.earliest"
+                  
+                >to 
+                 {{
+                          item.features[0].when.timespans[0].end.latest ? item.features[0].when.timespans[0].end.latest.split('-')[0].replace(/^0+/, '') : item.features[0].when.timespans[0].end.earliest.split('-')[0].replace(/^0+/, '')
+                        }}
                 </span>
                 </p>
             </v-card-title
