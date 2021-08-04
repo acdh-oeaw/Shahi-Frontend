@@ -20,42 +20,69 @@
           ></v-img>
         </v-col>
         <v-col cols="12" sm="9" md="10">
-          <v-card-title
-            ><router-link
+          <v-card-title style="background-color: lightgrey" class="d-block"
+            > <p class="ma-0 pa-0"> <router-link 
               :to="`/single/${
                 item.features[0]['@id'].split('/').splice(-1)[0]
               }`"
             >
-              {{ item.features[0].properties.title }}
-            </router-link></v-card-title
+            {{ item.features[0].properties.title }}
+            </router-link>
+            </p>
+            <p class="text-caption pa-0 ma-0"  >
+            <span
+                  v-if="item.features[0].when.timespans[0].start.earliest"
+                >
+                  from {{ item.features[0].when.timespans[0].start.earliest }}
+                </span>
+
+                <span
+
+                  v-if="item.features[0].when.timespans[0].end.latest"
+                >
+                  to {{ item.features[0].when.timespans[0].end.latest }}
+                </span>
+                </p>
+            </v-card-title
           >
-          <v-card-text style="min-width: 100vw" class="text-body-1">
-            <p
-              class="mb-1"
-              v-if="item.features[0].when.timespans[0].start.earliest"
-            >
-              from {{ item.features[0].when.timespans[0].start.earliest }}
-            </p>
-
-            <p
-              class="mb-1"
-              v-if="item.features[0].when.timespans[0].end.latest"
-            >
-              to {{ item.features[0].when.timespans[0].end.latest }}
-            </p>
-
-            <div v-if="item.features[0].description">
-              {{ item.features[0].description[0].value }}
-            </div>
-            <v-row>
-              <v-col
-                cols="6"
-                v-for="(type, index) in item.features[0].types"
-                :key="index"
+          <v-card-text class="text-body-1">
+                
+            <v-card outlined class="my-3" v-if="item.features[0].description">
+              <v-card-text class="text-body-1">{{
+                item.features[0].description[0].value
+              }}</v-card-text>
+            </v-card>
+            <div class="card-columns" :style="cssVars">
+              <div
+                class="card-column"
+                v-for="(typeGroup, index) in getOrderedTypes(
+                  item.features[0].types
+                )"
+                :key="index + 2000"
               >
-                {{ type.hierarchy }} : {{ type.label }}
-              </v-col>
-            </v-row>
+                <v-card class="mb-5" outlined>
+                  <v-card-title
+                    class="text-subtitle-2 justify-center"
+                    style="background-color: lightgrey"
+                    >{{ typeGroup[0].type }}
+                  </v-card-title>
+                  <v-card-text>
+                    <p
+                      v-for="(type, index) in typeGroup"
+                      :key="index"
+                      class="ma-0 ml-5 pa-0"
+                    >
+                      <nuxt-link :to="`/single/${type.id}`">
+                        {{ type.label }}
+                      </nuxt-link>
+                      <span v-if="!!type.value"
+                        >: {{ type.value }} {{ type.unit }}</span
+                      >
+                    </p>
+                  </v-card-text>
+                </v-card>
+              </div>
+            </div>
           </v-card-text>
         </v-col></v-row
       >
@@ -141,6 +168,27 @@ export default {
         .map((x) => x.label)
         .join(", ");
     },
+    getOrderedTypes(types) {
+      if(!types) return {}
+      const newTypes = types
+        .map((type) => {
+          var t = {};
+          t.type = type.hierarchy.split(" > ")[0];
+          t.subtype = type.hierarchy.split(" > ")?.[1];
+          t.id = type.identifier.split("/").splice(-1)[0];
+          t.label = type.label;
+          t.value = type.value;
+          t.unit = type.unit;
+          return t;
+        })
+        .reduce((accumulator, element) => {
+          if (!(element.type in accumulator))
+            accumulator[element.type] = [element];
+          else accumulator[element.type].push(element);
+          return accumulator;
+        }, {});
+      return newTypes;
+    },
   },
   computed: {
     ...mapGetters("app", [
@@ -152,6 +200,14 @@ export default {
       "getSystemClassForFilter",
       "getFilterList",
     ]),
+    cssVars() {
+      let colCount = 2;
+      if (this.$vuetify.breakpoint.name === "xs") colCount = 1;
+
+      return {
+        "--column-count": colCount,
+      };
+    },
   },
 };
 </script>
@@ -160,5 +216,17 @@ export default {
 }
 .list-element {
   transition: all 0.1s;
+}
+
+.card-columns {
+  -moz-column-count: 4;
+  -webkit-column-count: 4;
+  column-count: var(--column-count);
+}
+
+.card-column {
+  -webkit-column-break-inside: avoid; /* Chrome, Safari */
+  page-break-inside: avoid; /* Theoretically FF 20+ */
+  break-inside: avoid-column; /* IE 11 */
 }
 </style>
