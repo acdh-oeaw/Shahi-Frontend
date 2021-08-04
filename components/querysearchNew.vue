@@ -84,7 +84,8 @@ export default {
       }
     },
     updateArray() {
-      this.filterArray = this.$store.state.app.filterelements[0].items.map((x,index) => {
+      
+      this.filterArray = this.getCurrentFilters.items.map((x,index) => {
         const filters = x.values.map((v) => {
           v.group = index;
           return v;
@@ -123,7 +124,7 @@ export default {
       this.$router.push({
         name,
         params: {
-          q: `{"codes": "actor" ${filterString}}`,
+          q: `{"codes": "${this.getCurrentFilters.systemClass}" ${filterString}}`,
         },
       });
     },
@@ -138,6 +139,7 @@ export default {
     computed: {
     ...mapGetters('app', [
       'getFilterList',
+      'getCurrentFilters'
     ]),
   },
 

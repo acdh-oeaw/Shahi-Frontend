@@ -19,6 +19,7 @@ export const state = () => ({
 
 export const getters = {
   getSystemClassForFilter: (s) => s.filterelements.find((item) => item.selected === true).systemClass,
+  getCurrentFilters: (s) => s.filterelements.find((item) => item.selected === true),
   getFilterList: (s) => {
     let filterList = [];
     s.filterelements.find((item) => item.selected === true).items.forEach((group) => {
@@ -70,7 +71,7 @@ export const mutations = {
     value,
   }) {
     const key = Object.keys(value)[0];
-    const vals = state.filterelements[selectedClass].items[selectedProperty].values;
+    const vals = state.filterelements.find((item) => item.selected === true).items[selectedProperty].values;
     vals.filter((x) => x.id === key)[0].value = value[key];
   },
   setSelectedFilterClass(state,name){
