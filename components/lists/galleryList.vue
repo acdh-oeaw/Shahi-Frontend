@@ -176,11 +176,12 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
+  transition: all 100ms linear;
+
 }
 
 .gallery-background:hover {
   transform: scale(1.05);
-  transition: all 100ms linear;
   background-color: lightgray;
 }
 </style>
