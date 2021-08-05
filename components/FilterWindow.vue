@@ -166,6 +166,9 @@ export default {
         }
       });
     });
+
+    this.$store.commit("app/setFilterElements", this.filterElements);
+
   },
   methods: {
     chunk(arr, size) {

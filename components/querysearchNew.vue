@@ -27,17 +27,17 @@
       >
 
         <span class="text-body-1" v-if="item.value !== true & item.value !== false">
-            {{item.value}} 
+            {{item.value}}
         </span>
 
         <span class="text-body-1" v-else>
-            {{item.en}} 
+            {{item.en}}
         </span>
         <v-icon
           v-if="!item.codes"
           class="pl-2"
           small
-          @click="updateFilter(0,item.group,{[item.id]: null})"
+          @click="updateFilter(item.group,{[item.id]: null})"
         >
           $delete
         </v-icon>
@@ -108,9 +108,11 @@ export default {
         },
       });
     },
-    updateFilter(selectedClass, selectedProperty, value) {
+    updateFilter(selectedProperty, value) {
+
+      console.log(selectedProperty)
+      console.log(value)
       this.$store.commit('app/updateFilterValue', {
-        selectedClass,
         selectedProperty,
         value
       });

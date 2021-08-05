@@ -66,13 +66,12 @@ export const mutations = {
     state.filterelements = filterelements;
   },
   updateFilterValue(state, {
-    selectedClass,
     selectedProperty,
     value,
   }) {
     const key = Object.keys(value)[0];
     const vals = state.filterelements.find((item) => item.selected === true).items[selectedProperty].values;
-    vals.filter((x) => x.id === key)[0].value = value[key];
+    vals.filter((x) => x.id == key)[0].value = value[key];
   },
   setSelectedFilterClass(state,name){
     state.filterelements.forEach( (c) =>{
@@ -82,6 +81,11 @@ export const mutations = {
       else
         c.selected = false;
     } )
+  },
+  setFilterElements(state,filterElements){
+    state.filterelements =  JSON.parse(
+      JSON.stringify(filterElements)
+    );
   }
 };
 
