@@ -20,35 +20,47 @@
           ></v-img>
         </v-col>
         <v-col cols="12" sm="9" md="10">
-          <v-card-title style="background-color: lightgrey" class="d-block"
-            > <p class="ma-0 pa-0"> <router-link 
-              :to="`/single/${
-                item.features[0]['@id'].split('/').splice(-1)[0]
-              }`"
-            >
-            {{ item.features[0].properties.title }}
-            </router-link>
+            <router-link
+                :to="`/single/${
+                  item.features[0]['@id'].split('/').splice(-1)[0]
+                }`"
+              >
+          <v-card-title class="d-block brown white--text">
+            <p class="ma-0 pa-0">
+            
+                {{ item.features[0].properties.title }}
             </p>
-            <p class="text-caption pa-0 ma-0"  >
-            <span
-                  v-if="item.features[0].when.timespans[0].start.earliest"
-                >
-                  from {{ item.features[0].when.timespans[0].start.earliest.split('-')[0].replace(/^0+/, '')  }}
-                </span>
+            <p class="text-caption pa-0 ma-0">
+              <span v-if="item.features[0].when.timespans[0].start.earliest">
+                from
+                {{
+                  item.features[0].when.timespans[0].start.earliest
+                    .split("-")[0]
+                    .replace(/^0+/, "")
+                }}
+              </span>
 
-                <span
- v-if="item.features[0].when.timespans[0].end.latest || item.features[0].when.timespans[0].end.earliest"
-                  
-                >to 
-                 {{
-                          item.features[0].when.timespans[0].end.latest ? item.features[0].when.timespans[0].end.latest.split('-')[0].replace(/^0+/, '') : item.features[0].when.timespans[0].end.earliest.split('-')[0].replace(/^0+/, '')
-                        }}
-                </span>
-                </p>
-            </v-card-title
-          >
+              <span
+                v-if="
+                  item.features[0].when.timespans[0].end.latest ||
+                  item.features[0].when.timespans[0].end.earliest
+                "
+                >to
+                {{
+                  item.features[0].when.timespans[0].end.latest
+                    ? item.features[0].when.timespans[0].end.latest
+                        .split("-")[0]
+                        .replace(/^0+/, "")
+                    : item.features[0].when.timespans[0].end.earliest
+                        .split("-")[0]
+                        .replace(/^0+/, "")
+                }}
+              </span>
+            </p>
+          </v-card-title>
+              </router-link>
+
           <v-card-text class="text-body-1">
-                
             <v-card outlined class="my-3" v-if="item.features[0].description">
               <v-card-text class="text-body-1">{{
                 item.features[0].description[0].value
@@ -64,8 +76,7 @@
               >
                 <v-card class="mb-5" outlined>
                   <v-card-title
-                    class="text-subtitle-2 justify-center"
-                    style="background-color: lightgrey"
+                    class="text-subtitle-2 justify-center brown lighten-3"
                     >{{ typeGroup[0].type }}
                   </v-card-title>
                   <v-card-text>
@@ -171,7 +182,7 @@ export default {
         .join(", ");
     },
     getOrderedTypes(types) {
-      if(!types) return {}
+      if (!types) return {};
       const newTypes = types
         .map((type) => {
           var t = {};
