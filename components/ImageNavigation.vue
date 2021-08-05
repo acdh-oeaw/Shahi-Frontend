@@ -77,7 +77,8 @@ export default {
   min-height: 100px;
 
   margin-bottom: 10px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  transition: all 100ms linear;
 }
 .navigation-btn >>> .v-btn__content {
   display: flex;
@@ -95,11 +96,9 @@ export default {
 
 .navigation-btn:hover {
   transform: scale(1.1);
-  background-color: lightblue;
+  background-color: rgba(255, 255, 255, 1) !important;
 }
 
-.v-btn__content {
-}
 
 .image-content {
   position: relative;
