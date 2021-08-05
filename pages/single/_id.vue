@@ -5,11 +5,7 @@
         <v-col xs="6">
           <v-row no-gutters>
             <v-col cols="12" xs="12">
-              <v-card
-                class="pa-4"
-                outlined
-                tile
-              >
+              <v-card class="pa-4" outlined tile>
                 <!-- icon and title -->
                 <v-row align="center">
                   <v-tooltip right>
@@ -18,62 +14,64 @@
                         color="primary"
                         dark
                         v-bind="attrs"
-                        style="font-size:75px"
+                        style="font-size: 75px"
                         v-on="on"
                       >
                         {{ getIconBySystemClass(item.features[0].systemClass) }}
                       </v-icon>
                     </template>
                     <span>
-                      {{ getCRMClassBySystemClass(item.features[0].systemClass) }}
+                      {{
+                        getCRMClassBySystemClass(item.features[0].systemClass)
+                      }}
                       -
-                      {{ getLabelBySystemClass({c: item.features[0].systemClass, l: 'en'}) }}
+                      {{
+                        getLabelBySystemClass({
+                          c: item.features[0].systemClass,
+                          l: "en",
+                        })
+                      }}
                     </span>
                   </v-tooltip>
-                  <div class="text-h5">
+                  <div class="text-h3">
                     {{ item.features[0].properties.title }}
                   </div>
                 </v-row>
                 <!-- begin, end and sex -->
-                <v-row v-if="hasTime(item.features[0].systemClass)" class="pl-2">
+                <v-row
+                  v-if="hasTime(item.features[0].systemClass)"
+                  class="pl-2"
+                >
                   <v-col xs="4">
                     <v-row align="center">
-                      <v-icon class="pr-2">
-                        mdi-logout
-                      </v-icon>
-                      <div class="text-overline">
-                        Begin / From
-                      </div>
+                      <v-icon class="pr-2"> mdi-logout </v-icon>
+                      <div class="text-overline">Begin / From</div>
                       <div class="text-body-2 pl-2">
                         {{
-                          item.features[0].when.timespans[0].start.earliest ? item.features[0].when.timespans[0].start.earliest : item.features[0].when.timespans[0].start.latest
+                          item.features[0].when.timespans[0].start.earliest
+                            ? item.features[0].when.timespans[0].start.earliest
+                            : item.features[0].when.timespans[0].start.latest
                         }}
                       </div>
                     </v-row>
                   </v-col>
                   <v-col xs="4">
                     <v-row align="center">
-                      <v-icon class="pr-2">
-                        mdi-login
-                      </v-icon>
-                      <div class="text-overline">
-                        End / To
-                      </div>
+                      <v-icon class="pr-2"> mdi-login </v-icon>
+                      <div class="text-overline">End / To</div>
                       <div class="text-body-2 pl-2">
                         {{
-                          item.features[0].when.timespans[0].end.latest ? item.features[0].when.timespans[0].end.latest : item.features[0].when.timespans[0].end.earliest
+                          item.features[0].when.timespans[0].end.latest
+                            ? item.features[0].when.timespans[0].end.latest
+                            : item.features[0].when.timespans[0].end.earliest
                         }}
                       </div>
                     </v-row>
                   </v-col>
                   <v-col v-if="hasSex(item.features[0].systemClass)" xs="4">
                     <v-row align="center">
-                      <v-icon class="pr-2">
-                        mdi-sex
-                      </v-icon>
-                      <div class="text-overline">
-                        Sex
-                      </div>
+                      <v-icon class="pr-2"> mdi-sex </v-icon>
+                      <div class="text-overline">Sex</div>
                       <div class="text-body-2 pl-2">
                         {{ genderFromClass }}
                       </div>
@@ -81,85 +79,76 @@
                   </v-col>
                 </v-row>
                 <!-- description -->
-                <v-row class="pl-2">
+                <v-row class="pl-2" no-gutters>
                   <div
                     v-if="item.features[0].description"
-                    class="text-body-2 pt-2"
+                    class="text-body-1 pt-2"
                     :class="{ lineclamp: isClamped }"
                     @click="isClamped = !isClamped"
                   >
-                    {{
-                      item.features[0].description[0].value
-                    }}
+                    {{ item.features[0].description[0].value }}
                   </div>
                 </v-row>
               </v-card>
             </v-col>
-            <v-col cols="12" xs="12">
-              <v-card
-                class="pa-4"
-                outlined
-                tile
-              >
-                <v-row align="center" class="pl-4">
-                  <v-icon class="pr-2">
-                    mdi-comment
-                  </v-icon>
-                  <div class="text-overline">
-                    Relations
+            <!-- types -->
+            <v-col cols="12">
+              <v-card class="pa-4" outlined tile>
+                <v-card-title>
+                  <v-icon class="pr-2"> mdi-comment </v-icon>
+                  <div class="text-overline">Details</div>
+                </v-card-title>
+                <v-card-text style="overflow:auto; max-height:69vh" >
+                  <div v-if="!!item.features[0].types">
+                  <v-row no-gutters
+                    
+                    v-for="(typeGroup, index) in item.features[0].types
+                      .map((x) => {
+                        x.supertype = x.hierarchy.split(' > ')[0];
+                        return x;
+                      })
+                      .reduce((r, a) => {
+                        r[a.supertype] = [...(r[a.supertype] || []), a];
+                        return r;
+                      }, {})"
+                  
+                    :key="index">
+                    <v-col cols="auto"><span class="font-weight-bold">{{typeGroup[0].supertype}}</span> :</v-col>
+                    
+                    <v-col cols="auto">
+                      <p class="ml-1" v-for="(type,index) in typeGroup" :key="index">
+                    {{type.label}}</p>
+                    </v-col>
+                  </v-row>
                   </div>
-                </v-row>
-                <v-row class="pl-4">
-                  <v-data-table
-                    :headers="$store.state.app.tableheaders.relations"
-                    :items="item.features[0].relations"
-                    :expanded.sync="expanded"
-                    item-key="label"
-                    group-by="relationType"
-                    :items-per-page="-1"
-                    class="elevation-0"
-                    style="width:100%"
-                  >
-                    <template v-slot:group.header="{ group, headers, toggle, isOpen }">
-                      <td :colspan="headers.length">
-                        <v-btn :ref="group" small icon :data-open="isOpen" @click="toggle">
-                          <v-icon v-if="isOpen">
-                            mdi-chevron-up
-                          </v-icon>
-                          <v-icon v-else>
-                            mdi-chevron-down
-                          </v-icon>
-                        </v-btn>
-                        {{ group }}
-                      </td>
-                    </template>
-                    <template v-slot:item.label="{ item }">
-                      <nuxt-link :to="`/single/${item.relationTo.split('/').splice(-1)[0]}`">
-                        {{ item.label }}
-                      </nuxt-link>
-                    </template>
-                  </v-data-table>
-                </v-row>
+                  <p class="font-weight-bold">Relations</p>
+                  <v-row no-gutters v-if="item.relationType != 'crm:P2 has type'" v-for="(item,index) in item.features[0].relations" :key="index"> 
+                    {{item.relationType.split(' ').slice(1).join(' ')}} : <nuxt-link :to="`/single/${item.relationTo.split('/').splice(-1)[0]}`"> {{item.label}}</nuxt-link>
+
+                    
+                  </v-row>
+                  
+                </v-card-text>
               </v-card>
             </v-col>
           </v-row>
         </v-col>
         <v-col xs="6">
-          <v-card
-            class="pa-4"
-            outlined
-            tile
-          >
+          <v-card class="pa-4" outlined tile>
             <v-tabs right>
               <v-tab>Map</v-tab>
               <v-tab>Image</v-tab>
               <v-tab>Graph</v-tab>
               <v-tab>JSON</v-tab>
               <v-tab-item>
-                <qmap v-if="!this.loading" :geojsonitems="[item]" style="height: calc(100vh - 154px)" />
+                <qmap
+                  v-if="!this.loading"
+                  :geojsonitems="[item]"
+                  style="height: calc(100vh - 154px)"
+                />
               </v-tab-item>
               <v-tab-item>
-                <ImageViewer  style="height: calc(100vh - 154px);"></ImageViewer>
+                <ImageViewer style="height: calc(100vh - 154px)"></ImageViewer>
               </v-tab-item>
               <v-tab-item>
                 <treegraph
@@ -170,7 +159,7 @@
               </v-tab-item>
               <v-tab-item>
                 <json-viewer
-                  style="height: calc(100vh - 154px); overflow-y: auto;"
+                  style="height: calc(100vh - 154px); overflow-y: auto"
                   :value="item"
                   :expand-depth="5"
                   copyable
@@ -186,17 +175,17 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import JsonViewer from 'vue-json-viewer';
-import qmap from '~/components/map.vue';
-import treegraph from '~/components/treegraph.vue';
-import ImageViewer from '@/components/ImageViewer';
+import { mapGetters } from "vuex";
+import JsonViewer from "vue-json-viewer";
+import qmap from "~/components/map.vue";
+import treegraph from "~/components/treegraph.vue";
+import ImageViewer from "@/components/ImageViewer";
 export default {
   components: {
     qmap,
     JsonViewer,
     treegraph,
-    ImageViewer
+    ImageViewer,
   },
   async fetch() {
     this.loading = true;
@@ -224,50 +213,63 @@ export default {
       for (const id of this.item.features[0].relations) {
         // eslint-disable-next-line no-await-in-loop,no-underscore-dangle
         const ri = await this.$api.Entities.get_api_0_2_entity__id__({
-          id_: id.relationTo.split('/').splice(-1, 1),
+          id_: id.relationTo.split("/").splice(-1, 1),
         });
         this.related.push(ri.body);
       }
     },
     closeAll() {
       Object.keys(this.$refs).forEach((k) => {
-        if (this.$refs[k] && this.$refs[k].$attrs['data-open']) {
+        if (this.$refs[k] && this.$refs[k].$attrs["data-open"]) {
           this.$refs[k].$el.click();
         }
       });
     },
     openAll() {
       Object.keys(this.$refs).forEach((k) => {
-        if (this.$refs[k] && !this.$refs[k].$attrs['data-open']) {
+        if (this.$refs[k] && !this.$refs[k].$attrs["data-open"]) {
           this.$refs[k].$el.click();
         }
       });
     },
   },
   computed: {
-    ...mapGetters('app', [
-      'getIconBySystemClass',
-      'getLabelBySystemClass',
-      'getCRMClassBySystemClass',
-      'getSortColumnByPath',
-      'hasTime',
-      'hasSex',
+    ...mapGetters("app", [
+      "getIconBySystemClass",
+      "getLabelBySystemClass",
+      "getCRMClassBySystemClass",
+      "getSortColumnByPath",
+      "hasTime",
+      "hasSex",
     ]),
     relationTypes() {
       // eslint-disable-next-line max-len
-      if (Array.isArray(this.item.features[0].relations)) return [...new Set(this.item.features[0].relations.map((item) => item.relationType))];
+      if (Array.isArray(this.item.features[0].relations))
+        return [
+          ...new Set(
+            this.item.features[0].relations.map((item) => item.relationType)
+          ),
+        ];
       return [];
     },
     genderFromClass() {
       if (Array.isArray(this.item.features[0].relations)) {
-        if (this.item.features[0].relations.filter((r) => r.label === 'Male').length > 0) return 'Male';
-        if (this.item.features[0].relations.filter((r) => r.label === 'Female').length > 0) return 'Female';
+        if (
+          this.item.features[0].relations.filter((r) => r.label === "Male")
+            .length > 0
+        )
+          return "Male";
+        if (
+          this.item.features[0].relations.filter((r) => r.label === "Female")
+            .length > 0
+        )
+          return "Female";
       }
-      return 'n/a';
+      return "n/a";
     },
   },
   watch: {
-    '$route.params': {
+    "$route.params": {
       handler() {
         this.$fetch();
       },
