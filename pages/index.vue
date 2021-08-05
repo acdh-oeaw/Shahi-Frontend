@@ -3,7 +3,7 @@
     <div>
       <v-layout column justify-center align-center >
         <div class="text-center splashtext" style="z-index:401" :class="animationClasses">
-              {{asdf}}
+             
 
           <transition name="fade">
             

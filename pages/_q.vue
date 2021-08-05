@@ -154,13 +154,7 @@ export default {
 
     }
   },
-  computed:{
-    asdf(){
-      console.log(this.$route.params.q)
-      return this.$route.params.q
-    }
-  }
-
+  
 };
 </script>
 <style>
