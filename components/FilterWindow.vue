@@ -190,7 +190,7 @@ export default {
       );
 
       this.open = false;
-      const name = "list-q";
+      const name = "detaillist-q";
       let filterString = "";
       if (this.getFilterList.length != 0)
         filterString = `, "filter":["${this.getFilterList.join('","')}"]`;
