@@ -3,7 +3,7 @@
     "icon": "mdi-account-group",
     "text": "Actors",
     "target": {
-      "name": "list-q",
+      "name": "detaillist-q",
       "params": {
         "q": "{ \"codes\": \"actor\" }"
       }
@@ -13,7 +13,7 @@
     "icon": "mdi-text-box",
     "text": "Sources",
     "target": {
-      "name": "list-q",
+      "name": "detaillist-q",
       "params": {
         "q": "{ \"codes\": \"source\" }"
       }
@@ -23,7 +23,7 @@
     "icon": "mdi-calendar",
     "text": "Events",
     "target": {
-      "name": "list-q",
+      "name": "detaillist-q",
       "params": {
         "q": "{ \"codes\": \"event\" }"
       }
@@ -43,7 +43,7 @@
     "icon": "mdi-shape",
     "text": "Artifacts",
     "target": {
-      "name": "map-q",
+      "name": "detaillist-q",
       "params": {
         "q": "{ \"codes\": \"artifact\" }"
       }
