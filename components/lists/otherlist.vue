@@ -25,7 +25,8 @@
                   item.features[0]['@id'].split('/').splice(-1)[0]
                 }`"
               >
-          <v-card-title class="d-block brown white--text">
+              <v-hover v-slot="{hover}">
+          <v-card-title class="artifact-title brown d-block white--text " :class="hover ? 'lighten-1' : ''">
             <p class="ma-0 pa-0">
             
                 {{ item.features[0].properties.title }}
@@ -58,6 +59,7 @@
               </span>
             </p>
           </v-card-title>
+          </v-hover>
               </router-link>
 
           <v-card-text class="text-body-1">
@@ -242,4 +244,9 @@ export default {
   page-break-inside: avoid; /* Theoretically FF 20+ */
   break-inside: avoid-column; /* IE 11 */
 }
+.artifact-title{
+  transition: all 100ms linear !important;
+}
+
+
 </style>
