@@ -74,7 +74,7 @@
           },
           {
             "en": "End",
-            "id": "end_to",
+            "id": "end_from",
             "value": "",
             "concatOperator": "and",
             "logicalOperator": "le"
@@ -172,7 +172,7 @@
           },
           {
             "en": "End",
-            "id": "end_to",
+            "id": "end_from",
             "value": "",
             "concatOperator": "and",
             "logicalOperator": "le"
