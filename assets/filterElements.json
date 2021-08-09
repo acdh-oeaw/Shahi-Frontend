@@ -8,6 +8,7 @@
         "en": "Name",
         "label": "name",
         "type": "text",
+        "kind": "filter",
         "values": [
           {
             "en": "Name",
@@ -22,6 +23,7 @@
         "en": "Description",
         "label": "description",
         "type": "text",
+        "kind": "filter",
         "values": [
           {
             "en": "Description",
@@ -33,37 +35,11 @@
         ]
       },
       {
-        "label": "Material",
-        "en": "Material",
-        "type": "multiple",
-        "id": "119",
-        "values": [
-          {
-            "en": "Bone",
-            "id": "24",
-            "value": false,
-            "concatOperator": "and",
-            "logicalOperator": "eq"
-          },
-          {
-            "en": "Ceramic",
-            "id": "27",
-            "value": false,
-            "concatOperator": "and",
-            "logicalOperator": "eq"
-          },
-          {
-            "en": "Clay",
-            "id": "28",
-            "value": false,
-            "concatOperator": "and",
-            "logicalOperator": "eq"
-          }]
-      },
-      {
         "label": "Begin/End",
         "en": "Begin/End",
         "type": "text",
+        "kind": "filter",
+
         "values": [
           {
             "en": "Begin",
@@ -92,6 +68,7 @@
         "en": "Name",
         "label": "name",
         "type": "text",
+        "kind": "filter",
         "values": [
           {
             "en": "Name",
@@ -106,6 +83,7 @@
         "en": "Description",
         "label": "description",
         "type": "text",
+        "kind": "filter",
         "values": [
           {
             "en": "Description",
@@ -121,6 +99,7 @@
         "en": "Material",
         "type": "multiple",
         "id": "119",
+        "kind": "type",
         "values": []
       },
       {
@@ -128,6 +107,7 @@
         "en": "Technique",
         "type": "multiple",
         "id": "183",
+        "kind": "type",
         "values": []
       },
       {
@@ -135,6 +115,8 @@
         "en": "Artifact",
         "type": "multiple",
         "id": "107",
+        "kind": "type",
+
         "values": []
       },
       {
@@ -142,6 +124,8 @@
         "en": "Category of Authenticity",
         "type": "multiple",
         "id": "1090",
+        "kind": "type",
+
         "values": []
       },
       {
@@ -149,6 +133,8 @@
         "en": "Religious affiliation",
         "type": "multiple",
         "id": "112",
+        "kind": "type",
+
         "values": []
       },
       {
@@ -156,12 +142,15 @@
         "en": "Period",
         "type": "multiple",
         "id": "185",
+        "kind": "type",
+
         "values": []
       },
       {
         "label": "Begin/End",
         "en": "Begin/End",
         "type": "text",
+        "kind": "filter",
         "values": [
           {
             "en": "Begin",
