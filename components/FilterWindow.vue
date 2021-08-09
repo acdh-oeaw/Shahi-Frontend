@@ -191,14 +191,11 @@ export default {
 
       this.open = false;
       const name = "detaillist-q";
-      let filterString = "";
-      if (this.getFilterList.length != 0)
-        filterString = `, "filter":["${this.getFilterList.join('","')}"]`;
 
       this.$router.push({
         name,
         params: {
-          q: `{"codes": "${this.getSystemClassForFilter}" ${filterString}}`,
+          q: `{"codes": "${this.getSystemClassForFilter}" ${this.getFilterQuery}}`,
         },
       });
     },
@@ -218,7 +215,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("app", ["getFilterList", "getSystemClassForFilter"]),
+    ...mapGetters("app", ["getFilterQuery", "getSystemClassForFilter"]),
   },
 };
 </script>

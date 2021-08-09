@@ -20,16 +20,19 @@ export const state = () => ({
 export const getters = {
   getSystemClassForFilter: (s) => s.filterelements.find((item) => item.selected === true).systemClass,
   getCurrentFilters: (s) => s.filterelements.find((item) => item.selected === true),
-  getFilterList: (s) => {
+  getFilterQuery: (s) => {
     let filterList = [];
     s.filterelements.find((item) => item.selected === true).items.forEach((group) => {
       group.values.forEach((filter) => {
-        if (filter.value) {
+        if (filter.value && group.kind === 'filter') {
           filterList.push(`${filter.concatOperator}|${filter.id}|${filter.logicalOperator}|${filter.value}`);
         }
       });
     });
-    return filterList;
+    console.log(filterList.length)
+    if(filterList.length !== 0)
+      return `, "filter":["${filterList.join('","')}"]`;
+    return ""
   },
   getIconBySystemClass: (s) => (c) => s.classes.find((item) => item.systemClass === c).icon,
   getLabelBySystemClass: (s) => ({

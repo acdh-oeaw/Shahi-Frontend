@@ -117,16 +117,12 @@ export default {
         value
       });
        const name = this.$route.name
-      
-      let filterString = ""
-
-      if (this.getFilterList.length != 0)
-        filterString = `, "filter":["${this.getFilterList.join('","')}"]`
+    
 
       this.$router.push({
         name,
         params: {
-          q: `{"codes": "${this.getCurrentFilters.systemClass}" ${filterString}}`,
+          q: `{"codes": "${this.getCurrentFilters.systemClass}" ${this.getFilterQuery}}`,
         },
       });
     },
@@ -140,7 +136,7 @@ export default {
   },
     computed: {
     ...mapGetters('app', [
-      'getFilterList',
+      'getFilterQuery',
       'getCurrentFilters'
     ]),
   },
