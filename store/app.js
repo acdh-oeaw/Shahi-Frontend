@@ -22,17 +22,24 @@ export const getters = {
   getCurrentFilters: (s) => s.filterelements.find((item) => item.selected === true),
   getFilterQuery: (s) => {
     let filterList = [];
+    let typeList = [];
     s.filterelements.find((item) => item.selected === true).items.forEach((group) => {
       group.values.forEach((filter) => {
         if (filter.value && group.kind === 'filter') {
           filterList.push(`${filter.concatOperator}|${filter.id}|${filter.logicalOperator}|${filter.value}`);
         }
+        if (filter.value && group.kind === 'type') {
+          typeList.push(`${filter.id}`);
+        }
       });
     });
-    console.log(filterList.length)
+    let filterString = ""
     if(filterList.length !== 0)
-      return `, "filter":["${filterList.join('","')}"]`;
-    return ""
+      filterString += `, "filter":["${filterList.join('","')}"]`;
+    if(typeList.length !== 0)
+      filterString += `, "type_id":["${typeList.join('","')}"]`;
+   
+      return filterString
   },
   getIconBySystemClass: (s) => (c) => s.classes.find((item) => item.systemClass === c).icon,
   getLabelBySystemClass: (s) => ({
