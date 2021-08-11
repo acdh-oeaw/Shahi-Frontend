@@ -1,7 +1,7 @@
 <template>
-  <v-data-table
+<v-data-table
     :headers="$store.state.app.tableheaders.wide"
-    :items="items"
+    :items="itemsWithType"
     :options.sync="options"
     :server-items-length="totalItems"
     :loading="loading"
@@ -52,7 +52,17 @@
         n/a
       </div>
     </template>
+
+     <template v-slot:item.features[0].type.material="{ item }">
+      <nuxt-link v-for="(material,index) in item.features[0].type.material"  :to="`/single/${material.identifier.split('/').splice(-1)[0]}`" :key="index"
+                  ><span v-if="index !==0">, </span>{{material.label}}</nuxt-link>
+    </template>
+    <template v-slot:item.features[0].type.categoryofauthenticity="{ item }">
+      <nuxt-link v-for="(category,index) in item.features[0].type.categoryofauthenticity"  :to="`/single/${category.identifier.split('/').splice(-1)[0]}`" :key="index"
+                  ><span v-if="index !==0">, </span>{{category.label}}</nuxt-link>
+    </template>
   </v-data-table>
+
 </template>
 
 <script>
@@ -130,6 +140,24 @@ export default {
       'getSystemClassForFilter',
       'getFilterList'
     ]),
+    itemsWithType(){
+      if(this.items.length === 0)
+      return []
+    
+      return this.items.map((item) =>{
+        item.features[0].type = item.features[0].types.map((x) => {
+                        x.supertype = x.hierarchy.split(' > ')[0];
+                        return x;
+                      })
+                      .reduce((r, a) => {
+                        const key = a.supertype.toLowerCase().replace(/\s+/g, '')
+                        r[key] = [...(r[key] || '') ,a];
+                        return r;
+                      }, {})
+        return item
+      })
+  
+    }
   },
 };
 </script>

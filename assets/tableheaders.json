@@ -31,6 +31,20 @@
       "value": "features[0].when.timespans[0].end.earliest",
       "column": "end_from",
       "width": "50px"
+    },
+    {
+      "text": "Materials",
+      "value": "features[0].type.material",
+      "column": "material",
+      "width": "50px",
+      "sortable": false
+    },
+    {
+      "text": "category of authenticity",
+      "value": "features[0].type.categoryofauthenticity",
+      "column": "material",
+      "width": "50px",
+      "sortable": false
     }
   ],
   "narrow": [
