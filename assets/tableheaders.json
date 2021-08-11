@@ -28,8 +28,8 @@
     },
     {
       "text": "End/To",
-      "value": "features[0].when.timespans[0].end.latestnar",
-      "column": "end_to",
+      "value": "features[0].when.timespans[0].end.earliest",
+      "column": "end_from",
       "width": "50px"
     }
   ],
