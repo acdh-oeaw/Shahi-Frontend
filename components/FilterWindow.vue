@@ -134,7 +134,15 @@ export default {
     selectedClass() {
       this.selected = 0;
     },
-    computed: {},
+      '$store.state.app.filterelements': {
+      handler() {
+        this.filterElements = JSON.parse(
+      JSON.stringify(this.$store.state.app.filterelements)
+    );
+      },
+      immediate: true,
+      deep: true,
+    },
   },
   async beforeMount() {
     this.filterElements = JSON.parse(
@@ -216,7 +224,7 @@ export default {
   },
   computed: {
     ...mapGetters("app", ["getFilterQuery", "getSystemClassForFilter"]),
-  },
+  }
 };
 </script>
 
