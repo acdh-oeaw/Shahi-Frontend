@@ -53,14 +53,13 @@
       </div>
     </template>
 
-     <template v-slot:item.features[0].type.material="{ item }">
-      <nuxt-link v-for="(material,index) in item.features[0].type.material"  :to="`/single/${material.identifier.split('/').splice(-1)[0]}`" :key="index"
-                  ><span v-if="index !==0">, </span>{{material.label}}</nuxt-link>
+     <template v-for="slot in $store.state.app.tableheaders.wide.filter(x => x.value.startsWith('features[0].type'))" 
+       
+       v-slot:[`item.${slot.value}`]="{ item }">
+      <nuxt-link v-for="(type,index) in item.features[0].type[slot.value.split('.')[2]]"  :to="`/single/${type.identifier.split('/').splice(-1)[0]}`" :key="index"
+                  >{{type.label}}  <span v-if="!!type.value">({{type.value}}<span v-if="type.unit"> {{type.unit}}</span>)</span> <br></nuxt-link>
     </template>
-    <template v-slot:item.features[0].type.categoryofauthenticity="{ item }">
-      <nuxt-link v-for="(category,index) in item.features[0].type.categoryofauthenticity"  :to="`/single/${category.identifier.split('/').splice(-1)[0]}`" :key="index"
-                  ><span v-if="index !==0">, </span>{{category.label}}</nuxt-link>
-    </template>
+
   </v-data-table>
 
 </template>

@@ -33,9 +33,16 @@
       "width": "50px"
     },
     {
-      "text": "Materials",
+      "text": "Material",
       "value": "features[0].type.material",
       "column": "material",
+      "width": "50px",
+      "sortable": false
+    },
+    {
+      "text": "Materials",
+      "value": "features[0].type.materials",
+      "column": "materials",
       "width": "50px",
       "sortable": false
     },
@@ -43,6 +50,13 @@
       "text": "category of authenticity",
       "value": "features[0].type.categoryofauthenticity",
       "column": "material",
+      "width": "50px",
+      "sortable": false
+    },
+    {
+      "text": "Dimensions",
+      "value": "features[0].type.dimensions",
+      "column": "dimensions",
       "width": "50px",
       "sortable": false
     }
