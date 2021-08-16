@@ -1,5 +1,5 @@
 <template>
-<v-data-table
+  <v-data-table
     :headers="$store.state.app.tableheaders.wide"
     :items="itemsWithType"
     :options.sync="options"
@@ -23,24 +23,23 @@
     <template v-slot:item.features[0].systemClass="{ item }">
       <v-tooltip right>
         <template v-slot:activator="{ on, attrs }">
-          <v-icon
-            color="primary"
-            dark
-            v-bind="attrs"
-            v-on="on"
-          >
+          <v-icon color="primary" dark v-bind="attrs" v-on="on">
             {{ getIconBySystemClass(item.features[0].systemClass) }}
           </v-icon>
         </template>
         <span>
           {{ getCRMClassBySystemClass(item.features[0].systemClass) }}
           -
-          {{ getLabelBySystemClass({ c: item.features[0].systemClass, l: 'en' }) }}
+          {{
+            getLabelBySystemClass({ c: item.features[0].systemClass, l: "en" })
+          }}
         </span>
       </v-tooltip>
     </template>
     <template v-slot:item.features[0].properties.title="{ item }">
-      <nuxt-link :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}`">
+      <nuxt-link
+        :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}`"
+      >
         {{ item.features[0].properties.title }}
       </nuxt-link>
     </template>
@@ -48,24 +47,33 @@
       <div v-if="item.features[0].description" class="tablecolumndesc">
         {{ item.features[0].description[0].value }}
       </div>
-      <div v-else>
-        n/a
-      </div>
+      <div v-else>n/a</div>
     </template>
 
-     <template v-for="slot in $store.state.app.tableheaders.wide.filter(x => x.value.startsWith('features[0].type'))" 
-       
-       v-slot:[`item.${slot.value}`]="{ item }">
-      <nuxt-link v-for="(type,index) in item.features[0].type[slot.value.split('.')[2]]"  :to="`/single/${type.identifier.split('/').splice(-1)[0]}`" :key="index"
-                  >{{type.label}}  <span v-if="!!type.value">({{type.value}}<span v-if="type.unit"> {{type.unit}}</span>)</span> <br></nuxt-link>
+    <template
+      v-for="slot in $store.state.app.tableheaders.wide.filter((x) =>
+        x.value.startsWith('features[0].type')
+      )"
+      v-slot:[`item.${slot.value}`]="{ item }"
+    >
+    <div v-if="!!item.features[0].type">
+      <nuxt-link
+        v-for="(type, index) in item.features[0].type[slot.value.split('.')[2]]"
+        :to="`/single/${type.identifier.split('/').splice(-1)[0]}`"
+        :key="index"
+        >{{ type.label }}
+        <span v-if="!!type.value"
+          >({{ type.value }}<span v-if="type.unit"> {{ type.unit }}</span
+          >)</span
+        >
+        <br
+      /></nuxt-link></div>
     </template>
-
   </v-data-table>
-
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
   props: {
@@ -75,7 +83,7 @@ export default {
     },
   },
   async fetch() {
-     this.loading = true;
+    this.loading = true;
     const { sortBy, sortDesc, page, itemsPerPage } = this.options;
     // eslint-disable-next-line no-underscore-dangle
     const p = await this.$api.Entities.get_api_0_2_query_({
@@ -91,7 +99,6 @@ export default {
     this.itemIndex = p.body.pagination.index;
     this.totalItems = p.body.pagination.entities;
     this.loading = false;
-   
   },
   data() {
     return {
@@ -111,16 +118,19 @@ export default {
   watch: {
     options: {
       handler(o, n) {
-        if ((o.sortBy !== n.sortBy) || (o.sortDesc !== n.sortDesc)) this.itemIndex = [];
+        if (o.sortBy !== n.sortBy || o.sortDesc !== n.sortDesc)
+          this.itemIndex = [];
         this.$fetch();
       },
       deep: true,
     },
     filter: {
-      handler() { this.$fetch(); },
+      handler() {
+        this.$fetch();
+      },
       deep: true,
     },
-    '$store.state.app.filterelements': {
+    "$store.state.app.filterelements": {
       handler() {
         this.$fetch();
       },
@@ -128,35 +138,33 @@ export default {
       deep: true,
     },
   },
-  methods: {
-  },
+  methods: {},
   computed: {
-    ...mapGetters('app', [
-      'getIconBySystemClass',
-      'getLabelBySystemClass',
-      'getCRMClassBySystemClass',
-      'getSortColumnByPath',
-      'getSystemClassForFilter',
-      'getFilterList'
+    ...mapGetters("app", [
+      "getIconBySystemClass",
+      "getLabelBySystemClass",
+      "getCRMClassBySystemClass",
+      "getSortColumnByPath",
+      "getSystemClassForFilter",
+      "getFilterList",
     ]),
-    itemsWithType(){
-      if(this.items.length === 0)
-      return []
-    
-      return this.items.map((item) =>{
-        item.features[0].type = item.features[0].types.map((x) => {
-                        x.supertype = x.hierarchy.split(' > ')[0];
-                        return x;
-                      })
-                      .reduce((r, a) => {
-                        const key = a.supertype.toLowerCase().replace(/\s+/g, '')
-                        r[key] = [...(r[key] || '') ,a];
-                        return r;
-                      }, {})
-        return item
-      })
-  
-    }
+    itemsWithType() {
+      if (this.items.length === 0) return [];
+
+      return this.items.map((item) => {
+        item.features[0].type = item.features[0].types
+          ?.map((x) => {
+            x.supertype = x.hierarchy.split(" > ")[0];
+            return x;
+          })
+          .reduce((r, a) => {
+            const key = a.supertype.toLowerCase().replace(/\s+/g, "");
+            r[key] = [...(r[key] || ""), a];
+            return r;
+          }, {});
+        return item;
+      });
+    },
   },
 };
 </script>
