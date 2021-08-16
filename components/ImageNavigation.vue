@@ -7,7 +7,7 @@
       <div class="image-content">
         <div class="image-header text-h2">Shahi Kingdom</div>
         <div class="navigation-btns">
-          <v-btn @click="$router.push('')" class="navigation-btn">
+          <v-btn @click="$router.push('')" class="navigation-btn navigation-btn-map">
             <v-icon large>mdi-map</v-icon>
 
             <div>
@@ -69,7 +69,7 @@ export default {
           },
         },
         {
-          text: "Coins",
+          text: "Inscriptions",
           icon: "$artifact",
           target: {
             name: "detaillist-q",
@@ -87,18 +87,24 @@ export default {
 <style scoped>
 .navigation-btns {
   position: absolute;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(5, 300px);
+  grid-template-rows: repeat(3, 100%);
   left: 10%;
   top: 10%;
 }
 
 .navigation-btn {
   min-height: 100px;
-
-  margin-bottom: 10px;
+  margin: 10px;
   background-color: rgba(255, 255, 255, 0.8) !important;
   transition: all 100ms linear;
+}
+.navigation-btn-map{
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  height: 400px;
 }
 .navigation-btn >>> .v-btn__content {
   display: flex;
