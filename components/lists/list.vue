@@ -1,6 +1,20 @@
 <template>
+<div>
+  <v-row no-gutters>
+    <v-spacer></v-spacer>
+    <v-spacer></v-spacer>
+  <v-select class="mt-5" dense  v-model="selectedHeaders" :items="$store.state.app.tableheaders.wide" label="Select Columns" multiple outlined return-object>
+            <template v-slot:selection="{ item, index }">
+              <v-chip small v-if="index < 2">
+                <span>{{ item.text }}</span>
+              </v-chip>
+              <span v-if="index === 2" class="grey--text caption">(+{{ selectedHeaders.length - 2 }} others)</span>
+            </template>
+         </v-select>
+         </v-row>
+
   <v-data-table
-    :headers="$store.state.app.tableheaders.wide"
+    :headers="showHeaders"
     :items="itemsWithType"
     :options.sync="options"
     :server-items-length="totalItems"
@@ -70,6 +84,7 @@
       /></nuxt-link></div>
     </template>
   </v-data-table>
+</div>
 </template>
 
 <script>
@@ -113,7 +128,12 @@ export default {
       itemsPerPageOptions: [10, 20, 50, 100],
       totalItems: 0,
       itemIndex: [],
+      selectedHeaders: [],
+    
     };
+  },
+  created(){
+    this.selectedHeaders = this.$store.state.app.tableheaders.wide.filter(x => x.visible)
   },
   watch: {
     options: {
@@ -165,6 +185,9 @@ export default {
         return item;
       });
     },
+    showHeaders () {
+      return this.$store.state.app.tableheaders.wide.filter(s => this.selectedHeaders.includes(s));
+    }
   },
 };
 </script>

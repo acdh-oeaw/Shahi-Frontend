@@ -4,7 +4,8 @@
       "text": "Class",
       "value": "features[0].systemClass",
       "column": "class_code",
-      "width": "20px"
+      "width": "20px",
+      "visible":true
     },
     {
       "text": "Title",
@@ -12,32 +13,37 @@
       "sortable": true,
       "value": "features[0].properties.title",
       "column": "name",
-      "width": "200px"
+      "width": "200px",
+      "visible":true
     },
     {
       "text": "Description",
       "value": "features[0].description[0].value",
       "column": "description",
-      "width": "300px"
+      "width": "300px",
+      "visible":true
     },
     {
       "text": "Begin/From",
       "value": "features[0].when.timespans[0].start.earliest",
       "column": "begin_from",
-      "width": "50px"
+      "width": "50px",
+      "visible":true
     },
     {
       "text": "End/To",
       "value": "features[0].when.timespans[0].end.earliest",
       "column": "end_from",
-      "width": "50px"
+      "width": "50px",
+      "visible":true
     },
     {
       "text": "Material",
       "value": "features[0].type.material",
       "column": "material",
       "width": "50px",
-      "sortable": false
+      "sortable": false,
+      "visible":true
     },
     {
       "text": "Materials",
@@ -51,7 +57,8 @@
       "value": "features[0].type.categoryofauthenticity",
       "column": "material",
       "width": "50px",
-      "sortable": false
+      "sortable": false,
+      "visible":true
     },
     {
       "text": "Dimensions",
