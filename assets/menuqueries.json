@@ -1,31 +1,31 @@
 [
   {
     "icon": "mdi-account-group",
-    "text": "Actors",
+    "text": "Stationary structures",
     "target": {
       "name": "detaillist-q",
       "params": {
-        "q": "{ \"codes\": \"actor\" }"
+        "q": "{ \"codes\": \"artifact\", \"type_id\":[\"1095\"] }"
       }
     }
   },
   {
     "icon": "mdi-text-box",
-    "text": "Sources",
+    "text": "Movable objects",
     "target": {
       "name": "detaillist-q",
       "params": {
-        "q": "{ \"codes\": \"source\" }"
+        "q": "{ \"codes\": \"artifact\", \"type_id\":[\"109\"] }"
       }
     }
   },
   {
     "icon": "mdi-calendar",
-    "text": "Events",
+    "text": "Coins",
     "target": {
       "name": "detaillist-q",
       "params": {
-        "q": "{ \"codes\": \"event\" }"
+        "q": "{ \"codes\": \"artifact\", \"type_id\":[\"108\"] }"
       }
     }
   },
