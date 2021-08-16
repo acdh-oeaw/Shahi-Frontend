@@ -2,6 +2,7 @@
   {
     "icon": "mdi-account-group",
     "text": "Stationary structures",
+    "system_class":"artifacts",
     "target": {
       "name": "detaillist-q",
       "params": {
@@ -12,6 +13,7 @@
   {
     "icon": "mdi-text-box",
     "text": "Movable objects",
+    "system_class":"artifacts",
     "target": {
       "name": "detaillist-q",
       "params": {
@@ -22,6 +24,7 @@
   {
     "icon": "mdi-calendar",
     "text": "Coins",
+    "system_class":"artifacts",
     "target": {
       "name": "detaillist-q",
       "params": {
@@ -32,6 +35,7 @@
   {
     "icon": "mdi-map-marker",
     "text": "Places",
+    "system_class":"places",
     "target": {
       "name": "map-q",
       "params": {
@@ -42,6 +46,7 @@
   {
     "icon": "mdi-shape",
     "text": "Artifacts",
+    "system_class":"artifacts",
     "target": {
       "name": "detaillist-q",
       "params": {
