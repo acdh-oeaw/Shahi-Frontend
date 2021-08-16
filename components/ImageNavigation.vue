@@ -39,22 +39,42 @@ export default {
     return {
       items: [
         {
-          text: "Collections",
+          text: "Stationary Structures",
           icon: "$artifact",
           target: {
             name: "list-q",
             params: {
-              q: '{ "codes": "actor" }',
+              q: '{ "codes": "artifact", "type_id":["1095"] }',
             },
           },
         },
         {
-          text: "Artifact",
+          text: "Movable Objects",
           icon: "$artifact",
           target: {
             name: "detaillist-q",
             params: {
-              q: '{ "codes": "artifact" }',
+              q: '{ "codes": "artifact","type_id":["109"]  }',
+            },
+          },
+        },
+        {
+          text: "Coins",
+          icon: "$artifact",
+          target: {
+            name: "detaillist-q",
+            params: {
+              q: '{ "codes": "artifact","type_id":["108"]  }',
+            },
+          },
+        },
+        {
+          text: "Coins",
+          icon: "$artifact",
+          target: {
+            name: "detaillist-q",
+            params: {
+              q: '{ "codes": "artifact","type_id":["108"]  }',
             },
           },
         },
