@@ -83,10 +83,10 @@ export const mutations = {
     const vals = state.filterelements.find((item) => item.selected === true).items[selectedProperty].values;
     vals.filter((x) => x.id == key)[0].value = value[key];
   },
-  setSelectedFilterClass(state,name){
+  setSelectedFilterClass(state,systemClass){
     state.filterelements.forEach( (c) =>{
       
-      if(c.en === name)
+      if(c.systemClass === systemClass)
         c.selected = true;
       else
         c.selected = false;

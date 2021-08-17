@@ -244,7 +244,7 @@ export default {
     clickOnItem(item) {
       this.view = item.target.name;
       this.$store.commit("app/closeQueryDrawer");
-      this.$store.commit("app/setSelectedFilterClass", item.system_class);
+      this.$store.commit("app/setSelectedFilterClass", item.systemClass);
     },
   },
   watch: {
