@@ -60,8 +60,30 @@
                 <v-card v-if="selectedClass != undefined" flat>
                   <v-card-title>
                     {{ filterElements[selectedClass].items[selected].en }}
+                    <v-tooltip
+                      v-if="
+                        !!filterElements[selectedClass].items[selected]
+                          .description
+                      "
+                      right
+                      max-width="400px"
+                    >
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-icon class="ml-1" color="primary" v-bind="attrs" v-on="on"
+                          >mdi-help-circle-outline</v-icon
+                        >
+                      </template>
+                      {{
+                        filterElements[selectedClass].items[selected]
+                          .description
+                      }}
+                    </v-tooltip>
                   </v-card-title>
-                  <v-card-text class="pb-10 hidden" style="overflow:auto; max-height:370px" >
+                 
+                  <v-card-text
+                    class="pb-10 hidden"
+                    style="overflow: auto; max-height: 370px"
+                  >
                     <v-row not gutters>
                       <v-col
                         v-for="(item, index) in filterElements[selectedClass]
@@ -134,11 +156,11 @@ export default {
     selectedClass() {
       this.selected = 0;
     },
-      '$store.state.app.filterelements': {
+    "$store.state.app.filterelements": {
       handler() {
         this.filterElements = JSON.parse(
-      JSON.stringify(this.$store.state.app.filterelements)
-    );
+          JSON.stringify(this.$store.state.app.filterelements)
+        );
       },
       immediate: true,
       deep: true,
@@ -159,7 +181,7 @@ export default {
             (x) => x[Object.keys(x)[0]].root[0] == item.id
           );
           item.values = types.map((x) => {
-            const element = x[Object.keys(x)[0]]
+            const element = x[Object.keys(x)[0]];
             let type = {
               en: element.name,
               id: element.id,
@@ -176,7 +198,6 @@ export default {
     });
 
     this.$store.commit("app/setFilterElements", this.filterElements);
-
   },
   methods: {
     chunk(arr, size) {
@@ -224,7 +245,7 @@ export default {
   },
   computed: {
     ...mapGetters("app", ["getFilterQuery", "getSystemClassForFilter"]),
-  }
+  },
 };
 </script>
 

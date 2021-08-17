@@ -125,7 +125,7 @@
         "type": "multiple",
         "id": "1090",
         "kind": "type",
-
+        "description":"Only objects that the art history team could unanimously categorize as authentic are included in the corpus of Shahi visual and material culture. Strict selection criteria have been used to assess the authenticity of each object. We defined three categories of authenticity. In the database, each object is identified as belonging to either category A or B. Category C objects are not included.",
         "values": []
       },
       {
