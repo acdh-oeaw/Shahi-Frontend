@@ -69,7 +69,11 @@
                       max-width="400px"
                     >
                       <template v-slot:activator="{ on, attrs }">
-                        <v-icon class="ml-1" color="primary" v-bind="attrs" v-on="on"
+                        <v-icon
+                          class="ml-1"
+                          color="primary"
+                          v-bind="attrs"
+                          v-on="on"
                           >mdi-help-circle-outline</v-icon
                         >
                       </template>
@@ -79,7 +83,7 @@
                       }}
                     </v-tooltip>
                   </v-card-title>
-                 
+
                   <v-card-text
                     class="pb-10 hidden"
                     style="overflow: auto; max-height: 370px"
@@ -99,7 +103,7 @@
                           color="grey"
                           @click="item.value = !item.value"
                         >
-                          {{ item.en }}
+                          {{ item.en }}, {{ item.subs }}
                           <v-icon v-if="item.value" class="pl-2" small>
                             $delete
                           </v-icon>
@@ -177,11 +181,19 @@ export default {
       element.items.forEach((item) => {
         if (item.id) {
           console.log(item.id);
-          const types = typeTree.filter(
-            (x) => x[Object.keys(x)[0]].root[0] == item.id
-          );
-          item.values = types.map((x) => {
-            const element = x[Object.keys(x)[0]];
+          const types = typeTree
+            .filter((x) => x[Object.keys(x)[0]].root[0] == item.id).reduce((dict,element) => {dict[Object.keys(element)[0]]=element[Object.keys(element)[0]]; return dict},{});
+
+          const typesWithAllSubtypes = typeTree.reduce((dict,element) => {
+            const el = element[Object.keys(element)[0]];
+            if(dict.hasOwnProperty(el.root[0]))
+              dict[el.root[0]].child = [... (dict[el.root[0]].child || []), el]
+            return dict
+          },types)
+          console.log("jetzte");
+          console.log(Object.values(typesWithAllSubtypes));
+
+          const mapFunctionSubs = (element) => {
             let type = {
               en: element.name,
               id: element.id,
@@ -192,7 +204,27 @@ export default {
             };
 
             return type;
-          });
+          }
+
+
+        const mapFunction = (element) => {
+            let type = {
+              en: element.name,
+              id: element.id,
+              value: false,
+              count: element.count,
+              concatOperator: "and",
+              logicalOperator: "eq",
+              child: element.child?.map(mapFunctionSubs)
+            };
+
+            return type;
+          }
+        
+
+          item.values = Object.values(typesWithAllSubtypes).map(mapFunction );
+          console.log('lol')
+          console.log(item.values)
         }
       });
     });
