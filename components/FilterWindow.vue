@@ -89,7 +89,7 @@
                     style="overflow: auto; max-height: 370px"
                   >
                     <v-row not gutters>
-                      <v-col
+                      <v-col cols="12" sm="6"
                         v-for="(item, index) in filterElements[selectedClass]
                           .items[selected].values"
                         v-if="
@@ -98,16 +98,10 @@
                         "
                         :key="item.id"
                       >
-                        <v-btn
-                          :outlined="!item.value"
-                          color="grey"
-                          @click="item.value = !item.value"
-                        >
-                          {{ item.en }}, {{ item.subs }}
-                          <v-icon v-if="item.value" class="pl-2" small>
-                            $delete
-                          </v-icon>
-                        </v-btn>
+                      <div @click="item.value = !item.value" class="filter-element" :class="item.value ? 'filter-element-clicked' : ''">
+                        <span >{{ item.en }}</span> <v-icon style="float:right" v-if="item.value" small>mdi-close</v-icon>
+                      </div>
+                    
                       </v-col>
 
                       <v-col
@@ -312,5 +306,21 @@ export default {
   width: auto;
   height: auto;
   transition: height 0.5s linear;
+}
+
+.filter-element{
+  cursor: pointer;
+  transition: 100ms all linear;
+  padding: 5px;
+  
+}
+
+.filter-element:hover{
+ font-weight: bold;
+}
+
+.filter-element-clicked{
+ font-weight: bold;
+ background-color: lightgray;
 }
 </style>
