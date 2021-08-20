@@ -90,7 +90,7 @@
                     "
                   >
                     <v-text-field
-                      label="Suche"
+                      label="Search"
                       v-model="searchKeyword"
                     ></v-text-field>
                   </v-card-subtitle>
