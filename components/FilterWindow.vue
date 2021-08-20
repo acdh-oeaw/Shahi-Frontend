@@ -83,6 +83,17 @@
                       }}
                     </v-tooltip>
                   </v-card-title>
+                  <v-card-subtitle
+                    v-if="
+                      filterElements[selectedClass].items[selected].type ==
+                      'multiple'
+                    "
+                  >
+                    <v-text-field
+                      label="Suche"
+                      v-model="searchKeyword"
+                    ></v-text-field>
+                  </v-card-subtitle>
 
                   <v-card-text
                     class="pb-10 hidden"
@@ -92,8 +103,7 @@
                       <v-col
                         cols="12"
                         sm="6"
-                        v-for="(item, index) in filterElements[selectedClass]
-                          .items[selected].values"
+                        v-for="(item, index) in searchedTypes"
                         v-if="
                           filterElements[selectedClass].items[selected].type ==
                           'multiple'
@@ -101,48 +111,49 @@
                         :key="item.id"
                       >
                         <div
-                         
                           class="filter-element"
                           :class="item.value ? 'filter-element-clicked' : ''"
-                        @click="item.value = !item.value">
-                          <span>{{ item.en }}</span> 
+                          @click="selectItem(item)"
+                        >
+                          <span>{{ item.en }}</span>
 
-                          
                           <v-icon
-                          small
+                            small
                             @click.stop="item.showSubtypes = !item.showSubtypes"
-                            
                             v-if="!!item.child"
                             class="expand-icon"
-                            style="float:right;"
-                            :class="item.showSubtypes ? 'expand-icon-expanded' : ''"
+                            style="float: right"
+                            :class="
+                              item.showSubtypes ? 'expand-icon-expanded' : ''
+                            "
                             >mdi-chevron-down</v-icon
                           >
-                           <v-icon style="float: right" v-if="item.value" small
+                          <v-icon style="float: right" v-if="item.value" small
                             >mdi-close</v-icon
                           >
-                          
-                        
                         </div>
-                        
+
                         <v-expand-transition>
-                        <div v-if="item.showSubtypes">
-                          <div 
-                          
-                            v-for="(subtype, index) in item.child"
-                            :key="index"
-                          @click="subtype.value = !subtype.value"
-
-                            class="filter-element ml-2"
-                            :class="subtype.value ? 'filter-element-clicked' : ''"
-                          >
-                            <span>{{ subtype.en }}</span>
-
-                            <v-icon style="float: right" v-if="subtype.value" small
-                              >mdi-close</v-icon
+                          <div v-if="item.showSubtypes">
+                            <div
+                              v-for="(subtype, index) in item.child"
+                              :key="index"
+                              @click="subtype.value = !subtype.value"
+                              class="filter-element ml-2"
+                              :class="
+                                subtype.value ? 'filter-element-clicked' : ''
+                              "
                             >
+                              <span>{{ subtype.en }}</span>
+
+                              <v-icon
+                                style="float: right"
+                                v-if="subtype.value"
+                                small
+                                >mdi-close</v-icon
+                              >
+                            </div>
                           </div>
-                        </div>
                         </v-expand-transition>
                       </v-col>
 
@@ -190,11 +201,17 @@ export default {
       selectedClass: 0,
       filterElements: [{}],
       query: {},
+      searchKeyword: "",
+      searchedTypes: [],
     };
   },
   watch: {
     selectedClass() {
       this.selected = 0;
+      this.searchKeyword = "";
+    },
+    selected() {
+      this.searchKeyword = "";
     },
     "$store.state.app.filterelements": {
       handler() {
@@ -204,6 +221,31 @@ export default {
       },
       immediate: true,
       deep: true,
+    },
+    propertySelectedClassAndSelectedAndSearchKeyword() {
+      console.log("geändert");
+      if (!this.searchKeyword)
+        this.searchedTypes =
+          this.filterElements[this.selectedClass].items[this.selected].values;
+      else
+        this.searchedTypes = this.filterElements[this.selectedClass].items[
+          this.selected
+        ].values.reduce((result, element) => {
+          const e = { ...element };
+
+          if (
+            element.en.toLowerCase().includes(this.searchKeyword.toLowerCase())
+          )
+            result.push(e);
+          else {
+            e.child = element.child?.filter((x) =>
+              x.en.toLowerCase().includes(this.searchKeyword.toLowerCase())
+            );
+            if (e.child?.length) result.push(e);
+          }
+
+          return result;
+        }, []);
     },
   },
   async beforeMount() {
@@ -255,7 +297,7 @@ export default {
               concatOperator: "and",
               logicalOperator: "eq",
               child: element.child?.map(mapFunctionSubs),
-              showSubtypes: false
+              showSubtypes: false,
             };
 
             return type;
@@ -279,6 +321,29 @@ export default {
         []
       );
     },
+      selectItem(item){
+        item.value = ! item.value
+
+        this.filterElements[this.selectedClass].items[this.selected].values.every((type) => {
+          if(type.id === item.id){
+            type.value = item.value;
+            return false;
+          }
+          const stayInLoop = true
+          type.child?.every((subtype)=>{
+            if(subtype.id === item.id){
+            subtype.value = item.value;
+            stayInLoop = false;
+            return false;
+          }
+          })
+
+          return stayInLoop;
+        })
+        
+
+
+      },
 
     search() {
       this.filterElements.forEach((item) => (item.selected = false));
@@ -316,6 +381,9 @@ export default {
   },
   computed: {
     ...mapGetters("app", ["getFilterQuery", "getSystemClassForFilter"]),
+    propertySelectedClassAndSelectedAndSearchKeyword() {
+      return `${this.selectedClass}|${this.selected}|${this.searchKeyword}`;
+    },
   },
 };
 </script>
@@ -368,11 +436,7 @@ export default {
   background-color: lightgray;
 }
 
-
-
-
 .expand-icon-expanded {
   transform: rotate(180deg);
 }
-
 </style>
