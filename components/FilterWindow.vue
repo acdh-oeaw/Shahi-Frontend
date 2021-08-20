@@ -89,7 +89,9 @@
                     style="overflow: auto; max-height: 370px"
                   >
                     <v-row not gutters>
-                      <v-col cols="12" sm="6"
+                      <v-col
+                        cols="12"
+                        sm="6"
                         v-for="(item, index) in filterElements[selectedClass]
                           .items[selected].values"
                         v-if="
@@ -98,10 +100,50 @@
                         "
                         :key="item.id"
                       >
-                      <div @click="item.value = !item.value" class="filter-element" :class="item.value ? 'filter-element-clicked' : ''">
-                        <span >{{ item.en }}</span> <v-icon style="float:right" v-if="item.value" small>mdi-close</v-icon>
-                      </div>
-                    
+                        <div
+                         
+                          class="filter-element"
+                          :class="item.value ? 'filter-element-clicked' : ''"
+                        @click="item.value = !item.value">
+                          <span>{{ item.en }}</span> 
+
+                          
+                          <v-icon
+                          small
+                            @click.stop="item.showSubtypes = !item.showSubtypes"
+                            
+                            v-if="!!item.child"
+                            class="expand-icon"
+                            style="float:right;"
+                            :class="item.showSubtypes ? 'expand-icon-expanded' : ''"
+                            >mdi-chevron-down</v-icon
+                          >
+                           <v-icon style="float: right" v-if="item.value" small
+                            >mdi-close</v-icon
+                          >
+                          
+                        
+                        </div>
+                        
+                        <v-expand-transition>
+                        <div v-if="item.showSubtypes">
+                          <div 
+                          
+                            v-for="(subtype, index) in item.child"
+                            :key="index"
+                          @click="subtype.value = !subtype.value"
+
+                            class="filter-element ml-2"
+                            :class="subtype.value ? 'filter-element-clicked' : ''"
+                          >
+                            <span>{{ subtype.en }}</span>
+
+                            <v-icon style="float: right" v-if="subtype.value" small
+                              >mdi-close</v-icon
+                            >
+                          </div>
+                        </div>
+                        </v-expand-transition>
                       </v-col>
 
                       <v-col
@@ -176,14 +218,18 @@ export default {
         if (item.id) {
           console.log(item.id);
           const types = typeTree
-            .filter((x) => x[Object.keys(x)[0]].root[0] == item.id).reduce((dict,element) => {dict[Object.keys(element)[0]]=element[Object.keys(element)[0]]; return dict},{});
+            .filter((x) => x[Object.keys(x)[0]].root[0] == item.id)
+            .reduce((dict, element) => {
+              dict[Object.keys(element)[0]] = element[Object.keys(element)[0]];
+              return dict;
+            }, {});
 
-          const typesWithAllSubtypes = typeTree.reduce((dict,element) => {
+          const typesWithAllSubtypes = typeTree.reduce((dict, element) => {
             const el = element[Object.keys(element)[0]];
-            if(dict.hasOwnProperty(el.root[0]))
-              dict[el.root[0]].child = [... (dict[el.root[0]].child || []), el]
-            return dict
-          },types)
+            if (dict.hasOwnProperty(el.root[0]))
+              dict[el.root[0]].child = [...(dict[el.root[0]].child || []), el];
+            return dict;
+          }, types);
           console.log("jetzte");
           console.log(Object.values(typesWithAllSubtypes));
 
@@ -198,10 +244,9 @@ export default {
             };
 
             return type;
-          }
+          };
 
-
-        const mapFunction = (element) => {
+          const mapFunction = (element) => {
             let type = {
               en: element.name,
               id: element.id,
@@ -209,16 +254,16 @@ export default {
               count: element.count,
               concatOperator: "and",
               logicalOperator: "eq",
-              child: element.child?.map(mapFunctionSubs)
+              child: element.child?.map(mapFunctionSubs),
+              showSubtypes: false
             };
 
             return type;
-          }
-        
+          };
 
-          item.values = Object.values(typesWithAllSubtypes).map(mapFunction );
-          console.log('lol')
-          console.log(item.values)
+          item.values = Object.values(typesWithAllSubtypes).map(mapFunction);
+          console.log("lol");
+          console.log(item.values);
         }
       });
     });
@@ -308,19 +353,26 @@ export default {
   transition: height 0.5s linear;
 }
 
-.filter-element{
+.filter-element {
   cursor: pointer;
   transition: 100ms all linear;
   padding: 5px;
-  
 }
 
-.filter-element:hover{
- font-weight: bold;
+.filter-element:hover {
+  font-weight: bold;
 }
 
-.filter-element-clicked{
- font-weight: bold;
- background-color: lightgray;
+.filter-element-clicked {
+  font-weight: bold;
+  background-color: lightgray;
 }
+
+
+
+
+.expand-icon-expanded {
+  transform: rotate(180deg);
+}
+
 </style>
