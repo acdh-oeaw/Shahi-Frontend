@@ -99,16 +99,20 @@
                     class="pb-10 hidden"
                     style="overflow: auto; max-height: 370px"
                   >
-                    <v-row not gutters>
+                    <v-row
+                      not
+                      gutters
+                      v-if="
+                        filterElements[selectedClass].items[selected].type ==
+                        'multiple'
+                      "
+                    >
                       <v-col
                         cols="12"
                         sm="6"
                         v-for="(item, index) in searchedTypes"
-                        v-if="
-                          filterElements[selectedClass].items[selected].type ==
-                          'multiple'
-                        "
                         :key="item.id"
+                        v-if="item.root.length <= 1"
                       >
                         <div
                           class="filter-element"
@@ -120,7 +124,7 @@
                           <v-icon
                             small
                             @click.stop="item.showSubtypes = !item.showSubtypes"
-                            v-if="!!item.child"
+                            v-if="!!item.subs && item.subs.length != 0"
                             class="expand-icon"
                             style="float: right"
                             :class="
@@ -136,7 +140,8 @@
                         <v-expand-transition>
                           <div v-if="item.showSubtypes">
                             <div
-                              v-for="(subtype, index) in item.child"
+                              v-for="(subtype, index) in searchedTypes"
+                              v-if="subtype.root.includes(item.id)"
                               :key="index"
                               @click="subtype.value = !subtype.value"
                               class="filter-element ml-2"
@@ -155,16 +160,17 @@
                             </div>
                           </div>
                         </v-expand-transition>
-                      </v-col>
-
+                      </v-col> </v-row
+                    ><v-row
+                      v-if="
+                        filterElements[selectedClass].items[selected].type ==
+                        'text'
+                      "
+                    >
                       <v-col
                         v-for="item in filterElements[selectedClass].items[
                           selected
                         ].values"
-                        v-if="
-                          filterElements[selectedClass].items[selected].type ==
-                          'text'
-                        "
                         :key="item.id"
                         cols="12"
                       >
@@ -230,22 +236,12 @@ export default {
       else
         this.searchedTypes = this.filterElements[this.selectedClass].items[
           this.selected
-        ].values.reduce((result, element) => {
-          const e = { ...element };
-
-          if (
-            element.en.toLowerCase().includes(this.searchKeyword.toLowerCase())
-          )
-            result.push(e);
-          else {
-            e.child = element.child?.filter((x) =>
-              x.en.toLowerCase().includes(this.searchKeyword.toLowerCase())
-            );
-            if (e.child?.length) result.push(e);
-          }
-
-          return result;
-        }, []);
+        ].values.filter((element) =>  element.en.toLowerCase().includes(this.searchKeyword.toLowerCase())).map((element)=>{
+          let e = {...element}
+          e.root = []
+          e.subs = []
+          return e
+        })
     },
   },
   async beforeMount() {
@@ -258,24 +254,12 @@ export default {
     this.filterElements.forEach((element) => {
       element.items.forEach((item) => {
         if (item.id) {
-          console.log(item.id);
-          const types = typeTree
-            .filter((x) => x[Object.keys(x)[0]].root[0] == item.id)
-            .reduce((dict, element) => {
-              dict[Object.keys(element)[0]] = element[Object.keys(element)[0]];
-              return dict;
-            }, {});
+          const allTypes = typeTree.filter((x) =>
+            x[Object.keys(x)[0]].root.includes(parseInt(item.id))
+          );
 
-          const typesWithAllSubtypes = typeTree.reduce((dict, element) => {
-            const el = element[Object.keys(element)[0]];
-            if (dict.hasOwnProperty(el.root[0]))
-              dict[el.root[0]].child = [...(dict[el.root[0]].child || []), el];
-            return dict;
-          }, types);
-          console.log("jetzte");
-          console.log(Object.values(typesWithAllSubtypes));
-
-          const mapFunctionSubs = (element) => {
+          const mapFunction = (x) => {
+            const element = x[Object.keys(x)[0]];
             let type = {
               en: element.name,
               id: element.id,
@@ -283,29 +267,15 @@ export default {
               count: element.count,
               concatOperator: "and",
               logicalOperator: "eq",
-            };
-
-            return type;
-          };
-
-          const mapFunction = (element) => {
-            let type = {
-              en: element.name,
-              id: element.id,
-              value: false,
-              count: element.count,
-              concatOperator: "and",
-              logicalOperator: "eq",
-              child: element.child?.map(mapFunctionSubs),
               showSubtypes: false,
+              root: element.root,
+              subs: element.subs,
             };
 
             return type;
           };
 
-          item.values = Object.values(typesWithAllSubtypes).map(mapFunction);
-          console.log("lol");
-          console.log(item.values);
+          item.values = allTypes.map(mapFunction);
         }
       });
     });
@@ -321,29 +291,12 @@ export default {
         []
       );
     },
-      selectItem(item){
-        item.value = ! item.value
+    selectItem(item) {
+      item.value = !item.value;
 
-        this.filterElements[this.selectedClass].items[this.selected].values.every((type) => {
-          if(type.id === item.id){
-            type.value = item.value;
-            return false;
-          }
-          const stayInLoop = true
-          type.child?.every((subtype)=>{
-            if(subtype.id === item.id){
-            subtype.value = item.value;
-            stayInLoop = false;
-            return false;
-          }
-          })
-
-          return stayInLoop;
-        })
-        
-
-
-      },
+      this.filterElements[this.selectedClass].items[this.selected].values.find((x) => x.id === item.id).value = item.value
+   
+    },
 
     search() {
       this.filterElements.forEach((item) => (item.selected = false));
