@@ -32,6 +32,10 @@
                 {{ item.features[0].properties.title }}
             </p>
             <p class="text-caption pa-0 ma-0">
+              {{getFirstTypeByKeyword(item.features[0].types,'Artifact').label}}
+              <span v-if="!!getFirstTypeByKeyword(item.features[0].types,'Artifact').subtype">({{getFirstTypeByKeyword(item.features[0].types,'Artifact').subtype}})</span>
+            </p>
+            <p class="text-caption pa-0 ma-0">
               <span v-if="item.features[0].when.timespans[0].start.earliest">
                 from
                 {{
@@ -64,12 +68,18 @@
 
           <v-card-text class="text-body-1">
             <v-card outlined class="my-3" v-if="item.features[0].description">
+              <v-card-text class="text-body-1">
+                Category of Authenticity:    <nuxt-link
+                :to='`/detaillist/{"codes":"artifact","type_id":["${getFirstTypeByKeyword(item.features[0].types,"Category of Authenticity").identifier.split("/").splice(-1)[0]}"]}`'
+              >{{getFirstTypeByKeyword(item.features[0].types,'Category of Authenticity').label}}</nuxt-link>
+              </v-card-text>
               <v-card-text class="text-body-1">{{
                 item.features[0].description[0].value
               }}</v-card-text>
             </v-card>
             <div class="card-columns" :style="cssVars">
               <div
+                v-if="typeGroup[0].type !== 'Artifact' && typeGroup[0].type !== 'Category of Authenticity'"
                 class="card-column"
                 v-for="(typeGroup, index) in getOrderedTypes(
                   item.features[0].types
@@ -185,6 +195,14 @@ export default {
         .map((x) => x.label)
         .join(", ");
     },
+    getFirstTypeByKeyword(types,keyword) {
+      let type = types.find((x) => x.hierarchy.split(" > ")[0] === keyword)
+
+      type.supertype = type.hierarchy.split(" > ")[0];
+      type.subtype = type.hierarchy.split(" > ")[1];
+      return type;
+    }
+    ,
     getOrderedTypes(types) {
       if (!types) return {};
       const newTypes = types
