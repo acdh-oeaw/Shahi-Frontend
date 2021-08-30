@@ -20,7 +20,7 @@
           ></v-img>
         </v-col>
         <v-col cols="12" sm="9" md="10">
-            <router-link
+            <nuxt-link
                 :to="`/single/${
                   item.features[0]['@id'].split('/').splice(-1)[0]
                 }`"
@@ -28,7 +28,7 @@
               <v-hover v-slot="{hover}">
           <v-card-title class="artifact-title brown d-block white--text " :class="hover ? 'lighten-1' : ''">
             <p class="ma-0 pa-0">
-            
+
                 {{ item.features[0].properties.title }}
             </p>
             <p class="text-caption pa-0 ma-0">
@@ -60,7 +60,7 @@
             </p>
           </v-card-title>
           </v-hover>
-              </router-link>
+              </nuxt-link>
 
           <v-card-text class="text-body-1">
             <v-card outlined class="my-3" v-if="item.features[0].description">
@@ -87,7 +87,9 @@
                       :key="index"
                       class="ma-0 ml-5 pa-0"
                     >
-                      <nuxt-link :to="`/single/${type.id}`">
+                      <nuxt-link
+                                 :to='`/detaillist/{"codes":"artifact","type_id":["${type.id}"]}`'
+                      >
                         {{ type.label }}
                       </nuxt-link>
                       <span v-if="!!type.value"
