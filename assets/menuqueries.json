@@ -4,9 +4,10 @@
     "text": "Stationary structures",
     "systemClass":"artifact",
     "target": {
-      "name": "detaillist-q",
-      "params": {
-        "q": "{ \"codes\": \"artifact\", \"type_id\":[\"1095\"] }"
+      "name": "list-q",
+      "query": {
+        "codes": "artifact",
+        "type_id": ["140","150"]
       }
     }
   },
@@ -16,8 +17,9 @@
     "systemClass":"artifact",
     "target": {
       "name": "detaillist-q",
-      "params": {
-        "q": "{ \"codes\": \"artifact\", \"type_id\":[\"109\"] }"
+      "query": {
+        "codes": "artifact",
+        "type_id": 109
       }
     }
   },
@@ -27,8 +29,9 @@
     "systemClass":"artifact",
     "target": {
       "name": "detaillist-q",
-      "params": {
-        "q": "{ \"codes\": \"artifact\", \"type_id\":[\"108\"] }"
+      "query": {
+        "codes": "artifact",
+        "type_id": 108
       }
     }
   },
@@ -38,8 +41,8 @@
     "systemClass":"place",
     "target": {
       "name": "map-q",
-      "params": {
-        "q": "{ \"codes\": \"place\" }"
+      "query": {
+        "codes": "place"
       }
     }
   },
@@ -49,8 +52,8 @@
     "systemClass":"artifact",
     "target": {
       "name": "detaillist-q",
-      "params": {
-        "q": "{ \"codes\": \"artifact\" }"
+      "query": {
+        "codes": "artifact"
       }
     }
   }

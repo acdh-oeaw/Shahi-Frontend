@@ -20,10 +20,13 @@ export const state = () => ({
 export const getters = {
   getSystemClassForFilter: (s) => s.filterelements.find((item) => item.selected === true).systemClass,
   getCurrentFilters: (s) => s.filterelements.find((item) => item.selected === true),
-  getFilterQuery: (s) => {
+  getFilterObject: (s) => {
     let filterList = [];
     let typeList = [];
-    s.filterelements.find((item) => item.selected === true).items.forEach((group) => {
+    let filterObject = {};
+    const selectedItem = s.filterelements.find((item) => item.selected === true)
+
+    selectedItem.items.forEach((group) => {
       group.values.forEach((filter) => {
         if (filter.value && group.kind === 'filter') {
           filterList.push(`${filter.concatOperator}|${filter.id}|${filter.logicalOperator}|${filter.value}`);
@@ -33,13 +36,11 @@ export const getters = {
         }
       });
     });
-    let filterString = ""
-    if(filterList.length !== 0)
-      filterString += `, "filter":["${filterList.join('","')}"]`;
-    if(typeList.length !== 0)
-      filterString += `, "type_id":["${typeList.join('","')}"]`;
-   
-      return filterString
+    filterObject.codes = selectedItem.systemClass;
+    filterObject.type_id = typeList;
+    filterObject.filter = filterList;
+    console.log(filterObject)
+    return filterObject;
   },
   getIconBySystemClass: (s) => (c) => s.classes.find((item) => item.systemClass === c).icon,
   getLabelBySystemClass: (s) => ({
@@ -85,7 +86,7 @@ export const mutations = {
   },
   setSelectedFilterClass(state,systemClass){
     state.filterelements.forEach( (c) =>{
-      
+
       if(c.systemClass === systemClass)
         c.selected = true;
       else

@@ -20,8 +20,8 @@ export default {
     };
   },
   watch: {
-    '$route.params': {
-      handler(s) { this.parseQuery(s.q); },
+    '$route.query': {
+      handler(s) { this.query = s },
       immediate: true,
       deep: true,
     },

@@ -1,7 +1,7 @@
 <template>
   <v-app light>
     <v-navigation-drawer
-     
+
       v-model="$store.state.app.queryDrawer"
       class="ontop"
       :disable-resize-watcher="true"
@@ -233,14 +233,6 @@ export default {
       this.windowTop =
         window.top.scrollY; /* or: e.target.documentElement.scrollTop */
     },
-    changeMode() {
-      let name = "list-q";
-      if (this.$route.name === "list-q") name = "map-q";
-      this.$router.push({
-        name,
-        params: this.$route.params,
-      });
-    },
     clickOnItem(item) {
       this.view = item.target.name;
       this.$store.commit("app/closeQueryDrawer");
@@ -252,7 +244,7 @@ export default {
       handler(name) {
         this.$router.push({
           name,
-          params: this.$route.params,
+          query: this.$route.query,
         });
       },
       immediate: true,
@@ -261,9 +253,8 @@ export default {
       handler(s) {
         if (s) {
           const view = s.slice(1) + '-q';
-          if (this.$store.state.app.viewelements.map(x => x.route).includes(view))
-          {
-            this.view = view
+          if (this.$store.state.app.viewelements.map(x => x.route).includes(view)) {
+            this.view = view;
           }
         }
       },

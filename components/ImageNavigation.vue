@@ -43,8 +43,9 @@ export default {
           icon: "$artifact",
           target: {
             name: "list-q",
-            params: {
-              q: '{ "codes": "artifact", "type_id":["1095"] }',
+            query: {
+              codes: "artifact",
+              type_id: [1095]
             },
           },
         },
@@ -53,8 +54,9 @@ export default {
           icon: "$artifact",
           target: {
             name: "detaillist-q",
-            params: {
-              q: '{ "codes": "artifact","type_id":["109"]  }',
+            query: {
+              codes: "artifact",
+              type_id: [109]
             },
           },
         },
@@ -63,8 +65,9 @@ export default {
           icon: "$artifact",
           target: {
             name: "detaillist-q",
-            params: {
-              q: '{ "codes": "artifact","type_id":["108"]  }',
+            query: {
+              codes: "artifact",
+              type_id: [108]
             },
           },
         },
@@ -73,8 +76,9 @@ export default {
           icon: "$artifact",
           target: {
             name: "detaillist-q",
-            params: {
-              q: '{ "codes": "artifact","type_id":["108"]  }',
+            query: {
+              codes: "artifact",
+              type_id: [108]
             },
           },
         },

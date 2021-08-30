@@ -295,26 +295,23 @@ export default {
       item.value = !item.value;
 
       this.filterElements[this.selectedClass].items[this.selected].values.find((x) => x.id === item.id).value = item.value
-   
-    },
 
+    },
     search() {
       this.filterElements.forEach((item) => (item.selected = false));
       this.filterElements[this.selectedClass].selected = true;
 
       this.$store.commit(
-        "app/setFilterElements",
-        JSON.parse(JSON.stringify(this.filterElements))
-      );
+         "app/setFilterElements",
+         JSON.parse(JSON.stringify(this.filterElements))
+       );
 
       this.open = false;
       const name = "detaillist-q";
 
       this.$router.push({
         name,
-        params: {
-          q: `{"codes": "${this.getSystemClassForFilter}" ${this.getFilterQuery}}`,
-        },
+        query: this.getFilterObject,
       });
     },
     updateFilter(selectedClass, selectedProperty, value) {
@@ -333,7 +330,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters("app", ["getFilterQuery", "getSystemClassForFilter"]),
+    ...mapGetters("app", ["getFilterObject", "getSystemClassForFilter"]),
     propertySelectedClassAndSelectedAndSearchKeyword() {
       return `${this.selectedClass}|${this.selected}|${this.searchKeyword}`;
     },

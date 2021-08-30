@@ -9,8 +9,6 @@
     prepend-inner-icon="mdi-magnify"
     append-icon=""
     multiple
-    @keydown.enter="updateQuery(filterstring)"
-    @change="updateFilterstring"
 
   >
     <template v-slot:append>
@@ -60,13 +58,6 @@ export default {
     };
   },
   watch: {
-    '$route.params': {
-      handler(s) {
-        this.updateString(s.q);
-      },
-      immediate: true,
-      deep: true,
-    },
     '$store.state.app.filterelements': {
       handler() {
         this.updateArray();
@@ -84,8 +75,8 @@ export default {
       }
     },
     updateArray() {
-      
-      this.filterArray = this.getCurrentFilters.items.map((x,index) => {
+
+      this.filterArray = this.getCurrentFilters.items.map((x, index) => {
         const filters = x.values.map((v) => {
           v.group = index;
           return v;
@@ -98,16 +89,7 @@ export default {
       console
         .log(this.filterArray);
     },
-    updateQuery(a) {
-      let name = 'list-q';
-      if (this.$route.name === 'list-q' || this.$route.name === 'map-q') name = this.$route.name;
-      this.$router.push({
-        name,
-        params: {
-          q: a,
-        },
-      });
-    },
+
     updateFilter(selectedProperty, value) {
 
       console.log(selectedProperty)
@@ -116,27 +98,19 @@ export default {
         selectedProperty,
         value
       });
-       const name = this.$route.name
-    
+      const name = this.$route.name
+
 
       this.$router.push({
         name,
-        params: {
-          q: `{"codes": "${this.getCurrentFilters.systemClass}" ${this.getFilterQuery}}`,
-        },
+        query: this.getFilterObject,
+
       });
-    },
-    updateFilterstring() {
-      const newFilterString = this.filterArray.map((e) => `"${Object.entries(e)[0][0]}" : "${Object.entries(e)[0][1]}"`)
-        .join();
-      this.filterstring = `{ ${newFilterString}}`;
-      this.updateQuery(this.filterstring);
-     
     },
   },
     computed: {
     ...mapGetters('app', [
-      'getFilterQuery',
+      'getFilterObject',
       'getCurrentFilters'
     ]),
   },
