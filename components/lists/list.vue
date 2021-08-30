@@ -73,7 +73,7 @@
     <div v-if="!!item.features[0].type">
       <nuxt-link
         v-for="(type, index) in item.features[0].type[slot.value.split('.')[2]]"
-        :to='`/list/{"codes":"artifact","type_id":["${type.identifier.split("/").splice(-1)[0]}"]}`'
+        :to='`/list?codes=artifact&type_id=${type.identifier.split("/").splice(-1)[0]}`'
 
         :key="index"
         >{{ type.label }}

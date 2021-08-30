@@ -248,41 +248,45 @@ export default {
     this.filterElements = JSON.parse(
       JSON.stringify(this.$store.state.app.filterelements)
     );
+    this.loadAllTypesFromBackend()
 
-    const p = await this.$api.Nodes.get_api_0_2_type_tree_();
-    const typeTree = p.body.typeTree;
-    this.filterElements.forEach((element) => {
-      element.items.forEach((item) => {
-        if (item.id) {
-          const allTypes = typeTree.filter((x) =>
-            x[Object.keys(x)[0]].root.includes(parseInt(item.id))
-          );
 
-          const mapFunction = (x) => {
-            const element = x[Object.keys(x)[0]];
-            let type = {
-              en: element.name,
-              id: element.id,
-              value: false,
-              count: element.count,
-              concatOperator: "and",
-              logicalOperator: "eq",
-              showSubtypes: false,
-              root: element.root,
-              subs: element.subs,
-            };
-
-            return type;
-          };
-
-          item.values = allTypes.map(mapFunction);
-        }
-      });
-    });
-
-    this.$store.commit("app/setFilterElements", this.filterElements);
   },
   methods: {
+    async loadAllTypesFromBackend(){
+      const p = await this.$api.Nodes.get_api_0_2_type_tree_();
+      const typeTree = p.body.typeTree;
+      this.filterElements.forEach((element) => {
+        element.items.forEach((item) => {
+          if (item.id) {
+            const allTypes = typeTree.filter((x) =>
+              x[Object.keys(x)[0]].root.includes(parseInt(item.id))
+            );
+
+            const mapFunction = (x) => {
+              const element = x[Object.keys(x)[0]];
+              let type = {
+                en: element.name,
+                id: element.id,
+                value: false,
+                count: element.count,
+                concatOperator: "and",
+                logicalOperator: "eq",
+                showSubtypes: false,
+                root: element.root,
+                subs: element.subs,
+              };
+
+              return type;
+            };
+
+            item.values = allTypes.map(mapFunction);
+          }
+        });
+      });
+
+      this.$store.commit("app/setFilterElements", this.filterElements);
+    },
     chunk(arr, size) {
       return arr.reduce(
         (acc, e, i) => (
@@ -291,6 +295,7 @@ export default {
         []
       );
     },
+
     selectItem(item) {
       item.value = !item.value;
 

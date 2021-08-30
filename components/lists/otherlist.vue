@@ -70,7 +70,7 @@
             <v-card outlined class="my-3" v-if="item.features[0].description">
               <v-card-text class="text-body-1">
                 Category of Authenticity:    <nuxt-link
-                :to='`/detaillist/{"codes":"artifact","type_id":["${getFirstTypeByKeyword(item.features[0].types,"Category of Authenticity").identifier.split("/").splice(-1)[0]}"]}`'
+                :to='`/detaillist?codes=artifact&type_id=${getFirstTypeByKeyword(item.features[0].types,"Category of Authenticity").identifier.split("/").splice(-1)[0]}`'
               >{{getFirstTypeByKeyword(item.features[0].types,'Category of Authenticity').label}}</nuxt-link>
               </v-card-text>
               <v-card-text class="text-body-1">{{
@@ -98,7 +98,7 @@
                       class="ma-0 ml-5 pa-0"
                     >
                       <nuxt-link
-                                 :to='`/detaillist/{"codes":"artifact","type_id":["${type.id}"]}`'
+                                 :to='`/detaillist?codes=artifact&type_id=${type.id}`'
                       >
                         {{ type.label }}
                       </nuxt-link>
