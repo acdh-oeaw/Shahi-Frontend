@@ -2,8 +2,8 @@
 <div>
               <ImageNavigation></ImageNavigation>
               <v-container style="max-width: 850px;" class="text-justify">
-                <p class="text-h3">Cultural Formation and Transformation</p>
-                <p class="text-h4">Shahi Art and Architecture from Afghanistan to the West Tibetan Frontier at the Dawn of the Islamic Era</p>
+                <p class="text-h3 text-left">Cultural Formation and Transformation</p>
+                <p class="text-h4 text-left">Shahi Art and Architecture from Afghanistan to the West Tibetan Frontier at the Dawn of the Islamic Era</p>
                 <p class="text-body-1">
                   The goal of the project "Cultural Formation and Transformation: Shahi Art and Architecture from Afghanistan to the West Tibetan Frontier at the Dawn of the Islamic Era" is to define a narrative cultural history of the Shahi kingdoms (7th to 10th century). Due to their extensive temporal and geographic parameters — extending from Afghanistan to the borders of the Tibetan empire — the kingdoms played a pivotal role in the history of Inner and South Asia. Despite its importance for the history of later Buddhist art and the formation of Islamic art, the cultural history of this almost 300-year period has never been the focus of dedicated research.
                 </p>
