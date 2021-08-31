@@ -3,14 +3,18 @@
     <div>
       <v-layout column justify-center align-center >
         <div class="text-center splashtext" style="z-index:401" :class="animationClasses">
-             
+
 
           <transition name="fade">
-            
-            <div v-if="!showContent">
-              <logo />
+
+            <div v-if="!showContent" >
+              <p class="text-h2 mt-5">Shahi Art and Architecture</p>
               <div v-html="body" />
-              <v-btn text @click="openContent">more Information</v-btn>
+              <p class="text-body-1 ma-auto mt-10" style="max-width:650px">The goal of the project "Cultural Formation and Transformation: Shahi Buddhist Art and Architecture from Afghanistan to the West Tibetan Frontier at the Dawn of the Islamic Era" is to define a narrative cultural history of the Shahi kingdom (7th to 10th century).
+              <br>
+                <v-btn text @click="openContent">more Information</v-btn>
+                <br>
+                <v-btn class="mt-15" x-large  @click="close = !close" color="success">Disover Shahi Kingdom <v-icon>mdi-map</v-icon></v-btn>
               <v-icon style="position:absolute; right:10px; top:10px" @click="close = !close">mdi-close</v-icon>
               <div style="position:absolute; left:0; top:0; right:0;bottom:0;" v-if="close" @click="close = !close" ></div>
             </div>
@@ -98,7 +102,7 @@ export default {
       }
       else
         return false
-      
+
     }
   }
 
@@ -197,7 +201,7 @@ html {
     left: 95vw;
     background-color: rgba(255, 255, 255, 1);
   }
- 
+
 }
 
 @keyframes moveCenter {
