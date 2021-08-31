@@ -57,9 +57,13 @@ export default {
       filterArray: [],
     };
   },
+  mounted(){
+    this.updateArray();
+  },
   watch: {
     '$store.state.app.filterelements': {
       handler() {
+        console.log("wurde geändert")
         this.updateArray();
       },
       immediate: true,
@@ -75,8 +79,7 @@ export default {
       }
     },
     updateArray() {
-
-      this.filterArray = this.getCurrentFilters.items.map((x, index) => {
+      this.filterArray = this.getCurrentFilters?.items.map((x, index) => {
         const filters = x.values.map((v) => {
           v.group = index;
           return v;

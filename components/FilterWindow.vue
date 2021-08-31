@@ -248,12 +248,34 @@ export default {
     this.filterElements = JSON.parse(
       JSON.stringify(this.$store.state.app.filterelements)
     );
-    this.loadAllTypesFromBackend()
-
+    this.loadAllTypesFromBackend();
 
   },
   methods: {
     async loadAllTypesFromBackend(){
+      if(this.$route.query.codes){
+        this.filterElements.forEach((item) => {
+          (item.selected = item.systemClass === this.$route.query.codes)});
+      }
+
+      let filters = []
+      if(Array.isArray(this.$route.query.filter))
+        filters = this.$route.query.filter
+      else if (this.$route.query.filter)
+        filters = [this.$route.query.filter]
+
+      filters.forEach((x) => {
+        const filterParams = x.split('|')
+
+        this.filterElements
+          .find((x) => x.selected).items
+          .find((x) => x.kind === 'filter' && x.values[0]?.id === filterParams?.[1])
+          .values[0].value = filterParams?.[3];
+        console.log(this.filterElements,'filterelement', filterParams?.[1])
+
+      })
+
+
       const p = await this.$api.Nodes.get_api_0_2_type_tree_();
       const typeTree = p.body.typeTree;
       this.filterElements.forEach((element) => {
@@ -268,7 +290,7 @@ export default {
               let type = {
                 en: element.name,
                 id: element.id,
-                value: false,
+                value: this.$route.query.type_id== element.id || this.$route.query.type_id?.includes(element.id.toString()),
                 count: element.count,
                 concatOperator: "and",
                 logicalOperator: "eq",
@@ -285,8 +307,10 @@ export default {
         });
       });
 
+
       this.$store.commit("app/setFilterElements", this.filterElements);
     },
+
     chunk(arr, size) {
       return arr.reduce(
         (acc, e, i) => (
@@ -303,9 +327,8 @@ export default {
 
     },
     search() {
-      this.filterElements.forEach((item) => (item.selected = false));
-      this.filterElements[this.selectedClass].selected = true;
-
+      this.filterElements.forEach((item,index) => (item.selected = index === this.selectedClass));
+      console.log(this.selectedClass, 'selected Class')
       this.$store.commit(
          "app/setFilterElements",
          JSON.parse(JSON.stringify(this.filterElements))
