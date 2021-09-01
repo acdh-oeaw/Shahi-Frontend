@@ -11,10 +11,10 @@
     class="transition"
   >
     <template v-slot:activator="{ on, attrs }">
-      <v-icon v-bind="attrs" v-on="on"> mdi-tune </v-icon>
+      <v-icon v-bind="attrs" v-on="on"> mdi-tune</v-icon>
     </template>
     <div class="all">
-      <div class="tik" />
+      <div class="tik"/>
 
       <v-card
         elevation="4"
@@ -74,7 +74,8 @@
                           color="primary"
                           v-bind="attrs"
                           v-on="on"
-                          >mdi-help-circle-outline</v-icon
+                        >mdi-help-circle-outline
+                        </v-icon
                         >
                       </template>
                       {{
@@ -130,10 +131,12 @@
                             :class="
                               item.showSubtypes ? 'expand-icon-expanded' : ''
                             "
-                            >mdi-chevron-down</v-icon
+                          >mdi-chevron-down
+                          </v-icon
                           >
                           <v-icon style="float: right" v-if="item.value" small
-                            >mdi-close</v-icon
+                          >mdi-close
+                          </v-icon
                           >
                         </div>
 
@@ -155,13 +158,16 @@
                                 style="float: right"
                                 v-if="subtype.value"
                                 small
-                                >mdi-close</v-icon
+                              >mdi-close
+                              </v-icon
                               >
                             </div>
                           </div>
                         </v-expand-transition>
-                      </v-col> </v-row
-                    ><v-row
+                      </v-col>
+                    </v-row
+                    >
+                    <v-row
                       v-if="
                         filterElements[selectedClass].items[selected].type ==
                         'text'
@@ -174,7 +180,7 @@
                         :key="item.id"
                         cols="12"
                       >
-                        <v-text-field v-model="item.value" :label="item.en" />
+                        <v-text-field v-model="item.value" :label="item.en"/>
                       </v-col>
                     </v-row>
                   </v-card-text>
@@ -194,7 +200,7 @@
 
 <script>
 import filterelements from "assets/filterElements.json";
-import { mapGetters } from "vuex";
+import {mapGetters} from "vuex";
 
 export default {
   name: "FilterWindow",
@@ -236,7 +242,7 @@ export default {
       else
         this.searchedTypes = this.filterElements[this.selectedClass].items[
           this.selected
-        ].values.filter((element) =>  element.en.toLowerCase().includes(this.searchKeyword.toLowerCase())).map((element)=>{
+          ].values.filter((element) => element.en.toLowerCase().includes(this.searchKeyword.toLowerCase())).map((element) => {
           let e = {...element}
           e.root = []
           e.subs = []
@@ -252,14 +258,15 @@ export default {
 
   },
   methods: {
-    async loadAllTypesFromBackend(){
-      if(this.$route.query.codes){
+    async loadAllTypesFromBackend() {
+      if (this.$route.query.codes) {
         this.filterElements.forEach((item) => {
-          (item.selected = item.systemClass === this.$route.query.codes)});
+          (item.selected = item.systemClass === this.$route.query.codes)
+        });
       }
 
       let filters = []
-      if(Array.isArray(this.$route.query.filter))
+      if (Array.isArray(this.$route.query.filter))
         filters = this.$route.query.filter
       else if (this.$route.query.filter)
         filters = [this.$route.query.filter]
@@ -271,7 +278,7 @@ export default {
           .find((x) => x.selected).items
           .find((x) => x.kind === 'filter' && x.values[0]?.id === filterParams?.[1])
           .values[0].value = filterParams?.[3];
-        console.log(this.filterElements,'filterelement', filterParams?.[1])
+        console.log(this.filterElements, 'filterelement', filterParams?.[1])
 
       })
 
@@ -290,7 +297,7 @@ export default {
               let type = {
                 en: element.name,
                 id: element.id,
-                value: this.$route.query.type_id== element.id || this.$route.query.type_id?.includes(element.id.toString()),
+                value: this.$route.query.type_id === element.id || this.$route.query.type_id?.includes(element.id.toString()) || false,
                 count: element.count,
                 concatOperator: "and",
                 logicalOperator: "eq",
@@ -327,12 +334,12 @@ export default {
 
     },
     search() {
-      this.filterElements.forEach((item,index) => (item.selected = index === this.selectedClass));
+      this.filterElements.forEach((item, index) => (item.selected = index === this.selectedClass));
       console.log(this.selectedClass, 'selected Class')
       this.$store.commit(
-         "app/setFilterElements",
-         JSON.parse(JSON.stringify(this.filterElements))
-       );
+        "app/setFilterElements",
+        JSON.parse(JSON.stringify(this.filterElements))
+      );
 
       this.open = false;
       const name = "detaillist-q";
