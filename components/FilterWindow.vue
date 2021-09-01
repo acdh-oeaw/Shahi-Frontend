@@ -37,7 +37,7 @@
           <v-row no-gutters>
             <v-col cols="auto" style="min-width: 200px">
               <v-list max-width="200px" class="grey lighten-4">
-                <v-list-item-group v-model="selected">
+                <v-list-item-group v-model="selected" mandatory>
                   <v-expand-transition
                     v-for="(item, index) in filterElements[selectedClass].items"
                     :key="item.systemClass"
@@ -252,7 +252,7 @@ export default {
       console.log("geändert");
       if (!this.searchKeyword)
         this.searchedTypes =
-          this.filterElements[this.selectedClass].items[this.selected].values;
+          this.filterElements?.[this.selectedClass].items?.[this.selected].values;
       else
         this.searchedTypes = this.filterElements[this.selectedClass].items[
           this.selected
