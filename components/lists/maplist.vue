@@ -109,7 +109,11 @@ export default {
       deep: true,
     },
     filter: {
-      handler() { this.$fetch(); },
+      handler() {
+        this.itemIndex = [];
+        this.totalItems= 0;
+        this.options.page = 1;
+        this.$fetch(); },
       deep: true,
     },
   },

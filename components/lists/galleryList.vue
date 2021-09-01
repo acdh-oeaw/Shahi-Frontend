@@ -24,7 +24,7 @@
         style="position: absolute; top: 0; right: 0; bottom: 0; left: 0"
         class="ma-auto"
         :size="150"
-        
+
         indeterminate
       ></v-progress-circular>
     </div>
@@ -49,7 +49,7 @@ export default {
   async fetch() {
     this.loading = true;
     window.scrollTo(0, 0);
-    
+
     const { sortBy, sortDesc, page, itemsPerPage } = this.options;
     // eslint-disable-next-line no-underscore-dangle
     const p = await this.$api.Entities.get_api_0_2_query_({
@@ -92,6 +92,9 @@ export default {
     },
     filter: {
       handler() {
+        this.itemIndex = [];
+        this.totalItems = 0;
+        this.options.page = 1;
         this.$fetch();
       },
       deep: true,

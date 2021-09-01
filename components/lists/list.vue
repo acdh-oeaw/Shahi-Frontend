@@ -102,6 +102,7 @@ export default {
   async fetch() {
     this.loading = true;
     this.notFound = false;
+    this.items = [];
     const { sortBy, sortDesc, page, itemsPerPage } = this.options;
     try {
       // eslint-disable-next-line no-underscore-dangle
@@ -154,12 +155,17 @@ export default {
     },
     filter: {
       handler() {
+        this.itemIndex = [];
+        this.totalItems= 0;
+        this.options.page = 1;
         this.$fetch();
       },
       deep: true,
     },
     "$store.state.app.filterelements": {
       handler() {
+        this.itemIndex = [];
+        this.totalItems = 0;
         this.$fetch();
       },
       immediate: true,
