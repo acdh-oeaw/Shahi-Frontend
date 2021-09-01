@@ -218,6 +218,20 @@ export default {
     };
   },
   watch: {
+    "$route.query": {
+      handler(s){
+        if(this.filterElements?.[0].items) {
+          console.log("istddring", this.filterElements)
+          this.updateTypesFromUrl();
+          this.updateFiltersFromUrl();
+          this.$store.commit("app/setFilterElements", this.filterElements);
+        }
+        console.log(s)
+
+      },
+      deep: true,
+      immediate: true,
+    },
     selectedClass() {
       this.selected = 0;
       this.searchKeyword = "";
@@ -258,6 +272,43 @@ export default {
 
   },
   methods: {
+    updateFiltersFromUrl(){
+      let filters = [];
+      if (Array.isArray(this.$route.query.filter)) filters = this.$route.query.filter;
+      else if (this.$route.query.filter) filters = [this.$route.query.filter];
+
+      filters.forEach((filter) => {
+        const filterParams = filter.split('|');
+
+        this.filterElements
+          .find((x) => x.selected).items
+          .find((x) => x.kind === 'filter' && x.values[0]?.id === filterParams?.[1])
+          .values[0].value = filterParams?.[3];
+      });
+    },
+    updateTypesFromUrl(){
+      if(this.$route.query.codes){
+        let types = this.$route.query.type_id;
+        if (!Array.isArray(types)) types = [this.$route.query.type_id];
+        types = types.map(String)
+          console.log("this.filterElements",this.filterElements);
+          this.filterElements.forEach((filterElement) => {
+            filterElement.selected = (filterElement.systemClass === this.$route.query.codes);
+            console.log(filterElement)
+            filterElement.items.forEach((filterItems) =>{
+              if(filterItems.kind === 'type'){
+                filterItems.values.forEach((filterItemValue) => {
+                  if(filterItemValue.id === 108)
+                    console.log(types,filterItemValue,types.includes(filterItemValue.id.toString()));
+                  filterItemValue.value = types.includes(filterItemValue.id.toString());
+                });
+              }
+            });
+
+          });
+
+      }
+    },
     async loadAllTypesFromBackend() {
       if (this.$route.query.codes) {
         this.filterElements.forEach((item) => {
@@ -265,22 +316,7 @@ export default {
         });
       }
 
-      let filters = []
-      if (Array.isArray(this.$route.query.filter))
-        filters = this.$route.query.filter
-      else if (this.$route.query.filter)
-        filters = [this.$route.query.filter]
-
-      filters.forEach((x) => {
-        const filterParams = x.split('|')
-
-        this.filterElements
-          .find((x) => x.selected).items
-          .find((x) => x.kind === 'filter' && x.values[0]?.id === filterParams?.[1])
-          .values[0].value = filterParams?.[3];
-        console.log(this.filterElements, 'filterelement', filterParams?.[1])
-
-      })
+      this.updateFiltersFromUrl();
 
 
       const p = await this.$api.Nodes.get_api_0_2_type_tree_();
