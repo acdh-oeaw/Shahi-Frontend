@@ -3,7 +3,7 @@
   <v-row no-gutters>
     <v-spacer></v-spacer>
     <v-spacer></v-spacer>
-  <v-select class="mt-5" dense  v-model="selectedHeaders" :items="$store.state.app.tableheaders.wide" label="Select Columns" multiple outlined return-object>
+  <v-select v-if="items.length != 0" class="mt-5" dense  v-model="selectedHeaders" :items="$store.state.app.tableheaders.wide" label="Select Columns" multiple outlined return-object>
             <template v-slot:selection="{ item, index }">
               <v-chip small v-if="index < 2">
                 <span>{{ item.text }}</span>
@@ -12,8 +12,9 @@
             </template>
          </v-select>
          </v-row>
-
+  <p class="text-body-1 ma-5" v-if="notFound">No records found.</p>
   <v-data-table
+    v-if="items.length != 0"
     :headers="showHeaders"
     :items="itemsWithType"
     :options.sync="options"
@@ -100,26 +101,32 @@ export default {
   },
   async fetch() {
     this.loading = true;
+    this.notFound = false;
     const { sortBy, sortDesc, page, itemsPerPage } = this.options;
-    // eslint-disable-next-line no-underscore-dangle
-    const p = await this.$api.Entities.get_api_0_2_query_({
-      limit: itemsPerPage,
-      first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
-      filter: this.filter,
-      column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
-      sort: sortDesc[0] ? "desc" : "asc",
-    });
-    // eslint-disable-next-line prefer-destructuring
-    console.log(p.body);
-    this.items = p.body.results;
-    this.itemIndex = p.body.pagination.index;
-    this.totalItems = p.body.pagination.entities;
+    try {
+      // eslint-disable-next-line no-underscore-dangle
+      const p = await this.$api.Entities.get_api_0_2_query_({
+        limit: itemsPerPage,
+        first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
+        filter: this.filter,
+        column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
+        sort: sortDesc[0] ? "desc" : "asc",
+      });
+      // eslint-disable-next-line prefer-destructuring
+      console.log(p.body);
+      this.items = p.body.results;
+      this.itemIndex = p.body.pagination.index;
+      this.totalItems = p.body.pagination.entities;
+    } catch (err) {
+      this.notFound = true;
+    }
     this.loading = false;
   },
   data() {
     return {
       items: [],
       loading: true,
+      notFound: false,
       options: {
         sortBy: [],
         sortDesc: [],
