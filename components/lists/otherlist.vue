@@ -28,7 +28,7 @@
                 }`"
               >
               <v-hover v-slot="{hover}">
-          <v-card-title class="artifact-title brown d-block white--text " :class="hover ? 'lighten-1' : ''">
+          <v-card-title class="artifact-title grey d-block white--text " :class="hover ? 'lighten-1' : ''">
             <p class="ma-0 pa-0">
 
                 {{ item.features[0].properties.title }}
@@ -90,7 +90,7 @@
               >
                 <v-card class="mb-5" outlined>
                   <v-card-title
-                    class="text-subtitle-2 justify-center brown lighten-3"
+                    class="text-subtitle-2 justify-center grey lighten-3"
                     >{{ typeGroup[0].type }}
                   </v-card-title>
                   <v-card-text>
