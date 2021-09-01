@@ -96,7 +96,9 @@ export default {
   position:absolute;
   color: red;
   z-index: 400;
-  font-size: 100;
+  font-size: 40px;
+  margin: 10px;
+  opacity: 70%;
   top:0;
   left:0;
 }
