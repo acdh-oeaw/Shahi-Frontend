@@ -7,7 +7,7 @@
       "name": "list-q",
       "query": {
         "codes": "artifact",
-        "type_id": ["140","150"]
+        "type_id": ["1095"]
       }
     }
   },
@@ -19,7 +19,7 @@
       "name": "detaillist-q",
       "query": {
         "codes": "artifact",
-        "type_id": 109
+        "type_id": "118"
       }
     }
   },
@@ -37,12 +37,13 @@
   },
   {
     "icon": "mdi-map-marker",
-    "text": "Places",
-    "systemClass":"place",
+    "text": "Inscriptions",
+    "systemClass":"artifact",
     "target": {
-      "name": "map-q",
+      "name": "list-q",
       "query": {
-        "codes": "place"
+        "codes": "artifact",
+        "type_id": "3"
       }
     }
   },
