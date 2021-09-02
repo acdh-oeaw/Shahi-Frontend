@@ -191,7 +191,7 @@
         </v-card-text>
         <v-card-text v-else
                      class="pa-5 hidden"
-                     style="overflow: auto; max-height: 370px">
+                     style="overflow: auto; max-height: 370px; width: 500px">
           <v-row
           no-gutters>
             <v-col
@@ -199,7 +199,6 @@
               sm="6"
               v-for="(item, index) in searchedTypes"
               :key="item.id"
-              v-if="!item.root || item.root.length <= 1"
             >
               <div
                 class="filter-element"
@@ -259,7 +258,7 @@ export default {
           e.subs = []
           return e
         })
-      }else this.open = false;
+      }
 
     },
     "$route.query": {
