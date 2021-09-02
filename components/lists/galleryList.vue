@@ -152,8 +152,8 @@ export default {
 </script>
 <style scoped>
 .gallery-columns {
-  -moz-column-count: 4;
-  -webkit-column-count: 4;
+  -moz-column-count: var(--column-count);
+  -webkit-column-count: var(--column-count);
   column-count: var(--column-count);
 }
 
