@@ -191,7 +191,7 @@
         </v-card-text>
         <v-card-text v-else
                      class="pa-5 hidden"
-                     style="overflow: auto; max-height: 370px; width: 500px">
+                     style="overflow: auto; max-height: 370px; width: 732px">
           <v-row
           no-gutters>
             <v-col
@@ -213,6 +213,7 @@
                 >
               </div>
             </v-col>
+            <p v-if="searchedTypes.length === 0">Nothing found</p>
           </v-row
           >
         </v-card-text>
