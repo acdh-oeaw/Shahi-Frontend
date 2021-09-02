@@ -193,7 +193,7 @@
                      class="pa-5 hidden"
                      style="overflow: auto; max-height: 370px; width: 732px">
           <v-row
-          no-gutters>
+            no-gutters>
             <v-col
               cols="12"
               sm="6"
@@ -232,7 +232,7 @@ import {mapGetters} from "vuex";
 
 export default {
   name: "FilterWindow",
-  props: ['globalSearch','openWindow'],
+  props: ['globalSearch', 'openWindow'],
   data() {
     return {
       color: "lightgrey",
@@ -247,13 +247,13 @@ export default {
     };
   },
   watch: {
-    openWindow(){
+    openWindow() {
       this.open = !this.open;
     },
-    globalSearch(){
-      if(this.globalSearch) {
+    globalSearch() {
+      if (this.globalSearch) {
         this.open = true;
-        this.searchedTypes = this.filterElements[this.selectedClass].items.reduce((dict,item) => dict = [...dict, ...item.values] ,[]).filter((element) => element.en.toLowerCase().includes(this.globalSearch.toLowerCase())).map((element) => {
+        this.searchedTypes = this.filterElements[this.selectedClass].items.reduce((dict, item) => dict = [...dict, ...item.values], []).filter((element) => element.en.toLowerCase().includes(this.globalSearch.toLowerCase())).map((element) => {
           let e = {...element}
           e.root = []
           e.subs = []
@@ -263,8 +263,8 @@ export default {
 
     },
     "$route.query": {
-      handler(s){
-        if(this.filterElements?.[0].items) {
+      handler(s) {
+        if (this.filterElements?.[0].items) {
           console.log("istddring", this.filterElements)
           this.updateTypesFromUrl();
           this.updateFiltersFromUrl();
@@ -316,7 +316,7 @@ export default {
 
   },
   methods: {
-    updateFiltersFromUrl(){
+    updateFiltersFromUrl() {
       let filters = [];
       if (Array.isArray(this.$route.query.filter)) filters = this.$route.query.filter;
       else if (this.$route.query.filter) filters = [this.$route.query.filter];
@@ -330,26 +330,26 @@ export default {
           .values[0].value = filterParams?.[3];
       });
     },
-    updateTypesFromUrl(){
-      if(this.$route.query.codes){
+    updateTypesFromUrl() {
+      if (this.$route.query.codes) {
         let types = this.$route.query.type_id;
         if (!Array.isArray(types)) types = [this.$route.query.type_id];
         types = types.map(String)
-          console.log("this.filterElements",this.filterElements);
-          this.filterElements.forEach((filterElement) => {
-            filterElement.selected = (filterElement.systemClass === this.$route.query.codes);
-            console.log(filterElement)
-            filterElement.items.forEach((filterItems) =>{
-              if(filterItems.kind === 'type'){
-                filterItems.values.forEach((filterItemValue) => {
-                  if(filterItemValue.id === 108)
-                    console.log(types,filterItemValue,types.includes(filterItemValue.id.toString()));
-                  filterItemValue.value = types.includes(filterItemValue.id.toString());
-                });
-              }
-            });
-
+        console.log("this.filterElements", this.filterElements);
+        this.filterElements.forEach((filterElement) => {
+          filterElement.selected = (filterElement.systemClass === this.$route.query.codes);
+          console.log(filterElement)
+          filterElement.items.forEach((filterItems) => {
+            if (filterItems.kind === 'type') {
+              filterItems.values.forEach((filterItemValue) => {
+                if (filterItemValue.id === 108)
+                  console.log(types, filterItemValue, types.includes(filterItemValue.id.toString()));
+                filterItemValue.value = types.includes(filterItemValue.id.toString());
+              });
+            }
           });
+
+        });
 
       }
     },
@@ -410,7 +410,7 @@ export default {
     selectItem(item) {
       item.value = !item.value;
 
-      this.filterElements[this.selectedClass].items.reduce((dict,item) => dict = [...dict, ...item.values] ,[]).find((x) => x.id === item.id).value = item.value
+      this.filterElements[this.selectedClass].items.reduce((dict, item) => dict = [...dict, ...item.values], []).find((x) => x.id === item.id).value = item.value
     },
     search() {
       this.filterElements.forEach((item, index) => (item.selected = index === this.selectedClass));
