@@ -33,7 +33,7 @@
             {{ systemClass.en }}
           </v-btn>
         </v-card-text>
-        <v-card-text>
+        <v-card-text v-if="!globalSearch">
           <v-row no-gutters>
             <v-col cols="auto" style="min-width: 200px">
               <v-list max-width="200px" class="grey lighten-4">
@@ -113,7 +113,7 @@
                         sm="6"
                         v-for="(item, index) in searchedTypes"
                         :key="item.id"
-                        v-if="item.root.length <= 1"
+                        v-if="!!item.root && item.root.length <= 1"
                       >
                         <div
                           class="filter-element"
@@ -189,6 +189,34 @@
             </v-expand-x-transition>
           </v-row>
         </v-card-text>
+        <v-card-text v-else
+                     class="pa-5 hidden"
+                     style="overflow: auto; max-height: 370px">
+          <v-row
+          no-gutters>
+            <v-col
+              cols="12"
+              sm="6"
+              v-for="(item, index) in searchedTypes"
+              :key="item.id"
+              v-if="!item.root || item.root.length <= 1"
+            >
+              <div
+                class="filter-element"
+                :class="item.value ? 'filter-element-clicked' : ''"
+                @click="selectItem(item)"
+              >
+                <span>{{ item.en }}</span>
+
+                <v-icon style="float: right" v-if="item.value" small
+                >mdi-close
+                </v-icon
+                >
+              </div>
+            </v-col>
+          </v-row
+          >
+        </v-card-text>
         <v-btn absolute right bottom color="grey" @click="search">
           <v-icon>mdi-magnify</v-icon>
           Search
@@ -204,6 +232,7 @@ import {mapGetters} from "vuex";
 
 export default {
   name: "FilterWindow",
+  props: ['globalSearch','openWindow'],
   data() {
     return {
       color: "lightgrey",
@@ -218,6 +247,21 @@ export default {
     };
   },
   watch: {
+    openWindow(){
+      this.open = !this.open;
+    },
+    globalSearch(){
+      if(this.globalSearch) {
+        this.open = true;
+        this.searchedTypes = this.filterElements[this.selectedClass].items.reduce((dict,item) => dict = [...dict, ...item.values] ,[]).filter((element) => element.en.toLowerCase().includes(this.globalSearch.toLowerCase())).map((element) => {
+          let e = {...element}
+          e.root = []
+          e.subs = []
+          return e
+        })
+      }else this.open = false;
+
+    },
     "$route.query": {
       handler(s){
         if(this.filterElements?.[0].items) {
@@ -366,12 +410,10 @@ export default {
     selectItem(item) {
       item.value = !item.value;
 
-      this.filterElements[this.selectedClass].items[this.selected].values.find((x) => x.id === item.id).value = item.value
-
+      this.filterElements[this.selectedClass].items.reduce((dict,item) => dict = [...dict, ...item.values] ,[]).find((x) => x.id === item.id).value = item.value
     },
     search() {
       this.filterElements.forEach((item, index) => (item.selected = index === this.selectedClass));
-      console.log(this.selectedClass, 'selected Class')
       this.$store.commit(
         "app/setFilterElements",
         JSON.parse(JSON.stringify(this.filterElements))

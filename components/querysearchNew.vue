@@ -9,10 +9,11 @@
     prepend-inner-icon="mdi-magnify"
     append-icon=""
     multiple
-
+    :search-input.sync="globalSearch"
+    @click="open = !open"
   >
     <template v-slot:append>
-      <FilterWindow/>
+      <FilterWindow :global-search="globalSearch" :open-window="open"/>
     </template>
     <template v-slot:selection="{ attrs, item, parent, selected }">
 
@@ -53,6 +54,8 @@ export default {
   components: { FilterWindow },
   data() {
     return {
+      open: false,
+      globalSearch: '',
       filterstring: '',
       filterArray: [],
     };
@@ -68,6 +71,13 @@ export default {
       },
       immediate: true,
       deep: true,
+    },
+    '$route.query':{
+      handler(){
+        this.globalSearch = '';
+      },
+      immediate:true,
+      deep:true,
     },
   },
   methods: {
