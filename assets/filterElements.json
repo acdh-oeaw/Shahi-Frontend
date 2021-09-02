@@ -1,64 +1,5 @@
 [
-  {
-    "en": "Places",
-    "systemClass": "place",
-    "selected": true,
-    "items": [
-      {
-        "en": "Name",
-        "label": "name",
-        "type": "text",
-        "kind": "filter",
-        "values": [
-          {
-            "en": "Name",
-            "id": "name",
-            "value": "",
-            "concatOperator": "and",
-            "logicalOperator": "like"
-          }
-        ]
-      },
-      {
-        "en": "Description",
-        "label": "description",
-        "type": "text",
-        "kind": "filter",
-        "values": [
-          {
-            "en": "Description",
-            "id": "description",
-            "value": "",
-            "concatOperator": "and",
-            "logicalOperator": "like"
-          }
-        ]
-      },
-      {
-        "label": "Begin/End",
-        "en": "Begin/End",
-        "type": "text",
-        "kind": "filter",
 
-        "values": [
-          {
-            "en": "Begin",
-            "id": "begin_from",
-            "value": "",
-            "concatOperator": "and",
-            "logicalOperator": "ge"
-          },
-          {
-            "en": "End",
-            "id": "end_from",
-            "value": "",
-            "concatOperator": "and",
-            "logicalOperator": "le"
-          }
-        ]
-      }
-    ]
-  },
   {
     "en": "Artifacts",
     "systemClass": "artifact",
@@ -151,6 +92,66 @@
         "en": "Begin/End",
         "type": "text",
         "kind": "filter",
+        "values": [
+          {
+            "en": "Begin",
+            "id": "begin_from",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "ge"
+          },
+          {
+            "en": "End",
+            "id": "end_from",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "le"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "en": "Places",
+    "systemClass": "place",
+    "selected": true,
+    "items": [
+      {
+        "en": "Name",
+        "label": "name",
+        "type": "text",
+        "kind": "filter",
+        "values": [
+          {
+            "en": "Name",
+            "id": "name",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "like"
+          }
+        ]
+      },
+      {
+        "en": "Description",
+        "label": "description",
+        "type": "text",
+        "kind": "filter",
+        "values": [
+          {
+            "en": "Description",
+            "id": "description",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "like"
+          }
+        ]
+      },
+      {
+        "label": "Begin/End",
+        "en": "Begin/End",
+        "type": "text",
+        "kind": "filter",
+
         "values": [
           {
             "en": "Begin",
