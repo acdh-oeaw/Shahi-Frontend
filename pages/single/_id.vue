@@ -101,7 +101,7 @@
                 <v-card-text style="overflow:auto; max-height:69vh" >
                   <div v-if="!!item.features[0].types">
                   <v-row no-gutters
-                    
+
                     v-for="(typeGroup, index) in item.features[0].types
                       .map((x) => {
                         x.supertype = x.hierarchy.split(' > ')[0];
@@ -111,10 +111,10 @@
                         r[a.supertype] = [...(r[a.supertype] || []), a];
                         return r;
                       }, {})"
-                  
+
                     :key="index">
                     <v-col cols="auto"><span class="font-weight-bold">{{typeGroup[0].supertype}}</span> :</v-col>
-                    
+
                     <v-col cols="auto">
                       <p class="ml-1" v-for="(type,index) in typeGroup" :key="index">
                     {{type.label}}</p>
@@ -122,12 +122,12 @@
                   </v-row>
                   </div>
                   <p class="font-weight-bold">Relations</p>
-                  <v-row no-gutters v-if="item.relationType != 'crm:P2 has type'" v-for="(item,index) in item.features[0].relations" :key="index"> 
+                  <v-row no-gutters v-if="item.relationType != 'crm:P2 has type'" v-for="(item,index) in item.features[0].relations" :key="index">
                     {{item.relationType.split(' ').slice(1).join(' ')}} : <nuxt-link :to="`/single/${item.relationTo.split('/').splice(-1)[0]}`"> {{item.label}}</nuxt-link>
 
-                    
+
                   </v-row>
-                  
+
                 </v-card-text>
               </v-card>
             </v-col>
@@ -138,8 +138,8 @@
             <v-tabs right>
               <v-tab>Map</v-tab>
               <v-tab>Image</v-tab>
-              <v-tab>Graph</v-tab>
-              <v-tab>JSON</v-tab>
+              <v-tab v-if="false">Graph</v-tab>
+              <v-tab v-if="false">JSON</v-tab>
               <v-tab-item>
                 <qmap
                   v-if="!this.loading"
