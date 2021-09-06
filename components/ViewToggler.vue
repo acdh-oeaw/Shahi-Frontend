@@ -1,57 +1,58 @@
 <template>
   <v-fade-transition>
-    <div v-if="
-              ['list-q', 'map-q', 'detaillist-q', 'gallery-q'].includes(
-                $route.name
-              )
-            ">
+    <div
+      v-if="
+        ['list-q', 'map-q', 'detaillist-q', 'gallery-q'].includes(
+          $route.name
+        )
+      "
+    >
       <v-btn-toggle
-        class="hidden-xs-only"
-
         v-model="view"
+
+        class="hidden-sm-and-down"
       >
         <v-btn
           v-for="item in $store.state.app.viewelements"
           :key="item.route"
           :value="item.route"
-        >{{ item.en }}
-        </v-btn
         >
+          {{ item.en }}
+        </v-btn>
       </v-btn-toggle>
-      <v-menu>
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
+      <div class="hidden-md-and-up">
+        <v-menu>
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn
 
-            v-bind="attrs"
-            v-on="on"
-            icon
+              v-bind="attrs"
+              icon
+              v-on="on"
+            >
+              <v-icon>mdi-view-list</v-icon>
+            </v-btn>
+          </template>
+          <v-btn-toggle
+
+            v-model="view"
           >
-            <v-icon>mdi-view-list</v-icon>
-          </v-btn>
-        </template>
-        <v-btn-toggle
-
-
-          v-model="view"
-        >
-          <v-btn
-            v-for="item in $store.state.app.viewelements"
-            :key="item.route"
-            :value="item.route"
-          >{{ item.en }}
-          </v-btn
-          >
-        </v-btn-toggle>
-      </v-menu>
+            <v-btn
+              v-for="item in $store.state.app.viewelements"
+              :key="item.route"
+              :value="item.route"
+            >
+              {{ item.en }}
+            </v-btn>
+          </v-btn-toggle>
+        </v-menu>
+      </div>
     </div>
-
   </v-fade-transition>
-
 </template>
 
 <script>
 export default {
-  name: "ViewToggler",
+  name: 'ViewToggler',
   data() {
     return {
       view: undefined,
@@ -67,11 +68,11 @@ export default {
       },
       immediate: true,
     },
-    "$route.path": {
+    '$route.path': {
       handler(s) {
         if (s) {
-          const view = s.slice(1) + '-q';
-          if (this.$store.state.app.viewelements.map(x => x.route).includes(view)) {
+          const view = `${s.slice(1)}-q`;
+          if (this.$store.state.app.viewelements.map((x) => x.route).includes(view)) {
             this.view = view;
           }
         }
@@ -79,9 +80,9 @@ export default {
       deep: true,
       immediate: true,
     },
-  }
+  },
 
-}
+};
 </script>
 
 <style scoped>
