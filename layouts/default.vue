@@ -54,23 +54,8 @@
 
         <querysearch />
         <v-spacer />
-        <v-fade-transition>
-          <v-btn-toggle
-            v-if="
-              ['list-q', 'map-q', 'detaillist-q', 'gallery-q'].includes(
-                $route.name
-              )
-            "
-            v-model="view"
-          >
-            <v-btn
-              v-for="item in $store.state.app.viewelements"
-              :key="item.route"
-              :value="item.route"
-              >{{ item.en }}</v-btn
-            >
-          </v-btn-toggle>
-        </v-fade-transition>
+        <view-toggler></view-toggler>
+
       </v-app-bar>
     </v-expand-transition>
     <v-main>
@@ -208,7 +193,6 @@ export default {
   data() {
     return {
       drawer: false,
-      view: undefined,
       items: [{ heading: "Sample Queries" }].concat(
         this.$store.state.app.menuitems
       ),
@@ -234,32 +218,8 @@ export default {
         window.top.scrollY; /* or: e.target.documentElement.scrollTop */
     },
     clickOnItem(item) {
-      this.view = item.target.name;
       this.$store.commit("app/closeQueryDrawer");
       this.$store.commit("app/setSelectedFilterClass", item.systemClass);
-    },
-  },
-  watch: {
-    view: {
-      handler(name) {
-        this.$router.push({
-          name,
-          query: this.$route.query,
-        });
-      },
-      immediate: true,
-    },
-    "$route.path": {
-      handler(s) {
-        if (s) {
-          const view = s.slice(1) + '-q';
-          if (this.$store.state.app.viewelements.map(x => x.route).includes(view)) {
-            this.view = view;
-          }
-        }
-      },
-      deep: true,
-      immediate: true,
     },
   },
   computed: {
