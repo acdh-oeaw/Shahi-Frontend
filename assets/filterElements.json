@@ -88,6 +88,15 @@
         "values": []
       },
       {
+        "label": "Dimensions",
+        "en": "Dimensions",
+        "type": "multiple",
+        "id": "104",
+        "kind": "type",
+
+        "values": []
+      },
+      {
         "label": "Begin/End",
         "en": "Begin/End",
         "type": "text",
