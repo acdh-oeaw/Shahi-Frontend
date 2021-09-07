@@ -162,6 +162,7 @@ export default {
   -webkit-column-break-inside: avoid; /* Chrome, Safari */
   page-break-inside: avoid; /* Theoretically FF 20+ */
   break-inside: avoid-column; /* IE 11 */
+  overflow: hidden; /* Firefox */
   position: relative;
 }
 .gallery-content {
