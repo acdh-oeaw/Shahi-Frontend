@@ -5,10 +5,14 @@
       src="https://shahimaterialculture.univie.ac.at/fileadmin/_processed_/csm_1__Gilgit_MS_Banner_2ba90c6442.jpg"
     >
       <div class="image-content">
-        <div class="image-header text-h2">Shahi Kingdom</div>
+        <div class="image-header text-h2">
+          Shahi Kingdom
+        </div>
         <div class="navigation-btns">
-          <v-btn @click="$router.push('')" class="navigation-btn navigation-btn-map">
-            <v-icon large>mdi-map</v-icon>
+          <v-btn to="/" class="navigation-btn navigation-btn-map">
+            <v-icon large>
+              mdi-map
+            </v-icon>
 
             <div>
               Map
@@ -16,11 +20,13 @@
           </v-btn>
           <v-btn
             v-for="(item, index) in items"
-            :to="item.target"
             :key="index"
+            :to="item.target"
             class="navigation-btn"
           >
-            <v-icon large>{{ item.icon }}</v-icon>
+            <v-icon large>
+              {{ item.icon }}
+            </v-icon>
 
             <div>
               {{ item.text }}
@@ -34,51 +40,51 @@
 
 <script>
 export default {
-  name: "ImageNavigation",
+  name: 'ImageNavigation',
   data() {
     return {
       items: [
         {
-          text: "Stationary Structures",
-          icon: "$artifact",
+          text: 'Stationary Structures',
+          icon: '$artifact',
           target: {
-            name: "list-q",
+            name: 'list-q',
             query: {
-              codes: "artifact",
-              type_id: [1095]
+              codes: 'artifact',
+              type_id: [1095],
             },
           },
         },
         {
-          text: "Movable Objects",
-          icon: "$artifact",
+          text: 'Movable Objects',
+          icon: '$artifact',
           target: {
-            name: "detaillist-q",
+            name: 'detaillist-q',
             query: {
-              codes: "artifact",
-              type_id: [109]
+              codes: 'artifact',
+              type_id: [109],
             },
           },
         },
         {
-          text: "Coins",
-          icon: "$artifact",
+          text: 'Coins',
+          icon: '$artifact',
           target: {
-            name: "detaillist-q",
+            name: 'detaillist-q',
             query: {
-              codes: "artifact",
-              type_id: [108]
+              codes: 'artifact',
+              type_id: [108],
             },
           },
         },
         {
-          text: "Inscriptions",
-          icon: "$artifact",
+          text: 'Inscriptions',
+          icon: '$artifact',
           target: {
-            name: "detaillist-q",
+            name: 'detaillist-q',
             query: {
-              codes: "artifact",
-              type_id: [108]
+              codes: 'artifact',
+              type_id: [108],
             },
           },
         },
@@ -128,7 +134,6 @@ export default {
   transform: scale(1.1);
   background-color: rgba(255, 255, 255, 1) !important;
 }
-
 
 .image-content {
   position: relative;
