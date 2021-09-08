@@ -19,7 +19,7 @@
             Shahi Kingdom
           </div>
         </v-col>
-        <v-col cols="12" sm="6" class="d-flex align-start align-sm-center justify-center ">
+        <v-col cols="12" sm="6" class="pa-md-5 d-flex align-start align-sm-center justify-center ">
           <v-row no-gutters style="max-width: 700px" class="ma-5">
             <v-col cols="12">
               <v-btn
