@@ -1,7 +1,6 @@
 <template>
   <client-only>
     <div class="example">
-
       <l-map
         :zoom="initZoom"
         :center="center"
@@ -13,9 +12,9 @@
       </l-map>
 
       <div class="image-picker">
-      <div v-for="image in images" class="image-preview">
-        <v-img @click="selected = image + 'info.json'" :src="image + 'full/120,/0/default.jpg'"></v-img>
-      </div>
+        <div v-for="image in images" :key="image" class="image-preview">
+          <v-img :src="image + 'full/120,/0/default.png'" @click="selected = image + 'info.json'" />
+        </div>
       </div>
     </div>
   </client-only>
@@ -37,13 +36,10 @@ export default {
         tileSize: 310,
       },
       infoUrl: 'https://stacks.stanford.edu/image/iiif/hg676jb4964%2F0380_796-44/info.json',
-      images: ['http://localhost:8182/iiif/3/sculpture1.jpg/', 
-                'http://localhost:8182/iiif/3/sculpture2.jpg/', 
-                'http://localhost:8182/iiif/3/sculpture3.jpg/', 
-                'http://localhost:8182/iiif/3/sculpture4.jpg/', ],
-      selected: 'http://localhost:8182/iiif/3/sculpture1.jpg/info.json',
+      images: ['http://localhost:8182/iiif/3/sculpture1.tif/',
+        'http://localhost:8182/iiif/3/sculpture2.jpg/'],
+      selected: 'http://localhost:8182/iiif/3/sculpture1.tif/info.json',
     };
-
   },
 };
 </script>
@@ -78,8 +74,8 @@ html, body {
   width: 100%;
   z-index: 999999;
 
-  background-color: rgb(0,0,0,0.3);
-  bottom: 0px;
+  background-color: rgba(0,0,0,0.3);
+  bottom: 0;
   display: flex;
   flex-direction: row;
 }
