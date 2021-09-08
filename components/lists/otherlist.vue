@@ -76,11 +76,7 @@
                 <v-img
 
                   max-width="100%"
-                  :src="
-                    'http://localhost:8182/iiif/3/' +
-                      ['sculpture', 'plate'][Math.floor(Math.random() * 2)] +
-                      '1.jpg/full/400,/0/default.jpg'
-                  "
+                  :src="demoImageLinks[[Math.floor(Math.random()*demoImageLinks.length)]]"
                   alt="IMAGE"
                 />
               </v-card>
@@ -197,6 +193,13 @@ export default {
         page: 1,
         itemsPerPage: 10,
       },
+
+      demoImageLinks:[
+        "http://localhost:8182/iiif/3/sculpture1.tif/full/400,/0/default.png",
+        "http://localhost:8182/iiif/3/plate1.jpg/full/400,/0/default.jpg",
+        "http://localhost:8182/iiif/3/statue1.jpg/full/400,/0/default.jpg",
+        "http://localhost:8182/iiif/3/thing1.jpg/full/400,/0/default.jpg",
+      ],
       itemsPerPageOptions: [10, 20, 50, 100],
       totalItems: 0,
       itemIndex: [],
