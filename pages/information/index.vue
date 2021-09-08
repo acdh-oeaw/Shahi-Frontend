@@ -1,11 +1,11 @@
 <template>
   <div>
     <ImageNavigation />
-    <v-container style="max-width: 850px;" class="text-justify">
-      <p class="text-h3 text-left">
+    <v-container style="max-width: 850px;" class="text-justify pa-10">
+      <p class="text-h5 text-left">
         Cultural Formation and Transformation
       </p>
-      <p class="text-h4 text-left">
+      <p class="text-h6 text-left">
         Shahi Art and Architecture from Afghanistan to the West Tibetan Frontier at the Dawn
         of the Islamic Era
       </p>
@@ -29,7 +29,7 @@
         data) plus completely new data derived from the analysis of the materials and techniques of manufacture of three
         groups of artifacts (see Database).
       </p>
-      <p class="text-h3">
+      <p class="text-h6">
         Discover Shahi kingdom
       </p>
       <p class="text-body-1">
@@ -54,7 +54,7 @@
         src="https://shahimaterialculture.univie.ac.at/fileadmin/_processed_/csm_1__Gilgit_MS_Banner_2ba90c6442.jpg"
       />
 
-      <p class="text-h3">
+      <p class="text-h6">
         Artifacts
       </p>
       <v-row>
@@ -73,7 +73,7 @@
         src="https://shahimaterialculture.univie.ac.at/fileadmin/_processed_/csm_1__Gilgit_MS_Banner_2ba90c6442.jpg"
       />
 
-      <p class="text-h3">
+      <p class="text-h6">
         Sites
       </p>
       <v-row>
