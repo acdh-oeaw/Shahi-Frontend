@@ -1,40 +1,66 @@
 <template>
   <div>
-    <v-parallax
-      height="500"
-      src="https://shahimaterialculture.univie.ac.at/fileadmin/_processed_/csm_1__Gilgit_MS_Banner_2ba90c6442.jpg"
+    <v-img
+      col
+      :height="$vuetify.breakpoint.xs ? '98vh' : '100%'"
+      min-height="30vh"
+      style="background: linear-gradient(to bottom, #727076 0%, #dbdad8 100%);"
+      :src="$vuetify.breakpoint.xs ? '' : '/header.png'"
     >
-      <div class="image-content">
-        <div class="image-header text-h2">
-          Shahi Kingdom
-        </div>
-        <div class="navigation-btns">
-          <v-btn to="/" class="navigation-btn navigation-btn-map">
-            <v-icon large>
-              mdi-map
-            </v-icon>
-
-            <div>
-              Map
-            </div>
-          </v-btn>
-          <v-btn
-            v-for="(item, index) in items"
-            :key="index"
-            :to="item.target"
-            class="navigation-btn"
+      <v-row no-gutters style="height: 100%; ">
+        <v-col
+          cols="12"
+          sm="6"
+          class="d-flex align-center align-sm-start justify-center justify-sm-end "
+        >
+          <div
+            class="image-header text-h3 text-center pa-2 mt-10 hidden-sm-and-up"
           >
-            <v-icon large>
-              {{ item.icon }}
-            </v-icon>
+            Shahi Kingdom
+          </div>
+        </v-col>
+        <v-col cols="12" sm="6" class="d-flex align-start align-sm-center justify-center ">
+          <v-row no-gutters style="max-width: 700px" class="ma-5">
+            <v-col cols="12">
+              <v-btn
+                to="/"
+                class="navigation-btn mb-2"
+                :min-height="$vuetify.breakpoint.smAndDown ? 70 : 100"
+              >
+                <v-icon>
+                  mdi-map
+                </v-icon>
 
-            <div>
-              {{ item.text }}
-            </div>
-          </v-btn>
-        </div>
-      </div>
-    </v-parallax>
+                <div>
+                  Map
+                </div>
+              </v-btn>
+            </v-col>
+            <v-col
+              v-for="(item, index) in items"
+              :key="index"
+              cols="12"
+              sm="6"
+            >
+              <v-btn
+                v-bind="size"
+                :min-height="$vuetify.breakpoint.smAndDown ? 70 : 100"
+                :to="item.target"
+                class="navigation-btn my-2"
+              >
+                <v-icon v-bind="size">
+                  {{ item.icon }}
+                </v-icon>
+
+                <div>
+                  {{ item.text }}
+                </div>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-img>
   </div>
 </template>
 
@@ -91,53 +117,37 @@ export default {
       ],
     };
   },
+  computed: {
+    size() {
+      const size = {
+        xs: 'small', sm: 'small', lg: 'large', xl: 'x-large',
+      }[this.$vuetify.breakpoint.name];
+      return size ? { [size]: true } : {};
+    },
+  },
 };
 </script>
 
 <style scoped>
-.navigation-btns {
-  position: absolute;
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: repeat(5, 300px);
-  grid-template-rows: repeat(3, 100%);
-  left: 10%;
-  top: 10%;
-}
 
 .navigation-btn {
-  min-height: 100px;
-  margin: 10px;
-  background-color: rgba(255, 255, 255, 0.8) !important;
+  width: -moz-calc(100% - 20px);
+  width: -webkit-calc(100% - 20px);
+  width: calc(100% - 20px);
+  margin: 0 10px;
+  min-height: 50px;
+  background-color: rgba(255, 255, 255, 0.5) !important;
   transition: all 100ms linear;
 }
-.navigation-btn-map{
-  grid-column: 1 / span 2;
-  grid-row: 1;
-  height: 400px;
-}
+
 .navigation-btn >>> .v-btn__content {
   display: flex;
   flex-direction: column;
 }
 
-.image-header {
-  background-color: rgba(255, 255, 255, 0.5);
-  position: absolute;
-  color: black;
-  padding: 10px;
-  right: 0;
-  top: 10%;
-}
-
 .navigation-btn:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   background-color: rgba(255, 255, 255, 1) !important;
 }
 
-.image-content {
-  position: relative;
-  height: 100%;
-  max-width: 1500px;
-}
 </style>
