@@ -47,7 +47,7 @@
             <img
               class="barlogo ml-1 mr-1"
               alt="logo"
-              src="/OpenAtlasDiscovery_logo.png"
+              src="/ShahiDatabase_logo.png"
             />
           </div>
         </nuxt-link>
