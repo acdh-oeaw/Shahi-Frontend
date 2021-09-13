@@ -1,6 +1,6 @@
 <template>
   <img
     alt="OpenAtlasDiscovery Logo"
-    src="/OpenAtlasDiscovery_logo.png"
+    src="/ShahiDatabase_logo.png"
   >
 </template>
