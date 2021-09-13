@@ -2,7 +2,7 @@
   <div>
     <div v-if="!loading" class="mt-15 mx-5 gallery-columns" :style="cssVars">
       <div class="gallery-column" v-for="(item, index) in items" :key="index">
-        <div class="gallery-content +">
+        <div class="gallery-content">
           <p class="text-center">{{ item.features[0].properties.title }}</p>
 
           <div
@@ -162,7 +162,6 @@ export default {
   -webkit-column-break-inside: avoid; /* Chrome, Safari */
   page-break-inside: avoid; /* Theoretically FF 20+ */
   break-inside: avoid-column; /* IE 11 */
-  overflow: hidden; /* Firefox */
   position: relative;
 }
 .gallery-content {
