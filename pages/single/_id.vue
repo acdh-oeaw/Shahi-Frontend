@@ -1,172 +1,94 @@
 <template>
   <div>
-    <v-layout v-if="!loading" class="ma-1">
+    <v-layout v-if="!loading" class="mt-5 mx-sm-15 ">
       <v-row no-gutters>
-        <v-col xs="6">
-          <v-row no-gutters>
-            <v-col cols="12" xs="12">
-              <v-card class="pa-4" outlined tile>
-                <!-- icon and title -->
-                <v-row align="center">
-                  <v-tooltip right>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-icon
-                        color="primary"
-                        dark
-                        v-bind="attrs"
-                        style="font-size: 75px"
-                        v-on="on"
-                      >
-                        {{ getIconBySystemClass(item.features[0].systemClass) }}
-                      </v-icon>
-                    </template>
-                    <span>
-                      {{
-                        getCRMClassBySystemClass(item.features[0].systemClass)
-                      }}
-                      -
-                      {{
-                        getLabelBySystemClass({
-                          c: item.features[0].systemClass,
-                          l: "en",
-                        })
-                      }}
-                    </span>
-                  </v-tooltip>
-                  <div class="text-h3">
-                    {{ item.features[0].properties.title }}
-                  </div>
-                </v-row>
-                <!-- begin, end and sex -->
-                <v-row
-                  v-if="hasTime(item.features[0].systemClass)"
-                  class="pl-2"
-                >
-                  <v-col xs="4">
-                    <v-row align="center">
-                      <v-icon class="pr-2"> mdi-logout </v-icon>
-                      <div class="text-overline">Begin / From</div>
-                      <div class="text-body-2 pl-2">
-                        {{
-                          item.features[0].when.timespans[0].start.earliest
-                            ? item.features[0].when.timespans[0].start.earliest
-                            : item.features[0].when.timespans[0].start.latest
-                        }}
-                      </div>
-                    </v-row>
-                  </v-col>
-                  <v-col xs="4">
-                    <v-row align="center">
-                      <v-icon class="pr-2"> mdi-login </v-icon>
-                      <div class="text-overline">End / To</div>
-                      <div class="text-body-2 pl-2">
-                        {{
-                          item.features[0].when.timespans[0].end.latest
-                            ? item.features[0].when.timespans[0].end.latest
-                            : item.features[0].when.timespans[0].end.earliest
-                        }}
-                      </div>
-                    </v-row>
-                  </v-col>
-                  <v-col v-if="hasSex(item.features[0].systemClass)" xs="4">
-                    <v-row align="center">
-                      <v-icon class="pr-2"> mdi-sex </v-icon>
-                      <div class="text-overline">Sex</div>
-                      <div class="text-body-2 pl-2">
-                        {{ genderFromClass }}
-                      </div>
-                    </v-row>
-                  </v-col>
-                </v-row>
-                <!-- description -->
-                <v-row class="pl-2" no-gutters>
-                  <div
-                    v-if="item.features[0].description"
-                    class="text-body-1 pt-2"
-                    :class="{ lineclamp: isClamped }"
-                    @click="isClamped = !isClamped"
-                  >
-                    {{ item.features[0].description[0].value }}
-                  </div>
-                </v-row>
-              </v-card>
-            </v-col>
-            <!-- types -->
-            <v-col cols="12">
-              <v-card class="pa-4" outlined tile>
-                <v-card-title>
-                  <v-icon class="pr-2"> mdi-comment </v-icon>
-                  <div class="text-overline">Details</div>
-                </v-card-title>
-                <v-card-text style="overflow:auto; max-height:69vh" >
-                  <div v-if="!!item.features[0].types">
-                  <v-row no-gutters
-
-                    v-for="(typeGroup, index) in item.features[0].types
-                      .map((x) => {
-                        x.supertype = x.hierarchy.split(' > ')[0];
-                        return x;
-                      })
-                      .reduce((r, a) => {
-                        r[a.supertype] = [...(r[a.supertype] || []), a];
-                        return r;
-                      }, {})"
-
-                    :key="index">
-                    <v-col cols="auto"><span class="font-weight-bold">{{typeGroup[0].supertype}}</span> :</v-col>
-
-                    <v-col cols="auto">
-                      <p class="ml-1" v-for="(type,index) in typeGroup" :key="index">
-                    {{type.label}}</p>
-                    </v-col>
-                  </v-row>
-                  </div>
-                  <p class="font-weight-bold">Relations</p>
-                  <v-row no-gutters v-if="item.relationType != 'crm:P2 has type'" v-for="(item,index) in item.features[0].relations" :key="index">
-                    {{item.relationType.split(' ').slice(1).join(' ')}} : <nuxt-link :to="`/single/${item.relationTo.split('/').splice(-1)[0]}`"> {{item.label}}</nuxt-link>
-
-
-                  </v-row>
-
-                </v-card-text>
-              </v-card>
-            </v-col>
-          </v-row>
+        <v-col cols="12" md="6" class="d-flex align-center">
+          <v-card max-width="500px" flat class="ml-10">
+            <v-card-title class="text-h4">
+              {{ item.features[0].properties.title }}
+            </v-card-title>
+            <v-card-subtitle v-if="types.Period" class="text-h5">
+              {{ types.Period[0].label }}
+            </v-card-subtitle>
+            <v-card-subtitle v-else>
+              <span> from {{ item.features[0].when.timespans[0].start.earliest
+                .split("-")[0]
+                .replace(/^0+/, "") }}</span>
+              <span> to {{ item.features[0].when.timespans[0].end.earliest
+                .split("-")[0]
+                .replace(/^0+/, "") }}</span>
+            </v-card-subtitle>
+            <v-card-text v-if="item.features[0].description">
+              {{ item.features[0].description[0].value }}
+            </v-card-text>
+          </v-card>
         </v-col>
-        <v-col xs="6">
-          <v-card class="pa-4" outlined tile>
-            <v-tabs right>
-              <v-tab>Map</v-tab>
+        <v-col cols="12" md="6">
+          <v-card class="ml-sm-15" flat>
+            <v-tabs centered grow>
               <v-tab>Image</v-tab>
-              <v-tab v-if="false">Graph</v-tab>
-              <v-tab v-if="false">JSON</v-tab>
+
+              <v-tab>Map</v-tab>
+              <v-tab-item>
+                <ImageViewer style="height: calc(100vh - 154px)" />
+              </v-tab-item>
               <v-tab-item>
                 <qmap
-                  v-if="!this.loading"
+                  v-if="!loading"
                   :geojsonitems="[item]"
                   style="height: calc(100vh - 154px)"
                 />
               </v-tab-item>
-              <v-tab-item>
-                <ImageViewer style="height: calc(100vh - 154px)"></ImageViewer>
-              </v-tab-item>
-              <v-tab-item>
-                <treegraph
-                  v-if="!this.loading"
-                  style="height: calc(100vh - 154px)"
-                  :treeobject="item"
-                />
-              </v-tab-item>
-              <v-tab-item>
-                <json-viewer
-                  style="height: calc(100vh - 154px); overflow-y: auto"
-                  :value="item"
-                  :expand-depth="5"
-                  copyable
-                  sort
-                />
-              </v-tab-item>
             </v-tabs>
+          </v-card>
+        </v-col>
+        <v-col cols="12">
+          <v-card class="ml-10" flat>
+            <v-card-title class="text-overline">
+              Details
+            </v-card-title>
+            <v-card-text>
+              <v-row v-if="!!item.features[0].types" no-gutters>
+                <v-col v-for="i in [0,1]" :key="i" cols="12" sm="5">
+                  <v-row
+                    v-for="(typeGroup, index) in cutInHalf(Object.values(types))[i]"
+                    :key="index"
+                    no-gutters
+                  >
+                    <v-col cols="auto" class="mr-1">
+                      <p v-if="typeGroup[0].supertype === 'Material'" class="font-weight-bold">
+                        Materials:
+                      </p>
+                      <p v-else class="font-weight-bold">
+                        {{ typeGroup[0].supertype }}:
+                      </p>
+                    </v-col>
+                    <v-col cols="auto">
+                      <p style="max-width: 400px">
+                        {{ typeGroup.map(x => x.label).join(', ') }}
+                      </p>
+                    </v-col>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-card-text>
+            <v-card-title>
+              <div class="text-overline">
+                Relations
+              </div>
+            </v-card-title>
+            <v-card-text>
+              <v-row
+                v-for="(relation,index) in item.features[0].relations
+                  .filter(x => x.relationType !== 'crm:P2 has type')"
+                :key="index"
+                no-gutters
+              >
+                {{ relation.relationType.split(' ').slice(1).join(' ') }}:
+                {{ relation.label }}
+                {{ relation.relationType }}
+              </v-row>
+            </v-card-text>
           </v-card>
         </v-col>
       </v-row>
@@ -175,16 +97,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import JsonViewer from "vue-json-viewer";
-import qmap from "~/components/map.vue";
-import treegraph from "~/components/treegraph.vue";
-import ImageViewer from "@/components/ImageViewer";
+import { mapGetters } from 'vuex';
+import ImageViewer from '@/components/ImageViewer';
+import qmap from '~/components/map.vue';
+
 export default {
   components: {
     qmap,
-    JsonViewer,
-    treegraph,
     ImageViewer,
   },
   async fetch() {
@@ -207,69 +126,54 @@ export default {
       isClamped: true,
     };
   },
-  methods: {
-    async fetchRelated() {
-      // eslint-disable-next-line no-restricted-syntax
-      for (const id of this.item.features[0].relations) {
-        // eslint-disable-next-line no-await-in-loop,no-underscore-dangle
-        const ri = await this.$api.Entities.get_api_0_2_entity__id__({
-          id_: id.relationTo.split("/").splice(-1, 1),
-        });
-        this.related.push(ri.body);
-      }
-    },
-    closeAll() {
-      Object.keys(this.$refs).forEach((k) => {
-        if (this.$refs[k] && this.$refs[k].$attrs["data-open"]) {
-          this.$refs[k].$el.click();
-        }
-      });
-    },
-    openAll() {
-      Object.keys(this.$refs).forEach((k) => {
-        if (this.$refs[k] && !this.$refs[k].$attrs["data-open"]) {
-          this.$refs[k].$el.click();
-        }
-      });
-    },
-  },
   computed: {
-    ...mapGetters("app", [
-      "getIconBySystemClass",
-      "getLabelBySystemClass",
-      "getCRMClassBySystemClass",
-      "getSortColumnByPath",
-      "hasTime",
-      "hasSex",
+    ...mapGetters('app', [
+      'getIconBySystemClass',
+      'getLabelBySystemClass',
+      'getCRMClassBySystemClass',
+      'getSortColumnByPath',
+      'hasTime',
+      'hasSex',
     ]),
     relationTypes() {
       // eslint-disable-next-line max-len
-      if (Array.isArray(this.item.features[0].relations))
+      if (Array.isArray(this.item.features[0].relations)) {
         return [
           ...new Set(
-            this.item.features[0].relations.map((item) => item.relationType)
+            this.item.features[0].relations.map((item) => item.relationType),
           ),
         ];
+      }
       return [];
     },
     genderFromClass() {
       if (Array.isArray(this.item.features[0].relations)) {
         if (
-          this.item.features[0].relations.filter((r) => r.label === "Male")
+          this.item.features[0].relations.filter((r) => r.label === 'Male')
             .length > 0
-        )
-          return "Male";
+        ) return 'Male';
         if (
-          this.item.features[0].relations.filter((r) => r.label === "Female")
+          this.item.features[0].relations.filter((r) => r.label === 'Female')
             .length > 0
-        )
-          return "Female";
+        ) return 'Female';
       }
-      return "n/a";
+      return 'n/a';
+    },
+    types() {
+      if (!this.item.features[0].types) return [];
+      return this.item.features[0].types
+        .map((x) => {
+          [x.supertype] = x.hierarchy.split(' > ');
+          return x;
+        })
+        .reduce((r, a) => {
+          r[a.supertype] = [...(r[a.supertype] || []), a];
+          return r;
+        }, {});
     },
   },
   watch: {
-    "$route.params": {
+    '$route.params': {
       handler() {
         this.$fetch();
       },
@@ -280,13 +184,38 @@ export default {
   created() {
     this.closeAll();
   },
+  methods: {
+    async fetchRelated() {
+      // eslint-disable-next-line no-restricted-syntax
+      for (const id of this.item.features[0].relations) {
+        // eslint-disable-next-line no-await-in-loop,no-underscore-dangle
+        const ri = await this.$api.Entities.get_api_0_2_entity__id__({
+          id_: id.relationTo.split('/').splice(-1, 1),
+        });
+        this.related.push(ri.body);
+      }
+    },
+    closeAll() {
+      Object.keys(this.$refs).forEach((k) => {
+        if (this.$refs[k] && this.$refs[k].$attrs['data-open']) {
+          this.$refs[k].$el.click();
+        }
+      });
+    },
+    openAll() {
+      Object.keys(this.$refs).forEach((k) => {
+        if (this.$refs[k] && !this.$refs[k].$attrs['data-open']) {
+          this.$refs[k].$el.click();
+        }
+      });
+    },
+    cutInHalf(list) {
+      const halfwayThrough = Math.floor(list.length / 2);
+      const arrayFirstHalf = list.slice(0, halfwayThrough);
+      const arraySecondHalf = list.slice(halfwayThrough, list.length);
+      return [arrayFirstHalf, arraySecondHalf];
+    },
+  },
+
 };
 </script>
-<style>
-.lineclamp {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-</style>
