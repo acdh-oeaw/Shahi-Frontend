@@ -1,7 +1,18 @@
 [
   {
+    "icon": "mdi-shape",
+    "text": "Artifacts",
+    "systemClass":"artifact",
+    "target": {
+      "name": "detaillist-q",
+      "query": {
+        "codes": "artifact"
+      }
+    }
+  },
+  {
     "icon": "mdi-account-group",
-    "text": "Stationary structures",
+    "text": "Stationary Structures",
     "systemClass":"artifact",
     "target": {
       "name": "list-q",
@@ -13,7 +24,7 @@
   },
   {
     "icon": "mdi-text-box",
-    "text": "Movable objects",
+    "text": "Portable Objects",
     "systemClass":"artifact",
     "target": {
       "name": "detaillist-q",
@@ -44,17 +55,6 @@
       "query": {
         "codes": "artifact",
         "type_id": "3"
-      }
-    }
-  },
-  {
-    "icon": "mdi-shape",
-    "text": "Artifacts",
-    "systemClass":"artifact",
-    "target": {
-      "name": "detaillist-q",
-      "query": {
-        "codes": "artifact"
       }
     }
   }
