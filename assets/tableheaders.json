@@ -1,13 +1,6 @@
 {
   "wide": [
     {
-      "text": "Class",
-      "value": "features[0].systemClass",
-      "column": "class_code",
-      "width": "20px",
-      "visible":true
-    },
-    {
       "text": "Title",
       "align": "start",
       "sortable": true,
@@ -53,7 +46,7 @@
       "sortable": false
     },
     {
-      "text": "category of authenticity",
+      "text": "Category of Authenticity",
       "value": "features[0].type.categoryofauthenticity",
       "column": "material",
       "width": "50px",
