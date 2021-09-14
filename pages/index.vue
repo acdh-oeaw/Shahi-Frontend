@@ -2,11 +2,11 @@
   <div>
     <div>
       <v-layout column justify-center align-center>
-        <div class="text-center splashtext pa-5" style="z-index:401" :class="{ closed: close}">
+        <div class="text-center splashtext pa-5" style="z-index:401" :class="{ closed: closed}">
           <transition name="fade">
             <div>
               <p class="text-h4 text-sm-h2">
-                Shahi Art and Architecture
+                Shahi Kingdoms Database
               </p>
               <div v-html="body" />
               <p class="text-body-1 ma-sm-auto mt-10" style="max-width:650px">
@@ -14,20 +14,32 @@
                 Afghanistan to the West Tibetan Frontier at the Dawn of the Islamic Era" is to define a narrative
                 cultural history of the Shahi kingdom (7th to 10th century).
                 <br>
-                <v-btn to="/information" text @click="close=true">
-                  more Information
-                </v-btn>
                 <br>
-                <v-btn class="mt-5" x-large color="success" @click="close = !close">
-                  Disover Shahi Kingdom
-                  <v-icon>mdi-map</v-icon>
-                </v-btn>
               </p>
-              <div v-if="close" style="position:absolute; left:0; top:0; right:0;bottom:0;" @click="close = !close" />
+              <div v-if="closed" style="position:absolute; left:0; top:0; right:0;bottom:0;" @click="closed = !closed" />
+              <v-row class="mx-3 mx-sm-15">
+                <v-col>
+                  <ImageButton icon="mdi-map-marker" @click="closed = !closed">
+                    Discover the Kingdoms
+                  </ImageButton>
+                </v-col>
+                <v-col>
+                  <ImageButton to="/list?codes=artifact" icon="$artifact">
+                    Enter Database
+                  </ImageButton>
+                </v-col>
+                <v-col>
+                  <ImageButton to="/information" icon="mdi-information-variant">
+                    Read More
+                  </ImageButton>
+                </v-col>
+                <v-col>
+                  <ImageButton to="/team" icon="mdi-account-group">
+                    Meet the Team
+                  </ImageButton>
+                </v-col>
+              </v-row>
             </div>
-          </transition>
-          <transition name="fade">
-            <div v-if="showContent" />
           </transition>
         </div>
       </v-layout>
@@ -54,10 +66,11 @@ export default {
       items: [],
       body: 'loading...',
       loading: true,
-      close: false,
+      closed: false,
     };
   },
   async mounted() {
+    this.closed = this.$route.params.showMap;
     this.showContent = false;
     const p = await this.$api.Entities.get_api_0_2_code__code_({
       limit: 100,
@@ -106,6 +119,15 @@ html {
 
 .container {
   max-width: 1500px;
+}
+
+.navigation-btn:hover .btn-icon{
+  opacity: 50%;
+}
+
+.navigation-btn:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 1) !important;
 }
 
 </style>
