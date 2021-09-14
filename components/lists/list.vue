@@ -91,7 +91,8 @@
             v-for="(type, index) in item.features[0].type[slot.value.split('.')[2]]"
             :key="index"
 
-            :to="`/list?codes=artifact&type_id=${type.identifier.split('/').splice(-1)[0]}`"
+            :to="`/list?codes=artifact&type_id=${type.identifier
+              .split('/').splice(-1)[0]}`"
           >
             {{ type.label }}
             <span
@@ -185,7 +186,8 @@ export default {
       });
     },
     showHeaders() {
-      return this.$store.state.app.tableheaders.wide.filter((s) => this.selectedHeaders.includes(s));
+      return this.$store.state.app.tableheaders.wide
+        .filter((s) => this.selectedHeaders.includes(s));
     },
   },
   watch: {
