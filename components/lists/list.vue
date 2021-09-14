@@ -57,6 +57,7 @@
           {{ item.features[0].properties.title }}
         </nuxt-link>
       </template>
+
       <template v-slot:item.features[0].description[0].value="{ item }">
         <div v-if="item.features[0].description" class="tablecolumndesc">
           {{ item.features[0].description[0].value }}
@@ -65,7 +66,20 @@
           n/a
         </div>
       </template>
-
+      <template v-slot:item.features[0].when.timespans[0].start.earliest="{ item }">
+        <span v-if="!!item.features[0].when.timespans[0].start.earliest">
+          {{ item.features[0].when.timespans[0].start.earliest
+            .split("-")[0]
+            .replace(/^0+/, "") }}
+        </span>
+      </template>
+      <template v-slot:item.features[0].when.timespans[0].end.earliest="{ item }">
+        <span v-if="!!item.features[0].when.timespans[0].end.earliest">
+          {{ item.features[0].when.timespans[0].end.earliest
+            .split("-")[0]
+            .replace(/^0+/, "") }}
+        </span>
+      </template>
       <template
         v-for="slot in $store.state.app.tableheaders.wide.filter((x) =>
           x.value.startsWith('features[0].type')
