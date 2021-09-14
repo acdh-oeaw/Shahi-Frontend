@@ -25,15 +25,20 @@
           </div>
         </v-col>
         <v-col cols="12">
-          <ImageButton to="/" icon="mdi-map-marker">Discover the Kindoms</ImageButton>
-
+          <ImageButton :to="{'name':'index','params':{'showMap':true}}" icon="mdi-map-marker">
+            Discover the Kindoms
+          </ImageButton>
         </v-col>
 
         <v-col cols="12" sm="6">
-          <ImageButton to="/team" icon="$artifact">Enter Database</ImageButton>
+          <ImageButton to="/team" icon="$artifact">
+            Enter Database
+          </ImageButton>
         </v-col>
         <v-col cols="12" sm="6">
-          <ImageButton to="/team" icon="mdi-account-group">Meet the Team</ImageButton>
+          <ImageButton to="/team" icon="mdi-account-group">
+            Meet the Team
+          </ImageButton>
         </v-col>
       </v-row>
     </v-img>
@@ -106,7 +111,6 @@ export default {
 
 <style scoped>
 
-
 .navigation-btns{
   max-width: 600px;
   position: absolute;
@@ -115,6 +119,5 @@ export default {
   left: 0;
   margin: auto;
 }
-
 
 </style>
