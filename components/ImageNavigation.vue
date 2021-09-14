@@ -31,7 +31,7 @@
         </v-col>
 
         <v-col cols="12" sm="6">
-          <ImageButton to="/team" icon="$artifact">
+          <ImageButton to="/list?codes=artifact" icon="$artifact">
             Enter Database
           </ImageButton>
         </v-col>
