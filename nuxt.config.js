@@ -19,8 +19,7 @@ export default {
   ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
-    titleTemplate: `%s - ${process.env.npm_package_name}`,
-    title: process.env.npm_package_name || '',
+    title: "Shahi Kingdoms Database",
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
