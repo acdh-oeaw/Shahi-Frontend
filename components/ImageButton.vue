@@ -1,25 +1,25 @@
 <template>
   <v-btn
     :to="to"
-    @click="$emit('click')"
     class="navigation-btn"
+    @click="$emit('click')"
   >
     <v-icon v-if="icon" class="btn-icon mb-3" size="140">
-      {{icon}}
+      {{ icon }}
     </v-icon>
-    <div style="height: 100%; width: 100%" class="d-flex align-end justify-end" >
-    <p class="d-flex align-start  text-subtitle-1" >
-      <slot></slot>
-    </p>
+    <div style="height: 100%; width: 100%" class="d-flex align-end justify-end">
+      <p class="d-flex align-start  text-subtitle-1">
+        <slot />
+      </p>
     </div>
   </v-btn>
 </template>
 
 <script>
 export default {
-name: "ImageButton",
-  props:['icon','to'],
-}
+  name: 'ImageButton',
+  props: ['icon', 'to'],
+};
 </script>
 
 <style scoped>
@@ -48,6 +48,5 @@ name: "ImageButton",
   max-width: 350px;
   height: 100%;
 }
-
 
 </style>
