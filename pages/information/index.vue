@@ -91,8 +91,12 @@
 
 <script>
 import qmap from '@/components/map.vue';
+import ImageNavigation from '@/components/ImageNavigation';
 
 export default {
-  components: { qmap },
+  components: {
+    qmap,
+    ImageNavigation,
+  },
 };
 </script>

@@ -56,10 +56,12 @@
 
 <script>
 import qmap from '~/components/map.vue';
+import ImageButton from "@/components/ImageButton";
 
 export default {
   components: {
     qmap,
+    ImageButton,
   },
   data() {
     return {

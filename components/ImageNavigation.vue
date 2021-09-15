@@ -46,8 +46,11 @@
 </template>
 
 <script>
+import ImageButton from '@/components/ImageButton';
+
 export default {
   name: 'ImageNavigation',
+  components: { ImageButton },
   data() {
     return {
       items: [
