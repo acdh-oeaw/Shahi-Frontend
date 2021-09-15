@@ -25,7 +25,7 @@
           </div>
         </v-col>
         <v-col cols="12">
-          <ImageButton :to="{'name':'index','params':{'showMap':true}}" icon="mdi-map-marker">
+          <ImageButton :to="{'name':'index','path':'/','params':{'showMap':true}}" icon="mdi-map-marker">
             Discover the Kindoms
           </ImageButton>
         </v-col>
