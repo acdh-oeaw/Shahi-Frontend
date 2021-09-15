@@ -49,4 +49,14 @@ export default {
   height: 100%;
 }
 
+.navigation-btn:hover .btn-icon{
+  opacity: 50%;
+}
+
+.navigation-btn:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 1) !important;
+}
+
+
 </style>
