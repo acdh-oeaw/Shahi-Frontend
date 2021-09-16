@@ -11,12 +11,14 @@
               {{ types.Period[0].label }}
             </v-card-subtitle>
             <v-card-subtitle v-else>
-              <span> from {{ item.features[0].when.timespans[0].start.earliest
-                .split("-")[0]
-                .replace(/^0+/, "") }}</span>
-              <span> to {{ item.features[0].when.timespans[0].end.earliest
-                .split("-")[0]
-                .replace(/^0+/, "") }}</span>
+              <span v-if="item.features[0].when.timespans[0].start.earliest">
+                from {{ item.features[0].when.timespans[0].start.earliest
+                  .split("-")[0]
+                  .replace(/^0+/, "") }}</span>
+              <span v-if="item.features[0].when.timespans[0].end.earliest">
+                to {{ item.features[0].when.timespans[0].end.earliest
+                  .split("-")[0]
+                  .replace(/^0+/, "") }}</span>
             </v-card-subtitle>
             <v-card-text v-if="item.features[0].description">
               {{ item.features[0].description[0].value }}
