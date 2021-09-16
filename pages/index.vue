@@ -55,8 +55,8 @@
 </template>
 
 <script>
+import ImageButton from '@/components/ImageButton.vue';
 import qmap from '~/components/map.vue';
-import ImageButton from "@/components/ImageButton";
 
 export default {
   components: {
@@ -77,7 +77,7 @@ export default {
     const p = await this.$api.Entities.get_api_0_2_code__code_({
       limit: 100,
       show: ['geometry'],
-      code: 'place',
+      code: 'artifact',
     });
     this.items = p.body.results;
     const content = await this.$api.Content.get_api_0_2_content_({});
@@ -122,6 +122,5 @@ html {
 .container {
   max-width: 1500px;
 }
-
 
 </style>
