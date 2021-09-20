@@ -29,7 +29,7 @@
           <v-btn
             v-for="(systemClass, index) in filterElements"
             :key="index"
-            :color="index === selectedClass ? 'grey' : ''"
+            :color="index === selectedClass ? 'primary lighten-2' : ''"
             elevation="0"
             @click="selectedClass = index"
           >
@@ -277,7 +277,7 @@ export default {
       }
     },
     '$route.query': {
-      handler(s) {
+      handler() {
         if (this.filterElements?.[0].items) {
           this.updateTypesFromUrl();
           this.updateFiltersFromUrl();
