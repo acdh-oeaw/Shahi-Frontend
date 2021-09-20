@@ -21,7 +21,7 @@
           >
             <v-hover v-slot="{hover}">
               <v-card-title
-                class="artifact-title grey d-block white--text"
+                class="artifact-title armadillo lighten-2 d-block white--text"
                 :class="hover ? 'lighten-1' : ''"
               >
                 <p class="ma-0 pa-0">
@@ -64,14 +64,14 @@
             </v-hover>
           </nuxt-link>
           <v-row no-gutters>
-            <v-col cols="12" sm="3" md="2">
+            <v-col cols="12" sm="4" md="3">
               <v-card
                 height="100%"
                 rounded="0"
                 class="d-flex align-center pa-sm-2"
                 :class="{'borderBottom': $vuetify.breakpoint.xs}"
                 elevation="0"
-                color="grey lighten-2"
+                color="gray-nickel lighten-1"
               >
                 <v-img
 
@@ -81,7 +81,7 @@
                 />
               </v-card>
             </v-col>
-            <v-col cols="12" sm="9" md="10" class="px-5">
+            <v-col cols="12" sm="8" md="9" class="px-5">
               <v-card v-if="item.features[0].description" outlined class="my-3">
                 <v-card-text class="text-body-1">
                   Category of Authenticity:
@@ -102,7 +102,8 @@
                   v-for="(typeGroup, i) in getOrderedTypes(
                     item.features[0].types
                   )"
-                  v-if="typeGroup[0].type !== 'Artifact' && typeGroup[0].type !== 'Category of Authenticity'"
+                  v-if="typeGroup[0].type !== 'Artifact' && typeGroup[0]
+                    .type !== 'Category of Authenticity'"
                   :key="i + 2000"
                   class="card-column"
                 >
@@ -194,11 +195,11 @@ export default {
         itemsPerPage: 10,
       },
 
-      demoImageLinks:[
-        "http://localhost:8182/iiif/3/sculpture1.tif/full/400,/0/default.png",
-        "http://localhost:8182/iiif/3/plate1.jpg/full/400,/0/default.jpg",
-        "http://localhost:8182/iiif/3/statue1.jpg/full/400,/0/default.jpg",
-        "http://localhost:8182/iiif/3/thing1.jpg/full/400,/0/default.jpg",
+      demoImageLinks: [
+        'http://localhost:8182/iiif/3/sculpture1.tif/full/400,/0/default.png',
+        'http://localhost:8182/iiif/3/plate1.jpg/full/400,/0/default.jpg',
+        'http://localhost:8182/iiif/3/statue1.jpg/full/400,/0/default.jpg',
+        'http://localhost:8182/iiif/3/thing1.jpg/full/400,/0/default.jpg',
       ],
       itemsPerPageOptions: [10, 20, 50, 100],
       totalItems: 0,
