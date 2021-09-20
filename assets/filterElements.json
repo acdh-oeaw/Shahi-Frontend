@@ -99,7 +99,7 @@
       {
         "label": "Begin/End",
         "en": "Begin/End",
-        "type": "text",
+        "type": "time",
         "kind": "filter",
         "values": [
           {

@@ -182,6 +182,23 @@
                         <v-text-field v-model="item.value" :label="item.en" />
                       </v-col>
                     </v-row>
+                    <!--Time Search-->
+                    <v-row
+                      v-if="
+                        filterElements[selectedClass].items[selected].type ===
+                          'time'
+                      "
+                    >
+                      <v-col
+                        cols="12"
+                      >
+                        <filter-window-time-selection
+                          v-model="filterElements[selectedClass].items[
+                            selected
+                          ].values"
+                        />
+                      </v-col>
+                    </v-row>
                   </v-card-text>
                 </v-card>
               </v-slide-y-transition>
@@ -336,11 +353,13 @@ export default {
 
       filters.forEach((filter) => {
         const filterParams = filter.split('|');
-
-        this.filterElements
+        const value = this.filterElements
           .find((x) => x.selected).items
-          .find((x) => x.kind === 'filter' && x.values[0]?.id === filterParams?.[1])
-          .values[0].value = filterParams?.[3];
+          .find((x) => x.kind === 'filter' && x.values.some((obj) => obj.id === filterParams?.[1]))
+          .values.find((x) => x.id === filterParams?.[1]);
+        value.value = filterParams?.[3];
+        value.logicalOperator = filterParams?.[2];
+        value.concatOperator = filterParams?.[0];
       });
     },
     updateTypesFromUrl() {
