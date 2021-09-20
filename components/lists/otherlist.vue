@@ -50,11 +50,7 @@
                     "
                   >to
                     {{
-                      item.features[0].when.timespans[0].end.latest
-                        ? item.features[0].when.timespans[0].end.latest
-                          .split("-")[0]
-                          .replace(/^0+/, "")
-                        : item.features[0].when.timespans[0].end.earliest
+                      item.features[0].when.timespans[0].end.earliest
                           .split("-")[0]
                           .replace(/^0+/, "")
                     }}
