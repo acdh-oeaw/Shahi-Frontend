@@ -253,7 +253,7 @@ td {
 }
 
 .barlogo {
-  height: 53px;
+  height: 30px;
   top: 2px;
   position: relative;
 }
