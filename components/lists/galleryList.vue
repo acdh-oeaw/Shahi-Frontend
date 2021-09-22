@@ -5,13 +5,13 @@
         <div class="gallery-content">
           <p class="text-center">{{ item.features[0].properties.title }}</p>
 
-          <div
-            class="grey lighten-3 ma-2"
-            :style="'height:' + (Math.ceil(Math.random() * 2) + 1) + '00px;'"
-          >
-            #{{ index }}
+            <v-img
+              class="ma-3"
+              height="100%"
+              :src="demoImageLinks[[Math.floor(Math.random()*demoImageLinks.length)]]"
+              alt="IMAGE"
+            />
           </div>
-        </div>
         <nuxt-link
           :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}`"
         >
@@ -79,6 +79,11 @@ export default {
       itemsPerPageOptions: [10, 20, 50, 100],
       totalItems: 0,
       itemIndex: [],
+      demoImageLinks: [
+        'http://localhost:8080/iiif/images/shahi/1/1.jp2/full/400,/0/default.png',
+        'http://localhost:8080/iiif/images/shahi/2/1.jp2/full/400,/0/default.png',
+        'http://localhost:8080/iiif/images/shahi/3/1.jp2/full/400,/0/default.png',
+      ],
     };
   },
   watch: {

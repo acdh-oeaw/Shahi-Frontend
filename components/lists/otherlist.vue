@@ -192,10 +192,9 @@ export default {
       },
 
       demoImageLinks: [
-        'http://localhost:8182/iiif/3/sculpture1.tif/full/400,/0/default.png',
-        'http://localhost:8182/iiif/3/plate1.jpg/full/400,/0/default.jpg',
-        'http://localhost:8182/iiif/3/statue1.jpg/full/400,/0/default.jpg',
-        'http://localhost:8182/iiif/3/thing1.jpg/full/400,/0/default.jpg',
+        'http://localhost:8080/iiif/images/shahi/1/1.jp2/full/400,/0/default.png',
+        'http://localhost:8080/iiif/images/shahi/2/1.jp2/full/400,/0/default.png',
+        'http://localhost:8080/iiif/images/shahi/3/1.jp2/full/400,/0/default.png',
       ],
       itemsPerPageOptions: [10, 20, 50, 100],
       totalItems: 0,
