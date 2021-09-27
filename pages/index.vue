@@ -8,11 +8,19 @@
               <p class="text-h4 text-sm-h2">
                 Shahi Kingdoms Database
               </p>
-              <div v-html="body" />
-              <p class="text-body-1 ma-sm-auto mt-10" style="max-width:650px">
-                The goal of the project "Cultural Formation and Transformation: Shahi Buddhist Art and Architecture from
-                Afghanistan to the West Tibetan Frontier at the Dawn of the Islamic Era" is to define a narrative
-                cultural history of the Shahi kingdom (7th to 10th century).
+              <p class="text-body-1 ma-sm-auto mt-10" style="max-width:1500px">
+                The goal of the Shahi project is--for the first time--to define a narrative cultural history of the
+                Shahi kingdoms which played a pivotal role in the history of Central, Inner, and South Asia, notably in
+                the history of later Buddhist art and the formation of Islamic art. The project examines how exchanges
+                of objects, technologies, and ideas combined with continuous mobility across the vast network of
+                transnational trade routes, religious institutions, and mercantile sites enabled a distinctive visual
+                culture to evolve and flourish throughout the Shahi kingdoms, despite the simultaneous expansion of
+                successive Muslim armies as well as the Tibetan empire in the northeast. This research considers
+                political, economic, and cultural developments in the region in relation to major--often
+                interconnected--events like climate change and shifts in political alliances which resulted in changes
+                to the centuries-old transnational communication routes.
+
+
                 <br>
                 <br>
               </p>
