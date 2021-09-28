@@ -41,6 +41,11 @@
         'items-per-page-options': itemsPerPageOptions,
       }"
     >
+      <template v-slot:header.features[0].type.categoryofauthenticity="{ header }">
+        {{header.text}}
+        <tooltip-icon :text="header.description"></tooltip-icon>
+      </template>
+
       <template v-slot:top="{ pagination, options, updateOptions }">
         <v-data-footer
           :pagination="pagination"
