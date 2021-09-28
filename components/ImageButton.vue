@@ -39,7 +39,7 @@ export default {
   left: 3%;
   position: absolute;
 
-  opacity: 30% !important;
+  opacity: 0.3 !important;
   width: 130px;
   transition: all 100ms linear;
 }
@@ -50,7 +50,7 @@ export default {
 }
 
 .navigation-btn:hover .btn-icon{
-  opacity: 50% !important;
+  opacity: 0.5 !important;
 }
 
 .navigation-btn:hover {
