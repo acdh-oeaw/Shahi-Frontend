@@ -1,13 +1,15 @@
 <template>
-  <div>
-    <div>
+
+    <div style="height: 95vh">
       <v-layout column justify-center align-center>
         <div class="text-center splashtext pa-5" style="z-index:401" :class="{ closed: closed}">
-          <transition name="fade">
-            <div>
+            <div >
               <p class="text-h4 text-sm-h2">
                 Shahi Kingdoms Database
               </p>
+              <v-expand-transition>
+
+              <div v-if="!closed">
               <p class="text-body-1 ma-sm-auto mt-10" style="max-width:1500px">
                 The goal of the Shahi project is--for the first time--to define a narrative cultural history of the
                 Shahi kingdoms which played a pivotal role in the history of Central, Inner, and South Asia, notably in
@@ -24,7 +26,6 @@
                 <br>
                 <br>
               </p>
-              <div v-if="closed" style="position:absolute; left:0; top:0; right:0;bottom:0;" @click="closed = !closed" />
               <v-row class="mx-3 mx-sm-15">
                 <v-col>
                   <ImageButton icon="mdi-map-marker" @click="closed = !closed">
@@ -48,18 +49,23 @@
                 </v-col>
               </v-row>
             </div>
-          </transition>
+              </v-expand-transition>
+              <div v-if="closed" style="position:absolute; left:0; top:0; right:0;bottom:0;" @click="closed = !closed" />
+
+            </div>
+
         </div>
       </v-layout>
       <div class="bgmap">
         <qmap
+          :class="{ 'darkened': !closed}"
           v-if="!loading"
           :geojsonitems="items"
           :options="{ zoomControl: false }"
         />
       </div>
     </div>
-  </div>
+
 </template>
 
 <script>
@@ -106,18 +112,19 @@ html {
   background-color: rgba(255, 255, 255, 0.8);
   top: 15vh;
   width: 100%;
-  transition: all 100ms linear;
+  transition: all 200ms linear;
 }
 
 .closed {
-  top: 84vh;
+  top: 0;
   background-color: rgba(255, 255, 255, 1);
 
   cursor: pointer;
 }
 
 .closed:hover {
-  top: 77vh;
+  filter: brightness(85%);
+
 }
 
 .bgmap {
@@ -125,9 +132,18 @@ html {
   width: 100%;
   position: absolute;
   top: 0;
+
+  transition: all 100ms linear;
+
+}
+
+.darkened{
+  filter: brightness(85%);
+
 }
 
 .container {
+
   max-width: 1500px;
 }
 
