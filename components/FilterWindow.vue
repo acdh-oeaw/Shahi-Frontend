@@ -29,7 +29,7 @@
           <v-btn
             v-for="(systemClass, index) in filterElements"
             :key="index"
-            :color="index === selectedClass ? 'primary lighten-2' : ''"
+            :color="index === selectedClass ? 'primary ' : ''"
             elevation="0"
             @click="selectedClass = index"
           >

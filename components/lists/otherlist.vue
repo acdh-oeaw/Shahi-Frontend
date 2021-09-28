@@ -21,7 +21,7 @@
           >
             <v-hover v-slot="{hover}">
               <v-card-title
-                class="artifact-title armadillo lighten-2 d-block white--text"
+                class="artifact-title primary darken-2 d-block white--text"
                 :class="hover ? 'lighten-1' : ''"
               >
                 <p class="ma-0 pa-0">
@@ -67,7 +67,7 @@
                 class="d-flex align-center pa-sm-2"
                 :class="{'borderBottom': $vuetify.breakpoint.xs}"
                 elevation="0"
-                color="gray-nickel lighten-1"
+                color="grey lighten-2"
               >
                 <v-img
 
@@ -105,7 +105,7 @@
                 >
                   <v-card class="mb-5" outlined>
                     <v-card-title
-                      class="text-subtitle-2 justify-center grey lighten-3"
+                      class="text-subtitle-2 justify-center primary lighten-1"
                     >
                       {{ typeGroup[0].type }}
                     </v-card-title>
