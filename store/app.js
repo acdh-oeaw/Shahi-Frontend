@@ -4,6 +4,7 @@ import tableheaders from '../assets/tableheaders.json';
 import templateprops from '../assets/templateprops.json';
 import filterelements from '../assets/filterElements.json';
 import viewelements from '../assets/viewElements.json';
+import team from '../assets/team.json';
 
 /* eslint-disable no-param-reassign,no-shadow */
 export const state = () => ({
@@ -15,6 +16,7 @@ export const state = () => ({
   templateprops,
   filterelements,
   viewelements,
+  team,
 });
 
 export const getters = {
