@@ -3,6 +3,7 @@
     :height="$vuetify.breakpoint.xs ? '98vh' : '100%'"
     style="background: linear-gradient(to bottom, #727076 0%, #dbdad8 100%);"
     :src="$vuetify.breakpoint.xs ? '' : '/header.png'"
+    class="block"
   >
     <v-row
       no-gutters
@@ -118,6 +119,9 @@ export default {
   right: 0;
   left: 0;
   margin: auto;
+  display: block;
 }
-
+.block{
+  display: block;
+}
 </style>
