@@ -59,6 +59,16 @@
       "value": "features[0].type.dimensions",
       "column": "dimensions",
       "width": "50px",
+      "visible":true,
+
+      "sortable": false
+    },
+    {
+      "text": "Favorites",
+      "value": "favorites",
+      "column": "favorites",
+      "width": "50px",
+      "visible":true,
       "sortable": false
     }
   ],

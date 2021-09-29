@@ -107,6 +107,10 @@
           </nuxt-link>
         </div>
       </template>
+
+      <template v-slot:item.favorites="{ item }">
+        <favorite-icon :id="id(item)"></favorite-icon>
+      </template>
     </v-data-table>
   </div>
 </template>
@@ -195,6 +199,11 @@ export default {
         .filter((s) => this.selectedHeaders.includes(s));
     },
   },
+  methods: {
+    id(item) {
+      return item.features[0]['@id'].split('/').splice(-1)[0];
+    },
+  },
   watch: {
     options: {
       handler(o, n) {
@@ -203,6 +212,7 @@ export default {
       },
       deep: true,
     },
+
     filter: {
       handler() {
         this.itemIndex = [];

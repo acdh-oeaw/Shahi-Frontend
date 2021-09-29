@@ -10,6 +10,23 @@
       color="grey lighten-4"
     >
       <v-list dense class="grey lighten-4">
+        <v-list-item
+          :to="{
+            &quot;name&quot;: &quot;list-q&quot;,
+            &quot;query&quot;: {
+              &quot;entities&quot;: getFavorites()
+            }}"
+          @click="$store.commit(&quot;app/closeQueryDrawer&quot;)"
+        >
+          <v-list-item-action>
+            <v-icon>mdi-star</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="grey--text">
+              Favorites
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <template v-for="(item, i) in items">
           <v-row v-if="item.heading" :key="i" align="center">
             <v-col cols="6">
@@ -20,6 +37,7 @@
             <v-col cols="6" class="text-right" />
           </v-row>
           <v-divider v-else-if="item.divider" :key="i" dark class="my-4" />
+
           <v-list-item
             v-else
             :key="i"
@@ -40,7 +58,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-expand-transition>
-      <v-app-bar app clipped-left style="z-index:9999" >
+      <v-app-bar app clipped-left style="z-index:9999">
         <v-app-bar-nav-icon @click="$store.commit('app/toggleQueryDrawer')" />
         <nuxt-link to="/" @click="$store.commit('app/closeQueryDrawer')">
           <div class="logocaption d-none d-sm-flex">
@@ -48,14 +66,13 @@
               class="barlogo ml-1 mr-1"
               alt="logo"
               src="/ShahiDatabase_logo.png"
-            />
+            >
           </div>
         </nuxt-link>
 
         <querysearch />
         <v-spacer />
-        <view-toggler></view-toggler>
-
+        <view-toggler />
       </v-app-bar>
     </v-expand-transition>
     <v-main>
@@ -78,40 +95,43 @@
           >
             <path
               d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
-            ></path>
+            />
           </svg>
           Contact
         </v-row>
-        <v-divider class="my-3"></v-divider>
+        <v-divider class="my-3" />
         <v-row class="mx-2">
-          <v-col cols="12" sm="3"
-            >
+          <v-col
+            cols="12"
+            sm="3"
+          >
             <a href="https://www.oeaw.ac.at/acdh/acdh-ch-home" target="_blank">
-            <img
-              src="https://fundament.acdh.oeaw.ac.at/common-assets/images/acdh_logo.svg"
-              class="image"
-              alt="ACDH Logo"
-              style="max-width: 100%; height: auto"
-              title="ACDH Logo"
-          /></a></v-col>
+              <img
+                src="https://fundament.acdh.oeaw.ac.at/common-assets/images/acdh_logo.svg"
+                class="image"
+                alt="ACDH Logo"
+                style="max-width: 100%; height: auto"
+                title="ACDH Logo"
+              ></a>
+          </v-col>
           <v-col cols="12" sm="6">
             <div>
               <p>
                 ACDH-CH
-                <br />
-                Austrian Centre for Digital Humanities <br />
+                <br>
+                Austrian Centre for Digital Humanities <br>
                 and Cultural Heritage
-                <br />
+                <br>
                 Austrian Academy of Sciences
               </p>
               <p>
                 Sonnenfelsgasse 19,
-                <br />
+                <br>
                 1010 Vienna
               </p>
               <p>
                 T: +43 1 51581-2200
-                <br />
+                <br>
                 E: <a href="mailto:acdh@oeaw.ac.at">acdh@oeaw.ac.at</a>
               </p>
             </div>
@@ -127,105 +147,107 @@
                 <a
                   class="helpdesk-button"
                   href="mailto:acdh-helpdesk@oeaw.ac.at"
-                  >ASK US!</a
-                >
+                >ASK US!</a>
               </p>
             </div>
           </v-col>
         </v-row>
-        <v-divider class="my-3"></v-divider>
-          <v-row no-gutters>
-            <v-col cols=12 class="text-center">
+        <v-divider class="my-3" />
+        <v-row no-gutters>
+          <v-col cols="12" class="text-center">
             <a href="https://www.univie.ac.at/" target="_blank">
 
-            <img
-              class="footerlogo mr-2 ml-2"
-              alt="university_vienna_logo"
-              src="/UniVienna_logo.png"
-            /></a>
+              <img
+                class="footerlogo mr-2 ml-2"
+                alt="university_vienna_logo"
+                src="/UniVienna_logo.png"
+              ></a>
             <a href="https://www.oeaw.ac.at/oesterreichische-akademie-der-wissenschaften" target="_blank">
 
-            <img
-              class="footerlogo ml-2 mr-2"
-              alt="ÖAW logo"
-              src="/Oeaw_logo.png"
-            /></a>
+              <img
+                class="footerlogo ml-2 mr-2"
+                alt="ÖAW logo"
+                src="/Oeaw_logo.png"
+              ></a>
 
-             <a href="https://www.fwf.ac.at/" target="_blank">
+            <a href="https://www.fwf.ac.at/" target="_blank">
 
-            <img
-              class="footerlogo ml-2 mr-2"
-              alt="FWF logo"
-              src="/Fwf_logo.gif"
-            /></a>
+              <img
+                class="footerlogo ml-2 mr-2"
+                alt="FWF logo"
+                src="/Fwf_logo.gif"
+              ></a>
             <a href="https://www.khm.at/" target="_blank">
 
-            <img
-              class="footerlogo ml-2 mr-2"
-              alt="Kunst Historisches Museum logo"
-              src="/Khm_logo.png"
-            /></a>
+              <img
+                class="footerlogo ml-2 mr-2"
+                alt="Kunst Historisches Museum logo"
+                src="/Khm_logo.png"
+              ></a>
             <a href="https://www.univie.ac.at/cirdis/8-cirdis" target="_blank">
-            <img
-              class="footerlogo ml-2 mr-2"
-              alt="Cirdis logo"
-              src="/Cirdis_logo.png"
-            /></a>
-            </v-col>
+              <img
+                class="footerlogo ml-2 mr-2"
+                alt="Cirdis logo"
+                src="/Cirdis_logo.png"
+              ></a>
+          </v-col>
         </v-row>
-        <v-divider class="my-3"></v-divider>
+        <v-divider class="my-3" />
 
         <div class="text-center text-caption">
-          © Copyright OEAW |<nuxt-link to="/imprint">
-            Impressum/Imprint</nuxt-link
-          >
+          © Copyright OEAW |
+          <nuxt-link to="/imprint">
+            Impressum/Imprint
+          </nuxt-link>
         </div>
       </div>
     </div>
   </v-app>
 </template>
 <script>
-import querysearch from "~/components/querysearchNew.vue";
+import favorites from '@/mixins/favorites';
+import querysearch from '~/components/querysearchNew.vue';
+
 export default {
   components: {
     querysearch,
   },
+  mixins: [favorites],
   data() {
     return {
       drawer: false,
-      items: [{ heading: "Sample Queries" }].concat(
-        this.$store.state.app.menuitems
+      items: [{ heading: 'Sample Queries' }].concat(
+        this.$store.state.app.menuitems,
       ),
-      title: "",
+      title: '',
       windowTop: 0,
     };
   },
+  computed: {
+    hideOnMainPage() {
+      return this.$route.name != 'index' || this.windowTop >= 300;
+    },
+  },
   async mounted() {
     const content = await this.$api.Content.get_api_0_2_content_({});
-    this.$store.commit("app/setSiteName", content.body["site-name"]);
-    this.title = content.body["site-name"];
-    window.addEventListener("scroll", this.onScroll);
+    this.$store.commit('app/setSiteName', content.body['site-name']);
+    this.title = content.body['site-name'];
+    window.addEventListener('scroll', this.onScroll);
   },
   beforeDestroy() {
-    window.removeEventListener("scroll", this.onScroll);
-  },
-  head() {
-    return { title: this.title };
+    window.removeEventListener('scroll', this.onScroll);
   },
   methods: {
     onScroll(e) {
-      this.windowTop =
-        window.top.scrollY; /* or: e.target.documentElement.scrollTop */
+      this.windowTop = window.top.scrollY; /* or: e.target.documentElement.scrollTop */
     },
     clickOnItem(item) {
-      this.$store.commit("app/closeQueryDrawer");
-      this.$store.commit("app/setSelectedFilterClass", item.systemClass);
+      this.$store.commit('app/closeQueryDrawer');
+      this.$store.commit('app/setSelectedFilterClass', item.systemClass);
     },
   },
-  computed: {
-    hideOnMainPage() {
-      return this.$route.name != "index" || this.windowTop >= 300;
-    },
+  head() {
+    return { title: this.title };
   },
 };
 </script>
@@ -271,6 +293,7 @@ a.helpdesk-button:focus {
   color: #fff;
   text-decoration: none;
 }
+
 a.helpdesk-button {
   display: block;
   background-color: #fff;

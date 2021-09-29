@@ -30,6 +30,7 @@
     "nuxt-leaflet": "0.0.22",
     "swagger-client": "^3.10.12",
     "typeface-roboto": "^1.1.13",
+    "vue-cookie": "^1.1.4",
     "vue-json-viewer": "^2.2.18",
     "vuetify": "^2.3.5"
   },

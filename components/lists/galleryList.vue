@@ -1,17 +1,20 @@
 <template>
   <div>
+
     <div v-if="!loading" class="mt-15 mx-5 gallery-columns" :style="cssVars">
       <div class="gallery-column" v-for="(item, index) in items" :key="index">
         <div class="gallery-content">
           <p class="text-center">{{ item.features[0].properties.title }}</p>
 
-            <v-img
-              class="ma-3"
-              height="100%"
-              :src="demoImageLinks[[Math.floor(Math.random()*demoImageLinks.length)]]"
-              alt="IMAGE"
-            />
-          </div>
+          <v-img
+            class="ma-3"
+            height="100%"
+            :src="demoImageLinks[[Math.floor(Math.random()*demoImageLinks.length)]]"
+            alt="IMAGE"
+          />
+
+        </div>
+        <favorite-icon :id="id(item)"></favorite-icon>
         <nuxt-link
           :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}`"
         >
@@ -37,20 +40,25 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import {mapGetters} from "vuex";
+import favorites from "@/mixins/favorites.js";
+import favoriteIcon from "@/components/FavoriteIcon.vue";
 
 export default {
   props: {
     filter: {
       type: Object,
-      default: () => {},
+      default: () => {
+      },
     },
   },
+  components:{favoriteIcon},
+  mixins: [favorites],
   async fetch() {
     this.loading = true;
     window.scrollTo(0, 0);
 
-    const { sortBy, sortDesc, page, itemsPerPage } = this.options;
+    const {sortBy, sortDesc, page, itemsPerPage} = this.options;
     // eslint-disable-next-line no-underscore-dangle
     const p = await this.$api.Entities.get_api_0_2_query_({
       limit: itemsPerPage,
@@ -106,6 +114,9 @@ export default {
     },
   },
   methods: {
+    id(item) {
+      return item.features[0]['@id'].split('/').splice(-1)[0];
+    },
     getValueFromType(item, type) {
       if (!item.features[0].types) {
         return "-";
@@ -169,6 +180,7 @@ export default {
   break-inside: avoid-column; /* IE 11 */
   position: relative;
 }
+
 .gallery-content {
   position: relative;
   padding-bottom: 20px;

@@ -27,7 +27,8 @@
                 <p class="ma-0 pa-0">
                   {{ item.features[0].properties.title }}
                 </p>
-                <p class="text-caption pa-0 ma-0">
+                <favorite-icon class="float-right" :id="id(item)" ></favorite-icon>
+                <p class="text-caption pa-0 ma-0" v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Artifact')">
                   {{ getFirstTypeByKeyword(item.features[0].types, 'Artifact').label }}
                   <span
                     v-if="!!getFirstTypeByKeyword(item.features[0].types,'Artifact').subtype"
@@ -82,6 +83,7 @@
                 <v-card-text class="text-body-1">
                   Category of Authenticity:
                   <nuxt-link
+                    v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity')"
                     :to="`/detaillist?codes=artifact&type_id=${getFirstTypeByKeyword(item.features[0].types,'Category of Authenticity').identifier.split(';').splice(-1)[0]}`"
                   >
                     {{ getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity').label }}
@@ -239,6 +241,9 @@ export default {
     },
   },
   methods: {
+    id(item){
+      return item.features[0]['@id'].split('/').splice(-1)[0]
+    },
     getValueFromType(item, type) {
       if (!item.features[0].types) {
         return '-';
@@ -252,7 +257,11 @@ export default {
     getFirstTypeByKeyword(types, keyword) {
       const type = types.find((x) => x.hierarchy.split(' > ')[0] === keyword);
 
+      if(type === undefined)
+       return;
+
       [type.supertype, type.subtype] = type.hierarchy.split(' > ');
+
       return type;
     },
     getOrderedTypes(types) {
