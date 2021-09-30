@@ -118,10 +118,10 @@ export default {
   bottom: 4vw;
   right: 0;
   left: 0;
-  margin: auto;
-  display: block;
+  margin:auto;
 }
 .block{
   display: block;
+  width: 100%;
 }
 </style>
