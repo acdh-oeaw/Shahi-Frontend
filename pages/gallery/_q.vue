@@ -1,5 +1,6 @@
 <template>
   <div>
+    <navigation-buttons></navigation-buttons>
     <gallery :filter="query" />
 
   </div>
