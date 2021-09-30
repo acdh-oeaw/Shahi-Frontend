@@ -1,30 +1,29 @@
 <template>
 
-    <div style="height: 95vh">
-      <v-layout column justify-center align-center>
-        <div class="text-center splashtext pa-5" style="z-index:401" :class="{ closed: closed}">
-            <div >
-              <p class="text-h4 text-sm-h2">
-                Shahi Kingdoms Database
-              </p>
-              <v-expand-transition>
+  <div style="height: 95vh">
+    <v-layout column justify-center align-center>
+      <div class="text-center splashtext pa-5" style="z-index:401" :class="{ closed: closed}">
+        <div>
+          <p class="text-h4 text-sm-h2">
+            Shahi Kingdoms Database
+          </p>
+          <v-expand-transition>
 
-              <div v-if="!closed">
+            <div v-if="!closed">
               <p class="text-body-1 ma-sm-auto mt-10" style="max-width:1500px">
-                The goal of the Shahi project is--for the first time--to define a narrative cultural history of the
-                Shahi kingdoms which played a pivotal role in the history of Central, Inner, and South Asia, notably in
-                the history of later Buddhist art and the formation of Islamic art. The project examines how exchanges
-                of objects, technologies, and ideas combined with continuous mobility across the vast network of
-                transnational trade routes, religious institutions, and mercantile sites enabled a distinctive visual
-                culture to evolve and flourish throughout the Shahi kingdoms, despite the simultaneous expansion of
-                successive Muslim armies as well as the Tibetan empire in the northeast. This research considers
-                political, economic, and cultural developments in the region in relation to major--often
-                interconnected--events like climate change and shifts in political alliances which resulted in changes
-                to the centuries-old transnational communication routes.
-
-
-                <br>
-                <br>
+                The Shahi Kingdoms Database presents comprehensive primary source material--archaeological sites,
+                artifacts, coins, inscriptions--for the Shahi kingdoms (c. 7th-10th centuries) which played a pivotal
+                role in the history of Central, Inner, and South Asia. The primary source material records are
+                cross-referenced with an interactive geo-referenced map, bibliographic references, and digital
+                scientific articles.
+              </p>
+              <p class="text-body-1  my-10 mx-auto" style="max-width:1500px">
+                The database is an initiative of the interdisciplinary Austrian Science Fund (FWF) project P-31246
+                ‘Cultural Formation and Transformation: Shahi Art and Architecture from Afghanistan to the West Tibetan
+                Frontier at the Dawn of the Islamic Era’ in cooperation with technical experts at the Austrian Academy
+                of Sciences’ Austrian Centre for Digital Humanities and Cultural Heritage (ACDH-CH) and cartographers at
+                the University of Vienna’s Department of Geography and Regional Research. It is co-financed by the FWF
+                Shahi project, Austrian Archaeological Institute, and Holzhausen-Legat.
               </p>
               <v-row class="mx-3 mx-sm-15">
                 <v-col>
@@ -33,13 +32,8 @@
                   </ImageButton>
                 </v-col>
                 <v-col>
-                  <ImageButton to="/list?codes=artifact" icon="$artifact">
+                  <ImageButton to="/information" icon="$artifact">
                     Enter Database
-                  </ImageButton>
-                </v-col>
-                <v-col>
-                  <ImageButton to="/information" icon="mdi-information-variant">
-                    Read More
                   </ImageButton>
                 </v-col>
                 <v-col>
@@ -49,22 +43,22 @@
                 </v-col>
               </v-row>
             </div>
-              </v-expand-transition>
-              <div v-if="closed" style="position:absolute; left:0; top:0; right:0;bottom:0;" @click="closed = !closed" />
-
-            </div>
+          </v-expand-transition>
+          <div v-if="closed" style="position:absolute; left:0; top:0; right:0;bottom:0;" @click="closed = !closed"/>
 
         </div>
-      </v-layout>
-      <div class="bgmap">
-        <qmap
-          :class="{ 'darkened': !closed}"
-          v-if="!loading"
-          :geojsonitems="items"
-          :options="{ zoomControl: false }"
-        />
+
       </div>
+    </v-layout>
+    <div class="bgmap">
+      <qmap
+        :class="{ 'darkened': !closed}"
+        v-if="!loading"
+        :geojsonitems="items"
+        :options="{ zoomControl: false }"
+      />
     </div>
+  </div>
 
 </template>
 
@@ -137,7 +131,7 @@ html {
 
 }
 
-.darkened{
+.darkened {
   filter: brightness(85%);
 
 }
