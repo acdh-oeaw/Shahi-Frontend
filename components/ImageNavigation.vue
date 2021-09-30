@@ -12,7 +12,6 @@
       >
         <v-col
           cols="12"
-          sm="6"
           class="d-flex align-center align-sm-start justify-center justify-sm-end "
         >
           <div
@@ -23,20 +22,14 @@
             </p>
           </div>
         </v-col>
-        <v-col cols="12">
+        <v-col cols="12" sm="6" >
           <ImageButton :to="{'name':'index','path':'/','params':{'showMap':true}}" icon="mdi-map-marker">
-            Discover the Kindoms
+            Discover the Map
           </ImageButton>
         </v-col>
-
         <v-col cols="12" sm="6">
           <ImageButton to="/list?codes=artifact" icon="$artifact">
-            Enter Database
-          </ImageButton>
-        </v-col>
-        <v-col cols="12" sm="6">
-          <ImageButton to="/team" icon="mdi-account-group">
-            Meet the Project Team
+            Search the Database
           </ImageButton>
         </v-col>
       </v-row>
@@ -116,7 +109,7 @@ export default {
 .navigation-btns {
   max-width: 600px;
   position: absolute;
-  bottom: 4vw;
+  bottom: 6vw;
   right: 0;
   left: 0;
   display: block;
