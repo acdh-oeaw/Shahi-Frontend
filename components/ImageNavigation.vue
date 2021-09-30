@@ -118,7 +118,9 @@ export default {
   bottom: 4vw;
   right: 0;
   left: 0;
-  margin:auto;
+  display: block;
+  margin: 0 auto;
+
 }
 .block{
   display: block;
