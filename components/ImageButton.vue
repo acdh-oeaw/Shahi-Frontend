@@ -7,8 +7,8 @@
     <v-icon v-if="icon" class="btn-icon mb-3" size="140">
       {{ icon }}
     </v-icon>
-    <div style="height: 100%; width: 100%" class="d-flex align-end justify-end">
-      <p class="d-flex align-start  text-subtitle-1">
+    <div style="height: 100%; width: 100%;" class="d-flex align-end justify-end">
+      <p class="text-h6 pa-0 ma-0">
         <slot />
       </p>
     </div>
@@ -39,7 +39,7 @@ export default {
   left: 3%;
   position: absolute;
 
-  opacity: 0.3 !important;
+  opacity: 0.2 !important;
   width: 130px;
   transition: all 100ms linear;
 }
@@ -50,7 +50,7 @@ export default {
 }
 
 .navigation-btn:hover .btn-icon{
-  opacity: 0.5 !important;
+  opacity: 0.4 !important;
 }
 
 .navigation-btn:hover {
