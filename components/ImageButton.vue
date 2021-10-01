@@ -5,14 +5,17 @@
     @click="$emit('click')"
   >
     <div style="position: relative; width: 100%; height: 100%">
-    <v-icon v-if="icon" class="btn-icon" size="140">
+      <div class="btn-icon" v-if="icon">
+        <v-icon  size="140">
       {{ icon }}
-    </v-icon>
-    <div style="height: 100%; width: 100%;" class="d-flex align-end justify-end">
-      <p class="text-h6 pa-0 ma-0">
-        <slot />
-      </p>
-    </div>
+      </v-icon>
+      </div>
+
+      <div style="height: 100%; width: 100%;" class="d-flex align-end justify-end">
+        <p class="text-h6 pa-0 ma-0">
+          <slot/>
+        </p>
+      </div>
     </div>
   </v-btn>
 </template>
@@ -37,7 +40,7 @@ export default {
 
 }
 
-.btn-icon{
+.btn-icon {
   left: 3%;
   position: absolute;
   top: -27px;
@@ -45,13 +48,14 @@ export default {
   width: 130px;
   transition: all 100ms linear;
 }
+
 .navigation-btn >>> .v-btn__content {
   position: relative;
   max-width: 350px;
   height: 100%;
 }
 
-.navigation-btn:hover .btn-icon{
+.navigation-btn:hover .btn-icon {
   opacity: 0.4 !important;
 }
 
