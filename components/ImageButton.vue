@@ -4,13 +4,15 @@
     class="navigation-btn"
     @click="$emit('click')"
   >
-    <v-icon v-if="icon" class="btn-icon mb-3" size="140">
+    <div style="position: relative; width: 100%; height: 100%">
+    <v-icon v-if="icon" class="btn-icon" size="140">
       {{ icon }}
     </v-icon>
     <div style="height: 100%; width: 100%;" class="d-flex align-end justify-end">
       <p class="text-h6 pa-0 ma-0">
         <slot />
       </p>
+    </div>
     </div>
   </v-btn>
 </template>
@@ -38,7 +40,7 @@ export default {
 .btn-icon{
   left: 3%;
   position: absolute;
-
+  top: -27px;
   opacity: 0.2 !important;
   width: 130px;
   transition: all 100ms linear;
