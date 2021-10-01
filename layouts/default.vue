@@ -76,7 +76,10 @@
       </v-app-bar>
     </v-expand-transition>
     <v-main>
-      <nuxt />
+      <v-expand-transition>
+      <navigation-buttons v-if="['list-q','detaillist-q','map-q','gallery-q'].includes($route.name)"></navigation-buttons>
+      </v-expand-transition>
+        <nuxt />
     </v-main>
     <div class="grey lighten-3 mt-15">
       <div style="max-width: 1600px" class="ma-auto">

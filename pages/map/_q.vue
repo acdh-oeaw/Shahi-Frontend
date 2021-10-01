@@ -1,7 +1,6 @@
 <template>
   <div>
-    <navigation-buttons></navigation-buttons>
-    <maplist :filter="query" />
+de    <maplist :filter="query" />
   </div>
 </template>
 

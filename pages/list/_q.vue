@@ -1,6 +1,5 @@
 <template>
   <div>
-    <navigation-buttons></navigation-buttons>
     <list :filter="query" />
 
   </div>
