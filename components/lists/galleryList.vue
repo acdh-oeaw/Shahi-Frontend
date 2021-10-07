@@ -88,9 +88,9 @@ export default {
       totalItems: 0,
       itemIndex: [],
       demoImageLinks: [
-        'http://localhost:8080/iiif/images/shahi/1/1.jp2/full/400,/0/default.png',
-        'http://localhost:8080/iiif/images/shahi/2/1.jp2/full/400,/0/default.png',
-        'http://localhost:8080/iiif/images/shahi/3/1.jp2/full/400,/0/default.png',
+        'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/1/1.jp2/full/400,/0/default.png',
+        'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/2/1.jp2/full/400,/0/default.png',
+        'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/3/1.jp2/full/400,/0/default.png',
       ],
     };
   },
