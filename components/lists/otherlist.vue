@@ -21,7 +21,7 @@
           >
             <v-hover v-slot="{hover}">
               <v-card-title
-                class="artifact-title primary darken-2 d-block white--text"
+                class="artifact-title secondary darken-3 d-block white--text"
                 :class="hover ? 'lighten-1' : ''"
               >
                 <p class="ma-0 pa-0">
@@ -107,7 +107,7 @@
                 >
                   <v-card class="mb-5" outlined>
                     <v-card-title
-                      class="text-subtitle-2 justify-center primary lighten-1"
+                      class="text-subtitle-2 justify-center secondary"
                     >
                       {{ typeGroup[0].type }}
                     </v-card-title>
