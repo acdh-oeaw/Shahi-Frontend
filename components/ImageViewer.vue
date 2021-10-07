@@ -1,18 +1,19 @@
 <template>
   <div>
-    <div class="d-flex flex-column  align-start">
+    <div class="">
       <v-img
+        class="white shadow scale clickable"
         contain
-        max-width="100%"
-        max-height="700px"
+        max-width="450px"
         :src="`https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${$route.params.id%2 +1}/1.jp2/full/500,/0/default.png`"
+        @click="viewMode=true;"
       />
       <v-btn
-        class="pa-0"
+        class="ma-auto mt-3 pa-0"
         text
         @click="viewMode=true;"
       >
-        more images <v-icon>mdi-magnify-plus</v-icon>
+        more images
       </v-btn>
     </div>
     <client-only>
@@ -90,7 +91,7 @@ html, body {
 .wrapper {
   height: 100vh !important;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgb(0, 0, 0);
   position: fixed;
   top: 0;
   left: 0;
@@ -143,4 +144,20 @@ html, body {
 
 }
 
+.shadow{
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 0 20px 20px 1px rgba(0, 0, 0, 0.2);
+}
+
+.scale{
+  transition: all ease 200ms;
+}
+
+.scale:hover{
+  transform: scale(1.01);
+}
+
+.clickable{
+  cursor: pointer;
+}
 </style>
