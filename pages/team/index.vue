@@ -1,5 +1,5 @@
 <template>
-  <v-container class="pt-10">
+  <v-container class="pt-10 page-content">
     <h1 class="text-h4 pb-5">
       Meet the Project Team
     </h1>

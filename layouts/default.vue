@@ -12,11 +12,11 @@
       <v-list dense class="grey lighten-4">
         <v-list-item
           :to="{
-            &quot;name&quot;: &quot;list-q&quot;,
-            &quot;query&quot;: {
-              &quot;entities&quot;: getFavorites()
+            'name': $route.name.startsWith('data-') ? $route.name : 'data-list-q',
+            'query': {
+              'entities': getFavorites()
             }}"
-          @click="$store.commit(&quot;app/closeQueryDrawer&quot;)"
+          @click="$store.commit('app/closeQueryDrawer')"
         >
           <v-list-item-action>
             <v-icon>mdi-star</v-icon>
@@ -76,9 +76,7 @@
       </v-app-bar>
     </v-expand-transition>
     <v-main>
-      <v-expand-transition>
-      <navigation-buttons v-if="['list-q','detaillist-q','map-q','gallery-q'].includes($route.name)"></navigation-buttons>
-      </v-expand-transition>
+
         <nuxt />
     </v-main>
     <div class="grey lighten-3 mt-15">

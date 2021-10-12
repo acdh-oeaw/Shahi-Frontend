@@ -4,7 +4,7 @@
     "text": "All Artifacts",
     "systemClass":"artifact",
     "target": {
-      "name": "detaillist-q",
+      "name": "data-detaillist-q",
       "query": {
         "codes": "artifact"
       }
@@ -15,7 +15,7 @@
     "text": "Stationary Structures",
     "systemClass":"artifact",
     "target": {
-      "name": "list-q",
+      "name": "data-list-q",
       "query": {
         "codes": "artifact",
         "type_id": ["1095"]
@@ -27,7 +27,7 @@
     "text": "Portable Objects",
     "systemClass":"artifact",
     "target": {
-      "name": "detaillist-q",
+      "name": "data-detaillist-q",
       "query": {
         "codes": "artifact",
         "type_id": "118"
@@ -39,7 +39,7 @@
     "text": "Coins",
     "systemClass":"artifact",
     "target": {
-      "name": "detaillist-q",
+      "name": "data-detaillist-q",
       "query": {
         "codes": "artifact",
         "type_id": 108
@@ -51,7 +51,7 @@
     "text": "Inscriptions",
     "systemClass":"artifact",
     "target": {
-      "name": "list-q",
+      "name": "data-list-q",
       "query": {
         "codes": "artifact",
         "type_id": "3"

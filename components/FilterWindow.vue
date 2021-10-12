@@ -108,7 +108,7 @@
                         filterElements[selectedClass].items[selected].type ===
                           'multiple'
                       "
-                      nogutters
+                      no-gutters
                     >
                       <v-col
                         v-for="(item) in searchedTypes"
@@ -434,7 +434,8 @@ export default {
       );
 
       this.open = false;
-      const name = 'detaillist-q';
+      let name = 'data-detaillist-q';
+      if(this.$route.name.startsWith('data-')) name = this.$route.name;
 
       this.$router.push({
         name,

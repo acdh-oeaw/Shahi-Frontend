@@ -2,7 +2,7 @@
   <v-fade-transition>
     <div
       v-if="
-        ['list-q', 'map-q', 'detaillist-q', 'gallery-q'].includes(
+        ['data-list-q', 'data-map-q', 'data-detaillist-q', 'data-gallery-q'].includes(
           $route.name
         )
       "
