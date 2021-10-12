@@ -13,16 +13,30 @@
               </p>
               <p v-else class="text--secondary mt-n3">
                 <span v-if="item.features[0].when.timespans[0].start.earliest">
-                  from {{ item.features[0].when.timespans[0].start.earliest
-                    .split("-")[0]
-                    .replace(/^0+/, "") }}</span>
+                  from {{
+                    item.features[0].when.timespans[0].start.earliest
+                      .split("-")[0]
+                      .replace(/^0+/, "")
+                  }}</span>
                 <span v-if="item.features[0].when.timespans[0].end.earliest">
-                  to {{ item.features[0].when.timespans[0].end.earliest
-                    .split("-")[0]
-                    .replace(/^0+/, "") }}</span>
+                  to {{
+                    item.features[0].when.timespans[0].end.earliest
+                      .split("-")[0]
+                      .replace(/^0+/, "")
+                  }}</span>
               </p>
               <p v-if="item.features[0].description">
                 {{ item.features[0].description[0].value }}
+              </p>
+              <p
+                class="primary--text go-to-map-button"
+                text
+                @click="scrollMeTo('map')"
+              >
+                Discover on Map
+                <v-icon class="ml-n1">
+                  mdi-chevron-right
+                </v-icon>
               </p>
             </v-sheet>
           </v-col>
@@ -175,6 +189,14 @@ export default {
     this.closeAll();
   },
   methods: {
+    scrollMeTo(refName) {
+      const el = this.$el.getElementsByClassName(refName)[0];
+      const y = el.getBoundingClientRect().top - 100;
+
+      if (el) {
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    },
     async fetchRelated() {
       // eslint-disable-next-line no-restricted-syntax
       for (const id of this.item.features[0].relations) {
@@ -211,13 +233,25 @@ export default {
 </script>
 
 <style>
-.page-content{
+.page-content {
   max-width: 1200px;
   margin: auto;
 }
 
-.map{
+.map {
   margin-top: 120px;
 }
 
+.go-to-map-button {
+  transition: all ease 200ms;
+  cursor: pointer;
+}
+
+.go-to-map-button:hover {
+  opacity: 0.8;
+}
+
+.go-to-map-button:hover > .v-icon {
+  transform: translateX(5px);
+}
 </style>
