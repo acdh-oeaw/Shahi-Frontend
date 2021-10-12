@@ -90,7 +90,6 @@ export default {
       demoImageLinks: [
         'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/1/1.jp2/full/400,/0/default.png',
         'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/2/1.jp2/full/400,/0/default.png',
-        'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/3/1.jp2/full/400,/0/default.png',
       ],
     };
   },
