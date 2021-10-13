@@ -8,13 +8,9 @@
         :src="`https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${$route.params.id%2 +1}/1.jp2/full/500,/0/default.png`"
         @click="viewMode=true;"
       />
-      <v-btn
-        class="ma-auto mt-3 pa-0"
-        text
-        @click="viewMode=true;"
-      >
-        more images
-      </v-btn>
+      <p class="mt-3 primary--text go-to-map-button" text @click="viewMode=true">All Images
+        <v-icon class="ma-n1">mdi-chevron-right</v-icon>
+      </p>
     </div>
     <client-only>
       <div v-if="viewMode" class="wrapper">
