@@ -1,6 +1,6 @@
 <template>
   <v-img
-    :height="$vuetify.breakpoint.xs ? '98vh' : '100%'"
+    :height="$vuetify.breakpoint.xs ? '50vh' : '100%'"
     style="background: linear-gradient(to bottom, #727076 0%, #dbdad8 100%);"
     :src="$vuetify.breakpoint.xs ? '' : '/header.png'"
     class="block"
@@ -28,7 +28,7 @@
           </ImageButton>
         </v-col>
         <v-col cols="12" sm="6">
-          <ImageButton to="/list?codes=artifact" icon="$artifact">
+          <ImageButton to="/data/list?codes=artifact" icon="$artifact">
             Search the Database
           </ImageButton>
         </v-col>
