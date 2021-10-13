@@ -1,7 +1,7 @@
 <template>
   <div>
     <ImageNavigation />
-    <v-container class="text-justify pa-10">
+    <v-container class="text-justify pa-10 page-content">
       <h1 class="text-h2 text-left mb-10">
         Shahi Kingdoms Database
       </h1>
@@ -38,111 +38,152 @@
         chronologies, where available. However, for the category of portable objects, the database is structured
         according to material. The corpus of visual and material culture attributed to the Shahi period encompasses:
       </p>
+      <div class="d-flex flex-column flex-sm-row  justify-space-between align-center data-base-element">
+        <div>
+          <p class="text-h6">
+            (1) Archaeological sites
+          </p>
+          <p class="text-subtitle-1">
+            1.a. Stationary structures
+          </p>
+          <ul class="text-body-2">
+            <li>Constructed</li>
+            <li>Rock-carved</li>
+          </ul>
+          <p class="text-subtitle-1">
+            1.b. Stationary objects
+          </p>
+          <ul class="text-body-2">
+            <li>Cult object</li>
+            <li>Architectural element</li>
+            <li>Architectural decoration</li>
+          </ul>
+          <p
+            class="primary--text go-to-map-button mt-5"
+            @click="$router.push('/data/list?codes=artifact&type_id=1095')"
+          >
+            Search for sites in the database
+            <v-icon class="ml-n1 mb-1">
+              mdi-chevron-right
+            </v-icon>
+          </p>
+        </div>
+        <div class="database-image">
+          <v-img
+            class="elevation-3"
+            width="500px"
+            height="500px"
+            max-height="80vw"
+            max-width="80vw"
+            src="https://images.unsplash.com/photo-1554303486-cb4b90a27751?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
+          />
+          <div class="database-image-box" />
+        </div>
+      </div>
+      <div class="data-base-element d-flex flex-column flex-sm-row-reverse   justify-space-between align-center">
+        <div class="ml-15">
+          <p class="text-h6 mt-15">
+            (2) Portable objects
+          </p>
+          <p class="text-body-1">
+            All objects have been determined to be authentic based on our criteria for identifying
+            authentic objects (see “Categories of Authenticity” below).
+          </p>
+          <p class="text-subtitle-1">
+            2.a. Statue
+          </p>
+          <ul class="text-body-2">
+            <li>Metal</li>
+            <li>Clay-based</li>
+            <li>Stone</li>
+            <li>Wood</li>
+          </ul>
+          <p class="text-subtitle-1">
+            2.b. Painting
+          </p>
+          <p class="text-subtitle-1">
+            2.c. Coins and medals
+          </p>
+          <p v-if="false" class="text-body-2">
+            The largest and most significant category of artifacts are the coins struck in various
+            mints throughout the Shahi kingdoms. They provide the chronological and political framework for the Shahi
+            period. With their images and inscriptions, they give insight into the self-concept of their issuers. In
+            addition, the technical features of production have to be analyzed; this concerns the production of flans, dies,
+            striking methods, metrology, and metal composition. The extremely rich deposits of copper (Mes Aynak) and silver
+            (Panjshir) to which the Shahis had access constitute important resources for their coinage. However, especially
+            in the early period of the Turk Shahis (7th to 8th century), access to silver must have been temporarily
+            interrupted, because some issues show a considerable sign of debasement. Metal analyses will help to better
+            understand this phenomenon. Furthermore, we have to analyze the circulation patterns. Some coins were only used
+            locally, while others circulated far beyond the borders of their issuing authority. Unfortunately, most of the
+            coins bear no mint signature and are not found in a documented archaeological context. However, recent
+            excavations like Tepe Narenj, Qol-e Tut, Mes Aynak, Barikot, and others will help give a clearer picture. This
+            concerns also the role of foreign money, like Sasanian drachms, Muslim dirhams, and copper coins, which
+            circulated within the Shahi kingdoms.
+          </p>
+          <p class="text-subtitle-1">
+            2.d. Jewelry
+          </p>
+          <p class="text-subtitle-1">
+            2.e. Utensil
+          </p>
+          <p
+            class="primary--text go-to-map-button mt-5"
+            @click="$router.push('/data/list?codes=artifact&type_id=118')"
+          >
+            Search for portable objects in the database
+            <v-icon class="ml-n1 mb-1">
+              mdi-chevron-right
+            </v-icon>
+          </p>
+        </div>
+        <div class="database-image">
+          <v-img
+            class="elevation-3"
+            width="500px"
+            height="500px"
+            max-height="80vw"
+            max-width="80vw"
+            src="https://images.unsplash.com/photo-1632851852839-b70a13715261?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"
+          />
+          <div class="database-image-box" />
+        </div>
+      </div>
+      <div class="data-base-element d-flex flex-column flex-sm-row align-sm-center">
+        <div class="mr-15">
+          <p class="text-h6 mt-15">
+            (3) Information carrier
+          </p>
+          <p class="text-subtitle-1">
+            3.a. Inscriptions
+          </p>
 
-      <p class="text-h6">
-        (1) Archaeological sites
-      </p>
-      <p class="text-subtitle-1">
-        1.a. Stationary structures
-      </p>
-      <ul class="text-body-2">
-        <li>Constructed</li>
-        <li>Rock-carved</li>
-      </ul>
-      <p class="text-subtitle-1">
-        1.b. Stationary objects
-      </p>
-      <ul class="text-body-2">
-        <li>Cult object</li>
-        <li>Architectural element</li>
-        <li>Architectural decoration</li>
-      </ul>
-      <p
-        class="primary--text go-to-map-button mt-5"
-        @click="$router.push('/data/list?codes=artifact&type_id=1095')"
-      >
-        Search for sites in the database
-        <v-icon class="ml-n1 mb-1">
-          mdi-chevron-right
-        </v-icon>
-      </p>
-
-      <p class="text-h6 mt-15">
-        (2) Portable objects
-      </p>
-      <p class="text-body-1">
-        All objects have been determined to be authentic based on our criteria for identifying
-        authentic objects (see “Categories of Authenticity” below).
-      </p>
-      <p class="text-subtitle-1">
-        2.a. Statue
-      </p>
-      <ul class="text-body-2">
-        <li>Metal</li>
-        <li>Clay-based</li>
-        <li>Stone</li>
-        <li>Wood</li>
-      </ul>
-      <p class="text-subtitle-1">
-        2.b. Painting
-      </p>
-      <p class="text-subtitle-1">
-        2.c. Coins and medals
-      </p>
-      <p class="text-body-2">
-        The largest and most significant category of artifacts are the coins struck in various
-        mints throughout the Shahi kingdoms. They provide the chronological and political framework for the Shahi
-        period. With their images and inscriptions, they give insight into the self-concept of their issuers. In
-        addition, the technical features of production have to be analyzed; this concerns the production of flans, dies,
-        striking methods, metrology, and metal composition. The extremely rich deposits of copper (Mes Aynak) and silver
-        (Panjshir) to which the Shahis had access constitute important resources for their coinage. However, especially
-        in the early period of the Turk Shahis (7th to 8th century), access to silver must have been temporarily
-        interrupted, because some issues show a considerable sign of debasement. Metal analyses will help to better
-        understand this phenomenon. Furthermore, we have to analyze the circulation patterns. Some coins were only used
-        locally, while others circulated far beyond the borders of their issuing authority. Unfortunately, most of the
-        coins bear no mint signature and are not found in a documented archaeological context. However, recent
-        excavations like Tepe Narenj, Qol-e Tut, Mes Aynak, Barikot, and others will help give a clearer picture. This
-        concerns also the role of foreign money, like Sasanian drachms, Muslim dirhams, and copper coins, which
-        circulated within the Shahi kingdoms.
-      </p>
-      <p class="text-subtitle-1">
-        2.d. Jewelry
-      </p>
-      <p class="text-subtitle-1">
-        2.e. Utensil
-      </p>
-      <p
-        class="primary--text go-to-map-button mt-5"
-        @click="$router.push('/data/list?codes=artifact&type_id=118')"
-      >
-        Search for portable objects in the database
-        <v-icon class="ml-n1 mb-1">
-          mdi-chevron-right
-        </v-icon>
-      </p>
-
-
-      <p class="text-h6 mt-15">
-        (3) Information carrier
-      </p>
-      <p class="text-subtitle-1">
-        3.a. Inscriptions
-      </p>
-
-      <p class="text-body-2">
-        Inscriptions that fit within the chronological and geographic parameters of the Shahi kingdoms offer a critical
-        primary source for the region’s cultural history. The inscriptions will be contextualized to the degree
-        possible.
-      </p>
-      <p
-        class="primary--text go-to-map-button mt-5"
-        @click="$router.push('/data/list?codes=artifact&type_id=3')"
-      >
-        Search for inscriptions in the database
-        <v-icon class="ml-n1 mb-1">
-          mdi-chevron-right
-        </v-icon>
-      </p>
+          <p class="text-body-2">
+            Inscriptions that fit within the chronological and geographic parameters of the Shahi kingdoms offer a critical
+            primary source for the region’s cultural history. The inscriptions will be contextualized to the degree
+            possible.
+          </p>
+          <p
+            class="primary--text go-to-map-button mt-5"
+            @click="$router.push('/data/list?codes=artifact&type_id=3')"
+          >
+            Search for inscriptions in the database
+            <v-icon class="ml-n1 mb-1">
+              mdi-chevron-right
+            </v-icon>
+          </p>
+        </div>
+        <div class="database-image">
+          <v-img
+            class="elevation-3"
+            width="500px"
+            height="500px"
+            max-height="80vw"
+            max-width="80vw"
+            src="https://images.pexels.com/photos/8719164/pexels-photo-8719164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          />
+          <div class="database-image-box" />
+        </div>
+      </div>
     </v-container>
   </div>
 </template>
@@ -156,3 +197,47 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.database-image{
+  position: relative;
+  max-width: 80vw;
+  max-height: 80vw;
+}
+.database-image>.v-image{
+  transition: all ease 200ms;
+  z-index: 5;
+}
+.database-image-box{
+  bottom: -20px;
+  top: 20px;
+  left: 20px;
+  right: -20px;
+  position: absolute;
+  background-color: #b7bf96;
+  transition: all ease 200ms;
+
+}
+.database-image:hover>.v-image{
+  transform: translateX(-2px) translateY(-3px);
+}
+.database-image:hover>.database-image-box{
+  transform: translateX(2px) translateY(3px);
+}
+
+.data-base-element{
+  margin-top: 70px;
+}
+.data-base-element p{
+  width: 500px;
+  max-width: 70vw;
+
+}
+ul{
+  margin-top: -15px;
+  margin-bottom: 10px;
+}
+.page-content{
+  overflow: hidden;
+}
+</style>
