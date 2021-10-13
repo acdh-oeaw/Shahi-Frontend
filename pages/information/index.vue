@@ -57,8 +57,17 @@
         <li>Architectural element</li>
         <li>Architectural decoration</li>
       </ul>
+      <p
+        class="primary--text go-to-map-button mt-5"
+        @click="$router.push('/data/list?codes=artifact&type_id=1095')"
+      >
+        Search for sites in the database
+        <v-icon class="ml-n1 mb-1">
+          mdi-chevron-right
+        </v-icon>
+      </p>
 
-      <p class="text-h6">
+      <p class="text-h6 mt-15">
         (2) Portable objects
       </p>
       <p class="text-body-1">
@@ -102,8 +111,18 @@
       <p class="text-subtitle-1">
         2.e. Utensil
       </p>
+      <p
+        class="primary--text go-to-map-button mt-5"
+        @click="$router.push('/data/list?codes=artifact&type_id=118')"
+      >
+        Search for portable objects in the database
+        <v-icon class="ml-n1 mb-1">
+          mdi-chevron-right
+        </v-icon>
+      </p>
 
-      <p class="text-h6">
+
+      <p class="text-h6 mt-15">
         (3) Information carrier
       </p>
       <p class="text-subtitle-1">
@@ -114,6 +133,15 @@
         Inscriptions that fit within the chronological and geographic parameters of the Shahi kingdoms offer a critical
         primary source for the region’s cultural history. The inscriptions will be contextualized to the degree
         possible.
+      </p>
+      <p
+        class="primary--text go-to-map-button mt-5"
+        @click="$router.push('/data/list?codes=artifact&type_id=3')"
+      >
+        Search for inscriptions in the database
+        <v-icon class="ml-n1 mb-1">
+          mdi-chevron-right
+        </v-icon>
       </p>
     </v-container>
   </div>
