@@ -283,7 +283,7 @@ td {
 
 .footerlogo {
   max-height: 53px;
-  max-width: 100%;
+  max-width: 70vw;
   top: 2px;
   position: relative;
 }
