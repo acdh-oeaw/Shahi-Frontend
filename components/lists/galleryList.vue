@@ -9,7 +9,8 @@
           <v-img
             class="ma-3"
             height="100%"
-            :src="demoImageLinks[[Math.floor(Math.random()*demoImageLinks.length)]]"
+            :src="demoImageLinks[id(item)%2]"
+            :lazy-src="demoThumbnailLinks[id(item)%2]"
             alt="IMAGE"
           />
 
@@ -90,6 +91,10 @@ export default {
       demoImageLinks: [
         'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/1/1.jp2/full/400,/0/default.png',
         'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/2/1.jp2/full/400,/0/default.png',
+      ],
+      demoThumbnailLinks: [
+        'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/1/1.jp2/full/200,/0/default.png',
+        'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/2/1.jp2/full/200,/0/default.png',
       ],
     };
   },

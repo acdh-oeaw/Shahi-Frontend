@@ -73,7 +73,8 @@
                 <v-img
 
                   max-width="100%"
-                  :src="demoImageLinks[[Math.floor(Math.random()*demoImageLinks.length)]]"
+                  :src="demoImageLinks[id(item)%2]"
+                  :lazy-src="demoThumbnailLinks[id(item)%2]"
                   alt="IMAGE"
                 />
               </v-card>
@@ -196,6 +197,10 @@ export default {
       demoImageLinks: [
         'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/1/1.jp2/full/500,/0/default.jpg',
         'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/2/1.jp2/full/500,/0/default.jpg',
+      ],
+      demoThumbnailLinks: [
+        'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/1/1.jp2/full/200,/0/default.jpg',
+        'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/2/1.jp2/full/200,/0/default.jpg',
       ],
       itemsPerPageOptions: [10, 20, 50, 100],
       totalItems: 0,

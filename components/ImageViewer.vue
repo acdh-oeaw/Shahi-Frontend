@@ -7,6 +7,8 @@
         max-width="450px"
         :src="`https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${$route.params.id%2 +1}/1.jp2/full/500,/0/default.png`"
         @click="viewMode=true;"
+        :lazy-src="`https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${$route.params.id%2 +1}/1.jp2/full/100,/0/default.png`"
+
       />
       <p class="mt-3 primary--text go-to-map-button" text @click="viewMode=true">All Images
         <v-icon class="ma-n1">mdi-chevron-right</v-icon>
