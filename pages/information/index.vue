@@ -1,7 +1,7 @@
 <template>
   <div>
     <ImageNavigation />
-    <v-container class="text-justify pa-10 page-content">
+    <div class="text-justify pa-10 page-content">
       <h1 class="text-h2 text-left mb-10">
         Shahi Kingdoms Database
       </h1>
