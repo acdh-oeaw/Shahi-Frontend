@@ -146,7 +146,7 @@
           />
         </div>
       </div>
-      <div class="data-base-element d-flex flex-column flex-sm-row align-sm-center">
+      <div class="d-flex flex-column flex-sm-row  justify-space-between align-center data-base-element">
         <div class="mr-15">
           <p class="text-h6 mt-15">
             (3) Information carrier
@@ -236,6 +236,8 @@ ul{
 }
 .page-content{
   overflow: hidden;
+  max-width: 1200px;
+
 }
 
 
