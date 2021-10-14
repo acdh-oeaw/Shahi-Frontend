@@ -77,7 +77,6 @@
             max-width="80vw"
             src="https://images.unsplash.com/photo-1554303486-cb4b90a27751?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
           />
-          <div class="database-image-box" />
         </div>
       </div>
       <div class="data-base-element d-flex flex-column flex-sm-row-reverse   justify-space-between align-center">
@@ -145,7 +144,6 @@
             max-width="80vw"
             src="https://images.unsplash.com/photo-1632851852839-b70a13715261?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"
           />
-          <div class="database-image-box" />
         </div>
       </div>
       <div class="data-base-element d-flex flex-column flex-sm-row align-sm-center">
@@ -181,7 +179,6 @@
             max-width="80vw"
             src="https://images.pexels.com/photos/8719164/pexels-photo-8719164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
           />
-          <div class="database-image-box" />
         </div>
       </div>
     </v-container>
@@ -207,22 +204,22 @@ export default {
 .database-image>.v-image{
   transition: all ease 200ms;
   z-index: 5;
+  position: relative;
 }
-.database-image-box{
-  bottom: -20px;
-  top: 20px;
-  left: 20px;
-  right: -20px;
+.database-image::before{
   position: absolute;
+  content: '';
+  inset: 0;
+  transform: translateX(20px) translateY(20px);
   background-color: #b7bf96;
-  transition: all ease 200ms;
-
+  transition: all ease-out 200ms;
 }
+
 .database-image:hover>.v-image{
   transform: translateX(-2px) translateY(-3px);
 }
-.database-image:hover>.database-image-box{
-  transform: translateX(2px) translateY(3px);
+.database-image:hover::before{
+  transform: translateX(22px) translateY(23px);
 }
 
 .data-base-element{
@@ -240,4 +237,6 @@ ul{
 .page-content{
   overflow: hidden;
 }
+
+
 </style>
