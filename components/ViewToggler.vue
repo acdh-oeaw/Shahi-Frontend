@@ -9,7 +9,9 @@
     >
       <v-btn-toggle
         v-model="view"
-
+        dense
+        color="black"
+        background-color="primary darken-2"
         class="hidden-sm-and-down"
       >
         <v-btn
