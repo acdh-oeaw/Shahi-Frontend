@@ -72,7 +72,6 @@
 
         <querysearch />
         <v-spacer />
-        <view-toggler />
       </v-app-bar>
     </v-expand-transition>
     <v-main>
