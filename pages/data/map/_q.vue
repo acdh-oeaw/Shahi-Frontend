@@ -1,6 +1,6 @@
 <template>
   <div>
-de    <maplist :filter="query" />
+    <maplist :filter="query" />
   </div>
 </template>
 
