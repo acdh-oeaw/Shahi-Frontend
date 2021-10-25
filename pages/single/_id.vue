@@ -2,10 +2,10 @@
   <v-sheet v-if="!loading">
     <v-sheet class="secondary darken-1 ">
       <div class="page-content pa-5 pa-sm-10">
-        <v-row no-gutters>
+        <v-row no-gutters class="d-flex justify-center align-center">
           <v-col cols="12" md="6" class="d-flex align-center">
             <v-sheet max-width="400px" color="transparent">
-              <p class="text-h3">
+              <p class="title-1">
                 {{ item.features[0].properties.title }}
               </p>
               <p v-if="types.Period" class="text-h5 text--secondary mt-n3">
@@ -40,7 +40,7 @@
               </p>
             </v-sheet>
           </v-col>
-          <v-col cols="12" md="6">
+          <v-col cols="12" md="6" class="d-flex justify-center">
             <ImageViewer />
           </v-col>
         </v-row>
