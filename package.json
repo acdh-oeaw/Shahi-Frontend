@@ -28,6 +28,7 @@
     "leaflet-iiif": "^3.0.0",
     "nuxt": "^2.13.0",
     "nuxt-leaflet": "0.0.22",
+    "sass-loader": "^10",
     "swagger-client": "^3.10.12",
     "typeface-roboto": "^1.1.13",
     "vue-cookie": "^1.1.4",
