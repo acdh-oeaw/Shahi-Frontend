@@ -40,7 +40,7 @@ export default {
   ** Global CSS
   */
   css: [
-    '~/css/main.css',
+    '~/css/main.scss',
     '@mdi/font/css/materialdesignicons.css',
     'typeface-roboto/index.css',
     'vue-json-viewer/style.css',
