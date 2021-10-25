@@ -1,0 +1,53 @@
+/* Page transisitions
+   https://nuxtjs.org/guides/features/transitions/#global-settings
+*/
+@import url("https://fonts.googleapis.com/css?family=Noto+Serif+Display:400,500,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap");
+@import "mixins.scss";
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
+}
+.page-enter,
+.page-leave-to {
+  opacity: 0;
+}
+
+/* Global Presets */
+
+html {
+  overflow: auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+$body-font-family : 'lato';
+$heading-font-family : 'Noto Serif Display';
+
+
+.title-1{
+  font-family: $heading-font-family;
+  font-size: 40px;
+  line-height: 110%;
+  @include md {
+    font-size: 60px;
+  }
+
+
+
+}
+.title-2{
+  font-family: $heading-font-family;
+  font-size: 30px;
+  margin-top: 2rem;
+  @include md {
+    font-size: 40px;
+  }
+}
+
+
+
