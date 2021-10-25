@@ -10,8 +10,8 @@
       <v-btn-toggle
         v-model="view"
         dense
-        color="black"
-        background-color="primary darken-2"
+        color="primary"
+        background-color="primary"
         class="hidden-sm-and-down"
       >
         <v-btn
