@@ -53,7 +53,6 @@
     </v-layout>
     <div class="bgmap">
       <qmap
-        v-if="!loading"
         :class="{ 'darkened': !closed}"
         :geojsonitems="items"
         :options="{ zoomControl: false }"
@@ -75,7 +74,6 @@ export default {
     return {
       items: [],
       body: 'loading...',
-      loading: true,
       closed: false,
     };
   },
@@ -87,15 +85,15 @@ export default {
   async mounted() {
     this.closed = this.$route.params.showMap;
     this.showContent = false;
+    const content = await this.$api.Content.get_api_0_2_content_({});
+
     const p = await this.$api.Entities.get_api_0_2_code__code_({
-      limit: 100,
+      limit: 500,
       show: ['geometry'],
       code: 'artifact',
     });
     this.items = p.body.results;
-    const content = await this.$api.Content.get_api_0_2_content_({});
     this.body = content.body.intro;
-    this.loading = false;
   },
 
 };
