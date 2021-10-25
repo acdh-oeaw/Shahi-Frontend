@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="elevation-1 d-flex align-center justify-space-between  nav secondary lighten-1">
+    <div class="elevation-1 d-flex align-center justify-space-between  nav secondary darken-2">
       <div>
         <div
-          class="text-caption d-inline-block navigation-item"
-          v-for="(item,index) in items"
+          v-for="(item,index) in navBarItems"
           :key="index"
+          class="text-caption d-inline-block navigation-item"
           @click="clicked(item)"
         >
           {{ item.text }}
@@ -18,25 +18,94 @@
           Favorites
         </div>
       </div>
-      <div class="blue">
-        <view-toggler class="float-right"></view-toggler>
+      <div>
+        <view-toggler class="float-right mr-3" />
       </div>
     </div>
 
-    <nuxt-child></nuxt-child>
+    <collection-header v-if="$route.query.m == 'c'" :items="items" />
+
+    <nuxt-child :items="items" :totalItems="totalItems" :not-found="notFound" />
   </div>
 </template>
 
 <script>
-import favorites from "@/mixins/favorites";
+import favorites from '@/mixins/favorites';
+import { mapGetters } from 'vuex';
 
 export default {
-  name: "data.vue",
+  name: 'DataVue',
   mixins: [favorites],
+  async fetch() {
+    this.loading = true;
+    const {
+      sortBy, sortDesc, page, itemsPerPage,
+    } = this.options;
+
+    try {
+      // eslint-disable-next-line no-underscore-dangle
+      const p = await this.$api.Entities.get_api_0_2_query_({
+        limit: itemsPerPage,
+        first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
+        filter: this.query,
+        column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
+        sort: sortDesc[0] ? 'desc' : 'asc',
+      });
+      // eslint-disable-next-line prefer-destructuring
+      this.items = [];
+
+      this.items = p.body.results;
+      this.notFound = false;
+
+      this.itemIndex = p.body.pagination.index;
+      this.totalItems = p.body.pagination.entities;
+
+    } catch (err) {
+      console.log(err);
+      this.notFound = true;
+    }
+    this.loading = false;
+  },
   data() {
     return {
-      items: this.$store.state.app.menuitems,
+      navBarItems: this.$store.state.app.menuitems,
+      items: [],
+      loading: true,
+      notFound: false,
+      totalItems: 0,
+      itemIndex: [],
+      query: {},
     };
+  },
+  watch: {
+    '$route.query': {
+      handler(s) {
+        console.log('route');
+        if (this.options.page === 1) this.itemIndex = [];
+        this.query = s;
+      },
+      immediate: true,
+      deep: true,
+    },
+    options: {
+      handler(o, n) {
+        console.log('options');
+
+        // if (o.sortBy !== n.sortBy || o.sortDesc !== n.sortDesc) this.itemIndex = [];
+        // this.$fetch();
+      },
+      deep: true,
+    },
+    query: {
+      handler() {
+        console.log('query');
+
+        // this.itemIndex = [];
+        // this.options.page = 1;
+        this.$fetch();
+      },
+      deep: true,
+    },
   },
   methods: {
     clicked(item) {
@@ -56,7 +125,22 @@ export default {
       });
     },
   },
-}
+  computed: {
+    options: {
+      get() {
+        return {
+          sortBy: [],
+          sortDesc: [],
+          page: this.$route.query.page || 1,
+          itemsPerPage: this.$route.query.itemsperpage || 10,
+        };
+      },
+    },
+    ...mapGetters('app', [
+      'getSortColumnByPath',
+    ]),
+  },
+};
 </script>
 
 <style scoped>

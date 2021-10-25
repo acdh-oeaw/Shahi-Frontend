@@ -1,10 +1,12 @@
 <template>
   <div>
-
-    <div v-if="!loading" class="mt-15 mx-5 gallery-columns" :style="cssVars">
-      <div class="gallery-column" v-for="(item, index) in items" :key="index">
+    <div v-if="notFound">No records found.</div>
+    <div v-else-if="!loading" class="mt-15 mx-5 gallery-columns" :style="cssVars">
+      <div v-for="(item, index) in items" :key="index" class="gallery-column">
         <div class="gallery-content">
-          <p class="text-center">{{ item.features[0].properties.title }}</p>
+          <p class="text-center">
+            {{ item.features[0].properties.title }}
+          </p>
 
           <v-img
             class="ma-3"
@@ -13,13 +15,12 @@
             :lazy-src="demoThumbnailLinks[id(item)%2]"
             alt="IMAGE"
           />
-
         </div>
-        <favorite-icon :id="id(item)"></favorite-icon>
+        <favorite-icon :id="id(item)" />
         <nuxt-link
           :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}`"
         >
-          <div class="gallery-background"></div>
+          <div class="gallery-background" />
         </nuxt-link>
       </div>
     </div>
@@ -30,63 +31,50 @@
         :size="150"
 
         indeterminate
-      ></v-progress-circular>
+      />
     </div>
     <v-pagination
-      v-model="options.page"
+      class="ma-6"
+      :value="parseInt(options.page)"
+      @input="newPage"
       :length="Math.floor(totalItems / options.itemsPerPage)"
       :total-visible="7"
-    ></v-pagination>
+    />
   </div>
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-import favorites from "@/mixins/favorites.js";
-import favoriteIcon from "@/components/FavoriteIcon.vue";
+import { mapGetters } from 'vuex';
+import favorites from '@/mixins/favorites.js';
+import favoriteIcon from '@/components/FavoriteIcon.vue';
 
 export default {
+  components: { favoriteIcon },
+  mixins: [favorites],
   props: {
     filter: {
       type: Object,
       default: () => {
       },
     },
-  },
-  components:{favoriteIcon},
-  mixins: [favorites],
-  async fetch() {
-    this.loading = true;
-    window.scrollTo(0, 0);
+    items: {
+      type: Array,
+      default: [],
+    },
+    totalItems: {
+      type: Number,
+      default: () => 0,
+    },
 
-    const {sortBy, sortDesc, page, itemsPerPage} = this.options;
-    // eslint-disable-next-line no-underscore-dangle
-    const p = await this.$api.Entities.get_api_0_2_query_({
-      limit: itemsPerPage,
-      first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
-      filter: this.filter,
-      column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
-      sort: sortDesc[0] ? "desc" : "asc",
-    });
-    // eslint-disable-next-line prefer-destructuring
-    console.log(p.body);
-    this.items = p.body.results;
-    this.itemIndex = p.body.pagination.index;
-    this.totalItems = p.body.pagination.entities;
-    this.loading = false;
+    notFound: {
+      type: Boolean,
+      default: () => false,
+    },
   },
   data() {
     return {
-      items: [],
-      loading: true,
-      options: {
-        sortBy: [],
-        sortDesc: [],
-        page: 1,
-        itemsPerPage: 20,
-      },
+      loading: false,
       itemsPerPageOptions: [10, 20, 50, 100],
-      totalItems: 0,
       itemIndex: [],
       demoImageLinks: [
         'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/1/1.jp2/full/400,/0/default.png',
@@ -98,73 +86,67 @@ export default {
       ],
     };
   },
-  watch: {
-    options: {
-      handler(o, n) {
-        if (o.sortBy !== n.sortBy || o.sortDesc !== n.sortDesc)
-          this.itemIndex = [];
-        this.$fetch();
-      },
-      deep: true,
-    },
-    filter: {
-      handler() {
-        this.itemIndex = [];
-        this.totalItems = 0;
-        this.options.page = 1;
-        this.$fetch();
-      },
-      deep: true,
-    },
-  },
+
   methods: {
     id(item) {
       return item.features[0]['@id'].split('/').splice(-1)[0];
     },
     getValueFromType(item, type) {
       if (!item.features[0].types) {
-        return "-";
+        return '-';
       }
-      console.log(type);
 
       return item.features[0].types
         .filter((t) => t.hierarchy === type)
         .map((x) => x.label)
-        .join(", ");
+        .join(', ');
+    },
+    newPage(page){
+      this.$router.replace({name: this.$route.name, query: {...this.$route.query,page:page}})
     },
   },
   computed: {
-    ...mapGetters("app", [
-      "getTypesBySystemClass",
-      "getIconBySystemClass",
-      "getLabelBySystemClass",
-      "getCRMClassBySystemClass",
-      "getSortColumnByPath",
-      "getSystemClassForFilter",
-      "getFilterList",
+    options: {
+      get() {
+        return {
+          sortBy: [],
+          sortDesc: [],
+          page: this.$route.query.page || 1,
+          itemsPerPage: this.$route.query.itemsperpage || 20,
+        };
+      },
+    },
+    ...mapGetters('app', [
+      'getTypesBySystemClass',
+      'getIconBySystemClass',
+      'getLabelBySystemClass',
+      'getCRMClassBySystemClass',
+      'getSortColumnByPath',
+      'getSystemClassForFilter',
+      'getFilterList',
     ]),
 
     cssVars() {
       let colCount = 3;
       switch (this.$vuetify.breakpoint.name) {
-        case "xs":
+        case 'xs':
           colCount = 1;
           break;
-        case "sm":
+        case 'sm':
           colCount = 2;
           break;
-        case "md":
+        case 'md':
           colCount = 3;
           break;
-        case "lg":
+        case 'lg':
           colCount = 4;
           break;
-        case "xl":
+        case 'xl':
           colCount = 4;
           break;
       }
       return {
-        "--column-count": colCount,
+        '--column-count': colCount,
       };
     },
   },

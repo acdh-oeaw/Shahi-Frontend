@@ -1,6 +1,6 @@
 <template>
   <div>
-  <otherlist :filter="query"></otherlist>
+  <otherlist :filter="query" :items="items" :total-items="totalItems" :not-found="notFound"></otherlist>
   </div>
 </template>
 
@@ -11,6 +11,7 @@ import queries from '@/mixins/queries';
 export default {
   components: { otherlist },
   mixins: [queries],
+  props:['items','totalItems','notFound'],
   data() {
     return {
       query: {},

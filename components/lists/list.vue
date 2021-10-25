@@ -29,7 +29,7 @@
       No records found.
     </p>
     <v-data-table
-      v-if="items.length !== 0"
+      v-else-if="items.length !== 0"
       :headers="showHeaders"
       :items="itemsWithType"
       :options.sync="options"
@@ -42,8 +42,8 @@
       }"
     >
       <template v-slot:header.features[0].type.categoryofauthenticity="{ header }">
-        {{header.text}}
-        <tooltip-icon :text="header.description"></tooltip-icon>
+        {{ header.text }}
+        <tooltip-icon :text="header.description" />
       </template>
 
       <template v-slot:top="{ pagination, options, updateOptions }">
@@ -73,16 +73,20 @@
       </template>
       <template v-slot:item.features[0].when.timespans[0].start.earliest="{ item }">
         <span v-if="!!item.features[0].when.timespans[0].start.earliest">
-          {{ item.features[0].when.timespans[0].start.earliest
-            .split("-")[0]
-            .replace(/^0+/, "") }}
+          {{
+            item.features[0].when.timespans[0].start.earliest
+              .split("-")[0]
+              .replace(/^0+/, "")
+          }}
         </span>
       </template>
       <template v-slot:item.features[0].when.timespans[0].end.earliest="{ item }">
         <span v-if="!!item.features[0].when.timespans[0].end.earliest">
-          {{ item.features[0].when.timespans[0].end.earliest
-            .split("-")[0]
-            .replace(/^0+/, "") }}
+          {{
+            item.features[0].when.timespans[0].end.earliest
+              .split("-")[0]
+              .replace(/^0+/, "")
+          }}
         </span>
       </template>
       <template
@@ -96,7 +100,7 @@
             v-for="(type, index) in item.features[0].type[slot.value.split('.')[2]]"
             :key="index"
 
-            :to="`/list?codes=artifact&type_id=${type.identifier
+            :to="`/data/list?codes=artifact&type_id=${type.identifier
               .split('/').splice(-1)[0]}`"
           >
             {{ type.label }}
@@ -109,7 +113,7 @@
       </template>
 
       <template v-slot:item.favorites="{ item }">
-        <favorite-icon :id="id(item)"></favorite-icon>
+        <favorite-icon :id="id(item)" />
       </template>
     </v-data-table>
   </div>
@@ -120,55 +124,52 @@ import { mapGetters } from 'vuex';
 
 export default {
   props: {
-    filter: {
-      type: Object,
-      default: () => {},
+    items: {
+      type: Array,
+      default: () => [],
+    },
+    totalItems: {
+      type: Number,
+      default: () => 0,
+    },
+    notFound: {
+      type: Boolean,
+      default: () => false,
     },
   },
-  async fetch() {
-    this.loading = true;
-    this.notFound = false;
-    this.items = [];
-    const {
-      sortBy, sortDesc, page, itemsPerPage,
-    } = this.options;
-    try {
-      // eslint-disable-next-line no-underscore-dangle
-      const p = await this.$api.Entities.get_api_0_2_query_({
-        limit: itemsPerPage,
-        first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
-        filter: this.filter,
-        column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
-        sort: sortDesc[0] ? 'desc' : 'asc',
-      });
-      // eslint-disable-next-line prefer-destructuring
-      this.items = p.body.results;
-      this.itemIndex = p.body.pagination.index;
-      this.totalItems = p.body.pagination.entities;
-    } catch (err) {
-      this.notFound = true;
-    }
-    this.loading = false;
-  },
+
   data() {
     return {
-      items: [],
-      loading: true,
-      notFound: false,
-      options: {
-        sortBy: [],
-        sortDesc: [],
-        page: 1,
-        itemsPerPage: 10,
-      },
+      loading: false,
       itemsPerPageOptions: [10, 20, 50, 100],
-      totalItems: 0,
       itemIndex: [],
       selectedHeaders: [],
 
     };
   },
   computed: {
+    options: {
+      get() {
+        return {
+          sortBy: [],
+          sortDesc: [],
+          page: this.$route.query.page || 1,
+          itemsPerPage: this.$route.query.itemsperpage || 10,
+        };
+      },
+      set(newValue) {
+        let page;
+        if (newValue.page !== 1) page = newValue.page;
+
+        this.$router.replace({
+          name: this.$route.name,
+          query: {
+            ...this.$route.query,
+            page,
+          },
+        });
+      },
+    },
     ...mapGetters('app', [
       'getIconBySystemClass',
       'getLabelBySystemClass',
@@ -178,6 +179,7 @@ export default {
       'getFilterList',
     ]),
     itemsWithType() {
+      const start = new Date().getTime();
       if (this.items.length === 0) return [];
 
       return this.items.map((item) => {
@@ -191,6 +193,8 @@ export default {
             r[key] = [...(r[key] || ''), a];
             return r;
           }, {});
+        const end = new Date().getTime();
+        console.log(start, end, end - start);
         return item;
       });
     },
@@ -199,41 +203,14 @@ export default {
         .filter((s) => this.selectedHeaders.includes(s));
     },
   },
+  watch: {},
+  created() {
+    this.selectedHeaders = this.$store.state.app.tableheaders.wide.filter((x) => x.visible);
+  },
   methods: {
     id(item) {
       return item.features[0]['@id'].split('/').splice(-1)[0];
     },
-  },
-  watch: {
-    options: {
-      handler(o, n) {
-        if (o.sortBy !== n.sortBy || o.sortDesc !== n.sortDesc) this.itemIndex = [];
-        this.$fetch();
-      },
-      deep: true,
-    },
-
-    filter: {
-      handler() {
-        this.itemIndex = [];
-        this.totalItems = 0;
-        this.options.page = 1;
-        this.$fetch();
-      },
-      deep: true,
-    },
-    '$store.state.app.filterelements': {
-      handler() {
-        this.itemIndex = [];
-        this.totalItems = 0;
-        this.$fetch();
-      },
-      immediate: true,
-      deep: true,
-    },
-  },
-  created() {
-    this.selectedHeaders = this.$store.state.app.tableheaders.wide.filter((x) => x.visible);
   },
 
 };

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <maplist :filter="query" />
+    <maplist :items="items" :total-items="totalItems" />
   </div>
 </template>
 
@@ -12,21 +12,13 @@ export default {
   components: {
     maplist,
   },
+  props:['items', 'totalItems'],
   mixins: [queries],
   data() {
     return {
       query: {},
       view: 'list',
     };
-  },
-  watch: {
-    '$route.query': {
-      handler(s) { this.query = s },
-      immediate: true,
-      deep: true,
-    },
-  },
-  methods: {
   },
 };
 </script>

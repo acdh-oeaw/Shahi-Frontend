@@ -1,7 +1,10 @@
 <template>
   <div>
-    <list :filter="query" />
-
+    <list
+      :items="items"
+      :total-items="totalItems"
+      :not-found="notFound"
+    />
   </div>
 </template>
 
@@ -11,9 +14,10 @@ import queries from '~/mixins/queries';
 
 export default {
   components: {
-    list
+    list,
   },
   mixins: [queries],
+  props: ['items', 'totalItems','notFound'],
   data() {
     return {
       query: {},
@@ -22,12 +26,13 @@ export default {
   },
   watch: {
     '$route.query': {
-      handler(s) { this.query = s },
+      handler(s) {
+        this.query = s;
+      },
       immediate: true,
       deep: true,
     },
   },
-  methods: {
-  },
+  methods: {},
 };
 </script>

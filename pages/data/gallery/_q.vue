@@ -1,6 +1,6 @@
 <template>
   <div>
-    <gallery :filter="query" />
+    <gallery :filter="query" :total-items="totalItems" :not-found="notFound" :items="items" />
 
   </div>
 </template>
@@ -13,6 +13,7 @@ export default {
   components: {
     Gallery
   },
+  props:['items','totalItems','notFound'],
   mixins: [queries],
   data() {
     return {

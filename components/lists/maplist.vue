@@ -66,29 +66,19 @@ export default {
       type: Object,
       default: () => {},
     },
+    items:{
+      type: Array,
+      default:[],
+    },
+    totalItems: {
+      type: Number,
+      default: () => 0,
+    },
   },
-  async fetch() {
-    this.loading = true;
-    const { sortBy, sortDesc, page, itemsPerPage } = this.options;
-    // eslint-disable-next-line no-underscore-dangle
-    const p = await this.$api.Entities.get_api_0_2_query_({
-      limit: itemsPerPage,
-      first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
-      filter: this.filter,
-      column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
-      sort: sortDesc[0] ? "desc" : "asc",
-    });
-    // eslint-disable-next-line prefer-destructuring
-    console.log(p.body);
-    this.items = p.body.results;
-    this.itemIndex = p.body.pagination.index;
-    this.totalItems = p.body.pagination.entities;
-    this.loading = false;
-  },
+
   data() {
     return {
-      items: [],
-      loading: true,
+      loading: false,
       options: {
         sortBy: [],
         sortDesc: [],
@@ -96,26 +86,10 @@ export default {
         itemsPerPage: 50,
       },
       itemsPerPageOptions: [10, 20, 50],
-      totalItems: 0,
       itemIndex: [],
     };
   },
   watch: {
-    options: {
-      handler(o, n) {
-        if ((o.sortBy !== n.sortBy) || (o.sortDesc !== n.sortDesc)) this.itemIndex = [];
-        this.$fetch();
-      },
-      deep: true,
-    },
-    filter: {
-      handler() {
-        this.itemIndex = [];
-        this.totalItems= 0;
-        this.options.page = 1;
-        this.$fetch(); },
-      deep: true,
-    },
   },
   computed: {
     ...mapGetters('app', [

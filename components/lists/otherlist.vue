@@ -3,7 +3,7 @@
     <p v-if="notFound" class="text-body-1 ma-5">
       No records found.
     </p>
-
+<div v-else>
     <v-card
       v-for="(item, index) in items"
       :key="index"
@@ -136,12 +136,13 @@
         </v-col>
       </v-row>
     </v-card>
-
     <v-pagination
-      v-model="options.page"
+      :value="parseInt(options.page)"
+      @input="newPage"
       :length="Math.floor(totalItems / options.itemsPerPage)"
       :total-visible="7"
     />
+</div>
   </div>
 </template>
 
@@ -154,45 +155,24 @@ export default {
       type: Object,
       default: () => {
       },
+
     },
+    items: {
+      type: Array,
+      default: [],
+    },
+    totalItems: {
+      type: Number,
+      default: () => 0,
+    },
+  notFound: {
+    type: Boolean,
+    default: () => false,
   },
-  async fetch() {
-    this.loading = true;
-    this.notFound = false;
-    this.items = [];
-    const {
-      sortBy, sortDesc, page, itemsPerPage,
-    } = this.options;
-    try {
-      // eslint-disable-next-line no-underscore-dangle
-      const p = await this.$api.Entities.get_api_0_2_query_({
-        limit: itemsPerPage,
-        first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
-        filter: this.filter,
-        column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
-        sort: sortDesc[0] ? 'desc' : 'asc',
-      });
-      // eslint-disable-next-line prefer-destructuring
-      this.items = p.body.results;
-      this.itemIndex = p.body.pagination.index;
-      this.totalItems = p.body.pagination.entities;
-    } catch (err) {
-      this.notFound = true;
-    }
-    this.loading = false;
-    window.scrollTo(0, 0);
   },
   data() {
     return {
-      notFound: false,
-      items: [],
       loading: true,
-      options: {
-        sortBy: [],
-        sortDesc: [],
-        page: 1,
-        itemsPerPage: 10,
-      },
 
       demoImageLinks: [
         'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/1/1.jp2/full/500,/0/default.jpg',
@@ -203,11 +183,20 @@ export default {
         'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/2/1.jp2/full/200,/0/default.jpg',
       ],
       itemsPerPageOptions: [10, 20, 50, 100],
-      totalItems: 0,
       itemIndex: [],
     };
   },
   computed: {
+    options: {
+      get() {
+        return {
+          sortBy: [],
+          sortDesc: [],
+          page: this.$route.query.page || 1,
+          itemsPerPage: this.$route.query.itemsperpage || 10,
+        };
+      },
+    },
     ...mapGetters('app', [
       'getTypesBySystemClass',
       'getIconBySystemClass',
@@ -226,23 +215,11 @@ export default {
       };
     },
   },
-  watch: {
-    options: {
-      handler(o, n) {
-        if (o.sortBy !== n.sortBy || o.sortDesc !== n.sortDesc) this.itemIndex = [];
-        this.$fetch();
-      },
-      deep: true,
-    },
-    filter: {
-      handler() {
-        this.itemIndex = [];
-        this.totalItems = 0;
-        this.options.page = 1;
-        this.$fetch();
-      },
-      deep: true,
-    },
+  watch:{
+    items(){
+      window.scrollTo({ top: 0, });
+
+    }
   },
   methods: {
     id(item){
@@ -286,6 +263,9 @@ export default {
           return accumulator;
         }, {});
     },
+    newPage(page){
+      this.$router.replace({name: this.$route.name, query: {...this.$route.query,page:page}})
+    }
   },
 
 };
