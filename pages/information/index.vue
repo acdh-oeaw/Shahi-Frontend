@@ -2,7 +2,7 @@
   <div>
     <ImageNavigation />
     <div class="text-justify pa-10 page-content">
-      <h1 class="text-h2 text-left mb-10">
+      <h1 class="title-1 font-weight-light text-left mb-10">
         Shahi Kingdoms Database
       </h1>
 
@@ -22,7 +22,7 @@
         Archaeological Institute, and Holzhausen-Legat.
       </p>
 
-      <p class="text-h5">
+      <p class="title-2">
         The Database
       </p>
 
