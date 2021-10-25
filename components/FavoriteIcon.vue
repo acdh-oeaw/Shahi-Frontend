@@ -3,12 +3,12 @@
     <v-btn
       v-if="!active"
       icon
-      style="z-index: 4000"
       @click.prevent="add"
+      style="z-index: 200"
     >
       <v-icon>mdi-star</v-icon>
     </v-btn>
-    <v-btn v-else icon style="z-index: 4000" @click.prevent="remove">
+    <v-btn v-else icon style="z-index: 200" @click.prevent="remove">
       <v-icon color="yellow darken-3">
         mdi-star
       </v-icon>
