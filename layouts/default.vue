@@ -72,6 +72,11 @@
 
         <querysearch />
         <v-spacer />
+        
+        <nuxt-link class="nav-link mr-5" to="/collections">Collections</nuxt-link>
+        <nuxt-link class="nav-link mr-5" to="/bibliography">Bibliography</nuxt-link>
+        <nuxt-link class="nav-link" to="/team">Team</nuxt-link>
+       
       </v-app-bar>
     </v-expand-transition>
     <v-main>
@@ -305,5 +310,15 @@ a.helpdesk-button {
   color: #88dbdf;
   max-width: 16rem;
   transition: background-color ease 0.2s, color ease 0.2s;
+}
+
+.nav-link{
+  opacity: 0.8;
+  padding:3px;
+  transition: 100ms;
+}
+
+.nav-link:hover{
+  opacity: 1;
 }
 </style>
