@@ -5,6 +5,7 @@ import templateprops from '../assets/templateprops.json';
 import filterelements from '../assets/filterElements.json';
 import viewelements from '../assets/viewElements.json';
 import team from '../assets/team.json';
+import bib from '../assets/bib.json';
 
 /* eslint-disable no-param-reassign,no-shadow */
 export const state = () => ({
@@ -17,9 +18,12 @@ export const state = () => ({
   filterelements,
   viewelements,
   team,
+  bib
 });
 
 export const getters = {
+  getBibliography: (s) => s.bib,
+  getCollections: (s) => s.filterelements[0].items.find(item => item.id === '185'),
   getSystemClassForFilter: (s) => s.filterelements.find((item) => item.selected === true).systemClass,
   getCurrentFilters: (s) => s.filterelements.find((item) => item.selected === true),
   getFilterObject: (s) => {
