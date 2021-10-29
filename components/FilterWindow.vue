@@ -401,6 +401,7 @@ export default {
               return {
                 en: element.name,
                 id: element.id,
+                description: element.description,
                 value: this.$route.query.type_id === element.id || this.$route.query.type_id
                   ?.includes(element.id.toString()) || false,
                 count: element.count,
