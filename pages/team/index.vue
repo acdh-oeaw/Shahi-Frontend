@@ -1,6 +1,6 @@
 <template>
   <v-container class="pt-10 page-content">
-    <h1 class="text-h4 pb-5">
+    <h1 class="title-1 pb-5">
       Meet the Project Team
     </h1>
 
