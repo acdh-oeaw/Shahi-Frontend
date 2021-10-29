@@ -77,6 +77,9 @@ export default {
       query: {},
     };
   },
+  mounted(){
+    window.scrollTo({top:0})
+  },
   watch: {
     '$route.query': {
       handler(s) {
