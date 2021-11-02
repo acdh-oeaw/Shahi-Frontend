@@ -3,8 +3,8 @@
         <div class="page-content">
           <div class="d-flex justify-space-around">
             <div class="collection-header-left">
-              <p class="title-1">Collection of Clay Items</p>
-              <p>This collection contains Artifacts wich are completele made out of clay.</p>
+              <p class="title-1">{{collection.en}}</p>
+              <p>{{ collection.description }}</p>
             </div>
             <div class="collection-header-right">
               <image-collage :items="items"></image-collage>
@@ -15,10 +15,20 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
 export default {
   name: 'CollectionHeader',
   props:['items'],
-
+  computed:{
+    collection(){
+      console.log(this.$route.query.type_id)
+      console.log(this.getTypeById(this.$route.query.type_id))
+      return this.getTypeById(this.$route.query.type_id)
+    },
+    ...mapGetters('app',[
+      'getTypeById'
+    ])
+  }
 };
 </script>
 

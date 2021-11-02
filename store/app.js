@@ -24,6 +24,7 @@ export const state = () => ({
 export const getters = {
   getBibliography: (s) => s.bib,
   getCollections: (s) => s.filterelements[0].items.find(item => item.id === '185'),
+  getTypeById: (s) => (id) => s.filterelements[0].items.find(item => item.id === '185').values.find(item => item.id === parseInt(id)),
   getSystemClassForFilter: (s) => s.filterelements.find((item) => item.selected === true).systemClass,
   getCurrentFilters: (s) => s.filterelements.find((item) => item.selected === true),
   getFilterObject: (s) => {
