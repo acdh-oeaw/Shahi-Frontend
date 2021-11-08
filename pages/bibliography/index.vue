@@ -1,17 +1,19 @@
 <template>
   <div class="page-content pt-10 pa-5">
     <p class="title-1 pb-5">
-      BIBLIOGRAPHY FOR THE CULTURAL HISTORY OF THE SHAHI KINGDOMS
+      Bibliography
     </p>
-    <p>
+    <p class="title-2 mt-n5">for the cultural history of the shahi kingdoms</p>
+    <p class="text-body-1">
       This is an online resource of the Austrian Science Fund (FWF) project ‘Cultural Formation and Transformation:
       Shahi Art and Architecture from Afghanistan to the West Tibetan Frontier at the Dawn of the Islamic Era’ (P-
       31246) directed by Univ.-Prof. Dr. Deborah Klimburg-Salter in collaboration with National Research Partner HR
       Doz. Dr. Michael Alram. The following list includes publications relevant for the study of the cultural history of
       the Shahi kingdoms compiled by the project core team and expanded through the contributions of Prof. Dr. Minoru
-      Inaba, Dr. Noémie Verdon (primary literary sources) and other project consultants. Last update _______
+      Inaba, Dr. Noémie Verdon (primary literary sources) and other project consultants.
+      Last update 08.11.2021
     </p>
-    <v-text-field v-model="search" label="Search" />
+    <v-text-field class="search" v-model="search" label="Search" />
     <p />
     <div v-for="item in filteredList.slice(page,page+20)" :key="item.id" class="text-body-1 mb-4">
       <p v-if="!!item.author" class="font-weight-bold">
@@ -96,5 +98,11 @@ p {
 
 .bib-title::after {
   content: "’";
+}
+
+.search{
+  position: sticky;
+  top:64px;
+  background-color: white;
 }
 </style>
