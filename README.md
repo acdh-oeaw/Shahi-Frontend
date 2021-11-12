@@ -1,11 +1,13 @@
-# OpenAtlasDiscovery
+# Shahi Kingdoms Database
 
 # About
 
-OpenAtlasDiscovery is a presentation webapp for [OpenAtlas](https://openatlas.eu) projects.
+Shahi Kingdoms Database is a presentation webapp for the [Shahi](https://shahimaterialculture.univie.ac.at/) Project.
 
-At the moment we are in the concept phase and this is just a basic start point for further
-development.
+
+At the moment we are still in development phase.
+
+Shahi Kingdoms Database is an [OpenAtlas](https://openatlas.eu) projects and therefore [OpenAtlasDiscovery](https://github.com/craws/OpenAtlasDiscovery) was used as basi
 
 # Licensing
 
@@ -33,16 +35,6 @@ After cloning the repository, install all dependencies in the application root w
 $ npm install
 ```
 
-# Configuration
-
-Furthermore a running OpenAtlas instance with an activated
-[API Module](https://demo.openatlas.eu/static/manual/tools/api.html) is required.
-The instance served needs to be configured (servers/url) in the
-[Server Object](https://swagger.io/specification/#server-object) of
-the OpenAPI specification here:
-```
-assets\swagger.json
-``` 
 
 ## For Development
 
