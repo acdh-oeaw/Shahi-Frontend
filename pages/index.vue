@@ -112,7 +112,7 @@ html {
   transition: all  200ms linear;
 }
 .topOffset{
-  top: 15vw;
+  top: 15vh;
 }
 .closed {
   top: 0;
