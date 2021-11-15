@@ -83,7 +83,6 @@ export default {
   watch: {
     '$route.query': {
       handler(s) {
-        console.log('route');
         if (this.options.page === 1) this.itemIndex = [];
         this.query = s;
       },
@@ -92,7 +91,6 @@ export default {
     },
     options: {
       handler(o, n) {
-        console.log('options');
 
         // if (o.sortBy !== n.sortBy || o.sortDesc !== n.sortDesc) this.itemIndex = [];
         // this.$fetch();
@@ -101,7 +99,6 @@ export default {
     },
     query: {
       handler() {
-        console.log('query');
 
         // this.itemIndex = [];
         // this.options.page = 1;

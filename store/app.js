@@ -46,7 +46,6 @@ export const getters = {
     filterObject.codes = selectedItem.systemClass;
     filterObject.type_id = typeList;
     filterObject.filter = filterList;
-    console.log(filterObject)
     return filterObject;
   },
   getIconBySystemClass: (s) => (c) => s.classes.find((item) => item.systemClass === c).icon,

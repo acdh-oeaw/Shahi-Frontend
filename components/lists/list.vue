@@ -194,7 +194,6 @@ export default {
             return r;
           }, {});
         const end = new Date().getTime();
-        console.log(start, end, end - start);
         return item;
       });
     },

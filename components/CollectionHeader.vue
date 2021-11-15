@@ -8,7 +8,7 @@
             </div>
             <div class="collection-header-right">
               <image-collage :items="items"></image-collage>
-            </div>
+            </div>index
           </div>
         </div>
       </div>
@@ -21,8 +21,6 @@ export default {
   props:['items'],
   computed:{
     collection(){
-      console.log(this.$route.query.type_id)
-      console.log(this.getTypeById(this.$route.query.type_id))
       return this.getTypeById(this.$route.query.type_id)
     },
     ...mapGetters('app',[
