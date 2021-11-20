@@ -413,6 +413,7 @@ export default {
           id: x.id, en: x.en, value: x.value, type: x.type,
         }));
       this.setSearch(filters);
+      this.open = false;
     },
     updateFilter(selectedClass, selectedProperty, value) {
       this.$store.commit('app/updateFilterValue', {

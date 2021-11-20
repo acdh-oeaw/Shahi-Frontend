@@ -13,7 +13,7 @@
       @click="open = !open"
     >
       <template v-slot:append>
-        <logical-operator-editor class="mr-4" />
+        <logical-operator-editor v-if="getFiltersFlat.length > 1"  class="mr-4" />
         <FilterWindow :global-search="globalSearch" :open-window="open" />
       </template>
       <template v-slot:selection="{ attrs, item, parent, selected }">
