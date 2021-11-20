@@ -3,7 +3,7 @@
   {
     "en": "Artifacts",
     "systemClass": "artifact",
-    "selected": false,
+    "selected": true,
     "items": [
       {
         "en": "Name",
@@ -16,7 +16,8 @@
             "id": "name",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "like"
+            "logicalOperator": "like",
+            "type": "name"
           }
         ]
       },
@@ -31,7 +32,8 @@
             "id": "description",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "like"
+            "logicalOperator": "like",
+            "type": "description"
           }
         ]
       },
@@ -167,14 +169,16 @@
             "id": "begin_from",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "ge"
+            "logicalOperator": "ge",
+            "type": "begin"
           },
           {
             "en": "End",
             "id": "end_from",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "le"
+            "logicalOperator": "le",
+            "type": "end"
           }
         ]
       }

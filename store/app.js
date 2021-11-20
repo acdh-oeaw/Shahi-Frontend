@@ -18,20 +18,21 @@ export const state = () => ({
   filterelements,
   viewelements,
   team,
-  bib
+  bib,
 });
 
 export const getters = {
+  getCurrentFiltersFlat: (s) => s.filterelements.find((item) => item.selected === true).items.flatMap((x) => x.values),
   getBibliography: (s) => s.bib,
-  getCollections: (s) => s.filterelements[0].items.find(item => item.id === '185'),
-  getTypeById: (s) => (id) => s.filterelements[0].items.find(item => item.id === '185').values.find(item => item.id === parseInt(id)),
+  getCollections: (s) => s.filterelements[0].items.find((item) => item.id === '185'),
+  getTypeById: (s) => (id) => s.filterelements[0].items.find((item) => item.id === '185').values.find((item) => item.id === parseInt(id)),
   getSystemClassForFilter: (s) => s.filterelements.find((item) => item.selected === true).systemClass,
   getCurrentFilters: (s) => s.filterelements.find((item) => item.selected === true),
   getFilterObject: (s) => {
-    let filterList = [];
-    let typeList = [];
-    let filterObject = {};
-    const selectedItem = s.filterelements.find((item) => item.selected === true)
+    const filterList = [];
+    const typeList = [];
+    const filterObject = {};
+    const selectedItem = s.filterelements.find((item) => item.selected === true);
 
     selectedItem.items.forEach((group) => {
       group.values.forEach((filter) => {
@@ -90,20 +91,17 @@ export const mutations = {
     const vals = state.filterelements.find((item) => item.selected === true).items[selectedProperty].values;
     vals.filter((x) => x.id == key)[0].value = value[key];
   },
-  setSelectedFilterClass(state,systemClass){
-    state.filterelements.forEach( (c) =>{
-
-      if(c.systemClass === systemClass)
-        c.selected = true;
-      else
-        c.selected = false;
-    } )
+  setSelectedFilterClass(state, systemClass) {
+    state.filterelements.forEach((c) => {
+      if (c.systemClass === systemClass) c.selected = true;
+      else c.selected = false;
+    });
   },
-  setFilterElements(state,filterElements){
-    state.filterelements =  JSON.parse(
-      JSON.stringify(filterElements)
+  setFilterElements(state, filterElements) {
+    state.filterelements = JSON.parse(
+      JSON.stringify(filterElements),
     );
-  }
+  },
 };
 
 export const actions = {};

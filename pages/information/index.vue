@@ -182,6 +182,23 @@
         </div>
       </div>
     </div>
+
+    Categories of Authenticity for Objects in the Shahi Kingdoms Database
+
+    Only objects that the art history team could unanimously categorize as authentic are included in the corpus of Shahi visual and material culture. Strict selection criteria have been used to assess the authenticity of each object. We defined three categories of authenticity. In the database, each object is identified as belonging to either category A or B. Category C objects are not included.
+
+    A    Authentic objects with firm attribution
+
+    A1 Secure attribution: excavated objects from a trustworthy context
+    A2 Attributable with high confidence: objects with an early accession date (prior to WWI) in regional museums in Afghanistan, Pakistan, and India, as well as objects photographed in situ in monastic and temple treasuries in India; objects bearing inscriptions that indicate authenticity; objects for which objective technical analysis has been conducted that indicates authenticity.
+
+    B    Apparently authentic objects without secure attribution
+
+    Objects in private and western museum collections without secure provenance, inscriptions, or objective technical analysis. Comparative art historical analysis suggests confidence in their authenticity.
+
+    C    Insecure and fake objects
+
+    These objects are not included in the corpus. However, in our study of Shahi material culture they are used for comparison with apparently authentic objects in order to better understand the historiography of the field and the current market situation. We are aware that other art historians may come to different conclusions in some instances.
   </div>
 </template>
 

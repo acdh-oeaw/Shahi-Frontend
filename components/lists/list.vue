@@ -96,19 +96,19 @@
         v-slot:[`item.${slot.value}`]="{ item }"
       >
         <div v-if="!!item.features[0].type">
-          <nuxt-link
+          <span
             v-for="(type, index) in item.features[0].type[slot.value.split('.')[2]]"
             :key="index"
-
-            :to="`/data/list?codes=artifact&type_id=${type.identifier
-              .split('/').splice(-1)[0]}`"
+            class="clickable"
+            @click="searchByFilterId(parseInt(type.identifier
+              .split('/').splice(-1)[0]))"
           >
             {{ type.label }}
             <span
               v-if="!!type.value"
             >({{ type.value }}<span v-if="type.unit"> {{ type.unit }}</span>)</span>
             <br>
-          </nuxt-link>
+          </span>
         </div>
       </template>
 
@@ -120,7 +120,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 
 export default {
   props: {
@@ -179,7 +179,6 @@ export default {
       'getFilterList',
     ]),
     itemsWithType() {
-      const start = new Date().getTime();
       if (this.items.length === 0) return [];
 
       return this.items.map((item) => {
@@ -207,6 +206,9 @@ export default {
     this.selectedHeaders = this.$store.state.app.tableheaders.wide.filter((x) => x.visible);
   },
   methods: {
+    ...mapActions({
+      searchByFilterId: 'query/searchByFilterId',
+    }),
     id(item) {
       return item.features[0]['@id'].split('/').splice(-1)[0];
     },

@@ -42,7 +42,6 @@
             v-else
             :key="i"
             link
-            :to="item.target"
             @click="clickOnItem(item)"
           >
             <v-list-item-action>
@@ -72,16 +71,20 @@
 
         <querysearch />
         <v-spacer />
-        
-        <nuxt-link class="nav-link mr-5" to="/collections">Collections</nuxt-link>
-        <nuxt-link class="nav-link mr-5" to="/bibliography">Bibliography</nuxt-link>
-        <nuxt-link class="nav-link" to="/team">Team</nuxt-link>
-       
+
+        <nuxt-link class="nav-link mr-5" to="/collections">
+          Collections
+        </nuxt-link>
+        <nuxt-link class="nav-link mr-5" to="/bibliography">
+          Bibliography
+        </nuxt-link>
+        <nuxt-link class="nav-link" to="/team">
+          Team
+        </nuxt-link>
       </v-app-bar>
     </v-expand-transition>
     <v-main>
-
-        <nuxt />
+      <nuxt />
     </v-main>
     <div class="grey lighten-3 mt-15">
       <div style="max-width: 1600px" class="ma-auto">
@@ -211,6 +214,7 @@
 </template>
 <script>
 import favorites from '@/mixins/favorites';
+import { mapActions } from 'vuex';
 import querysearch from '~/components/querysearchNew.vue';
 
 export default {
@@ -243,12 +247,16 @@ export default {
     window.removeEventListener('scroll', this.onScroll);
   },
   methods: {
+    ...mapActions({
+      searchByFilterId: 'query/searchByFilterId',
+    }),
     onScroll(e) {
       this.windowTop = window.top.scrollY; /* or: e.target.documentElement.scrollTop */
     },
     clickOnItem(item) {
       this.$store.commit('app/closeQueryDrawer');
       this.$store.commit('app/setSelectedFilterClass', item.systemClass);
+      this.searchByFilterId(item.id);
     },
   },
   head() {

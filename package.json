@@ -33,6 +33,8 @@
     "typeface-roboto": "^1.1.13",
     "vue-cookie": "^1.1.4",
     "vue-json-viewer": "^2.2.18",
+    "vue-tour": "^2.0.0",
+    "vuedraggable": "^2.24.3",
     "vuetify": "^2.3.5"
   },
   "devDependencies": {

@@ -2,60 +2,31 @@
   {
     "icon": "mdi-shape",
     "text": "All Artifacts",
-    "systemClass":"artifact",
-    "target": {
-      "name": "data-detaillist-q",
-      "query": {
-        "codes": "artifact"
-      }
-    }
+    "systemClass":"artifact"
   },
   {
     "icon": "mdi-account-group",
     "text": "Stationary Structures",
     "systemClass":"artifact",
-    "target": {
-      "name": "data-list-q",
-      "query": {
-        "codes": "artifact",
-        "type_id": ["1095"]
-      }
-    }
+    "id": 1095
+
   },
   {
     "icon": "mdi-text-box",
     "text": "Portable Objects",
     "systemClass":"artifact",
-    "target": {
-      "name": "data-detaillist-q",
-      "query": {
-        "codes": "artifact",
-        "type_id": "118"
-      }
-    }
+    "id": 118
   },
   {
     "icon": "mdi-calendar",
     "text": "Coins",
     "systemClass":"artifact",
-    "target": {
-      "name": "data-detaillist-q",
-      "query": {
-        "codes": "artifact",
-        "type_id": 108
-      }
-    }
+    "id": 108
   },
   {
     "icon": "mdi-map-marker",
     "text": "Inscriptions",
     "systemClass":"artifact",
-    "target": {
-      "name": "data-list-q",
-      "query": {
-        "codes": "artifact",
-        "type_id": "3"
-      }
-    }
+    "id":3
   }
 ]

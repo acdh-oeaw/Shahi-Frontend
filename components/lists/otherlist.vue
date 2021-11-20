@@ -3,151 +3,153 @@
     <p v-if="notFound" class="text-body-1 ma-5">
       No records found.
     </p>
-<div v-else>
-    <v-card
-      v-for="(item, index) in items"
-      :key="index"
-      outlined
-      max-width="1500px"
-      class="ma-5"
-      style="overflow: hidden"
-    >
-      <v-row no-gutters>
-        <v-col cols="12">
-          <nuxt-link
-            :to="`/single/${
-              item.features[0]['@id'].split('/').splice(-1)[0]
-            }`"
-          >
-            <v-hover v-slot="{hover}">
-              <v-card-title
-                class="artifact-title secondary darken-3 d-block white--text"
-                :class="hover ? 'lighten-1' : ''"
-              >
-                <p class="ma-0 pa-0">
-                  {{ item.features[0].properties.title }}
-                </p>
-                <favorite-icon class="float-right" :id="id(item)" ></favorite-icon>
-                <p class="text-caption pa-0 ma-0" v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Artifact')">
-                  {{ getFirstTypeByKeyword(item.features[0].types, 'Artifact').label }}
-                  <span
-                    v-if="!!getFirstTypeByKeyword(item.features[0].types,'Artifact').subtype"
-                  >({{ getFirstTypeByKeyword(item.features[0].types, 'Artifact').subtype }})</span>
-                </p>
-                <p class="text-caption pa-0 ma-0">
-                  <span v-if="item.features[0].when.timespans[0].start.earliest">
-                    from
-                    {{
-                      item.features[0].when.timespans[0].start.earliest
-                        .split("-")[0]
-                        .replace(/^0+/, "")
-                    }}
-                  </span>
-
-                  <span
-                    v-if="
-                      item.features[0].when.timespans[0].end.latest ||
-                        item.features[0].when.timespans[0].end.earliest
-                    "
-                  >to
-                    {{
-                      item.features[0].when.timespans[0].end.earliest
+    <div v-else>
+      <v-card
+        v-for="(item, index) in items"
+        :key="index"
+        outlined
+        max-width="1500px"
+        class="ma-5"
+        style="overflow: hidden"
+      >
+        <v-row no-gutters>
+          <v-col cols="12">
+            <nuxt-link
+              :to="`/single/${
+                item.features[0]['@id'].split('/').splice(-1)[0]
+              }`"
+            >
+              <v-hover v-slot="{hover}">
+                <v-card-title
+                  class="artifact-title secondary darken-3 d-block white--text"
+                  :class="hover ? 'lighten-1' : ''"
+                >
+                  <p class="ma-0 pa-0">
+                    {{ item.features[0].properties.title }}
+                  </p>
+                  <favorite-icon :id="id(item)" class="float-right" />
+                  <p v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Artifact')" class="text-caption pa-0 ma-0">
+                    {{ getFirstTypeByKeyword(item.features[0].types, 'Artifact').label }}
+                    <span
+                      v-if="!!getFirstTypeByKeyword(item.features[0].types,'Artifact').subtype"
+                    >({{ getFirstTypeByKeyword(item.features[0].types, 'Artifact').subtype }})</span>
+                  </p>
+                  <p class="text-caption pa-0 ma-0">
+                    <span v-if="item.features[0].when.timespans[0].start.earliest">
+                      from
+                      {{
+                        item.features[0].when.timespans[0].start.earliest
                           .split("-")[0]
                           .replace(/^0+/, "")
-                    }}
-                  </span>
-                </p>
-              </v-card-title>
-            </v-hover>
-          </nuxt-link>
-          <v-row no-gutters>
-            <v-col cols="12" sm="4" md="3">
-              <v-card
-                height="100%"
-                rounded="0"
-                class="d-flex align-center pa-sm-2"
-                :class="{'borderBottom': $vuetify.breakpoint.xs}"
-                elevation="0"
-                color="grey lighten-2"
-              >
-                <v-img
+                      }}
+                    </span>
 
-                  max-width="100%"
-                  :src="demoImageLinks[id(item)%2]"
-                  :lazy-src="demoThumbnailLinks[id(item)%2]"
-                  alt="IMAGE"
-                />
-              </v-card>
-            </v-col>
-            <v-col cols="12" sm="8" md="9" class="px-5">
-              <v-card v-if="item.features[0].description" outlined class="my-3">
-                <v-card-text class="text-body-1">
-                  Category of Authenticity:
-                  <nuxt-link
-                    v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity')"
-                    :to="`/detaillist?codes=artifact&type_id=${getFirstTypeByKeyword(item.features[0].types,'Category of Authenticity').identifier.split(';').splice(-1)[0]}`"
-                  >
-                    {{ getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity').label }}
-                  </nuxt-link>
-                </v-card-text>
-                <v-card-text class="text-body-1">
-                  {{
-                    item.features[0].description[0].value
-                  }}
-                </v-card-text>
-              </v-card>
-              <div class="card-columns" :style="cssVars">
-                <div
-                  v-for="(typeGroup, i) in getOrderedTypes(
-                    item.features[0].types
-                  )"
-                  v-if="typeGroup[0].type !== 'Artifact' && typeGroup[0]
-                    .type !== 'Category of Authenticity'"
-                  :key="i + 2000"
-                  class="card-column"
+                    <span
+                      v-if="
+                        item.features[0].when.timespans[0].end.latest ||
+                          item.features[0].when.timespans[0].end.earliest
+                      "
+                    >to
+                      {{
+                        item.features[0].when.timespans[0].end.earliest
+                          .split("-")[0]
+                          .replace(/^0+/, "")
+                      }}
+                    </span>
+                  </p>
+                </v-card-title>
+              </v-hover>
+            </nuxt-link>
+            <v-row no-gutters>
+              <v-col cols="12" sm="4" md="3">
+                <v-card
+                  height="100%"
+                  rounded="0"
+                  class="d-flex align-center pa-sm-2"
+                  :class="{'borderBottom': $vuetify.breakpoint.xs}"
+                  elevation="0"
+                  color="grey lighten-2"
                 >
-                  <v-card class="mb-5" outlined>
-                    <v-card-title
-                      class="text-subtitle-2 justify-center secondary"
+                  <v-img
+
+                    max-width="100%"
+                    :src="demoImageLinks[id(item)%2]"
+                    :lazy-src="demoThumbnailLinks[id(item)%2]"
+                    alt="IMAGE"
+                  />
+                </v-card>
+              </v-col>
+              <v-col cols="12" sm="8" md="9" class="px-5">
+                <v-card v-if="item.features[0].description" outlined class="my-3">
+                  <v-card-text class="text-body-1">
+                    Category of Authenticity:
+                    <span
+                      v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity')"
+                      class="clickable"
+                      @click="searchByFilterId(parseInt(getFirstTypeByKeyword(item.features[0].types,'Category of Authenticity').identifier.split('/').splice(-1)[0]))"
                     >
-                      {{ typeGroup[0].type }}
-                    </v-card-title>
-                    <v-card-text>
-                      <p
-                        v-for="(type, idx) in typeGroup"
-                        :key="idx"
-                        class="ma-0 ml-5 pa-0"
+                      {{ getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity').label }}
+                    </span>
+                  </v-card-text>
+                  <v-card-text class="text-body-1">
+                    {{
+                      item.features[0].description[0].value
+                    }}
+                  </v-card-text>
+                </v-card>
+                <div class="card-columns" :style="cssVars">
+                  <div
+                    v-for="(typeGroup, i) in getOrderedTypes(
+                      item.features[0].types
+                    )"
+                    v-if="typeGroup[0].type !== 'Artifact' && typeGroup[0]
+                      .type !== 'Category of Authenticity'"
+                    :key="i + 2000"
+                    class="card-column"
+                  >
+                    <v-card class="mb-5" outlined>
+                      <v-card-title
+                        class="text-subtitle-2 justify-center secondary"
                       >
-                        <nuxt-link
-                          :to="`/detaillist?codes=artifact&type_id=${type.id}`"
+                        {{ typeGroup[0].type }}
+                      </v-card-title>
+                      <v-card-text>
+                        <p
+                          v-for="(type, idx) in typeGroup"
+                          :key="idx"
+                          class="ma-0 ml-5 pa-0"
                         >
-                          {{ type.label }}
-                        </nuxt-link>
-                        <span
-                          v-if="!!type.value"
-                        >: {{ type.value }} {{ type.unit }}</span>
-                      </p>
-                    </v-card-text>
-                  </v-card>
+                          <span
+                            class="clickable"
+                            @click="searchByFilterId(parseInt(type.id))"
+                          >
+                            {{ type.label }}
+                          </span>
+                          <span
+                            v-if="!!type.value"
+                          >: {{ type.value }} {{ type.unit }}</span>
+                        </p>
+                      </v-card-text>
+                    </v-card>
+                  </div>
                 </div>
-              </div>
-            </v-col>
-          </v-row>
-        </v-col>
-      </v-row>
-    </v-card>
-    <v-pagination
-      :value="parseInt(options.page)"
-      @input="newPage"
-      :length="Math.floor(totalItems / options.itemsPerPage)"
-      :total-visible="7"
-    />
-</div>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-pagination
+        :value="parseInt(options.page)"
+        :length="Math.floor(totalItems / options.itemsPerPage)"
+        :total-visible="7"
+        @input="newPage"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -165,10 +167,10 @@ export default {
       type: Number,
       default: () => 0,
     },
-  notFound: {
-    type: Boolean,
-    default: () => false,
-  },
+    notFound: {
+      type: Boolean,
+      default: () => false,
+    },
   },
   data() {
     return {
@@ -215,15 +217,17 @@ export default {
       };
     },
   },
-  watch:{
-    items(){
-      window.scrollTo({ top: 0, });
-
-    }
+  watch: {
+    items() {
+      window.scrollTo({ top: 0 });
+    },
   },
   methods: {
-    id(item){
-      return item.features[0]['@id'].split('/').splice(-1)[0]
+    ...mapActions({
+      searchByFilterId: 'query/searchByFilterId',
+    }),
+    id(item) {
+      return item.features[0]['@id'].split('/').splice(-1)[0];
     },
     getValueFromType(item, type) {
       if (!item.features[0].types) {
@@ -238,8 +242,7 @@ export default {
     getFirstTypeByKeyword(types, keyword) {
       const type = types.find((x) => x.hierarchy.split(' > ')[0] === keyword);
 
-      if(type === undefined)
-       return;
+      if (type === undefined) return;
 
       [type.supertype, type.subtype] = type.hierarchy.split(' > ');
 
@@ -263,9 +266,9 @@ export default {
           return accumulator;
         }, {});
     },
-    newPage(page){
-      this.$router.replace({name: this.$route.name, query: {...this.$route.query,page:page}})
-    }
+    newPage(page) {
+      this.$router.replace({ name: this.$route.name, query: { ...this.$route.query, page } });
+    },
   },
 
 };

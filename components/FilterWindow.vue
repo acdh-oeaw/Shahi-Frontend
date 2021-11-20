@@ -12,246 +12,237 @@
   >
     <template v-slot:activator="{ on, attrs }">
       <v-icon v-bind="attrs" v-on="on">
-        mdi-tune
+        mdi-filter
       </v-icon>
     </template>
-    <div class="all">
-      <div class="tik" />
-
-      <v-card
-        elevation="4"
-        class="content overflow-auto"
-        max-height="90vh"
-        @keydown.enter="search"
-      >
-        <!--System Classes-->
-        <v-card-text>
-          <v-btn
-            v-for="(systemClass, index) in filterElements"
-            :key="index"
-            :color="index === selectedClass ? 'primary ' : ''"
-            elevation="0"
-            @click="selectedClass = index"
-          >
-            {{ systemClass.en }}
-          </v-btn>
-        </v-card-text>
-        <!--Normal Search-->
-        <v-card-text v-if="!globalSearch">
-          <v-row no-gutters>
-            <!--Select Supertype-->
-            <v-col cols="12" sm="auto" style="min-width: 200px">
-              <v-btn
-                v-if="$vuetify.breakpoint.xsOnly"
-                outlined
-                small
-                class="text-caption mb-2"
-                @click="showSupertype= !showSupertype"
+    <menu-window>
+      <!--System Classes-->
+      <v-card-text>
+        <v-btn
+          v-for="(systemClass, index) in filterElements"
+          :key="index"
+          :color="index === selectedClass ? 'primary ' : ''"
+          elevation="0"
+          @click="selectedClass = index"
+        >
+          {{ systemClass.en }}
+        </v-btn>
+      </v-card-text>
+      <!--Normal Search-->
+      <v-card-text v-if="!globalSearch">
+        <v-row no-gutters>
+          <!--Select Supertype-->
+          <v-col cols="12" sm="auto" style="min-width: 200px">
+            <v-btn
+              v-if="$vuetify.breakpoint.xsOnly"
+              outlined
+              small
+              class="text-caption mb-2"
+              @click="showSupertype= !showSupertype"
+            >
+              {{ showSupertype ? 'Hide all Properties' : 'Show all Properties' }}
+            </v-btn>
+            <v-slide-y-transition mode="in-out" hide-on-leave>
+              <v-list
+                v-if="showSupertype || $vuetify.breakpoint.smAndUp"
+                max-width="200px"
+                class="grey lighten-4"
               >
-                {{ showSupertype ? 'Hide all Properties' : 'Show all Properties' }}
-              </v-btn>
-              <v-slide-y-transition mode="in-out" hide-on-leave>
-                <v-list
-                  v-if="showSupertype || $vuetify.breakpoint.smAndUp"
-                  max-width="200px"
-                  class="grey lighten-4"
+                <v-list-item-group v-model="selected" mandatory class="d-inline-block">
+                  <v-expand-transition
+                    v-for="(item, index) in filterElements[selectedClass].items"
+                    :key="item.systemClass"
+                    appear
+                  >
+                    <div>
+                      <v-list-item
+                        :value="index"
+                        :class="{'font-weight-bold' : hasSetValue(item)}"
+                        @click="showSupertype=false"
+                      >
+                        {{ item.en }}
+                      </v-list-item>
+                    </div>
+                  </v-expand-transition>
+                </v-list-item-group>
+              </v-list>
+            </v-slide-y-transition>
+          </v-col>
+          <!--Select Subtypes-->
+          <v-col v-if="selectedClass !== undefined &&selected !== undefined" style="width: 500px">
+            <v-slide-y-transition mode="out-in">
+              <v-card v-if="!showSupertype || $vuetify.breakpoint.smAndUp" flat>
+                <v-card-title>
+                  {{ filterElements[selectedClass].items[selected].en }}
+                  <tooltip-icon
+                    v-if="!!filterElements[selectedClass].items[selected]
+                      .description"
+                    :text="filterElements[selectedClass].items[selected]
+                      .description"
+                  />
+                </v-card-title>
+                <v-text-field
+                  v-if="
+                    filterElements[selectedClass].items[selected].type ===
+                      'multiple'
+                  "
+                  v-model="searchKeyword"
+                  class="px-3"
+                  label="Search for keyword"
+                />
+
+                <v-card-text
+                  style="overflow: auto; max-height: 370px"
                 >
-                  <v-list-item-group v-model="selected" mandatory class="d-inline-block">
-                    <v-expand-transition
-                      v-for="(item, index) in filterElements[selectedClass].items"
-                      :key="item.systemClass"
-                      appear
-                    >
-                      <div>
-                        <v-list-item
-                          :value="index"
-                          :class="{'font-weight-bold' : hasSetValue(item)}"
-                          @click="showSupertype=false"
-                        >
-                          {{ item.en }}
-                        </v-list-item>
-                      </div>
-                    </v-expand-transition>
-                  </v-list-item-group>
-                </v-list>
-              </v-slide-y-transition>
-            </v-col>
-            <!--Select Subtypes-->
-            <v-col v-if="selectedClass !== undefined &&selected !== undefined" style="width: 500px">
-              <v-slide-y-transition mode="out-in">
-                <v-card v-if="!showSupertype || $vuetify.breakpoint.smAndUp" flat>
-                  <v-card-title>
-                    {{ filterElements[selectedClass].items[selected].en }}
-                    <tooltip-icon
-                      v-if="!!filterElements[selectedClass].items[selected]
-                        .description"
-                      :text="filterElements[selectedClass].items[selected]
-                        .description"
-                    />
-                  </v-card-title>
-                  <v-text-field
+                  <!--Type search-->
+                  <v-row
                     v-if="
                       filterElements[selectedClass].items[selected].type ===
                         'multiple'
                     "
-                    v-model="searchKeyword"
-                    class="px-3"
-                    label="Search for keyword"
-                  />
-
-                  <v-card-text
-                    style="overflow: auto; max-height: 370px"
+                    no-gutters
                   >
-                    <!--Type search-->
-                    <v-row
-                      v-if="
-                        filterElements[selectedClass].items[selected].type ===
-                          'multiple'
-                      "
-                      no-gutters
+                    <v-col
+                      v-for="(item) in searchedTypes"
+                      :key="item.id"
+                      cols="12"
+                      sm="6"
                     >
-                      <v-col
-                        v-for="(item) in searchedTypes"
-                        :key="item.id"
-                        cols="12"
-                        sm="6"
+                      <div
+                        class="filter-element"
+                        :class="{'filter-element-clicked': item.value}"
+                        @click="selectItem(item)"
                       >
-                        <div
-                          class="filter-element"
-                          :class="{'filter-element-clicked': item.value}"
-                          @click="selectItem(item)"
+                        <span>{{ item.en }}</span>
+
+                        <v-icon
+                          v-if="!!item.subs && item.subs.length !== 0"
+                          small
+                          class="expand-icon float-right"
+                          :class="{'expand-icon-expanded' : item.showSubtypes}"
+                          @click.stop="item.showSubtypes = !item.showSubtypes"
                         >
-                          <span>{{ item.en }}</span>
+                          mdi-chevron-down
+                        </v-icon>
+                        <v-icon
+                          v-if="item.value"
+                          style="float: right"
+                          small
+                        >
+                          mdi-close
+                        </v-icon>
+                      </div>
 
-                          <v-icon
-                            v-if="!!item.subs && item.subs.length !== 0"
-                            small
-                            class="expand-icon float-right"
-                            :class="{'expand-icon-expanded' : item.showSubtypes}"
-                            @click.stop="item.showSubtypes = !item.showSubtypes"
+                      <v-expand-transition>
+                        <div v-if="item.showSubtypes">
+                          <div
+                            v-for="(subtype, index) in searchedTypes.filter(x=>x.root
+                              .includes(item.id))"
+                            :key="index"
+                            class="filter-element ml-2"
+                            :class="{'filter-element-clicked' : subtype.value}"
+                            @click="subtype.value = !subtype.value"
                           >
-                            mdi-chevron-down
-                          </v-icon>
-                          <v-icon
-                            v-if="item.value"
-                            style="float: right"
-                            small
-                          >
-                            mdi-close
-                          </v-icon>
-                        </div>
+                            <span>{{ subtype.en }}</span>
 
-                        <v-expand-transition>
-                          <div v-if="item.showSubtypes">
-                            <div
-                              v-for="(subtype, index) in searchedTypes.filter(x=>x.root
-                                .includes(item.id))"
-                              :key="index"
-                              class="filter-element ml-2"
-                              :class="{'filter-element-clicked' : subtype.value}"
-                              @click="subtype.value = !subtype.value"
+                            <v-icon
+                              v-if="subtype.value"
+                              style="float: right"
+                              small
                             >
-                              <span>{{ subtype.en }}</span>
-
-                              <v-icon
-                                v-if="subtype.value"
-                                style="float: right"
-                                small
-                              >
-                                mdi-close
-                              </v-icon>
-                            </div>
+                              mdi-close
+                            </v-icon>
                           </div>
-                        </v-expand-transition>
-                      </v-col>
-                    </v-row>
-                    <!--String search-->
-                    <v-row
-                      v-if="
-                        filterElements[selectedClass].items[selected].type ===
-                          'text'
-                      "
+                        </div>
+                      </v-expand-transition>
+                    </v-col>
+                  </v-row>
+                  <!--String search-->
+                  <v-row
+                    v-if="
+                      filterElements[selectedClass].items[selected].type ===
+                        'text'
+                    "
+                  >
+                    <v-col
+                      v-for="item in filterElements[selectedClass].items[
+                        selected
+                      ].values"
+                      :key="item.id"
+                      cols="12"
                     >
-                      <v-col
-                        v-for="item in filterElements[selectedClass].items[
+                      <v-text-field v-model="item.value" :label="item.en" />
+                    </v-col>
+                  </v-row>
+                  <!--Time Search-->
+                  <v-row
+                    v-if="
+                      filterElements[selectedClass].items[selected].type ===
+                        'time'
+                    "
+                  >
+                    <v-col
+                      cols="12"
+                    >
+                      <filter-window-time-selection
+                        v-model="filterElements[selectedClass].items[
                           selected
                         ].values"
-                        :key="item.id"
-                        cols="12"
-                      >
-                        <v-text-field v-model="item.value" :label="item.en" />
-                      </v-col>
-                    </v-row>
-                    <!--Time Search-->
-                    <v-row
-                      v-if="
-                        filterElements[selectedClass].items[selected].type ===
-                          'time'
-                      "
-                    >
-                      <v-col
-                        cols="12"
-                      >
-                        <filter-window-time-selection
-                          v-model="filterElements[selectedClass].items[
-                            selected
-                          ].values"
-                        />
-                      </v-col>
-                    </v-row>
-                  </v-card-text>
-                </v-card>
-              </v-slide-y-transition>
-            </v-col>
-          </v-row>
-        </v-card-text>
-        <!--Global Search-->
-        <v-card-text
-          v-else
-          class="pa-5 hidden"
-          style="overflow: auto; max-height: 370px; width: 732px"
+                      />
+                    </v-col>
+                  </v-row>
+                </v-card-text>
+              </v-card>
+            </v-slide-y-transition>
+          </v-col>
+        </v-row>
+      </v-card-text>
+      <!--Global Search-->
+      <v-card-text
+        v-else
+        class="pa-5 hidden"
+        style="overflow: auto; max-height: 370px; width: 732px"
+      >
+        <v-row
+          no-gutters
         >
-          <v-row
-            no-gutters
+          <v-col
+            v-for="item in searchedTypes"
+            :key="item.id"
+            cols="12"
+            sm="6"
           >
-            <v-col
-              v-for="item in searchedTypes"
-              :key="item.id"
-              cols="12"
-              sm="6"
+            <div
+              class="filter-element"
+              :class="item.value ? 'filter-element-clicked' : ''"
+              @click="selectItem(item)"
             >
-              <div
-                class="filter-element"
-                :class="item.value ? 'filter-element-clicked' : ''"
-                @click="selectItem(item)"
-              >
-                <span>{{ item.en }}</span>
+              <span>{{ item.en }} asd</span>
 
-                <v-icon
-                  v-if="item.value"
-                  style="float: right"
-                  small
-                >
-                  mdi-close
-                </v-icon>
-              </div>
-            </v-col>
-            <p v-if="searchedTypes.length === 0">
-              Nothing found
-            </p>
-          </v-row>
-        </v-card-text>
-        <v-btn absolute right bottom color="grey" @click="search">
-          <v-icon>mdi-magnify</v-icon>
-          Search
-        </v-btn>
-      </v-card>
-    </div>
+              <v-icon
+                v-if="item.value"
+                style="float: right"
+                small
+              >
+                mdi-close
+              </v-icon>
+            </div>
+          </v-col>
+          <p v-if="searchedTypes.length === 0">
+            Nothing found
+          </p>
+        </v-row>
+      </v-card-text>
+      <v-btn absolute right bottom color="grey" @click="search">
+        <v-icon>mdi-magnify</v-icon>
+        Search
+      </v-btn>
+    </menu-window>
   </v-menu>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'FilterWindow',
@@ -274,6 +265,7 @@ export default {
     propertySelectedClassAndSelectedAndSearchKeyword() {
       return `${this.selectedClass}|${this.selected}|${this.searchKeyword}`;
     },
+    ...mapGetters('query', ['getCurrentSystemClass', 'getFiltersFlat']),
   },
   watch: {
     openWindow() {
@@ -296,8 +288,6 @@ export default {
     '$route.query': {
       handler() {
         if (this.filterElements?.[0].items) {
-          this.updateTypesFromUrl();
-          this.updateFiltersFromUrl();
           this.$store.commit('app/setFilterElements', this.filterElements);
         }
       },
@@ -316,6 +306,19 @@ export default {
         this.filterElements = JSON.parse(
           JSON.stringify(this.$store.state.app.filterelements),
         );
+      },
+      immediate: true,
+      deep: true,
+    },
+    '$store.state.query.filters': {
+      handler() {
+        this.filterElements
+          .find((x) => x.systemClass === this.getCurrentSystemClass)?.items.forEach((item) => {
+            item.values.forEach((value) => {
+              const match = this.getFiltersFlat.find((setFilter) => setFilter.id === value.id);
+              if (match) value.value = match.value;
+            });
+          });
       },
       immediate: true,
       deep: true,
@@ -346,47 +349,16 @@ export default {
     this.loadAllTypesFromBackend();
   },
   methods: {
-    updateFiltersFromUrl() {
-      let filters = [];
-      if (Array.isArray(this.$route.query.filter)) filters = this.$route.query.filter;
-      else if (this.$route.query.filter) filters = [this.$route.query.filter];
-
-      filters.forEach((filter) => {
-        const filterParams = filter.split('|');
-        const value = this.filterElements
-          .find((x) => x.selected).items
-          .find((x) => x.kind === 'filter' && x.values.some((obj) => obj.id === filterParams?.[1]))
-          .values.find((x) => x.id === filterParams?.[1]);
-        value.value = filterParams?.[3];
-        value.logicalOperator = filterParams?.[2];
-        value.concatOperator = filterParams?.[0];
-      });
-    },
-    updateTypesFromUrl() {
-      if (this.$route.query.codes) {
-        let types = this.$route.query.type_id;
-        if (!Array.isArray(types)) types = [this.$route.query.type_id];
-        types = types.map(String);
-        this.filterElements.forEach((filterElement) => {
-          filterElement.selected = (filterElement.systemClass === this.$route.query.codes);
-          filterElement.items.forEach((filterItems) => {
-            if (filterItems.kind === 'type') {
-              filterItems.values.forEach((filterItemValue) => {
-                filterItemValue.value = types.includes(filterItemValue.id.toString());
-              });
-            }
-          });
-        });
-      }
-    },
+    ...mapActions({
+      updateFiltersFromUrl: 'query/updateFiltersFromUrl',
+      setSearch: 'query/setSearch',
+    }),
     async loadAllTypesFromBackend() {
       if (this.$route.query.codes) {
         this.filterElements.forEach((item) => {
           (item.selected = item.systemClass === this.$route.query.codes);
         });
       }
-
-      this.updateFiltersFromUrl();
 
       const p = await this.$api.Nodes.get_api_0_2_type_tree_();
       const { typeTree } = p.body;
@@ -410,6 +382,7 @@ export default {
                 showSubtypes: false,
                 root: element.root,
                 subs: element.subs,
+                type: 'type',
               };
             };
 
@@ -418,7 +391,11 @@ export default {
         });
       });
 
-      this.$store.commit('app/setFilterElements', this.filterElements);
+      await this.$store.commit(
+        'app/setFilterElements',
+        JSON.parse(JSON.stringify(this.filterElements)),
+      );
+      this.updateFiltersFromUrl(this.$route.query);
     },
     selectItem(item) {
       item.value = !item.value;
@@ -428,20 +405,14 @@ export default {
         .value = item.value;
     },
     search() {
-      this.filterElements.forEach((item, index) => (item.selected = index === this.selectedClass));
-      this.$store.commit(
-        'app/setFilterElements',
-        JSON.parse(JSON.stringify(this.filterElements)),
-      );
 
-      this.open = false;
-      let name = 'data-detaillist-q';
-      if(this.$route.name.startsWith('data-')) name = this.$route.name;
-
-      this.$router.push({
-        name,
-        query: this.getFilterObject,
-      });
+      const filters = this.filterElements[this.selectedClass].items
+        .flatMap((x) => x.values)
+        .filter((x) => x.value)
+        .map((x) => ({
+          id: x.id, en: x.en, value: x.value, type: x.type,
+        }));
+      this.setSearch(filters);
     },
     updateFilter(selectedClass, selectedProperty, value) {
       this.$store.commit('app/updateFilterValue', {

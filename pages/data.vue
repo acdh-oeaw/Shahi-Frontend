@@ -25,13 +25,13 @@
 
     <collection-header v-if="$route.query.m == 'c'" :items="items" />
 
-    <nuxt-child :items="items" :totalItems="totalItems" :not-found="notFound" />
+    <nuxt-child :items="items" :total-items="totalItems" :not-found="notFound" />
   </div>
 </template>
 
 <script>
 import favorites from '@/mixins/favorites';
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'DataVue',
@@ -44,7 +44,7 @@ export default {
 
     try {
       // eslint-disable-next-line no-underscore-dangle
-      const p = await this.$api.Entities.get_api_0_2_query_({
+      const p = await this.$api.Entities.get_api_0_3_query_({
         limit: itemsPerPage,
         first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
         filter: this.query,
@@ -59,7 +59,6 @@ export default {
 
       this.itemIndex = p.body.pagination.index;
       this.totalItems = p.body.pagination.entities;
-
     } catch (err) {
       console.log(err);
       this.notFound = true;
@@ -76,9 +75,6 @@ export default {
       itemIndex: [],
       query: {},
     };
-  },
-  mounted(){
-    window.scrollTo({top:0})
   },
   watch: {
     '$route.query': {
@@ -99,7 +95,6 @@ export default {
     },
     query: {
       handler() {
-
         // this.itemIndex = [];
         // this.options.page = 1;
         this.$fetch();
@@ -107,14 +102,15 @@ export default {
       deep: true,
     },
   },
+  mounted() {
+    window.scrollTo({ top: 0 });
+  },
   methods: {
+    ...mapActions({
+      searchByFilterId: 'query/searchByFilterId',
+    }),
     clicked(item) {
-      this.$router.push(
-        {
-          name: this.$route.name,
-          query: item.target.query,
-        },
-      );
+      this.searchByFilterId(item.id);
     },
     toFavs() {
       this.$router.push({
@@ -150,15 +146,17 @@ export default {
   z-index: 500;
 
 }
-.navigation-item{
+
+.navigation-item {
   height: 100%;
   font-size: 14px !important;
   padding: 13px 3px;
   margin: 0 7px;
   cursor: pointer;
-  transition: all  ease 100ms;
+  transition: all ease 100ms;
 }
-.navigation-item:hover{
-  background-color: rgba(0,0,0,0.1);
+
+.navigation-item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 </style>

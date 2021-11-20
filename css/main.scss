@@ -48,6 +48,13 @@ $heading-font-family : 'Noto Serif Display';
     font-size: 40px;
   }
 }
+.clickable{
+  cursor: pointer;
+  transition: opacity 100ms ease;
+}
 
+.clickable:hover{
+  opacity: 0.8;
+}
 
 
