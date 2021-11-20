@@ -725,7 +725,7 @@
         }
       }
     },
-    "/api/0.2/query/": {
+    "/api/0.3/query/": {
       "get": {
         "tags": [
           "Entities"
