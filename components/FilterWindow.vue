@@ -217,7 +217,7 @@
               :class="item.value ? 'filter-element-clicked' : ''"
               @click="selectItem(item)"
             >
-              <span>{{ item.en }} asd</span>
+              <span>{{ item.en }} </span>
 
               <v-icon
                 v-if="item.value"
