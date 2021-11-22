@@ -158,4 +158,8 @@ html, body {
 .clickable{
   cursor: pointer;
 }
+
+.clickable:hover{
+opacity:1 !important;
+}
 </style>
