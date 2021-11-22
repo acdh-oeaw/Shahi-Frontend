@@ -1,7 +1,7 @@
 <template>
-  <v-card :max-width="width" class="window sb5 elevation-4">
+  <div  class="window sb5 elevation-4">
     <slot />
-  </v-card>
+  </div>
 </template>
 
 <script>
@@ -31,14 +31,15 @@ export default {
   margin-top: 8px;
   border: 4px solid #b7bf96;
   padding: 20px;
+  background-color:white;
   position: relative;
 
 }
 
 .sb5:before {
   content: "";
-  width: 0px;
-  height: 0px;
+  width: 0;
+  height: 0;
   position: absolute;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
