@@ -29,21 +29,16 @@
               the University of Vienna’s Department of Geography and Regional Research. It is co-financed by the FWF
               Shahi project, Austrian Archaeological Institute, and Holzhausen-Legat.
             </p>
-            <v-row class="mx-3 mx-sm-15">
+            <v-row class="mx-3 mx-sm-15 mt-7">
               <v-col>
-                <ImageButton icon="mdi-map-marker" @click="closed = !closed">
+                <v-btn color="secondary" x-large class="splashtext-btn" @click="closed = !closed">
                   Discover the Kingdoms
-                </ImageButton>
+                </v-btn>
               </v-col>
               <v-col>
-                <ImageButton to="/information" icon="$artifact">
+                <v-btn color="secondary" x-large class="splashtext-btn" to="/information">
                   Enter Database
-                </ImageButton>
-              </v-col>
-              <v-col>
-                <ImageButton to="/team" icon="mdi-account-group">
-                  Meet the Team
-                </ImageButton>
+                </v-btn>
               </v-col>
             </v-row>
           </div>
@@ -116,7 +111,7 @@ html {
 }
 .closed {
   top: 0;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: #b7bf96;
   z-index: 500;
   cursor: pointer;
 }
@@ -137,6 +132,11 @@ html {
 
 .darkened {
   filter: brightness(85%);
+}
+
+.splashtext-btn{
+  width:100%;
+  min-height:70px;
 }
 
 </style>
