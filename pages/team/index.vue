@@ -22,14 +22,14 @@
 
         <v-card flat>
           <v-row no-gutters>
-            <v-col cols="12" sm="3" :order-sm="i%2" class="px-4">
+            <v-col cols="12" sm="3" :order-sm="i%2" class="px-4" v-if="person.image">
               <v-img
                 class="mr-sm-5 circle"
 
-                :src="person.image ? person.image : 'team/placeholder.png'"
+                :src="person.image"
               />
             </v-col>
-            <v-col cols="12" sm="9" class="d-sm-flex align-center px-4">
+            <v-col cols="12" sm="" class="d-sm-flex align-center px-4">
               <v-card flat>
                 <v-row no-gutters>
                   <v-col cols="12" sm="">
@@ -40,7 +40,7 @@
                       {{ person.role }}
                     </v-card-subtitle>
                   </v-col>
-                  <v-col cols="12" sm="">
+                  <v-col cols="12" sm="8">
                     <v-card-text class="text--disabled  text-sm-right font-weight-bold">
                       <p v-for="(reference, index) in person.references" :key="index" class="ma-0">
                         {{ reference }}
@@ -70,7 +70,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <p class="text-h5">Partners</p>
+    <p class="text-h5 mt-15">Partners</p>
     <v-list v-for="partner in partners" :key="partner.name">
       <v-subheader class="text-h6">{{partner.name}}</v-subheader>
       <v-list-item v-for="(member,index) in partner.members" :key="index">
@@ -356,6 +356,10 @@ export default {
               link: '',
             }, {
               name: 'Alexander Watzinger',
+              institute: 'Austrian Academy of Sciences, Austrian Centre for Digital Humanities and Cultural Heritage',
+              link: '',
+            },{
+              name: 'Andreas Olschnögger, BSc',
               institute: 'Austrian Academy of Sciences, Austrian Centre for Digital Humanities and Cultural Heritage',
               link: '',
             },
