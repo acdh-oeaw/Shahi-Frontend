@@ -22,9 +22,9 @@
             </p>
           </div>
         </v-col>
-        <v-col cols="12" sm="6" >
+        <v-col cols="12" sm="6">
           <ImageButton :to="{'name':'index','path':'/','params':{'showMap':true}}" icon="mdi-map-marker">
-            Discover the Map
+            Explore the Map
           </ImageButton>
         </v-col>
         <v-col cols="12" sm="6">
