@@ -70,17 +70,22 @@
         </div>
         <div class="database-image">
           <v-img
+            position="center bottom"
             class="elevation-3"
             width="500px"
             height="500px"
             max-height="80vw"
             max-width="80vw"
-            src="https://images.unsplash.com/photo-1554303486-cb4b90a27751?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-          />
+            src="/site.jpg"
+          >
+            <div class="image-credit">
+              <span> Barikot, Swat, Photo courtesy of Luca Maria Olivieri</span>
+            </div>
+          </v-img>
         </div>
       </div>
-      <div class="data-base-element d-flex flex-column flex-sm-row-reverse   justify-space-between align-center">
-        <div class="ml-15">
+      <div class="data-base-element d-flex flex-column flex-sm-row   justify-space-between align-center">
+        <div>
           <p class="text-h6 mt-15">
             (2) Portable objects
           </p>
@@ -107,15 +112,21 @@
             The largest and most significant category of artifacts are the coins struck in various
             mints throughout the Shahi kingdoms. They provide the chronological and political framework for the Shahi
             period. With their images and inscriptions, they give insight into the self-concept of their issuers. In
-            addition, the technical features of production have to be analyzed; this concerns the production of flans, dies,
-            striking methods, metrology, and metal composition. The extremely rich deposits of copper (Mes Aynak) and silver
-            (Panjshir) to which the Shahis had access constitute important resources for their coinage. However, especially
+            addition, the technical features of production have to be analyzed; this concerns the production of flans,
+            dies,
+            striking methods, metrology, and metal composition. The extremely rich deposits of copper (Mes Aynak) and
+            silver
+            (Panjshir) to which the Shahis had access constitute important resources for their coinage. However,
+            especially
             in the early period of the Turk Shahis (7th to 8th century), access to silver must have been temporarily
             interrupted, because some issues show a considerable sign of debasement. Metal analyses will help to better
-            understand this phenomenon. Furthermore, we have to analyze the circulation patterns. Some coins were only used
-            locally, while others circulated far beyond the borders of their issuing authority. Unfortunately, most of the
+            understand this phenomenon. Furthermore, we have to analyze the circulation patterns. Some coins were only
+            used
+            locally, while others circulated far beyond the borders of their issuing authority. Unfortunately, most of
+            the
             coins bear no mint signature and are not found in a documented archaeological context. However, recent
-            excavations like Tepe Narenj, Qol-e Tut, Mes Aynak, Barikot, and others will help give a clearer picture. This
+            excavations like Tepe Narenj, Qol-e Tut, Mes Aynak, Barikot, and others will help give a clearer picture.
+            This
             concerns also the role of foreign money, like Sasanian drachms, Muslim dirhams, and copper coins, which
             circulated within the Shahi kingdoms.
           </p>
@@ -142,8 +153,12 @@
             height="500px"
             max-height="80vw"
             max-width="80vw"
-            src="https://images.unsplash.com/photo-1632851852839-b70a13715261?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=687&q=80"
-          />
+            src="/artifact.jpg"
+          >
+            <div class="image-credit expand-on-hover">
+              <span>Head of a Buddhist devotee or bodhisattva, Ambaran (Akhnur), Historical Northwest India, c. 6th/7th century, Red clay, accidentally fired, 14 x 10 x 11.5 cm, Photo: © The Government Museum and Art Gallery, Chandigarh, 02961</span>
+            </div>
+          </v-img>
         </div>
       </div>
       <div class="d-flex flex-column flex-sm-row  justify-space-between align-center data-base-element">
@@ -156,7 +171,8 @@
           </p>
 
           <p class="text-body-2">
-            Inscriptions that fit within the chronological and geographic parameters of the Shahi kingdoms offer a critical
+            Inscriptions that fit within the chronological and geographic parameters of the Shahi kingdoms offer a
+            critical
             primary source for the region’s cultural history. The inscriptions will be contextualized to the degree
             possible.
           </p>
@@ -172,33 +188,73 @@
         </div>
         <div class="database-image">
           <v-img
-            class="elevation-3"
+            contain
+
+            class="grey lighten-3 elevation-3"
             width="500px"
             height="500px"
             max-height="80vw"
             max-width="80vw"
-            src="https://images.pexels.com/photos/8719164/pexels-photo-8719164.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-          />
+            src="/inscription.png"
+          >
+            <div class="image-credit expand-on-hover">
+              <span>
+
+                A śāradā inscription from the important Shahi archaeological site Barikot (Vajirasthāna) in Swat, Pakistan.
+
+                The inscription mentions the Hindu Shahi king Jayapāladeva (r. c. 964-1002 CE) and the area where a Shahi temple with a water tank has been excavated.
+
+                Photo: after von Hinüber 2020 in Callieri and Olivieri 2020: 53, fig. 18; Courtesy Lahore Museum and ISMEO Italian Archaeological Mission in Pakistan (Photo by Cristiano Moscatelli)
+              </span>
+            </div>
+          </v-img>
         </div>
       </div>
+      <h2 class="text-h4 mt-15">
+        Categories of Authenticity for Objects in the Shahi Kingdoms Database
+      </h2>
+
+      <p class="text-body-1">
+        Only objects that the art history team could unanimously categorize as authentic are included in the corpus of Shahi
+        visual and material culture. Strict selection criteria have been used to assess the authenticity of each object. We
+        defined three categories of authenticity. In the database, each object is identified as belonging to either category
+        A or B. Category C objects are not included.
+      </p>
+
+      <p class="text-h6">
+        <span class="mr-4 font-weight-bold">A</span> Authentic objects with firm attribution
+      </p>
+
+      <p class="ml-3 text-body-1">
+        <span class="font-weight-bold">A1</span> Secure attribution: excavated objects from a trustworthy context
+      </p>
+      <p class="ml-3 text-body-1">
+        <span class="font-weight-bold">A2</span> Attributable with high confidence: objects with an early accession date (prior to WWI) in regional museums in
+        Afghanistan, Pakistan, and India, as well as objects photographed in situ in monastic and temple treasuries in
+        India; objects bearing inscriptions that indicate authenticity; objects for which objective technical analysis has
+        been conducted that indicates authenticity.
+      </p>
+
+      <p class="text-h6">
+        <span class="mr-4 font-weight-bold">B</span> Apparently authentic objects without secure attribution
+      </p>
+
+      <p class="text-body-1">
+        Objects in private and western museum collections without secure provenance, inscriptions, or objective technical
+        analysis. Comparative art historical analysis suggests confidence in their authenticity.
+      </p>
+
+      <p class="text-h6">
+        <span class="mr-4 font-weight-bold">C</span> Insecure and fake objects
+      </p>
+
+      <p class="text-body-1">
+        These objects are not included in the corpus. However, in our study of Shahi material culture they are used for
+        comparison with apparently authentic objects in order to better understand the historiography of the field and the
+        current market situation. We are aware that other art historians may come to different conclusions in some
+        instances.
+      </p>
     </div>
-
-    Categories of Authenticity for Objects in the Shahi Kingdoms Database
-
-    Only objects that the art history team could unanimously categorize as authentic are included in the corpus of Shahi visual and material culture. Strict selection criteria have been used to assess the authenticity of each object. We defined three categories of authenticity. In the database, each object is identified as belonging to either category A or B. Category C objects are not included.
-
-    A    Authentic objects with firm attribution
-
-    A1 Secure attribution: excavated objects from a trustworthy context
-    A2 Attributable with high confidence: objects with an early accession date (prior to WWI) in regional museums in Afghanistan, Pakistan, and India, as well as objects photographed in situ in monastic and temple treasuries in India; objects bearing inscriptions that indicate authenticity; objects for which objective technical analysis has been conducted that indicates authenticity.
-
-    B    Apparently authentic objects without secure attribution
-
-    Objects in private and western museum collections without secure provenance, inscriptions, or objective technical analysis. Comparative art historical analysis suggests confidence in their authenticity.
-
-    C    Insecure and fake objects
-
-    These objects are not included in the corpus. However, in our study of Shahi material culture they are used for comparison with apparently authentic objects in order to better understand the historiography of the field and the current market situation. We are aware that other art historians may come to different conclusions in some instances.
   </div>
 </template>
 
@@ -213,17 +269,19 @@ export default {
 </script>
 
 <style scoped>
-.database-image{
+.database-image {
   position: relative;
   max-width: 80vw;
   max-height: 80vw;
 }
-.database-image>.v-image{
+
+.database-image > .v-image {
   transition: all ease 200ms;
   z-index: 5;
   position: relative;
 }
-.database-image::before{
+
+.database-image::before {
   position: absolute;
   content: '';
   inset: 0;
@@ -232,30 +290,60 @@ export default {
   transition: all ease-out 200ms;
 }
 
-.database-image:hover>.v-image{
-  transform: translateX(-2px) translateY(-3px);
-}
-.database-image:hover::before{
-  transform: translateX(22px) translateY(23px);
+.image-credit {
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100%;
+  padding: 20px;
+  transition: all 200ms ease-in-out;
+  max-height: 64px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.data-base-element{
+.image-credit::after {
+  content: "";
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7));
+  position: absolute;
+  transition: all ease-in-out 200ms;
+  opacity: 1;
+
+}
+
+.database-image:hover .image-credit {
+  max-height: 100%;
+}
+
+.database-image:hover .image-credit::after {
+  opacity: 0;
+  height: 0;
+
+}
+
+.data-base-element {
   margin-top: 70px;
 }
-.data-base-element p{
+
+.data-base-element p {
   width: 500px;
   max-width: 70vw;
 
 }
-ul{
+
+ul {
   margin-top: -15px;
   margin-bottom: 10px;
 }
-.page-content{
+
+.page-content {
   overflow: hidden;
   max-width: 1200px;
 
 }
-
 
 </style>
