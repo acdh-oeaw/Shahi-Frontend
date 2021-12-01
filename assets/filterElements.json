@@ -99,6 +99,15 @@
         "values": []
       },
       {
+        "label": "Collections",
+        "en": "Collections",
+        "type": "multiple",
+        "id": "1969",
+        "kind": "type",
+
+        "values": []
+      },
+      {
         "label": "Begin/End",
         "en": "Begin/End",
         "type": "time",
