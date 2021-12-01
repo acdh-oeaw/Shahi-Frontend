@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <collection-header v-if="$route.query.m == 'c'" :items="items" />
+    <collection-header v-if="$route.query.collection" :items="items" />
 
     <nuxt-child :items="items" :total-items="totalItems" :not-found="notFound" />
   </div>
@@ -111,6 +111,14 @@ export default {
     }),
     clicked(item) {
       this.searchByFilterId(item.id);
+
+      let name = 'data-list-q';
+      if (this.$route.name.startsWith('data-')) name = this.$route.name;
+
+      this.$router.push({
+        name,
+        query: this.getQuery,
+      });
     },
     toFavs() {
       this.$router.push({
@@ -122,6 +130,7 @@ export default {
     },
   },
   computed: {
+    ...mapGetters('query',['getQuery']),
     options: {
       get() {
         return {

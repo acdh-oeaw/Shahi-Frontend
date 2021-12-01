@@ -1,32 +1,35 @@
 <template>
-      <div class="collection-header secondary darken-1">
-        <div class="page-content">
-          <div class="d-flex justify-space-around">
-            <div class="collection-header-left">
-              <p class="title-1">{{collection.en}}</p>
-              <p>{{ collection.description }}</p>
-            </div>
-            <div class="collection-header-right">
-              <image-collage :items="items"></image-collage>
-            </div>index
-          </div>
+  <div class="collection-header secondary darken-1">
+    <div class="page-content">
+      <div class="d-flex justify-space-around">
+        <div class="collection-header-left">
+          <p class="title-2">
+            {{ collection.en }}
+          </p>
+          <p>{{ collection.description }}</p>
+        </div>
+        <div class="collection-header-right">
+          <image-collage :items="items" />
         </div>
       </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex';
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'CollectionHeader',
-  props:['items'],
-  computed:{
-    collection(){
-      return this.getTypeById(this.$route.query.type_id)
+  props: ['items'],
+  computed: {
+    collection() {
+      return this.getTypeById(this.$route.query.collection);
     },
-    ...mapGetters('app',[
-      'getTypeById'
-    ])
-  }
+    ...mapGetters('app', [
+      'getTypeById',
+    ]),
+  },
 };
 </script>
 
@@ -42,7 +45,7 @@ export default {
   margin-top: 160px;
 }
 .collection-header-left{
-  max-width: 400px;
+  max-width: 500px;
 }
 
 .collection-header-right{
@@ -50,4 +53,3 @@ export default {
 }
 
 </style>
-
