@@ -121,7 +121,7 @@
                         >
                           <span
                             class="clickable"
-                            @click="searchByFilterId(parseInt(type.id))"
+                            @click="searchType(parseInt(type.id))"
                           >
                             {{ type.label }}
                           </span>
@@ -208,6 +208,7 @@ export default {
       'getSystemClassForFilter',
       'getFilterList',
     ]),
+    ...mapGetters('query', ['getQuery']),
     cssVars() {
       let colCount = 2;
       if (this.$vuetify.breakpoint.name === 'xs') colCount = 1;
@@ -268,6 +269,16 @@ export default {
     },
     newPage(page) {
       this.$router.replace({ name: this.$route.name, query: { ...this.$route.query, page } });
+    },
+    searchType(id) {
+      this.searchByFilterId(id);
+      let name = 'data-list-q';
+      if (this.$route.name.startsWith('data-')) name = this.$route.name;
+
+      this.$router.push({
+        name,
+        query: this.getQuery,
+      });
     },
   },
 

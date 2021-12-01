@@ -1,48 +1,46 @@
 <template>
+  <v-combobox
+    v-model="getFiltersFlat"
+    single-line
+    solo-inverted
+    flat
+    hide-details
+    prepend-inner-icon="mdi-magnify"
+    append-icon=""
+    multiple
+    :search-input.sync="globalSearch"
+    @click="open = !open"
+  >
+    <template v-slot:append>
+      <logical-operator-editor v-if="getFiltersFlat.length > 1" class="mr-4" />
+      <FilterWindow :global-search="globalSearch" :open-window="open" />
+    </template>
+    <template v-slot:selection="{ attrs, item, parent, selected }">
+      <v-chip
+        v-if="item === Object(item)"
+        class="text-capitalize"
+        label
+        small
+      >
+        <span v-if="item.value !== true & item.value !== false" class="text-body-1">
+          {{ item.value }}
 
-    <v-combobox
-      v-model="getFiltersFlat"
-      single-line
-      solo-inverted
-      flat
-      hide-details
-      prepend-inner-icon="mdi-magnify"
-      append-icon=""
-      multiple
-      :search-input.sync="globalSearch"
-      @click="open = !open"
-    >
-      <template v-slot:append>
-        <logical-operator-editor v-if="getFiltersFlat.length > 1"  class="mr-4" />
-        <FilterWindow :global-search="globalSearch" :open-window="open" />
-      </template>
-      <template v-slot:selection="{ attrs, item, parent, selected }">
-        <v-chip
-          v-if="item === Object(item)"
-          class="text-capitalize"
-          label
+        </span>
+        <span v-else class="text-body-1">
+
+          {{ item.en }}
+        </span>
+        <v-icon
+          v-if="!item.codes"
+          class="pl-2"
           small
+          @click="removeItem(item.id)"
         >
-          <span v-if="item.value !== true & item.value !== false" class="text-body-1">
-            {{ item.value }}
-
-          </span>
-          <span v-else class="text-body-1">
-
-            {{ item.en }}
-          </span>
-          <v-icon
-            v-if="!item.codes"
-            class="pl-2"
-            small
-            @click="removeFilter(item.id)"
-          >
-            $delete
-          </v-icon>
-        </v-chip>
-      </template>
-    </v-combobox>
-
+          $delete
+        </v-icon>
+      </v-chip>
+    </template>
+  </v-combobox>
 </template>
 
 <script>
@@ -70,19 +68,6 @@ export default {
     ]),
   },
   watch: {
-    '$store.state.query.filters': {
-      handler() {
-        let name = 'data-list-q';
-        if (this.$route.name.startsWith('data-')) name = this.$route.name;
-
-        this.$router.push({
-          name,
-          query: this.getQuery,
-        });
-      },
-      immediate: true,
-      deep: true,
-    },
     '$store.state.app.filters': {
       handler() {
         this.updateArray();
@@ -105,6 +90,16 @@ export default {
     ...mapActions({
       removeFilter: 'query/removeFilter',
     }),
+    removeItem(id) {
+      this.removeFilter(id);
+      let name = 'data-list-q';
+      if (this.$route.name.startsWith('data-')) name = this.$route.name;
+
+      this.$router.push({
+        name,
+        query: this.getQuery,
+      });
+    },
     updateString(query) {
       if (!query) {
         this.filterString = '';

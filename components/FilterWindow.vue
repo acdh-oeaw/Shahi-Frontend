@@ -262,6 +262,7 @@ export default {
   },
   computed: {
     ...mapGetters('app', ['getFilterObject', 'getSystemClassForFilter']),
+    ...mapGetters('query', ['getQuery']),
     propertySelectedClassAndSelectedAndSearchKeyword() {
       return `${this.selectedClass}|${this.selected}|${this.searchKeyword}`;
     },
@@ -405,7 +406,6 @@ export default {
         .value = item.value;
     },
     search() {
-
       const filters = this.filterElements[this.selectedClass].items
         .flatMap((x) => x.values)
         .filter((x) => x.value)
@@ -413,6 +413,14 @@ export default {
           id: x.id, en: x.en, value: x.value, type: x.type,
         }));
       this.setSearch(filters);
+
+      let name = 'data-list-q';
+      if (this.$route.name.startsWith('data-')) name = this.$route.name;
+
+      this.$router.push({
+        name,
+        query: this.getQuery,
+      });
       this.open = false;
     },
     updateFilter(selectedClass, selectedProperty, value) {

@@ -100,7 +100,7 @@
             v-for="(type, index) in item.features[0].type[slot.value.split('.')[2]]"
             :key="index"
             class="clickable"
-            @click="searchByFilterId(parseInt(type.identifier
+            @click="searchType(parseInt(type.identifier
               .split('/').splice(-1)[0]))"
           >
             {{ type.label }}
@@ -120,7 +120,7 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -176,8 +176,9 @@ export default {
       'getCRMClassBySystemClass',
       'getSortColumnByPath',
       'getSystemClassForFilter',
-      'getFilterList',
-    ]),
+      'getFilterList']),
+    ...mapGetters('query', ['getQuery']),
+
     itemsWithType() {
       if (this.items.length === 0) return [];
 
@@ -211,6 +212,16 @@ export default {
     }),
     id(item) {
       return item.features[0]['@id'].split('/').splice(-1)[0];
+    },
+    searchType(id) {
+      this.searchByFilterId(id);
+      let name = 'data-list-q';
+      if (this.$route.name.startsWith('data-')) name = this.$route.name;
+
+      this.$router.push({
+        name,
+        query: this.getQuery,
+      });
     },
   },
 

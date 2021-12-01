@@ -8,7 +8,7 @@ export const getters = {
   getCurrentSystemClass: (s) => s.codes,
   getQuery: (s) => {
     const query = {
-      codes: s.codes,
+      codes: s.codes || 'artifact',
       search: [],
     };
     let filtergroup = [[]];
@@ -44,7 +44,6 @@ export const getters = {
     return query;
   },
 };
-
 export const mutations = {
 
   setSearch(state, value) {
@@ -63,7 +62,6 @@ export const mutations = {
   },
 
 };
-
 export const actions = {
 
   setSearch({ commit }, value) {
@@ -81,7 +79,7 @@ export const actions = {
     commit('setFilters', value);
   },
   updateFiltersFromUrl({ commit, rootGetters }, q) {
-    commit('setCodes', q?.codes || this.state.codes);
+    if (q?.codes) commit('setCodes', q?.codes);
 
     if (q.search) {
       const getFilterDetailsFromID = (id) => {

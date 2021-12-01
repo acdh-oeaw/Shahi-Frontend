@@ -149,6 +149,13 @@ export default {
     },
     save(value) {
       this.setFilters(JSON.parse(JSON.stringify(this.boxes)));
+      let name = 'data-list-q';
+      if (this.$route.name.startsWith('data-')) name = this.$route.name;
+
+      this.$router.push({
+        name,
+        query: this.getQuery,
+      });
       this.open = false;
     },
   },
