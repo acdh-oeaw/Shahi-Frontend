@@ -6,7 +6,7 @@
           <p class="title-2">
             {{ collection.en }}
           </p>
-          <p>{{ collection.description }}</p>
+          <p style="white-space: pre-line">{{ collection.description }}</p>
         </div>
         <div class="collection-header-right">
           <image-collage :items="items" />

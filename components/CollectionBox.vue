@@ -4,7 +4,7 @@
       <p class="title-2">
         {{ collection.name }}
       </p>
-      <p class="collection-description text-body-1">
+      <p style="white-space: pre-line" class="collection-description text-body-1">
         {{ collection.description }}
       </p>
       <div

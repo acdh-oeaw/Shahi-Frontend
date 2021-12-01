@@ -40,7 +40,7 @@ export default {
 <style scoped>
 
 .header {
-  height: 600px;
+  height: 200px;
 }
 
 .page-content {
@@ -49,7 +49,6 @@ export default {
 
 .title-1 {
   padding-left: 20px;
-  margin-top: -10%;
 }
 
 </style>
