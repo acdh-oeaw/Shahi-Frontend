@@ -434,30 +434,6 @@ export default {
 </script>
 
 <style>
-.all {
-  padding-top: 5px;
-  position: relative;
-}
-
-.tik {
-  position: absolute;
-  left: 50%;
-  background-color: white;
-  width: 15px;
-  height: 15px;
-  transform: rotateY(0deg) rotate(45deg);
-
-  box-shadow: 0 0 4px 2px rgba(0, 0, 0, 0.1);
-  clip-path: polygon(-50% 150%, 150% -50%, -50% -50%);
-  z-index: 4;
-}
-
-.content {
-  position: relative;
-  margin-top: 6px;
-  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.4);
-  z-index: -0;
-}
 
 .transition {
   width: auto;
