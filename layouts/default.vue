@@ -75,6 +75,9 @@
         <nuxt-link class="nav-link mr-5" to="/collections">
           Collections
         </nuxt-link>
+        <nuxt-link class="nav-link mr-5" to="/sourcebook">
+          Sourcebook
+        </nuxt-link>
         <nuxt-link class="nav-link mr-5" to="/bibliography">
           Bibliography
         </nuxt-link>
@@ -214,7 +217,7 @@
 </template>
 <script>
 import favorites from '@/mixins/favorites';
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import querysearch from '~/components/querysearchNew.vue';
 
 export default {
@@ -233,7 +236,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('query',['getQuery']),
+    ...mapGetters('query', ['getQuery']),
     hideOnMainPage() {
       return this.$route.name != 'index' || this.windowTop >= 300;
     },
