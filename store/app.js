@@ -24,8 +24,8 @@ export const state = () => ({
 export const getters = {
   getCurrentFiltersFlat: (s) => s.filterelements.find((item) => item.selected === true).items.flatMap((x) => x.values),
   getBibliography: (s) => s.bib,
-  getCollections: (s) => s.filterelements[0].items.find((item) => item.id === '185'),
-  getTypeById: (s) => (id) => s.filterelements[0].items.find((item) => item.id === '185').values.find((item) => item.id === parseInt(id)),
+  getCollections: (s) => s.filterelements[0].items.find((item) => item.id === '1969'),
+  getTypeById: (s) => (id) => s.filterelements[0].items.find((item) => item.id === '1969').values.find((item) => item.id === parseInt(id)),
   getSystemClassForFilter: (s) => s.filterelements.find((item) => item.selected === true).systemClass,
   getCurrentFilters: (s) => s.filterelements.find((item) => item.selected === true),
   getFilterObject: (s) => {
