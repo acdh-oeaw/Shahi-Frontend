@@ -214,7 +214,7 @@
 </template>
 <script>
 import favorites from '@/mixins/favorites';
-import { mapActions } from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 import querysearch from '~/components/querysearchNew.vue';
 
 export default {
@@ -233,6 +233,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters('query',['getQuery']),
     hideOnMainPage() {
       return this.$route.name != 'index' || this.windowTop >= 300;
     },
@@ -257,6 +258,14 @@ export default {
       this.$store.commit('app/closeQueryDrawer');
       this.$store.commit('app/setSelectedFilterClass', item.systemClass);
       this.searchByFilterId(item.id);
+      let name = 'data-list-q';
+      if (this.$route.name.startsWith('data-')) name = this.$route.name;
+
+      this.$router.push({
+        name,
+        query: this.getQuery,
+      });
+      this.open = false;
     },
   },
   head() {
