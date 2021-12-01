@@ -1,5 +1,5 @@
 <template>
-  <div>
+
     <v-combobox
       v-model="getFiltersFlat"
       single-line
@@ -42,7 +42,7 @@
         </v-chip>
       </template>
     </v-combobox>
-  </div>
+
 </template>
 
 <script>
