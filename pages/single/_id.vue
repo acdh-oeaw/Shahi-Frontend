@@ -25,7 +25,7 @@
                       .replace(/^0+/, "")
                   }}</span>
               </p>
-              <p v-if="item.features[0].description">
+              <p style="white-space: pre-line" v-if="item.features[0].description">
                 {{ item.features[0].description[0].value }}
               </p>
               <p

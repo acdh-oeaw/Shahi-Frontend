@@ -91,7 +91,7 @@
                       {{ getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity').label }}
                     </span>
                   </v-card-text>
-                  <v-card-text class="text-body-1">
+                  <v-card-text style="white-space: pre-line" class="text-body-1">
                     {{
                       item.features[0].description[0].value
                     }}
