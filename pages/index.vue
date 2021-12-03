@@ -8,7 +8,7 @@
       :class="{ closed: closed,
                 topOffset: $vuetify.breakpoint.smAndUp}"
     >
-      <div class="page-content">
+       <div class="page-content">
         <p class="text-h4 text-sm-h2">
           Shahi Kingdoms Database
         </p>
@@ -48,7 +48,8 @@
     </v-layout>
     <div class="bgmap">
       <qmap
-        :class="{ 'darkened': !closed}"
+        :class="{ 'darkened': !closed,
+        down: closed,}"
         :geojsonitems="items"
         :options="{ zoomControl: false }"
       />
@@ -124,10 +125,15 @@ html {
 .bgmap {
   height: calc(100vh - 64px);
   width: 100%;
+
   position: absolute;
   top: 0;
   z-index: 0;
   transition: all 100ms linear;
+}
+.down{
+  transform: translateY(115px);
+    transition: all 100ms;
 }
 
 .darkened {

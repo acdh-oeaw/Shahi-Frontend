@@ -1,8 +1,9 @@
 import colors from 'vuetify/es5/util/colors';
+
 export default {
-  server:{
+  server: {
     port: process.env.PORT || 3000,
-    host: process.env.GITLAB_ENVIRONMENT_NAME ? '0.0.0.0' : 'localhost'
+    host: process.env.GITLAB_ENVIRONMENT_NAME ? '0.0.0.0' : 'localhost',
   },
   /*
   ** Nuxt rendering mode
@@ -19,7 +20,7 @@ export default {
   ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
-    title: "Shahi Kingdoms Database",
+    title: 'Shahi Kingdoms Database',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -27,7 +28,15 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/icon.ico' },
+      { rel: 'stylesheet', href: '~/assets/js/map/mapviewer.css' },
     ],
+    script: [
+
+      {
+        src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
+
+      },
+  ]
   },
   generate: {
     fallback: true,

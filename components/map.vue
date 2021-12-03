@@ -1,28 +1,18 @@
 <template>
-  <client-only>
-    <div class="mapcontainer">
-      <l-map ref="map" :zoom="7" :center="center" :options="options">
-        <l-tile-layer :url="url" />
-        <l-feature-group ref="features">
-          <l-geo-json
-            v-for="item in geojsonitems"
-            :key="item.features[0]['@id']"
-            :geojson="item"
-          />
-        </l-feature-group>
-      </l-map>
-      <p class="demo-text">This is just a demo map</p>
-    </div>
-  </client-only>
+
+    <div style="width:100%;height:100%;" id="map-container"></div>
+
 </template>
 
 <script>
-
+import MapViewerComponent from "@/assets/js/map/mapviewer.js";
+import "@/assets/js/map/mapviewer.css";
 export default {
   props: {
     options: {
       type: Object,
-      default: () => {},
+      default: () => {
+      },
     },
     geojsonitems: {
       type: Array,
@@ -47,7 +37,9 @@ export default {
   },
   watch: {
     geojsonitems: {
-      handler() { this.setBounds(); },
+      handler() {
+        this.setBounds();
+      },
       deep: true,
       immediate: true,
     },
@@ -56,6 +48,73 @@ export default {
     this.$nextTick(() => {
       // this.$refs.map.mapObject.remove();
     });
+  },
+  mounted() {
+
+    const configData = {
+      "map": {
+        "controls": {
+          "zoomlvl": true,
+          "layer": true,
+          "geonames": false,
+          "locate": false,
+          "opacity": true
+        },
+        "leafletOptions": {
+          "maxZoom": 10,
+          "minZoom": 7,
+          "zoom": 8,
+          "center": [35, 70]
+        }
+      }
+    };
+    const jsonData = [
+      {
+        "type": "Feature",
+        "properties": {
+          "ID": "Point 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            69.205,
+            33.5653
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "ID": "Point 2"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            70.2075,
+            34.5253
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "ID": "Point 3"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            69.2175,
+            34.5553
+          ]
+        }
+      }
+    ];
+    this.$nextTick(function (){
+      const coreComponent = document.getElementById("map-container");
+      console.log(coreComponent)
+      const asd  = new MapViewerComponent(coreComponent,configData,[])
+    })
+
   },
   methods: {
     setBounds() {
@@ -78,29 +137,31 @@ export default {
   position: relative;
 }
 
- #vizTreeV circle {
-   fill: #fff;
-   stroke: #54a8ff;
-   stroke-width: 3px;
- }
+#vizTreeV circle {
+  fill: #fff;
+  stroke: #54a8ff;
+  stroke-width: 3px;
+}
+
 #vizTreeV .node text {
   font: 12px sans-serif;
 }
+
 #vizTreeV .link {
   fill: none;
   stroke: #ccc;
   stroke-width: 2px;
 }
 
-.demo-text{
-  position:absolute;
+.demo-text {
+  position: absolute;
   color: red;
   z-index: 400;
   font-size: 40px;
   margin: 10px;
   opacity: 70%;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
 }
 
 </style>
