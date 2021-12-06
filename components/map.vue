@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import MapViewerComponent from "@/assets/js/map/mapviewer.js";
 import "@/assets/js/map/mapviewer.css";
+import MapViewerComponent from "@/assets/js/map/mapviewer.js";
 export default {
   props: {
     options: {

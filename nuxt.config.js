@@ -28,7 +28,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/icon.ico' },
-      { rel: 'stylesheet', href: '~/assets/js/map/mapviewer.css' },
+      { rel: 'stylesheet', href: '@/assets/js/map/mapviewer.css' },
     ],
     script: [
 

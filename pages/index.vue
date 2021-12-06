@@ -5,51 +5,92 @@
       justify-center
       align-center
       class="text-center pa-5 splashtext"
-      :class="{ closed: closed,
-                topOffset: $vuetify.breakpoint.smAndUp}"
+      :class="{
+        closed: closed,
+        'animation-closed': closed & initialized,
+        'animation-open': !closed & initialized,
+        open: !closed,
+        topOffset: $vuetify.breakpoint.smAndUp,
+      }"
     >
-       <div class="page-content">
-        <p class="text-h4 text-sm-h2">
-          Shahi Kingdoms Database
-        </p>
-        <v-expand-transition>
-          <div v-if="!closed">
-            <p class="text-body-1">
-              The Shahi Kingdoms Database presents comprehensive primary source material--archaeological sites,
-              artifacts, coins, inscriptions--for the Shahi kingdoms (c. 7th-10th centuries) which played a pivotal
-              role in the history of Central, Inner, and South Asia. The primary source material records are
-              cross-referenced with an interactive geo-referenced map, bibliographic references, and digital
-              scientific articles.
-            </p>
-            <p class="text-body-1">
-              The database is an initiative of the interdisciplinary Austrian Science Fund (FWF) project P-31246
-              ‘Cultural Formation and Transformation: Shahi Art and Architecture from Afghanistan to the West Tibetan
-              Frontier at the Dawn of the Islamic Era’ in cooperation with technical experts at the Austrian Academy
-              of Sciences’ Austrian Centre for Digital Humanities and Cultural Heritage (ACDH-CH) and cartographers at
-              the University of Vienna’s Department of Geography and Regional Research. It is co-financed by the FWF
-              Shahi project, Austrian Archaeological Institute, and Holzhausen-Legat.
-            </p>
-            <v-row class="mx-3 mx-sm-15 mt-7">
-              <v-col>
-                <v-btn color="secondary" x-large class="splashtext-btn" @click="closed = !closed">
-                  Discover the Kingdoms
-                </v-btn>
-              </v-col>
-              <v-col>
-                <v-btn color="secondary" x-large class="splashtext-btn" to="/information">
-                  Enter Database
-                </v-btn>
-              </v-col>
-            </v-row>
-          </div>
-        </v-expand-transition>
-        <div v-if="closed" style="position:absolute; left:0; top:0; right:0;bottom:0;" @click="closed = !closed" />
+      <div style="max-width: 1000px">
+        <div v-if="!closed">
+          <p class="text-h4 text-sm-h2">Shahi Kingdoms Database</p>
+
+          <p class="text-body-1">
+            The Shahi Kingdoms Database presents comprehensive primary source
+            material--archaeological sites, artifacts, coins, inscriptions--for
+            the Shahi kingdoms (c. 7th-10th centuries) which played a pivotal
+            role in the history of Central, Inner, and South Asia. The primary
+            source material records are cross-referenced with an interactive
+            geo-referenced map, bibliographic references, and digital scientific
+            articles.
+          </p>
+          <p class="text-body-1">
+            The database is an initiative of the interdisciplinary Austrian
+            Science Fund (FWF) project P-31246 ‘Cultural Formation and
+            Transformation: Shahi Art and Architecture from Afghanistan to the
+            West Tibetan Frontier at the Dawn of the Islamic Era’ in cooperation
+            with technical experts at the Austrian Academy of Sciences’ Austrian
+            Centre for Digital Humanities and Cultural Heritage (ACDH-CH) and
+            cartographers at the University of Vienna’s Department of Geography
+            and Regional Research. It is co-financed by the FWF Shahi project,
+            Austrian Archaeological Institute, and Holzhausen-Legat.
+          </p>
+          <v-row class="mx-3 mx-sm-15 mt-7">
+            <v-col>
+              <v-btn
+                color="secondary"
+                x-large
+                class="splashtext-btn"
+                @click="closed = !closed"
+              >
+                Discover the Kingdoms
+              </v-btn>
+            </v-col>
+            <v-col>
+              <v-btn
+                color="secondary"
+                x-large
+                class="splashtext-btn"
+                to="/information"
+              >
+                Enter Database
+              </v-btn>
+            </v-col>
+          </v-row>
+        </div>
+
+        <v-btn
+          v-else
+          fab
+          @click="
+            initialized = true;
+            closed = !closed;
+          "
+          color="secondary"
+        >
+          <v-icon>mdi-information-variant</v-icon>
+        </v-btn>
       </div>
     </v-layout>
+    <v-fab-transition>
+      <v-btn
+        to="/data/list?codes=artifact"
+        fab
+        absolute
+        bottom
+        right
+        color="secondary"
+        v-if="closed"
+        class="database-btn"
+      >
+        <v-icon>mdi-database</v-icon></v-btn
+      >
+    </v-fab-transition>
     <div class="bgmap">
       <qmap
-        :class="{ 'darkened': !closed,
-        down: closed,}"
+        :class="{ darkened: !closed, down: closed }"
         :geojsonitems="items"
         :options="{ zoomControl: false }"
       />
@@ -58,8 +99,8 @@
 </template>
 
 <script>
-import ImageButton from '@/components/ImageButton.vue';
-import qmap from '~/components/map.vue';
+import ImageButton from "@/components/ImageButton.vue";
+import qmap from "~/components/map.vue";
 
 export default {
   components: {
@@ -69,13 +110,14 @@ export default {
   data() {
     return {
       items: [],
-      body: 'loading...',
+      body: "loading...",
       closed: false,
+      initialized: false,
     };
   },
   watch: {
     closed() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     },
   },
   async mounted() {
@@ -85,13 +127,12 @@ export default {
 
     const p = await this.$api.Entities.get_api_0_2_code__code_({
       limit: 500,
-      show: ['geometry'],
-      code: 'artifact',
+      show: ["geometry"],
+      code: "artifact",
     });
     this.items = p.body.results;
     this.body = content.body.intro;
   },
-
 };
 </script>
 <style>
@@ -101,25 +142,46 @@ html {
 }
 
 .splashtext {
-  position: relative;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 400px;
+
   background-color: rgba(255, 255, 255, 1);
-  width: 100%;
   z-index: 5;
-  transition: all  200ms linear;
+  max-width: 100vw;
+  min-width: 100%;
+  max-height: 100%;
 }
-.topOffset{
-  top: 15vh;
+.topOffset {
+  transform: translateY(5rem);
 }
-.closed {
-  top: 0;
-  background-color: #b7bf96;
-  z-index: 500;
+.animation-closed {
+  animation-name: close;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+
   cursor: pointer;
 }
 
-.closed:hover {
-  filter: brightness(85%);
+.animation-open {
+  overflow: hidden;
+  animation-name: open;
+  animation-duration: 500ms;
+  animation-fill-mode: forwards;
+}
 
+.closed {
+  border-radius: 100%;
+  max-width: 56px;
+  min-width: 56px;
+
+  max-height: 56px;
+  min-height: 56px;
+  background-color: rgba(255, 255, 255, 0);
+  transform: translateY(calc(84vh - 100px)) translateX(calc(50vw - 54px));
 }
 
 .bgmap {
@@ -131,18 +193,94 @@ html {
   z-index: 0;
   transition: all 100ms linear;
 }
-.down{
-  transform: translateY(115px);
-    transition: all 100ms;
-}
 
 .darkened {
   filter: brightness(85%);
 }
 
-.splashtext-btn{
-  width:100%;
-  min-height:70px;
+.splashtext-btn {
+  width: 100%;
+  min-height: 56px;
 }
 
+.slide-fade-enter-active {
+  transition: all 300ms ease;
+  transition-delay: 500ms;
+}
+.slide-fade-leave-active {
+  transition: all 100ms ease;
+}
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+  height: 0px;
+}
+
+@keyframes close {
+  0% {
+    border-radius: 0%;
+    background-color: rgba(255, 255, 255, 1);
+    transform: translateY(5rem);
+
+    max-width: 100vw;
+    min-width: 100%;
+    max-height: 100%;
+    min-height: 400px;
+  }
+  60% {
+    border-radius: 30%;
+  }
+  70% {
+    max-width: 56px;
+    min-width: 56px;
+    max-height: 56px;
+    min-height: 56px;
+  }
+  99% {
+    background-color: #b7bf96;
+  }
+  100% {
+    border-radius: 100%;
+    max-width: 56px;
+    min-width: 56px;
+
+    max-height: 56px;
+    min-height: 56px;
+    background-color: rgba(255, 255, 255, 0);
+    transform: translateY(calc(84vh - 100px)) translateX(calc(50vw - 54px));
+  }
+}
+
+@keyframes open {
+  100% {
+    background-color: rgba(255, 255, 255, 1);
+
+    max-width: 100vw;
+    min-width: 100%;
+    max-height: 100%;
+    min-height: 400px;
+  }
+  40% {
+    border-radius: 30%;
+  }
+  30% {
+    max-width: 56px;
+    min-width: 56px;
+    max-height: 56px;
+    min-height: 56px;
+  }
+  1% {
+    background-color: #b7bf96;
+  }
+  0% {
+    border-radius: 100%;
+    max-width: 56px;
+    min-width: 56px;
+
+    max-height: 56px;
+    min-height: 56px;
+    background-color: rgba(255, 255, 255, 0);
+    transform: translateY(calc(84vh - 100px)) translateX(calc(50vw - 54px));
+  }
+}
 </style>
