@@ -1,19 +1,15 @@
 <template>
   <div class="pdf-viewer">
-    <slot />
-    <iframe
-      v-if="pdf"
-      frameBorder="0"
-      class="pdf-viewer"
-      :src="pdf"
-      style="width:100%;height:100%"
-    />
+    <slot></slot>
+
+    <div id="pdf-viewer" 
+      style="width:100%;height:100%"></div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-
+import PDFObject from 'pdfobject';
 export default {
   name: 'Sourcebook',
   props: ['page'],
@@ -38,6 +34,8 @@ export default {
         responseType: 'blob',
       });
       this.pdf = URL.createObjectURL(p.data);
+
+      PDFObject.embed(this.pdf, "#pdf-viewer");
     },
   },
 };
@@ -50,4 +48,7 @@ export default {
   min-height:500px;
   position: relative;
 }
+
+.pdfobject-container { height: 30rem; border: 1rem solid rgba(0,0,0,.1); }
+
 </style>
