@@ -88,9 +88,8 @@
         <v-icon>mdi-database</v-icon></v-btn
       >
     </v-fab-transition>
-    <div class="bgmap">
+    <div class="bgmap"  :class="{ darkened: !closed}">
       <qmap
-        :class="{ darkened: !closed, down: closed }"
         :geojsonitems="items"
         :options="{ zoomControl: false }"
       />
@@ -174,7 +173,7 @@ html {
 }
 
 .closed {
-  border-radius: 100%;
+  border-radius: 50%;
   max-width: 56px;
   min-width: 56px;
 
@@ -240,7 +239,7 @@ html {
     background-color: #b7bf96;
   }
   100% {
-    border-radius: 100%;
+    border-radius: 50%;
     max-width: 56px;
     min-width: 56px;
 
@@ -273,7 +272,7 @@ html {
     background-color: #b7bf96;
   }
   0% {
-    border-radius: 100%;
+    border-radius: 50%;
     max-width: 56px;
     min-width: 56px;
 
