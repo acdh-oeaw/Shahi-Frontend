@@ -1,18 +1,14 @@
 <template>
-
-    <div style="width:100%;height:100%;" id="map-container"></div>
-
+  <div style="width: 100%; height: 100%" id="map-container"></div>
 </template>
 
 <script>
-import "@/assets/js/map/mapviewer.css";
 import MapViewerComponent from "@/assets/js/map/mapviewer.js";
 export default {
   props: {
     options: {
       type: Object,
-      default: () => {
-      },
+      default: () => {},
     },
     geojsonitems: {
       type: Array,
@@ -30,7 +26,7 @@ export default {
       enableTooltip: true,
       zoom: 6,
       center: [32.962949, 67.954916],
-      url: 'https://tile.jawg.io/jawg-light/{z}/{x}/{y}.png?access-token=TUhizWedCN04NDjuRQtXfgE0HSuYwHzro3NRUDa3LMUlLbymREaTyUW2lpuoNnMz',
+      url: "https://tile.jawg.io/jawg-light/{z}/{x}/{y}.png?access-token=TUhizWedCN04NDjuRQtXfgE0HSuYwHzro3NRUDa3LMUlLbymREaTyUW2lpuoNnMz",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
     };
@@ -50,71 +46,59 @@ export default {
     });
   },
   mounted() {
-
     const configData = {
-      "map": {
-        "controls": {
-          "zoomlvl": true,
-          "layer": true,
-          "geonames": false,
-          "locate": false,
-          "opacity": true
+      map: {
+        controls: {
+          zoomlvl: true,
+          layer: true,
+          geonames: true,
+          locate: true,
+          opacity: true,
         },
-        "leafletOptions": {
-          "maxZoom": 10,
-          "minZoom": 7,
-          "zoom": 8,
-          "center": [35, 70]
-        }
-      }
+        leafletOptions: {
+          maxZoom: 10,
+          minZoom: 7,
+          zoom: 8,
+          center: [35, 70],
+        },
+      },
     };
     const jsonData = [
       {
-        "type": "Feature",
-        "properties": {
-          "ID": "Point 1"
+        type: "Feature",
+        properties: {
+          ID: "Point 1",
         },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            69.205,
-            33.5653
-          ]
-        }
+        geometry: {
+          type: "Point",
+          coordinates: [69.205, 33.5653],
+        },
       },
       {
-        "type": "Feature",
-        "properties": {
-          "ID": "Point 2"
+        type: "Feature",
+        properties: {
+          ID: "Point 2",
         },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            70.2075,
-            34.5253
-          ]
-        }
+        geometry: {
+          type: "Point",
+          coordinates: [70.2075, 34.5253],
+        },
       },
       {
-        "type": "Feature",
-        "properties": {
-          "ID": "Point 3"
+        type: "Feature",
+        properties: {
+          ID: "Point 3",
         },
-        "geometry": {
-          "type": "Point",
-          "coordinates": [
-            69.2175,
-            34.5553
-          ]
-        }
-      }
+        geometry: {
+          type: "Point",
+          coordinates: [69.2175, 34.5553],
+        },
+      },
     ];
-    this.$nextTick(function (){
+    this.$nextTick(function () {
       const coreComponent = document.getElementById("map-container");
-      console.log(coreComponent)
-      const asd  = new MapViewerComponent(coreComponent,configData,[])
-    })
-
+      const map = new MapViewerComponent(coreComponent, configData, jsonData);
+    });
   },
   methods: {
     setBounds() {
@@ -131,6 +115,8 @@ export default {
 </script>
 
 <style>
+@import "@/assets/js/map/mapviewer.css";
+
 .mapcontainer {
   width: 100%;
   height: 100%;
@@ -163,5 +149,4 @@ export default {
   top: 0;
   left: 0;
 }
-
 </style>
