@@ -78,6 +78,9 @@ export const actions = {
   setFilters({ commit }, value) {
     commit('setFilters', value);
   },
+  setCodes({ commit }, value) {
+    commit('setCodes', value);
+  },
   updateFiltersFromUrl({ commit, rootGetters }, q) {
     if (q?.codes) commit('setCodes', q?.codes);
 

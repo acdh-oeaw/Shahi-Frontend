@@ -353,6 +353,7 @@ export default {
     ...mapActions({
       updateFiltersFromUrl: 'query/updateFiltersFromUrl',
       setSearch: 'query/setSearch',
+      setCodes: 'query/setCodes'
     }),
     async loadAllTypesFromBackend() {
       if (this.$route.query.codes) {
@@ -412,6 +413,7 @@ export default {
         .map((x) => ({
           id: x.id, en: x.en, value: x.value, type: x.type,
         }));
+      this.setCodes(this.filterElements[this.selectedClass].systemClass)
       this.setSearch(filters);
 
       let name = 'data-list-q';
