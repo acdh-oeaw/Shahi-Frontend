@@ -190,6 +190,14 @@
             "type": "end"
           }
         ]
+      },
+      {
+        "label": "Kingdom",
+        "en": "Kingdom",
+        "type": "multiple",
+        "id": "1747",
+        "kind": "type",
+        "values": []
       }
     ]
   }
