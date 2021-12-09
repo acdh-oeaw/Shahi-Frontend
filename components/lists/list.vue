@@ -8,7 +8,7 @@
         v-model="selectedHeaders"
         class="mt-5"
         dense
-        :items="$store.state.app.tableheaders.wide"
+        :items="$store.state.app.tableheaders[getCurrentSystemClass]"
         label="Select Columns"
         multiple
         outlined
@@ -90,7 +90,7 @@
         </span>
       </template>
       <template
-        v-for="slot in $store.state.app.tableheaders.wide.filter((x) =>
+        v-for="slot in $store.state.app.tableheaders[getCurrentSystemClass].filter((x) =>
           x.value.startsWith('features[0].type')
         )"
         v-slot:[`item.${slot.value}`]="{ item }"
@@ -177,7 +177,7 @@ export default {
       'getSortColumnByPath',
       'getSystemClassForFilter',
       'getFilterList']),
-    ...mapGetters('query', ['getQuery']),
+    ...mapGetters('query', ['getQuery','getCurrentSystemClass']),
 
     itemsWithType() {
       if (this.items.length === 0) return [];
@@ -198,13 +198,17 @@ export default {
       });
     },
     showHeaders() {
-      return this.$store.state.app.tableheaders.wide
+      return this.$store.state.app.tableheaders[this.getCurrentSystemClass]
         .filter((s) => this.selectedHeaders.includes(s));
     },
   },
-  watch: {},
+  watch: {
+    getCurrentSystemClass(){
+      this.selectedHeaders = this.$store.state.app.tableheaders[this.getCurrentSystemClass].filter((x) => x.visible);
+    }
+  },
   created() {
-    this.selectedHeaders = this.$store.state.app.tableheaders.wide.filter((x) => x.visible);
+    this.selectedHeaders = this.$store.state.app.tableheaders[this.getCurrentSystemClass].filter((x) => x.visible);
   },
   methods: {
     ...mapActions({
