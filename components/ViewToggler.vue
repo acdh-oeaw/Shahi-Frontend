@@ -10,11 +10,12 @@
       <v-btn-toggle
         v-model="view"
         dense
-        color="primary"
-        background-color="primary"
         class="hidden-sm-and-down"
+        background-color="secondary"
       >
         <v-btn
+          outlined
+          color="primary"
           v-for="item in $store.state.app.viewelements"
           :key="item.route"
           :value="item.route"
@@ -35,10 +36,14 @@
             </v-btn>
           </template>
           <v-btn-toggle
+            background-color="secondary"
 
             v-model="view"
           >
             <v-btn
+              color="primary"
+              outlined
+
               v-for="item in $store.state.app.viewelements"
               :key="item.route"
               :value="item.route"
