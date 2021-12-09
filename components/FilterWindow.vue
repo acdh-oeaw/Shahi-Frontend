@@ -171,7 +171,7 @@
                       :key="item.id"
                       cols="12"
                     >
-                      <v-text-field v-model="item.value" :label="item.en" />
+                      <v-text-field v-model="item.value" :label="item.en"/>
                     </v-col>
                   </v-row>
                   <!--Time Search-->
@@ -242,11 +242,11 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 
 export default {
   name: 'FilterWindow',
-  props: { globalSearch: { default: '', type: String }, openWindow: { type: Boolean } },
+  props: {globalSearch: {default: '', type: String}, openWindow: {type: Boolean}},
   data() {
     return {
       color: 'lightgrey',
@@ -264,7 +264,7 @@ export default {
     ...mapGetters('app', ['getFilterObject', 'getSystemClassForFilter']),
     ...mapGetters('query', ['getQuery']),
     propertySelectedClassAndSelectedAndSearchKeyword() {
-      return `${this.selectedClass}|${this.selected}|${this.searchKeyword}`;
+      return `${this.selectedClass}|${this.selected}|${this.searchKeyword}|${this.reloadItems}`;
     },
     ...mapGetters('query', ['getCurrentSystemClass', 'getFiltersFlat']),
   },
@@ -279,7 +279,7 @@ export default {
           .reduce((dict, item) => [...dict, ...item.values], [])
           .filter((element) => element.en.toLowerCase().includes(this.globalSearch.toLowerCase()))
           .map((element) => {
-            const e = { ...element };
+            const e = {...element};
             e.root = [];
             e.subs = [];
             return e;
@@ -315,11 +315,15 @@ export default {
       handler() {
         this.filterElements
           .find((x) => x.systemClass === this.getCurrentSystemClass)?.items.forEach((item) => {
-            item.values.forEach((value) => {
-              const match = this.getFiltersFlat.find((setFilter) => setFilter.id === value.id);
-              if (match) value.value = match.value;
-            });
+          item.values.forEach((value) => {
+            const match = this.getFiltersFlat.find((setFilter) => setFilter.id === value.id);
+            if (match) value.value = match.value;
+            else value.value = value.type == "type" ? false : '';
           });
+        });
+        this.$store.commit('app/setFilterElements', this.filterElements);
+        this.searchedTypes = this.filterElements?.[this.selectedClass]
+          .items?.[this.selected].values;
       },
       immediate: true,
       deep: true,
@@ -331,11 +335,11 @@ export default {
       } else {
         this.searchedTypes = this.filterElements[this.selectedClass].items[
           this.selected
-        ].values
+          ].values
           .filter((element) => element.en.toLowerCase()
             .includes(this.searchKeyword.toLowerCase()))
           .map((element) => {
-            const e = { ...element };
+            const e = {...element};
             e.root = [];
             e.subs = [];
             return e;
@@ -363,7 +367,7 @@ export default {
       }
 
       const p = await this.$api.Nodes.get_api_0_2_type_tree_();
-      const { typeTree } = p.body;
+      const {typeTree} = p.body;
       this.filterElements.forEach((filterElement) => {
         filterElement.items.forEach((item) => {
           if (item.id) {
