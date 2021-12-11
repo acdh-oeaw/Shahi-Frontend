@@ -6,12 +6,14 @@
         contain
         max-width="450px"
         :src="`https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${$route.params.id%2 +1}/1.jp2/full/500,/0/default.png`"
-        @click="viewMode=true;"
         :lazy-src="`https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${$route.params.id%2 +1}/1.jp2/full/100,/0/default.png`"
-
+        @click="viewMode=true;"
       />
-      <p class="mt-3 primary--text go-to-map-button" text @click="viewMode=true">All Images
-        <v-icon class="ma-n1">mdi-chevron-right</v-icon>
+      <p class="mt-3 primary--text go-to-map-button" text @click="viewMode=true">
+        All Images
+        <v-icon class="ma-n1">
+          mdi-chevron-right
+        </v-icon>
       </p>
     </div>
     <client-only>
@@ -22,16 +24,7 @@
               mdi-close
             </v-icon>
           </v-btn>
-          <l-map
-            :zoom="initZoom"
-            :center="center"
-          >
-            <l-iiif
-              :url="selected"
-              :options="iiifOptions"
-            />
-          </l-map>
-
+          <IIIFImageViewer style="height:100%;width:100%" :image-info-url="selected" />
           <div class="image-picker">
             <div v-for="i in 5" :key="i" class="image-preview">
               <v-img
@@ -48,22 +41,18 @@
 </template>
 
 <script>
-import * as L from 'leaflet';
-import LIiif from '@/components/Vue2LeafletIIIF.vue';
 
 export default {
   name: 'ImageViewer',
-  components: { LIiif },
   data() {
     return {
       viewMode: false,
       initZoom: 0,
-      center: L.latLng(0, 0),
       iiifOptions: {
         tileFormat: 'jpg',
         tileSize: 310,
       },
-      manifest: 'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/presentation/hk-shahi/manifest',
+      manifest: 'https://shahi-img.acdh-dev.oeaw.ac.at/iviif/presentation/hk-shahi/manifest',
       infoUrl: 'https://stacks.stanford.edu/image/iiif/hg676jb4964%2F0380_796-44/info.json',
       images: ['http://localhost:8182/iiif/3/sculpture1.tif/',
         'http://localhost:8182/iiif/3/sculpture2.jpg/'],
@@ -79,7 +68,6 @@ export default {
 </script>
 
 <style scoped>
-@import "https://unpkg.com/leaflet@1.6.0/dist/leaflet.css";
 
 html, body {
   margin: 0;
