@@ -28,11 +28,12 @@
       "@nuxt/types",
       "@nuxt/vue-app",
       "nuxt-leaflet"
-    ]
+    ],
+    "skipLibCheck": true
   },
   "exclude": [
     "node_modules",
     ".nuxt",
     "dist"
-  ]
+  ],
 }
