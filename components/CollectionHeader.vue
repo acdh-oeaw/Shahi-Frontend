@@ -1,12 +1,12 @@
 <template>
-  <div class="collection-header secondary darken-1">
+  <section>
+  <div class="collection-header secondary darken-1" v-if="collection">
     <div class="page-content">
       <div class="d-flex justify-space-around">
-        <div class="collection-header-left">
-          <p class="title-2">
+        <div class="collection-header-left d-flex align-center">
+          <p class="title-1 mt-n15">
             {{ collection.en }}
           </p>
-          <p style="white-space: pre-line">{{ collection.description }}</p>
         </div>
         <div class="collection-header-right">
           <image-collage :items="items" />
@@ -14,6 +14,16 @@
       </div>
     </div>
   </div>
+
+    <div class="page-content">
+      <p class="title-2">Description</p>
+      <p style="white-space: pre-line" class="text-body-1">
+        {{ collection.description}}
+      </p>
+      <p class="title-2">Artifacts</p>
+
+    </div>
+  </section>
 </template>
 
 <script>
