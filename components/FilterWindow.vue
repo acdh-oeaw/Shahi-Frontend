@@ -171,7 +171,7 @@
                       :key="item.id"
                       cols="12"
                     >
-                      <v-text-field v-model="item.value" :label="item.en"/>
+                      <v-text-field @keydown.enter="search" v-model="item.value" :label="item.en"/>
                     </v-col>
                   </v-row>
                   <!--Time Search-->
@@ -351,11 +351,7 @@ export default {
       setCodes: 'query/setCodes'
     }),
     async loadAllTypesFromBackend() {
-      if (this.$route.query.codes) {
-        this.filterElements.forEach((item) => {
-          (item.selected = item.systemClass === this.$route.query.codes);
-        });
-      }
+
 
       const p = await this.$api.Nodes.get_api_0_2_type_tree_();
       const {typeTree} = p.body;
@@ -387,12 +383,12 @@ export default {
           }
         });
       });
-
       await this.$store.commit(
         'app/setFilterElements',
         JSON.parse(JSON.stringify(this.filterElements)),
       );
-      this.updateFiltersFromUrl(this.$route.query);
+      if(this.$route.name.startsWith('data-'))
+        this.updateFiltersFromUrl(this.$route.query);
     },
     selectItem(item) {
       item.value = !item.value;
@@ -420,13 +416,7 @@ export default {
       });
       this.open = false;
     },
-    updateFilter(selectedClass, selectedProperty, value) {
-      this.$store.commit('app/updateFilterValue', {
-        selectedClass,
-        selectedProperty,
-        value,
-      });
-    },
+
     hasSetValue(item) {
       let returnValue = false;
       item.values.forEach((x) => {
