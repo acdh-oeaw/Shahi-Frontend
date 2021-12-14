@@ -79,11 +79,13 @@ export const actions = {
     commit('setFilters', value);
   },
   setCodes({ commit }, value) {
+    commit('app/setSelectedFilterClass', value, { root: true });
+
     commit('setCodes', value);
   },
   updateFiltersFromUrl({ commit, rootGetters }, q) {
     if (q?.codes) commit('setCodes', q?.codes);
-
+    commit('app/setSelectedFilterClass', q?.codes, { root: true });
     if (q.search) {
       const getFilterDetailsFromID = (id) => {
         const allFilters = rootGetters['app/getCurrentFiltersFlat'];
