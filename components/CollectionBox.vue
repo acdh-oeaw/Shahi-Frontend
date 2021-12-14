@@ -4,14 +4,16 @@
       <p class="title-2">
         {{ collection.name }}
       </p>
-      <p style="white-space: pre-line" class="collection-description text-body-1">
-        {{ collection.description }}
+      <div class="description">
+      <p v-if="!moreInfo" style="white-space: pre-line" class="collection-description text-body-1">
+        {{ collection.description.split('\r\n\r\n')[0]}}
       </p>
+</div>
       <div
         @click="routeToCollection()"
       >
         <p
-          class=" primary--text go-to-map-button"
+          class=" primary--text go-to-map-button mt-3"
           text
         >
           Explore Collection
@@ -33,13 +35,12 @@ import * as collection from 'postcss-selector-parser';
 export default {
 
   name: 'CollectionBox',
-  async asd() {
-    console.log(this.collection.id);
-    // eslint-disable-next-line no-underscore-dangle
-
-    // eslint-disable-next-line prefer-destructuring
-  },
   props: ['collection'],
+  data(){
+    return{
+      moreInfo:false,
+    }
+  },
 
   async mounted() {
     const p = await this.$api.Entities.get_api_0_2_entity__id__({
@@ -80,4 +81,6 @@ export default {
   margin: 20px;
   max-width: 600px;
 }
+
+
 </style>
