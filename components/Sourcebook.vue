@@ -13,13 +13,13 @@
       </div>
 
       <div style="height: 100%; width: 2px" class="secondary darken-1" />
-      <v-menu bottom 
+      <v-menu bottom
       rounded="0"
-      transition="slide-y-transition" 
+      transition="slide-y-transition"
         offset-y  content-class="menu-content elevation-0"
      >
         <template v-slot:activator="{ on, attrs }">
-              
+
         <div
         v-on="on"
           class="
@@ -36,7 +36,7 @@
           {{ pages[page].title }}
         </div>
         </template>
-        <v-list style="max-width:750px;" class="secondary lighten-1">
+        <v-list style="max-width:850px;" class="secondary lighten-1">
           <v-list-item v-for="(item,index) in pages" :key="index" @click="page=index">
           <v-list-item-title :class="{'font-weight-bold':index===page}">  {{item.title}}</v-list-item-title>
           </v-list-item>
@@ -107,7 +107,7 @@ export default {
 }
 
 .navigator {
-  max-width: 750px;
+  max-width: min(100vw, 850px);
   height: 60px;
   left: 0;
   right: 0;
@@ -131,6 +131,6 @@ export default {
 .menu-content {
   transform: translateX(-61px);
   max-height: 500px;
-  
+
 }
 </style>
