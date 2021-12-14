@@ -147,7 +147,8 @@
             "id": "name",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "like"
+            "logicalOperator": "like",
+            "type": "name"
           }
         ]
       },
@@ -162,7 +163,8 @@
             "id": "description",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "like"
+            "logicalOperator": "like",
+            "type": "description"
           }
         ]
       },
