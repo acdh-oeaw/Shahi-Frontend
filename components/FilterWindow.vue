@@ -286,15 +286,6 @@ export default {
           });
       }
     },
-    '$route.query': {
-      handler() {
-        if (this.filterElements?.[0].items) {
-          this.$store.commit('app/setFilterElements', this.filterElements);
-        }
-      },
-      deep: true,
-      immediate: true,
-    },
     selectedClass() {
       this.selected = 0;
       this.searchKeyword = '';
