@@ -100,13 +100,15 @@ export default {
     }),
     _keyListener(e) {
 
-      console.log(e.key,this.globalSearch);
-      if(e.key ==='Enter')
-        this.searchKeydownEnter = !this.searchKeydownEnter;
-      if(this.open && this.globalSearch)
-        this.$nextTick(() => this.$refs.searchField.focus())
+
+      if (this.open && this.globalSearch) {
+
+        if (e.key === 'Enter')
+          this.searchKeydownEnter = !this.searchKeydownEnter;
+        this.$nextTick(() => this.$refs.searchField.focus());
+      }
     },
-    enter(){
+    enter() {
       console.log(this.globalSearch)
     },
     removeItem(id) {
@@ -141,9 +143,11 @@ export default {
         query: this.getFilterObject,
       });
     },
-  },
+  }
+  ,
 
-};
+}
+;
 </script>
 
 <style>
