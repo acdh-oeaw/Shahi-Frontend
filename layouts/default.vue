@@ -218,7 +218,7 @@
 <script>
 import favorites from '@/mixins/favorites';
 import { mapActions, mapGetters } from 'vuex';
-import querysearch from '~/components/querysearchNew.vue';
+import querysearch from '~/components/querysearch.vue';
 
 export default {
   components: {

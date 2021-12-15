@@ -28,8 +28,31 @@
           {{ systemClass.en }}
         </v-btn>
       </v-card-text>
+      <!--Current Filters-->
+      <v-expand-transition>
+        <v-card-text
+          v-if="currentFilters.length !=0"
+          style="min-height: 72px; max-width:732px"
+          class="mx-4 mb-0 pb-0 secondary rounded"
+        >
+          <p class="mb-1">
+            Current filters:
+          </p>
+          <v-chip v-for="filter in currentFilters" :key="filter.id" label small class="mr-2 mb-2">
+            <span>{{ filter.en }}</span>
+            <span v-if="filter.type==='name' || filter.type =='description'">:{{ filter.value }}</span>
+            <v-icon
+              class="pl-2"
+              small
+              @click="selectItem(filter)"
+            >
+              $delete
+            </v-icon>
+          </v-chip>
+        </v-card-text>
+      </v-expand-transition>
       <!--Normal Search-->
-      <v-card-text v-if="!globalSearch">
+      <v-card-text v-if="!globalSearch" class="mt-1 pt-0">
         <v-row no-gutters>
           <!--Select Supertype-->
           <v-col cols="12" sm="auto" style="min-width: 200px">
@@ -171,7 +194,7 @@
                       :key="item.id"
                       cols="12"
                     >
-                      <v-text-field @keydown.enter="search" v-model="item.value" :label="item.en"/>
+                      <v-text-field v-model="item.value" :label="item.en" @keydown.enter="search"/>
                     </v-col>
                   </v-row>
                   <!--Time Search-->
@@ -198,41 +221,56 @@
         </v-row>
       </v-card-text>
       <!--Global Search-->
-      <v-card-text
-        v-else
-        class="pa-5 hidden"
-        style="overflow: auto; max-height: 370px; width: 732px"
-      >
-        <v-row
-          no-gutters
-        >
-          <v-col
-            v-for="item in searchedTypes"
-            :key="item.id"
-            cols="12"
-            sm="6"
-          >
-            <div
-              class="filter-element"
-              :class="item.value ? 'filter-element-clicked' : ''"
-              @click="selectItem(item)"
-            >
-              <span>{{ item.en }} </span>
-
-              <v-icon
-                v-if="item.value"
-                style="float: right"
-                small
-              >
-                mdi-close
-              </v-icon>
-            </div>
-          </v-col>
-          <p v-if="searchedTypes.length === 0">
-            Nothing found
+      <div v-else>
+        <v-card-text>
+          <p class="text-caption">
+            Hit enter to search by Name:
+            <v-chip label small>
+              {{ globalSearch }}
+            </v-chip>
           </p>
-        </v-row>
-      </v-card-text>
+          <v-divider color="secondary"/>
+        </v-card-text>
+        <v-card-text class="ma-0 py-0">
+          <p class="text-caption">
+            Search by types:
+          </p>
+        </v-card-text>
+        <v-card-text
+          class=" hidden"
+          style="overflow: auto; max-height: 370px; width: 735px"
+        >
+          <v-row
+            no-gutters
+          >
+            <v-col
+              v-for="item in searchedTypes"
+              :key="item.id"
+              cols="12"
+              sm="6"
+            >
+              <div
+                class="filter-element"
+                :class="item.value ? 'filter-element-clicked' : ''"
+                @click="selectItem(item)"
+              >
+                <span>{{ item.en }} </span>
+
+                <v-icon
+                  v-if="item.value"
+                  style="float: right"
+                  small
+                >
+                  mdi-close
+                </v-icon>
+              </div>
+            </v-col>
+            <p v-if="searchedTypes.length === 0">
+              Nothing found
+            </p>
+          </v-row>
+        </v-card-text>
+      </div>
       <v-btn absolute right bottom color="grey" @click="search">
         <v-icon>mdi-magnify</v-icon>
         Search
@@ -246,7 +284,11 @@ import {mapGetters, mapActions} from 'vuex';
 
 export default {
   name: 'FilterWindow',
-  props: {globalSearch: {default: '', type: String}, openWindow: {type: Boolean}},
+  props: {
+    globalSearch: {default: '', type: String},
+    openWindow: {type: Boolean},
+    searchKeydownEnter: {type: Boolean, default: false},
+  },
   data() {
     return {
       color: 'lightgrey',
@@ -267,8 +309,24 @@ export default {
       return `${this.selectedClass}|${this.selected}|${this.searchKeyword}|${this.reloadItems}`;
     },
     ...mapGetters('query', ['getCurrentSystemClass', 'getFiltersFlat']),
+    currentFilters() {
+      return this.filterElements[this.selectedClass].items
+        .flatMap((x) => x.values)
+        .filter((x) => x.value)
+        .map((x) => ({
+          id: x.id, en: x.en, value: x.value, type: x.type,
+        }));
+    },
   },
   watch: {
+    async searchKeydownEnter() {
+      console.log('keydown', this.globalSearch)
+      this.filterElements[this.selectedClass].items.find(x => x.label === 'name').values[0].value = this.globalSearch;
+      await new Promise((resolve) => {
+        setTimeout(resolve, 100);
+      });
+      this.search();
+    },
     openWindow() {
       this.open = !this.open;
     },
@@ -309,7 +367,7 @@ export default {
           item.values.forEach((value) => {
             const match = this.getFiltersFlat.find((setFilter) => setFilter.id === value.id);
             if (match) value.value = match.value;
-            else value.value = value.type == "type" ? false : '';
+            else value.value = value.type == 'type' ? false : '';
           });
         });
         this.$store.commit('app/setFilterElements', this.filterElements);
@@ -348,11 +406,9 @@ export default {
     ...mapActions({
       updateFiltersFromUrl: 'query/updateFiltersFromUrl',
       setSearch: 'query/setSearch',
-      setCodes: 'query/setCodes'
+      setCodes: 'query/setCodes',
     }),
     async loadAllTypesFromBackend() {
-
-
       const p = await this.$api.Nodes.get_api_0_2_type_tree_();
       const {typeTree} = p.body;
       this.filterElements.forEach((filterElement) => {
@@ -387,25 +443,20 @@ export default {
         'app/setFilterElements',
         JSON.parse(JSON.stringify(this.filterElements)),
       );
-      if(this.$route.name.startsWith('data-'))
-        this.updateFiltersFromUrl(this.$route.query);
+      if (this.$route.name.startsWith('data-')) this.updateFiltersFromUrl(this.$route.query);
     },
     selectItem(item) {
-      item.value = !item.value;
+      if (typeof item.value === 'string' || item.value instanceof String) item.value = '';
+
+      else item.value = !item.value;
 
       this.filterElements[this.selectedClass].items
         .reduce((dict, element) => [...dict, ...element.values], []).find((x) => x.id === item.id)
         .value = item.value;
     },
     search() {
-      const filters = this.filterElements[this.selectedClass].items
-        .flatMap((x) => x.values)
-        .filter((x) => x.value)
-        .map((x) => ({
-          id: x.id, en: x.en, value: x.value, type: x.type,
-        }));
-      this.setCodes(this.filterElements[this.selectedClass].systemClass)
-      this.setSearch(filters);
+      this.setCodes(this.filterElements[this.selectedClass].systemClass);
+      this.setSearch(this.currentFilters);
 
       let name = 'data-list-q';
       if (this.$route.name.startsWith('data-')) name = this.$route.name;
