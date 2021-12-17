@@ -414,6 +414,9 @@ export default {
       this.filterElements.forEach((filterElement) => {
         filterElement.items.forEach((item) => {
           if (item.id) {
+            const thisType = typeTree.find((x)=> x[Object.keys(x)[0]].id.toString() === item.id)
+            if(thisType?.[Object.keys(thisType)[0]])
+              item.en = thisType?.[Object.keys(thisType)[0]].name;
             const allTypes = typeTree.filter((x) => x[Object.keys(x)[0]].root
               .includes(parseInt(item.id, 10)));
 
