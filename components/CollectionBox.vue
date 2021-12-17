@@ -48,8 +48,9 @@ export default {
     });
   },
   methods: {
-    ...mapActions('query', ['searchByFilterId']),
+    ...mapActions('query', ['searchByFilterId','setCodes']),
     routeToCollection() {
+      this.setCodes('artifact');
       this.searchByFilterId(this.collection.id);
       this.$router.push({
         name: 'data-list-q',
