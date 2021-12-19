@@ -81,6 +81,9 @@ export default {
         .filter((x) => this.normalizeString(x?.title)?.includes(search)
           || this.normalizeString(x?.publisher)?.includes(search)
           || x?.author?.some((a) => this.normalizeString(a?.family)?.includes(search))
+          || this.normalizeString(x['collection-title'])?.includes(search)
+          || this.normalizeString(x['container-title'])?.includes(search)
+          || x?.author?.some((a) => this.normalizeString(a?.literal)?.includes(search))
           || x?.author?.some((a) => this.normalizeString(a?.given)?.includes(search)));
       return a;
     },
