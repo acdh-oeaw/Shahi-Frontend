@@ -314,7 +314,7 @@ export default {
             },
             {
               name: 'Ehsan Shavarebi, BA MA',
-              institute: 'University of Vienna, Department of Numismatics and Monetary History',
+              institute: 'Art History Museum Vienna, Coin Cabinet',
               link: 'https://univie.academia.edu/EhsanShavarebi',
             },
             {
