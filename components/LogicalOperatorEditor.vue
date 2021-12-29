@@ -118,9 +118,10 @@ export default {
     };
   },
   async mounted() {
+    if(!localStorage.getItem('seenLogicInfo')){
     setTimeout(() => {
       this.$refs.infoWindow.show();
-    }, 2000);
+    }, 2000);}
   },
   methods: {
     ...mapActions(
@@ -179,6 +180,8 @@ true,
       },
     open() {
       this.$refs.infoWindow.hide();
+      if(!localStorage.getItem('seenLogicInfo'))
+        localStorage.setItem('seenLogicInfo',true)
     },
   }
   ,
