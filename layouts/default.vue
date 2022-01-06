@@ -60,7 +60,7 @@
       <v-app-bar app clipped-left style="z-index:9999">
         <v-app-bar-nav-icon @click="$store.commit('app/toggleQueryDrawer')" />
         <nuxt-link to="/" @click="$store.commit('app/closeQueryDrawer')">
-          <div class="logocaption d-none d-sm-flex">
+          <div class="logocaption d-none d-md-flex">
             <img
               class="barlogo ml-1 mr-1"
               alt="logo"
@@ -73,16 +73,23 @@
         <v-spacer />
 
         <nuxt-link class="nav-link mr-5" to="/collections">
-          Collections
+        <v-icon v-if="$vuetify.breakpoint.smAndDown" >$artifact</v-icon>
+          <span v-else>Collections</span>
         </nuxt-link>
         <nuxt-link class="nav-link mr-5" to="/sourcebook">
-          Sourcebook
+        <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-book-open-variant</v-icon>
+
+         <span v-else>Sourcebook</span> 
         </nuxt-link>
         <nuxt-link class="nav-link mr-5" to="/bibliography">
-          Bibliography
+        <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-file-find</v-icon>
+
+          <span v-else>Bibliography</span> 
         </nuxt-link>
         <nuxt-link class="nav-link" to="/team">
-          Team
+          <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-account-group</v-icon>
+
+          <span v-else> Team</span> 
         </nuxt-link>
       </v-app-bar>
     </v-expand-transition>
@@ -242,7 +249,7 @@ export default {
     },
   },
   async mounted() {
-    const content = await this.$api.Content.get_api_0_2_content_({});
+    const content = await this.$api.Content.get_api_0_3_content_({});
     this.$store.commit('app/setSiteName', content.body['site-name']);
     this.title = content.body['site-name'];
     window.addEventListener('scroll', this.onScroll);

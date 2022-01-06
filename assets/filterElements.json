@@ -16,7 +16,7 @@
             "id": "name",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "like",
+            "logicalOperator": "equal",
             "type": "name"
           }
         ]
@@ -32,7 +32,7 @@
             "id": "description",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "like",
+            "logicalOperator": "equal",
             "type": "description"
           }
         ]
@@ -118,14 +118,16 @@
             "id": "begin_from",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "ge"
+            "logicalOperator": "greaterThanEqual",
+            "type":"begin"
           },
           {
             "en": "End",
             "id": "end_from",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "le"
+            "logicalOperator": "lesserThanEqual",
+            "type":"end"
           }
         ]
       }
@@ -147,7 +149,7 @@
             "id": "name",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "like",
+            "logicalOperator": "equal",
             "type": "name"
           }
         ]
@@ -163,7 +165,7 @@
             "id": "description",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "like",
+            "logicalOperator": "equal",
             "type": "description"
           }
         ]
@@ -180,7 +182,7 @@
             "id": "begin_from",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "ge",
+            "logicalOperator": "greaterThanEqual",
             "type": "begin"
           },
           {
@@ -188,7 +190,7 @@
             "id": "end_from",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "le",
+            "logicalOperator": "lesserThanEqual",
             "type": "end"
           }
         ]

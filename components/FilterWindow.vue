@@ -15,7 +15,7 @@
         mdi-filter
       </v-icon>
     </template>
-    <menu-window>
+    <menu-window style="max-height:90vh; overflow:auto">
       <!--System Classes-->
       <v-card-text>
         <v-btn
@@ -271,7 +271,7 @@
           </v-row>
         </v-card-text>
       </div>
-      <v-btn absolute right bottom color="grey" @click="search">
+      <v-btn absolute right bottom color="secondary" @click="search">
         <v-icon>mdi-magnify</v-icon>
         Search
       </v-btn>
@@ -314,7 +314,7 @@ export default {
         .flatMap((x) => x.values)
         .filter((x) => x.value)
         .map((x) => ({
-          id: x.id, en: x.en, value: x.value, type: x.type,
+          id: x.id, en: x.en, value: x.value, type: x.type,operator:x.logicalOperator
         }));
     },
   },
@@ -409,19 +409,21 @@ export default {
       setCodes: 'query/setCodes',
     }),
     async loadAllTypesFromBackend() {
-      const p = await this.$api.Nodes.get_api_0_2_type_tree_();
-      const {typeTree} = p.body;
+      const p = await this.$api.Nodes.get_api_0_3_type_tree_();
+          const typeTree  = Object.values(p.body.typeTree);
+
+      console.log(typeTree,'tyype')
       this.filterElements.forEach((filterElement) => {
         filterElement.items.forEach((item) => {
           if (item.id) {
-            const thisType = typeTree.find((x)=> x[Object.keys(x)[0]].id.toString() === item.id)
-            if(thisType?.[Object.keys(thisType)[0]])
-              item.en = thisType?.[Object.keys(thisType)[0]].name;
-            const allTypes = typeTree.filter((x) => x[Object.keys(x)[0]].root
+            const thisType = typeTree.find((x)=> x.id.toString() === item.id)
+            if(thisType)
+              item.en = thisType.name;
+            const allTypes = typeTree.filter((x) => x.root
               .includes(parseInt(item.id, 10)));
 
             const mapFunction = (x) => {
-              const element = x[Object.keys(x)[0]];
+              const element = x;
               return {
                 en: element.name,
                 id: element.id,
@@ -430,7 +432,7 @@ export default {
                   ?.includes(element.id.toString()) || false,
                 count: element.count,
                 concatOperator: 'and',
-                logicalOperator: 'eq',
+                logicalOperator: 'equal',
                 showSubtypes: false,
                 root: element.root,
                 subs: element.subs,

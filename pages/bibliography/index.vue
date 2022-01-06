@@ -15,7 +15,14 @@
       Inaba, Dr. Noémie Verdon (primary literary sources) and other project consultants.
       Last update 08.11.2021
     </p>
+    <v-row  align="center">
+      <v-col cols="12" sm="">
     <v-text-field v-model="search" class="search" label="Search" />
+    </v-col>
+    <v-col cols=12 sm="auto" >
+      <v-btn href="primary_sources.pdf" color="primary" small outlined>Primary Sources</v-btn>
+    </v-col>
+    </v-row>
     <p />
     <div v-for="item in filteredList.slice(page,page+20)" :key="item.id" class="text-body-1 mb-4">
       <p v-if="!!item.author" class="font-weight-bold">

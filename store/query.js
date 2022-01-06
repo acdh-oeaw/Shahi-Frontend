@@ -1,6 +1,7 @@
 export const state = () => ({
   filters: [],
   codes: 'artifact',
+  
 });
 export const getters = {
   getFiltersFlat: (s) => s.filters.flatMap((x) => x.items),
@@ -10,17 +11,21 @@ export const getters = {
     const query = {
       codes: s.codes || 'artifact',
       search: [],
+      filter:[],
     };
     let filtergroup = [[]];
     s.filters.forEach((box) => {
       if (box.logicalOperator === 'OR') filtergroup = [...filtergroup, [box]];
       else filtergroup[filtergroup.length - 1].push(box);
     });
+    console.log(s.filters)
 
     filtergroup.forEach((search) => {
       if (search && search.length > 0) {
         const searchers = [{ typeName: 'type', filterCategory: 'typeID', valueProperty: 'id' },
           { typeName: 'name', filterCategory: 'entityName', valueProperty: 'value' },
+          { typeName: 'begin', filterCategory: 'beginFrom', valueProperty: 'value' },
+          { typeName: 'end', filterCategory: 'endFrom', valueProperty: 'value' },
           { typeName: 'description', filterCategory: 'entityDescription', valueProperty: 'value' }];
 
         const operators = [];
@@ -29,18 +34,21 @@ export const getters = {
             ...x,
             items: x.items.filter((y) => y.type === searcher.typeName),
           })).filter((x) => x.items.length > 0);
+          console.log('fiiilters',filters)
           if (filters && filters.length > 0) {
             let searchString = `"${searcher.filterCategory}":[`;
             if (searcher.valueProperty === 'id') searchString += filters.map((x) => `{"operator":"equal","logicalOperator":"${x.logicalOperatorInside.toLowerCase()}","values":[${x.items.map((y) => y.id).join(',')}]}`).join(',');
-            else searchString += filters.map((x) => `{"operator":"equal","logicalOperator":"${x.logicalOperatorInside.toLowerCase()}","values":[${x.items.map((y) => `"${y.value}"`).join(',')}]}`).join(',');
+            else searchString += filters.map((x) => `{"operator":"${x.items?.[0]?.operator}","logicalOperator":"${x.logicalOperatorInside.toLowerCase()}","values":[${x.items.map((y) => `"${y.value}"`).join(',')}]}`).join(',');
             searchString += ']';
 
             if (!searchString.includes('[]')) operators.push(searchString);
           }
         });
         if (operators.length > 0) query.search = [...query.search, `{${operators.join(',')}}`];
+    
       }
     });
+    console.log(query)
     return query;
   },
 };

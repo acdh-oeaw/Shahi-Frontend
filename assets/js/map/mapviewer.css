@@ -1108,36 +1108,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
     animation: spin 2s infinite linear;
 }
 
-.mapviewer-component-info {
-  display:none;
-  z-index: 1005;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 480px;
-  max-width: 40%;
-  min-width: 375px;
-  height: 100%;
-  overflow: hidden;
-  background: white;
-  opacity: 1;
-}
-@media only screen and (max-width: 480px) {
-  .mapviewer-component-info {
-  		min-width: 100%;
-	}
-}
-
-.mapviewer-component-info.active {
-  display: block;
-  overflow: auto;
-}
-
-
-.mapviewer-component-info.loading {
-  opacity: 0.5;
-}
-
 .mapviewer-component {
     margin: 0;
     padding: 0;

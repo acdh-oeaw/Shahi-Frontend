@@ -23,10 +23,12 @@ export default {
     };
   },
   async mounted() {
-    const p = await this.$api.Nodes.get_api_0_2_type_tree_();
-    const { typeTree } = p.body;
-
-    this.collections = typeTree.filter((x) => x[Object.keys(x)[0]]?.root?.[0] === 1969).map((x) => x[Object.keys(x)[0]]);
+    const p = await this.$api.Nodes.get_api_0_3_type_tree_();
+    const typeTree  = Object.values(p.body.typeTree);
+    console.log(typeTree)
+    this.collections = typeTree.filter((x) => x?.root?.[0] === 1969);
+    console.log(typeTree.map(x => x.root))
+    console.log(this.collections,typeTree)
   },
   computed: {
     ...mapGetters('app', [
