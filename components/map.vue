@@ -8,7 +8,7 @@ export default {
   props: {
     options: {
       type: Object,
-      default: () => {},
+      default: () => { },
     },
     geojsonitems: {
       type: Array,
@@ -29,6 +29,11 @@ export default {
       url: "https://tile.jawg.io/jawg-light/{z}/{x}/{y}.png?access-token=TUhizWedCN04NDjuRQtXfgE0HSuYwHzro3NRUDa3LMUlLbymREaTyUW2lpuoNnMz",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      artifacts: {
+        type: "FeatureCollection",
+        features: []
+      },
+      map: undefined,
     };
   },
   watch: {
@@ -38,6 +43,18 @@ export default {
       },
       deep: true,
       immediate: true,
+    },
+    visibleArtifacts: {
+      handler() {
+        console.log(this.visibleArtifacts)
+        this.map?.clearData();
+
+        this.map?.passData(this.visibleArtifacts);
+
+
+      },
+      immediate: true,
+      deep: true,
     },
   },
   beforeDestroy() {
@@ -63,42 +80,56 @@ export default {
         },
       },
     };
-    const jsonData = [
-      {
-        type: "Feature",
-        properties: {
-          ID: "Point 1",
+    const jsonData = {
+      type: "FeatureCollection",
+      features: [
+        {
+          type: "Feature",
+          properties: {
+            ID: "Point 1",
+          },
+          geometry: {
+            type: "Point",
+            coordinates: [69.205, 33.5653],
+          },
         },
-        geometry: {
-          type: "Point",
-          coordinates: [69.205, 33.5653],
+        {
+          type: "Feature",
+          properties: {
+            ID: "Point 2",
+          },
+          geometry: {
+            type: "Point",
+            coordinates: [70.2075, 34.5253],
+          },
         },
-      },
-      {
-        type: "Feature",
-        properties: {
-          ID: "Point 2",
-        },
-        geometry: {
-          type: "Point",
-          coordinates: [70.2075, 34.5253],
-        },
-      },
-      {
-        type: "Feature",
-        properties: {
-          ID: "Point 3",
-        },
-        geometry: {
-          type: "Point",
-          coordinates: [69.2175, 34.5553],
-        },
-      },
-    ];
+        {
+          type: "Feature",
+          properties: {
+            ID: "Point 3",
+          },
+          geometry: {
+            type: "Point",
+            coordinates: [69.2175, 34.5553],
+          },
+        },]
+    };
+
     this.$nextTick(function () {
       const coreComponent = document.getElementById("map-container");
-      const map = new MapViewerComponent(coreComponent, configData, jsonData);
+      this.map = new MapViewerComponent(coreComponent, configData, jsonData);
+      this.map.on("init", (el) => { });
+      this.map.on("featureSelected", (el) => {
+        console.log("[mapviewer-component event: feature selected]:", el);
+      });
+      this.map.on("mapStateChanged", (el) => {
+        if (el) {
+          console.log("[mapviewer-component event: mapStateChanged]: " + JSON.stringify(el));
+        }
+      });
     });
+    this.loadAllArtifacts();
+
   },
   methods: {
     setBounds() {
@@ -110,7 +141,32 @@ export default {
         }
       });
     },
+    async loadAllArtifacts() {
+      let page = 1;
+
+      const p = await this.$api.Entities.get_api_0_3_system_class__system_class_({
+        system_class: "place",
+        page: page
+      });
+      this.artifacts.features = this.artifacts.features.concat(p.body.results.map(x => x.features))
+      while (page < p.body.pagination.totalPages) {
+        page++;
+        const q = await this.$api.Entities.get_api_0_3_system_class__system_class_({
+          system_class: "place",
+          page: page
+        });
+        this.artifacts.features = this.artifacts.features.concat(q.body.results.map(x => x.features))
+        console.log(this.artifacts)
+      }
+
+    },
   },
+  computed:{
+    visibleArtifacts(){
+      return {...this.artifacts,
+      features : this.artifacts.features.filter(x => x.geometry?. geometries?.length !== 0)}
+    }
+  }
 };
 </script>
 

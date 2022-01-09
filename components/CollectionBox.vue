@@ -43,13 +43,14 @@ export default {
   },
 
   async mounted() {
-    const p = await this.$api.Entities.get_api_0_2_entity__id__({
+    const p = await this.$api.Entities.get_api_0_3_entity__id__({
       id_: this.collection.id,
     });
   },
   methods: {
-    ...mapActions('query', ['searchByFilterId']),
+    ...mapActions('query', ['searchByFilterId','setCodes']),
     routeToCollection() {
+      this.setCodes('artifact');
       this.searchByFilterId(this.collection.id);
       this.$router.push({
         name: 'data-list-q',

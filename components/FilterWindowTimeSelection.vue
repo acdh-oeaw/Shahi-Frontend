@@ -9,17 +9,7 @@
           needs to be an exact match
         </p>
       </v-col>
-      <v-col cols="12" sm="5" class="d-flex align-center">
-        <v-range-slider
-          v-model="slidervalue"
-          class="large-slider"
-          vertical
-          step="1"
-          max="10"
-          min="0"
-          :tick-labels="items.map(x=>x.text)"
-        />
-      </v-col>
+    
     </v-row>
   </div>
 </template>
@@ -67,11 +57,11 @@ export default {
     },
     exactMatch() {
       if (this.exactMatch) {
-        this.value[0].logicalOperator = 'eq';
-        this.value[1].logicalOperator = 'eq';
+        this.value[0].logicalOperator = 'equal';
+        this.value[1].logicalOperator = 'equal';
       } else {
-        this.value[0].logicalOperator = 'ge';
-        this.value[1].logicalOperator = 'le';
+        this.value[0].logicalOperator = 'greaterThanEqual';
+        this.value[1].logicalOperator = 'lesserThanEqual ';
       }
     },
     slidervalue() {

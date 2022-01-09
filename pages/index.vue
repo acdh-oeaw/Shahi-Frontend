@@ -4,17 +4,20 @@
       column
       justify-center
       align-center
-      class="text-center pa-5 splashtext"
+      class="text-center  splashtext "
       :class="{
         closed: closed,
         'animation-closed': closed & initialized,
         'animation-open': !closed & initialized,
+        'gilgit-background': !closed,
+        'py-10':!closed,
         open: !closed,
         topOffset: $vuetify.breakpoint.smAndUp,
       }"
     >
-      <div style="max-width: 1000px">
-        <div v-if="!closed">
+    
+      <div v-if="!closed" class="white" style="width:100%; ">
+        <div  style="max-width:1000px;margin:auto;" class="pa-5">
           <p class="text-h4 text-sm-h2">Shahi Kingdoms Database</p>
 
           <p class="text-body-1">
@@ -61,7 +64,9 @@
           </v-row>
         </div>
 
-        <v-btn
+       
+      </div>
+       <v-btn
           v-else
           fab
           @click="
@@ -72,7 +77,6 @@
         >
           <v-icon>mdi-information-variant</v-icon>
         </v-btn>
-      </div>
     </v-layout>
     <v-fab-transition>
       <v-btn
@@ -122,14 +126,7 @@ export default {
   async mounted() {
     this.closed = this.$route.params.showMap;
     this.showContent = false;
-    const content = await this.$api.Content.get_api_0_2_content_({});
-
-    const p = await this.$api.Entities.get_api_0_2_code__code_({
-      limit: 500,
-      show: ["geometry"],
-      code: "artifact",
-    });
-    this.items = p.body.results;
+    const content = await this.$api.Content.get_api_0_3_content_({});
     this.body = content.body.intro;
   },
 };
@@ -139,7 +136,6 @@ body,
 html {
   height: 100%;
 }
-
 .splashtext {
   position: absolute;
   left: 0;
@@ -148,12 +144,20 @@ html {
   margin-right: auto;
   min-height: 400px;
 
-  background-color: rgba(255, 255, 255, 1);
   z-index: 5;
   max-width: 100vw;
   min-width: 100%;
   max-height: 100%;
+
 }
+.gilgit-background{
+        background-image:url("../assets/gilgit_banner.jpg");
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+
 .topOffset {
   transform: translateY(5rem);
 }
@@ -242,7 +246,6 @@ html {
     border-radius: 50%;
     max-width: 56px;
     min-width: 56px;
-
     max-height: 56px;
     min-height: 56px;
     background-color: rgba(255, 255, 255, 0);
@@ -282,4 +285,5 @@ html {
     transform: translateY(calc(84vh - 100px)) translateX(calc(50vw - 54px));
   }
 }
+
 </style>

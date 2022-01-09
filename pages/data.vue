@@ -41,13 +41,14 @@ export default {
     const {
       sortBy, sortDesc, page, itemsPerPage,
     } = this.options;
-
+    console.log(this.query,'Asd')
     try {
       // eslint-disable-next-line no-underscore-dangle
       const p = await this.$api.Entities.get_api_0_3_query_({
         limit: itemsPerPage,
         first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
-        filter: this.query,
+        codes: this.query?.codes,
+        search: this.query?.search,
         column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
         sort: sortDesc[0] ? 'desc' : 'asc',
       });
