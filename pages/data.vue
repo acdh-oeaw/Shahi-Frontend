@@ -25,7 +25,7 @@
 
     <collection-header v-if="$route.query.collection" :items="items"/>
 
-    <nuxt-child class="page-content" :items="items" :total-items="totalItems" :not-found="notFound"/>
+    <nuxt-child :items="items" :total-items="totalItems" :not-found="notFound"/>
   </div>
 </template>
 
@@ -41,7 +41,6 @@ export default {
     const {
       sortBy, sortDesc, page, itemsPerPage,
     } = this.options;
-    console.log(this.query,'Asd')
     try {
       // eslint-disable-next-line no-underscore-dangle
       const p = await this.$api.Entities.get_api_0_3_query_({

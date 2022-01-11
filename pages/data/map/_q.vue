@@ -1,16 +1,16 @@
 <template>
-  <div>
-    <maplist :items="items" :total-items="totalItems" />
+  <div class="data_map">
+    <dataMap />
   </div>
 </template>
 
 <script>
-import maplist from '~/components/lists/maplist.vue';
+import dataMap from '~/components/DataMap';
 import queries from '~/mixins/queries';
 
 export default {
   components: {
-    maplist,
+    dataMap,
   },
   props:['items', 'totalItems'],
   mixins: [queries],
@@ -22,3 +22,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+.data_map{
+  width:100%;
+  height:calc(100vh - 110px);
+  position:relative;
+}
+</style>

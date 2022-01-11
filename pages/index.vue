@@ -15,7 +15,7 @@
         topOffset: $vuetify.breakpoint.smAndUp,
       }"
     >
-    
+
       <div v-if="!closed" class="white" style="width:100%; ">
         <div  style="max-width:1000px;margin:auto;" class="pa-5">
           <p class="text-h4 text-sm-h2">Shahi Kingdoms Database</p>
@@ -64,7 +64,7 @@
           </v-row>
         </div>
 
-       
+
       </div>
        <v-btn
           v-else
@@ -103,7 +103,7 @@
 
 <script>
 import ImageButton from "@/components/ImageButton.vue";
-import qmap from "~/components/map.vue";
+import qmap from "~/components/DataMap";
 
 export default {
   components: {
