@@ -108,9 +108,6 @@ export default {
         this.$nextTick(() => this.$refs.searchField.focus());
       }
     },
-    enter() {
-      console.log(this.globalSearch)
-    },
     removeItem(id) {
       this.removeFilter(id);
       let name = 'data-list-q';

@@ -21,7 +21,6 @@ export default {
   },
   watch: {
     imageInfoUrl() {
-      console.log('cahnegd');
       this.refreshMap();
     },
   },
@@ -42,7 +41,6 @@ export default {
             .then((imageInfo) => {
               const options = new IIIFInfo(imageInfo).getTileSourceOptions();
               if (options === undefined || options.version === undefined) {
-                console.log('Data seems to be no valid IIIF image information.');
                 return;
               }
               options.zDirection = -1;

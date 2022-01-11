@@ -320,7 +320,6 @@ export default {
   },
   watch: {
     async searchKeydownEnter() {
-      console.log('keydown', this.globalSearch)
       this.filterElements[this.selectedClass].items.find(x => x.label === 'name').values[0].value = this.globalSearch;
       await new Promise((resolve) => {
         setTimeout(resolve, 100);
@@ -412,7 +411,6 @@ export default {
       const p = await this.$api.Nodes.get_api_0_3_type_tree_();
           const typeTree  = Object.values(p.body.typeTree);
 
-      console.log(typeTree,'tyype')
       this.filterElements.forEach((filterElement) => {
         filterElement.items.forEach((item) => {
           if (item.id) {
@@ -463,7 +461,7 @@ export default {
       this.setCodes(this.filterElements[this.selectedClass].systemClass);
       this.setSearch(this.currentFilters);
 
-      let name = 'data-list-q';
+      let name = 'data-map-q';
       if (this.$route.name.startsWith('data-')) name = this.$route.name;
 
       this.$router.push({

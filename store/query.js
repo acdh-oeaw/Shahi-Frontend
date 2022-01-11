@@ -1,7 +1,7 @@
 export const state = () => ({
   filters: [],
   codes: 'artifact',
-  
+
 });
 export const getters = {
   getFiltersFlat: (s) => s.filters.flatMap((x) => x.items),
@@ -18,7 +18,6 @@ export const getters = {
       if (box.logicalOperator === 'OR') filtergroup = [...filtergroup, [box]];
       else filtergroup[filtergroup.length - 1].push(box);
     });
-    console.log(s.filters)
 
     filtergroup.forEach((search) => {
       if (search && search.length > 0) {
@@ -34,7 +33,6 @@ export const getters = {
             ...x,
             items: x.items.filter((y) => y.type === searcher.typeName),
           })).filter((x) => x.items.length > 0);
-          console.log('fiiilters',filters)
           if (filters && filters.length > 0) {
             let searchString = `"${searcher.filterCategory}":[`;
             if (searcher.valueProperty === 'id') searchString += filters.map((x) => `{"operator":"equal","logicalOperator":"${x.logicalOperatorInside.toLowerCase()}","values":[${x.items.map((y) => y.id).join(',')}]}`).join(',');
@@ -45,10 +43,9 @@ export const getters = {
           }
         });
         if (operators.length > 0) query.search = [...query.search, `{${operators.join(',')}}`];
-    
+
       }
     });
-    console.log(query)
     return query;
   },
 };
