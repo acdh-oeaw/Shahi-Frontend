@@ -10,13 +10,13 @@
 
     <qmap :geojsonitems="visibleArtifacts" />
 
-    <div class="timeline elevation-4 relative" :class="{show:useTimeline}">
+    <div  class="timeline elevation-4 relative" :class="{show:useTimeline}">
       <v-btn v-if="useTimeline" icon @click="useTimeline = false">
         <v-icon size="23">
           mdi-close
         </v-icon>
       </v-btn>
-      <v-btn v-else icon @click="useTimeline = true">
+      <v-btn v-else icon @click="useTimeline = true" title="configure timeline">
         <v-icon size="23">
           mdi-timeline-clock-outline
         </v-icon>
@@ -38,6 +38,12 @@
           </v-col>
         </v-row>
       </transition>
+    
+    </div>
+    <div :title="showPolygons ? 'hide polygons' : 'show polygons'" @click="showPolygons = !showPolygons" class="showploygons elevation-4" :class="{active: !showPolygons}">
+    <v-icon size="23">
+          mdi-vector-polygon
+        </v-icon>
     </div>
   </div>
 </template>
@@ -53,6 +59,7 @@ export default {
   },
   data() {
     return {
+      showPolygons:true,
       useTimeline: false,
       loading: false,
       toggler: 1,
@@ -81,49 +88,12 @@ export default {
   },
   methods: {
     ...mapActions('entity', ['addToPlaces', 'addToArtifacts', 'setArtifactsLoaded', 'setPlacesLoaded']),
-    async loadAllArtifacts() {
-      if (this.getArtifactsLoaded) return;
-
-      const p = await this.$api.Entities.get_api_0_3_system_class__system_class_({
-        system_class: 'artifact',
-        page: 1,
-      });
-
-      Array.from({ length: p.body.pagination.totalPages }, async (x, i) => {
-        const q = await this.$api.Entities.get_api_0_3_system_class__system_class_({
-          system_class: 'artifact',
-          page: i,
-        });
-        this.addToArtifacts(q.body.results.map((x) => x.features));
-      });
-      this.setArtifactsLoaded(true);
-    },
-    async loadAllPlaces() {
-      if (this.getPlaceLoaded) return;
-      const page = 1;
-
-      const p = await this.$api.Entities.get_api_0_3_system_class__system_class_({
-        system_class: 'place',
-        page,
-      });
-
-      Array.from({ length: p.body.pagination.totalPages }, async (x, i) => {
-        const q = await this.$api.Entities.get_api_0_3_system_class__system_class_({
-          system_class: 'place',
-          page: i,
-        });
-
-        this.addToPlaces(q.body.results.map((x) => x.features));
-        this.items = [...this.items, ...q.body.results.map((x) => x.features)];
-      });
-      this.setPlacesLoaded(true);
-    },
     dateStringToYear(date) {
       return parseInt(date.split('-')[0], 10);
     },
     async loadArtifacts() {
       this.loading = true;
-      this.items = [];
+      let localItems = [];
       const p = await this.$api.Entities.get_api_0_3_query_({
         codes: this.getQuery?.codes,
         search: this.getQuery?.search,
@@ -136,9 +106,11 @@ export default {
           search: this.getQuery?.search,
           page: i,
         });
-        this.items = [...this.items, ...q.body.results.map((x) => x.features)];
+        localItems = [...localItems, ...q.body.results.map((x) => x.features[0])];
       }));
       this.loading = false;
+      this.items = localItems;
+      console.log(this.items)
     },
   },
   computed: {
@@ -146,10 +118,11 @@ export default {
     ...mapGetters('query', ['getQuery']),
     visibleArtifacts() {
       const year = (this.time + 1) * 100;
-      if (!this.useTimeline) return this.items;
-      return this.items
-        .filter((x) => this.dateStringToYear(x[0].when?.timespans?.[0]?.start.earliest) <= year)
-        .filter((x) => this.dateStringToYear(x[0].when?.timespans?.[0]?.end.earliest) >= year);
+      let localItems = this.items.filter(x => this.showPolygons || x?.geometry?.type !== 'Polygon')
+      if (!this.useTimeline) return localItems;
+      return localItems
+        .filter((x) => this.dateStringToYear(x.when?.timespans?.[0]?.start.earliest) <= year)
+        .filter((x) => this.dateStringToYear(x.when?.timespans?.[0]?.end.earliest) >= year);
     },
   },
 
@@ -200,6 +173,33 @@ export default {
   top: 0;
   left: 0;
 }
+.showploygons{
+  position: absolute;
+  padding: 5px;
+  background-color: white;
+  width:35px;
+  height:35px;
+  z-index: 400;
+  right:10px;
+  top:55px;
+  cursor:pointer;
+  transition:all linear 100ms;
+}
+a.showploygons{
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  position: absolute;
+  background-color: green;
+}
+.showploygons.active{
+  filter: brightness(90%);
+}
+.showploygons:hover{
+filter: brightness(95%);
+}
+
 
 .timeline {
   position: absolute;

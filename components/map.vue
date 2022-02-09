@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     correctDataFormat() {
-      return { features: this.geojsonitems.filter((x) => x?.[0]?.geometry?.coordinates) };
+      return { features: this.geojsonitems.filter((x) => x?.geometry?.coordinates) };
     },
   },
   watch: {
