@@ -2,8 +2,9 @@
   <v-combobox
     :value="getFiltersFlat"
     single-line
-    solo-inverted
     flat
+    solo
+    background-color="grey lighten-2"
     hide-details
     prepend-inner-icon="mdi-magnify"
     append-icon=""
@@ -21,7 +22,7 @@
     <template v-slot:selection="{ attrs, item, parent, selected }">
       <v-chip
         v-if="item === Object(item)"
-        class="text-capitalize"
+        class="text-capitalize grey lighten-3"
         label
         small
       >

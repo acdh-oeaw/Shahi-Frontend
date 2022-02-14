@@ -139,7 +139,6 @@ export default {
 </script>
 
 <style>
-@import "@/assets/js/map/mapviewer.css";
 
 .mapcontainer {
   width: 100%;

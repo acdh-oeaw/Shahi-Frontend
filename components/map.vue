@@ -48,11 +48,12 @@ export default {
   watch: {
     correctDataFormat: {
       handler() {
-        this.map?.clearData();
-        if (this.correctDataFormat.features.length !== 0 ){
-          this.map?.passData(this.correctDataFormat);
-        }
-
+        this.$nextTick(() => {
+          this.map?.clearData();
+          if (this.correctDataFormat.features.length !== 0) {
+            this.map?.passData(this.correctDataFormat);
+          }
+        });
       },
       deep: true,
       immediate: true,
@@ -66,7 +67,22 @@ export default {
   mounted() {
     this.$nextTick(function () {
       const coreComponent = document.getElementById('map-container');
-      this.map = new MapViewerComponent(coreComponent, this.options, this.correctDataFormat);
+      this.map = new MapViewerComponent(coreComponent, this.options, {
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          66.37939453125,
+          32.38923910985902
+        ]
+      }
+    },
+  ]
+} );
       this.map.on('init', (el) => { });
       this.map.on('featureSelected', (el) => {
         console.log('[mapviewer-component event: feature selected]:', el);
@@ -82,5 +98,6 @@ export default {
 </script>
 
 <style>
+@import "@/assets/js/map/mapviewer.css";
 
 </style>
