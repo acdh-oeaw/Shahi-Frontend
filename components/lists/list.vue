@@ -63,9 +63,9 @@
         </nuxt-link>
       </template>
 
-      <template v-slot:item.features[0].description[0].value="{ item }">
-        <div v-if="item.features[0].description" class="tablecolumndesc">
-          {{ item.features[0].description[0].value }}
+      <template v-slot:item.features[0].descriptions[0].value="{ item }">
+        <div v-if="item.features[0].descriptions" class="tablecolumndesc">
+          {{ item.features[0].descriptions[0].value }}
         </div>
         <div v-else>
           n/a

@@ -95,14 +95,14 @@ export default {
       this.loading = true;
       let localItems = [];
       const p = await this.$api.Entities.get_api_0_3_query_({
-        codes: this.getQuery?.codes,
+        view_classes: this.getQuery?.view_classes,
         search: this.getQuery?.search,
         page: 1,
       });
 
       await Promise.all(Array.from({ length: p.body.pagination.totalPages }, async (x, i) => {
         const q = await this.$api.Entities.get_api_0_3_query_({
-          codes: this.getQuery?.codes,
+          view_classes: this.getQuery?.view_classes,
           search: this.getQuery?.search,
           page: i,
         });

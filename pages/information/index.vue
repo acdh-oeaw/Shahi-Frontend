@@ -52,7 +52,7 @@
             </ul>
             <p
               class="primary--text go-to-map-button mt-5"
-              @click="$router.push('/data/list?codes=artifact&type_id=1095')"
+              @click="$router.push('/data/list?view_classes=artifact&type_id=1095')"
             >
               Search for sites in the database
               <v-icon class="ml-n1 mb-1">mdi-chevron-right</v-icon>
@@ -78,7 +78,7 @@
             <p class="text-subtitle-1">2.e. Utensil</p>
             <p
               class="primary--text go-to-map-button mt-5"
-              @click="$router.push('/data/list?codes=artifact&type_id=118')"
+              @click="$router.push('/data/list?view_classes=artifact&type_id=118')"
             >
               Search for portable objects in the database
               <v-icon class="ml-n1 mb-1">mdi-chevron-right</v-icon>
@@ -184,7 +184,7 @@
         </p>
         <p
           class="primary--text go-to-map-button mt-5"
-          @click="$router.push('/data/list?codes=artifact&type_id=3')"
+          @click="$router.push('/data/list?view_classes=artifact&type_id=3')"
         >
           Search for inscriptions in the database
           <v-icon class="ml-n1 mb-1">mdi-chevron-right</v-icon>

@@ -9,7 +9,7 @@ export const getters = {
   getCurrentSystemClass: (s) => s.codes,
   getQuery: (s) => {
     const query = {
-      codes: s.codes || 'artifact',
+      view_classes: s.codes || 'artifact',
       search: [],
       filter:[],
     };
@@ -89,8 +89,8 @@ export const actions = {
     commit('setCodes', value);
   },
   updateFiltersFromUrl({ commit, rootGetters }, q) {
-    if (q?.codes) commit('setCodes', q?.codes);
-    commit('app/setSelectedFilterClass', q?.codes, { root: true });
+    if (q?.view_classes) commit('setCodes', q?.view_classes);
+    commit('app/setSelectedFilterClass', q?.view_classes, { root: true });
     if (q.search) {
       const getFilterDetailsFromID = (id) => {
         const allFilters = rootGetters['app/getCurrentFiltersFlat'];

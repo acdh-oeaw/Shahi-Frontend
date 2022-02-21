@@ -25,8 +25,8 @@
                       .replace(/^0+/, "")
                   }}</span>
               </p>
-              <p style="white-space: pre-line" v-if="item.features[0].description">
-                {{ item.features[0].description[0].value }}
+              <p style="white-space: pre-line" v-if="item.features[0].descriptions">
+                {{ item.features[0].descriptions[0].value }}
               </p>
               <p
                 class="primary--text go-to-map-button"

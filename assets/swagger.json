@@ -9,10 +9,25 @@
   "servers": [
     {
       "url": "https://shahi.openatlas.eu/",
-      "description": "Demo Server"
-    }],
+      "description": "Shahi Production Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Entities",
+      "description": "Requesting entities through different means."
+    },
+    {
+      "name": "Nodes",
+      "description": "Requesting nodes and subunits"
+    },
+    {
+      "name": "Content",
+      "description": "Requesting content of the OpenAtlas instance."
+    }
+  ],
   "paths": {
-    "/api/0.3/cidoc_class/{class_code}": {
+    "/api/0.3/cidoc_class/{cidoc_class}": {
       "get": {
         "tags": [
           "Entities"
@@ -21,7 +36,7 @@
         "description": "Retrieves a json with a list of entities based on their CIDOC CRM class code. The json contains a **result** and **pagination** key. All in OpenAtlas available codes can be found under `https://redmine.craws.net/projects/uni/wiki/OpenAtlas_and_CIDOC_CRM_class_mapping`. The result can also be filtered, ordered and manipulated through different parameters. By default results are orderd alphabetically and 20 entities are shown.",
         "parameters": [
           {
-            "name": "class_code",
+            "name": "cidoc_class",
             "in": "path",
             "description": "Need to be a valid CIDOC CRM class code (e.g. E21, E18, E33)",
             "required": true,
@@ -180,6 +195,21 @@
               "enum": [
                 "linked_places",
                 "geojson"
+              ]
+            }
+          },
+          {
+            "name": "export",
+            "in": "query",
+            "description": "Result will be downloaded in the given format.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "csv",
+                "csvNetwork"
               ]
             }
           },
@@ -448,6 +478,36 @@
             }
           },
           {
+            "name": "format",
+            "in": "query",
+            "description": "Select to which output format is prefered",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "linked_places",
+                "geojson"
+              ]
+            }
+          },
+          {
+            "name": "export",
+            "in": "query",
+            "description": "Result will be downloaded in the given format.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "csv",
+                "csvNetwork"
+              ]
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "description": "Jump to given page",
@@ -530,14 +590,15 @@
           {
             "name": "export",
             "in": "query",
-            "description": "Select to which format the output is downloaded",
+            "description": "Result will be downloaded in the given format.",
             "required": false,
             "style": "form",
             "explode": true,
             "schema": {
               "type": "string",
               "enum": [
-                "csv"
+                "csv",
+                "csvNetwork"
               ]
             }
           },
@@ -687,6 +748,21 @@
                 "geojson"
               ]
             }
+          },
+          {
+            "name": "export",
+            "in": "query",
+            "description": "Result will be downloaded in the given format.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "csv",
+                "csvNetwork"
+              ]
+            }
           }
         ],
         "responses": {
@@ -726,7 +802,7 @@
             }
           },
           {
-            "name": "classes",
+            "name": "cidoc_classes",
             "in": "query",
             "description": "Need to be a entity class code of the CIDOC CRM (e.g. E21, E18, E33). For further information visit https://redmine.craws.net/projects/uni/wiki/OpenAtlas_and_CIDOC_CRM_class_mapping",
             "required": false,
@@ -737,7 +813,7 @@
             }
           },
           {
-            "name": "codes",
+            "name": "view_classes",
             "in": "query",
             "description": "Need to be an OpenAtlas menu items",
             "required": false,
@@ -767,7 +843,6 @@
               "enum": [
                 "acquisition",
                 "activity",
-                "actor_appellation",
                 "administrative_unit",
                 "appellation",
                 "artifact",
@@ -943,6 +1018,21 @@
             }
           },
           {
+            "name": "export",
+            "in": "query",
+            "description": "Result will be downloaded in the given format.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "csv",
+                "csvNetwork"
+              ]
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "description": "Jump to given page",
@@ -1063,28 +1153,31 @@
             "schema": {
               "type": "string",
               "enum": [
+                "all",
+                "administrative_unit",
+                "type",
                 "acquisition",
                 "activity",
-                "actor_appellation",
-                "administrative_unit",
+                "actor_actor_relation",
+                "actor_function",
                 "appellation",
                 "artifact",
                 "bibliography",
                 "edition",
                 "external_reference",
-                "feature",
-                "file",
+                "feature file",
                 "group",
                 "human_remains",
+                "involvement",
                 "move",
                 "object_location",
                 "person",
                 "place",
-                "source",
+                "production",
                 "reference_system",
-                "stratigraphic_unit",
+                "source",
                 "source_translation",
-                "type"
+                "stratigraphic_unit"
               ]
             }
           },
@@ -1226,6 +1319,21 @@
               "enum": [
                 "linked_places",
                 "geojson"
+              ]
+            }
+          },
+          {
+            "name": "export",
+            "in": "query",
+            "description": "Result will be downloaded in the given format.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "csv",
+                "csvNetwork"
               ]
             }
           },
@@ -1453,6 +1561,21 @@
             }
           },
           {
+            "name": "export",
+            "in": "query",
+            "description": "Result will be downloaded in the given format.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "csv",
+                "csvNetwork"
+              ]
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "description": "Jump to given page",
@@ -1653,6 +1776,21 @@
             }
           },
           {
+            "name": "export",
+            "in": "query",
+            "description": "Result will be downloaded in the given format.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "csv",
+                "csvNetwork"
+              ]
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "description": "Jump to given page",
@@ -1707,7 +1845,7 @@
             "content": {
               "application/ld+json": {
                 "schema": {
-                  "$ref": "#/components/schemas/NodeOverviewModel"
+                  "$ref": "#/components/schemas/TypeOverviewModel"
                 }
               }
             }
@@ -1755,7 +1893,7 @@
         }
       }
     },
-    "/api/0.3/view_class/{code}": {
+    "/api/0.3/view_class/{view_class}": {
       "get": {
         "tags": [
           "Entities"
@@ -1764,7 +1902,7 @@
         "description": "Retrieves a json with a list of entities based on their OpenAtlas view class. Available categories are **actor**, **event**, **place**, **source**, **reference**, **object**. The result can also be filtered, ordered and manipulated through different parameters. By default results are orderd alphabetically and 20 entities are shown.",
         "parameters": [
           {
-            "name": "code",
+            "name": "view_class",
             "in": "path",
             "description": "Need to be an OpenAtlas menu item",
             "required": true,
@@ -1773,12 +1911,17 @@
             "schema": {
               "type": "string",
               "enum": [
+                "all",
                 "actor",
+                "artifact",
+                "file",
                 "event",
                 "place",
                 "reference",
+                "reference_system",
                 "source",
-                "object"
+                "type",
+                "source_translation"
               ]
             }
           },
@@ -1931,6 +2074,21 @@
               "enum": [
                 "linked_places",
                 "geojson"
+              ]
+            }
+          },
+          {
+            "name": "export",
+            "in": "query",
+            "description": "Result will be downloaded in the given format.",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "csv",
+                "csvNetwork"
               ]
             }
           },
@@ -2297,10 +2455,7 @@
         "type": "object",
         "properties": {
           "types": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/NodeCategoryModel"
-            }
+            "$ref": "#/components/schemas/NodeCategoryModel"
           }
         }
       },
@@ -2542,6 +2697,84 @@
           },
           "value": {
             "type": "number"
+          }
+        }
+      },
+      "TypeOverviewChildren": {
+        "type": "object",
+        "properties": {
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TypeOverviewChildren"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "TypeOverviewEntry": {
+        "type": "object",
+        "properties": {
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TypeOverviewChildren"
+            }
+          },
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "viewClass": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TypeOverviewModel": {
+        "type": "object",
+        "properties": {
+          "custom": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TypeOverviewEntry"
+            }
+          },
+          "places": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TypeOverviewEntry"
+            }
+          },
+          "standard": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TypeOverviewEntry"
+            }
+          },
+          "system": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TypeOverviewEntry"
+            }
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TypeOverviewEntry"
+            }
           }
         }
       },
@@ -3007,14 +3240,15 @@
       "exportParam": {
         "name": "export",
         "in": "query",
-        "description": "Select to which format the output is downloaded",
+        "description": "Result will be downloaded in the given format.",
         "required": false,
         "style": "form",
         "explode": true,
         "schema": {
           "type": "string",
           "enum": [
-            "csv"
+            "csv",
+            "csvNetwork"
           ]
         }
       },

@@ -28,7 +28,7 @@
           </ImageButton>
         </v-col>
         <v-col cols="12" sm="6">
-          <ImageButton to="/data/list?codes=artifact" icon="$artifact">
+          <ImageButton to="/data/list?view_classes=artifact" icon="$artifact">
             Search the Database
           </ImageButton>
         </v-col>
@@ -52,7 +52,7 @@ export default {
           target: {
             name: 'list-q',
             query: {
-              codes: 'artifact',
+              view_classes: 'artifact',
               type_id: [1095],
             },
           },
@@ -63,7 +63,7 @@ export default {
           target: {
             name: 'detaillist-q',
             query: {
-              codes: 'artifact',
+              view_classes: 'artifact',
               type_id: [109],
             },
           },
@@ -74,7 +74,7 @@ export default {
           target: {
             name: 'detaillist-q',
             query: {
-              codes: 'artifact',
+              view_classes: 'artifact',
               type_id: [108],
             },
           },
@@ -85,7 +85,7 @@ export default {
           target: {
             name: 'detaillist-q',
             query: {
-              codes: 'artifact',
+              view_classes: 'artifact',
               type_id: [108],
             },
           },

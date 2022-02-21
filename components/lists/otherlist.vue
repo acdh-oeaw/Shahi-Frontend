@@ -80,7 +80,7 @@
                 </v-card>
               </v-col>
               <v-col cols="12" sm="8" md="9" class="px-5">
-                <v-card v-if="item.features[0].description" outlined class="my-3">
+                <v-card v-if="item.features[0].descriptions" outlined class="my-3">
                   <v-card-text class="text-body-1">
                     Category of Authenticity:
                     <span
@@ -93,7 +93,7 @@
                   </v-card-text>
                   <v-card-text style="white-space: pre-line" class="text-body-1">
                     {{
-                      item.features[0].description[0].value
+                      item.features[0].descriptions[0].value
                     }}
                   </v-card-text>
                 </v-card>

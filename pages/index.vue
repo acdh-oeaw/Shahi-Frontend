@@ -80,7 +80,7 @@
     </v-layout>
     <v-fab-transition>
       <v-btn
-        to="/data/list?codes=artifact"
+        to="/data/list?view_classes=artifact"
         fab
         absolute
         bottom
