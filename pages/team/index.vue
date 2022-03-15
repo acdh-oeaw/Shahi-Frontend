@@ -33,7 +33,7 @@
               <v-card flat>
                 <v-row no-gutters>
                   <v-col cols="12" sm="">
-                    <v-card-title class="">
+                    <v-card-title >
                       {{ person.name }}
                     </v-card-title>
                     <v-card-subtitle class=" text-overline">
@@ -380,7 +380,7 @@ export default {
 };
 </script>
 
-<style>
+<style >
 .circle {
   clip-path: circle();
 }
@@ -391,6 +391,6 @@ export default {
 }
 
 .v-card__text, .v-card__title {
-  word-break: normal; /* maybe !important  */
+  word-break: normal !important;
 }
 </style>
