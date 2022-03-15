@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height: 84vh">
+  <div class="full-height">
     <v-layout
       column
       justify-center
@@ -82,11 +82,12 @@
       <v-btn
         to="/data/list?view_classes=artifact"
         fab
+        style="bottom:55px"
         absolute
-        bottom
         right
         color="secondary"
         v-if="closed"
+
         class="database-btn"
       >
         <v-icon>mdi-database</v-icon></v-btn
@@ -149,6 +150,9 @@ html {
   min-width: 100%;
   max-height: 100%;
 
+}
+.full-height{
+  min-height:calc(100vh - 64px);
 }
 .gilgit-background{
         background-image:url("../assets/gilgit_banner.jpg");

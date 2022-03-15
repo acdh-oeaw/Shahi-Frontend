@@ -96,7 +96,7 @@
     <v-main>
       <nuxt />
     </v-main>
-    <div class="grey lighten-3 mt-15">
+    <div class="grey lighten-3 ">
       <div style="max-width: 1600px" class="ma-auto">
         <v-row no-gutters class="mx-2 mt-3">
           <svg
