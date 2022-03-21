@@ -16,7 +16,7 @@
             "id": "name",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "equal",
+            "logicalOperator": "like",
             "type": "name"
           }
         ]
@@ -32,7 +32,7 @@
             "id": "description",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "equal",
+            "logicalOperator": "like",
             "type": "description"
           }
         ]
@@ -149,7 +149,7 @@
             "id": "name",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "equal",
+            "logicalOperator": "like",
             "type": "name"
           }
         ]
@@ -165,7 +165,7 @@
             "id": "description",
             "value": "",
             "concatOperator": "and",
-            "logicalOperator": "equal",
+            "logicalOperator": "like",
             "type": "description"
           }
         ]

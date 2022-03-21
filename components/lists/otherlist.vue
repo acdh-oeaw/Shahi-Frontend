@@ -244,7 +244,7 @@ export default {
         .join(', ');
     },
     getFirstTypeByKeyword(types, keyword) {
-      const type = types.find((x) => x.hierarchy.split(' > ')[0] === keyword);
+      const type = types?.find((x) => x.hierarchy.split(' > ')[0] === keyword);
 
       if (type === undefined) return;
 
