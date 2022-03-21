@@ -19,19 +19,19 @@
         </div>
       </div>
       <div>
-        <view-toggler class="float-right mr-3"/>
+        <view-toggler class="float-right mr-3" />
       </div>
     </div>
 
-    <collection-header v-if="$route.query.collection" :items="items"/>
+    <collection-header v-if="$route.query.collection" :items="items" />
 
-    <nuxt-child :items="items" :total-items="totalItems" :not-found="notFound"/>
+    <nuxt-child :items="items" :total-items="totalItems" :not-found="notFound" />
   </div>
 </template>
 
 <script>
 import favorites from '@/mixins/favorites';
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'DataVue',
@@ -103,15 +103,15 @@ export default {
     },
   },
   mounted() {
-    window.scrollTo({top: 0});
+    window.scrollTo({ top: 0 });
   },
   methods: {
     ...mapActions({
       searchByFilterId: 'query/searchByFilterId',
-      setCodes: 'query/setCodes'
+      setCodes: 'query/setCodes',
     }),
     clicked(item) {
-      this.setCodes('artifact');
+      this.setCodes(item.systemClass);
 
       this.searchByFilterId(item.id);
       let name = 'data-list-q';

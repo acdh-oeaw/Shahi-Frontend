@@ -1,27 +1,30 @@
 <template>
-  <section>
-  <div class="collection-header secondary darken-1" v-if="collection">
-    <div class="page-content">
-      <div class="d-flex justify-space-around">
-        <div class="collection-header-left d-flex align-center">
-          <p class="title-1 mt-n15">
-            {{ collection.en }}
-          </p>
-        </div>
-        <div class="collection-header-right">
-          <image-collage :items="items" />
+  <section v-if="collection">
+    <div class="collection-header secondary darken-1">
+      <div class="page-content">
+        <div class="d-flex justify-space-around">
+          <div class="collection-header-left d-flex align-center">
+            <p class="title-1 mt-n15">
+              {{ collection.en }}
+            </p>
+          </div>
+          <div class="collection-header-right">
+            <image-collage :items="items" />
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
     <div class="page-content">
-      <p class="title-2">Description</p>
-      <p style="white-space: pre-line" class="text-body-1">
-        {{ collection.description}}
+      <p class="title-2">
+        Description
       </p>
-      <p class="title-2">Artifacts</p>
-
+      <p style="white-space: pre-line" class="text-body-1">
+        {{ collection.description }}
+      </p>
+      <p class="title-2">
+        Artifacts
+      </p>
     </div>
   </section>
 </template>

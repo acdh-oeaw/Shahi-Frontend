@@ -5,11 +5,10 @@
         class="white shadow scale clickable"
         contain
         max-width="450px"
-        :src="`https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${$route.params.id%2 +1}/1.jp2/full/500,/0/default.png`"
-        :lazy-src="`https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${$route.params.id%2 +1}/1.jp2/full/100,/0/default.png`"
-        @click="viewMode=true;"
+        :src="primaryImage.url"
+        @click="!!images && images.length !== 0 ? show() : viewMode=true"
       />
-      <p class="mt-3 primary--text go-to-map-button" text @click="viewMode=true">
+      <p class="mt-3 primary--text go-to-map-button" text @click="!!images && images.length !== 0 ? show() : viewMode=true">
         All Images
         <v-icon class="ma-n1">
           mdi-chevron-right
@@ -24,7 +23,7 @@
               mdi-close
             </v-icon>
           </v-btn>
-          <IIIFImageViewer style="height:100%;width:100%" :image-info-url="selected" />
+          <IIIFImageViewer style="height:100%;width:100%" :image-info-url="primaryImage.url" />
           <div class="image-picker">
             <div v-for="i in 5" :key="i" class="image-preview">
               <v-img
@@ -41,9 +40,14 @@
 </template>
 
 <script>
+import 'viewerjs/dist/viewer.css';
+import VueViewer from 'v-viewer';
+import Vue from 'vue';
 
+Vue.use(VueViewer);
 export default {
   name: 'ImageViewer',
+  props: ['images'],
   data() {
     return {
       viewMode: false,
@@ -54,7 +58,7 @@ export default {
       },
       manifest: 'https://shahi-img.acdh-dev.oeaw.ac.at/iviif/presentation/hk-shahi/manifest',
       infoUrl: 'https://stacks.stanford.edu/image/iiif/hg676jb4964%2F0380_796-44/info.json',
-      images: ['http://localhost:8182/iiif/3/sculpture1.tif/',
+      demoImages: ['http://localhost:8182/iiif/3/sculpture1.tif/',
         'http://localhost:8182/iiif/3/sculpture2.jpg/'],
       selected: `https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${this.$route.params.id % 2 + 1}/1.jp2/info.json`,
     };
@@ -62,6 +66,16 @@ export default {
   computed: {
     id() {
       return Math.ceil(Math.random() * 3);
+    },
+    primaryImage() {
+      return this.images?.[0] || { url: `https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${this.$route.params.id % 2 + 1}/1.jp2/full/500,/0/default.png` };
+    },
+  },
+  methods: {
+    show() {
+      this.$viewerApi({
+        images: this.images.map((x) => x.url),
+      });
     },
   },
 };
@@ -130,24 +144,24 @@ html, body {
 
 }
 
-.shadow{
+.shadow {
   /* offset-x | offset-y | blur-radius | spread-radius | color */
   box-shadow: 0 20px 20px 1px rgba(0, 0, 0, 0.2);
 }
 
-.scale{
+.scale {
   transition: all ease 200ms;
 }
 
-.scale:hover{
+.scale:hover {
   transform: scale(1.01);
 }
 
-.clickable{
+.clickable {
   cursor: pointer;
 }
 
-.clickable:hover{
-opacity:1 !important;
+.clickable:hover {
+  opacity: 1 !important;
 }
 </style>

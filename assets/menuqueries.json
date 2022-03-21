@@ -6,7 +6,12 @@
   },
   {
     "icon": "mdi-account-group",
-    "text": "Stationary Structures",
+    "text": "Archaeological Sites",
+    "systemClass":"place"
+  },
+  {
+    "icon": "mdi-account-group",
+    "text": "Archaeological Objects",
     "systemClass":"artifact",
     "id": 1095
 

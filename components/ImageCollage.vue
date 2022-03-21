@@ -2,12 +2,12 @@
   <div class="collage-wrapper">
     <div class="collage-root">
       <div
-        v-for="(item, index) in items"
+        v-for="(item, index) in filteredItems"
         :key="index"
-        @click="$router.push(`/single/${id(item)}`)"
         :class="`collage-image collage-image-${index+1}`"
-        :style="{'--background-image':`url(${images[index%6].image})`}"
-      ></div>
+        :style="{'--background-image':`url(${item.features[0].depictions[0].url})`}"
+        @click="$router.push(`/single/${id(item)}`)"
+      />
     </div>
   </div>
 </template>
@@ -15,15 +15,15 @@
 <script>
 export default {
   name: 'ImageCollage',
-  props:{
-    items:{
+  props: {
+    items: {
       type: Array,
-      default:[],
-    }
+      default: [],
+    },
   },
   data() {
     return {
-      images: [
+      demoImages: [
         {
           name: '1',
           image: 'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/1/1.jp2/full/200,/0/default.png',
@@ -50,6 +50,12 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    filteredItems() {
+      console.log(this.items.filter((x) => x.features[0].depictions));
+      return this.items.filter((x) => x.features[0].depictions);
+    },
   },
   methods: {
     id(item) {

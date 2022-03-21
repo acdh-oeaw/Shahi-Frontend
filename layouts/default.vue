@@ -79,17 +79,17 @@
         <nuxt-link class="nav-link mr-5" to="/sourcebook">
         <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-book-open-variant</v-icon>
 
-         <span v-else>Sourcebook</span> 
+         <span v-else>Sourcebook</span>
         </nuxt-link>
         <nuxt-link class="nav-link mr-5" to="/bibliography">
         <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-file-find</v-icon>
 
-          <span v-else>Bibliography</span> 
+          <span v-else>Bibliography</span>
         </nuxt-link>
         <nuxt-link class="nav-link" to="/team">
           <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-account-group</v-icon>
 
-          <span v-else> Team</span> 
+          <span v-else> Team</span>
         </nuxt-link>
       </v-app-bar>
     </v-expand-transition>
@@ -260,6 +260,7 @@ export default {
   methods: {
     ...mapActions({
       searchByFilterId: 'query/searchByFilterId',
+      setCodes: 'query/setCodes'
     }),
     onScroll(e) {
       this.windowTop = window.top.scrollY; /* or: e.target.documentElement.scrollTop */
@@ -267,6 +268,7 @@ export default {
     clickOnItem(item) {
       this.$store.commit('app/closeQueryDrawer');
       this.$store.commit('app/setSelectedFilterClass', item.systemClass);
+      this.setCodes(item.systemClass);
       this.searchByFilterId(item.id);
       let name = 'data-list-q';
       if (this.$route.name.startsWith('data-')) name = this.$route.name;

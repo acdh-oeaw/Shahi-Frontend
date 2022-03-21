@@ -25,7 +25,7 @@
                       .replace(/^0+/, "")
                   }}</span>
               </p>
-              <p style="white-space: pre-line" v-if="item.features[0].descriptions">
+              <p v-if="item.features[0].descriptions" style="white-space: pre-line">
                 {{ item.features[0].descriptions[0].value }}
               </p>
               <p
@@ -41,7 +41,7 @@
             </v-sheet>
           </v-col>
           <v-col cols="12" md="6" class="d-flex justify-center">
-            <ImageViewer />
+            <ImageViewer :images="picture" />
           </v-col>
         </v-row>
       </div>
@@ -175,6 +175,9 @@ export default {
           return r;
         }, {});
     },
+    picture() {
+      return this.item.features[0].depictions;
+    },
   },
   watch: {
     '$route.params': {
@@ -191,11 +194,7 @@ export default {
   methods: {
     scrollMeTo(refName) {
       const el = this.$el.getElementsByClassName(refName)[0];
-      const y = el.getBoundingClientRect().top - 100;
-
-      if (el) {
-        window.scrollTo({ top: y, behavior: 'smooth' });
-      }
+      el?.scrollIntoView({ behavior: 'smooth', block: 'end' });
     },
     async fetchRelated() {
       // eslint-disable-next-line no-restricted-syntax

@@ -11,7 +11,7 @@ export const getters = {
     const query = {
       view_classes: s.codes || 'artifact',
       search: [],
-      filter:[],
+      filter: [],
     };
     let filtergroup = [[]];
     s.filters.forEach((box) => {
@@ -43,7 +43,6 @@ export const getters = {
           }
         });
         if (operators.length > 0) query.search = [...query.search, `{${operators.join(',')}}`];
-
       }
     });
     return query;
@@ -85,7 +84,6 @@ export const actions = {
   },
   setCodes({ commit }, value) {
     commit('app/setSelectedFilterClass', value, { root: true });
-
     commit('setCodes', value);
   },
   updateFiltersFromUrl({ commit, rootGetters }, q) {

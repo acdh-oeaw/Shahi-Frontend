@@ -37,6 +37,7 @@
     "sass-loader": "^10",
     "swagger-client": "^3.10.12",
     "typeface-roboto": "^1.1.13",
+    "v-viewer": "^1.6.4",
     "vue-cookie": "^1.1.4",
     "vue-json-viewer": "^2.2.18",
     "vue-tour": "^2.0.0",

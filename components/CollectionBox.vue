@@ -5,10 +5,10 @@
         {{ collection.name }}
       </p>
       <div class="description">
-      <p v-if="!moreInfo" style="white-space: pre-line" class="collection-description text-body-1">
-        {{ collection.description.split('\r\n\r\n')[0]}}
-      </p>
-</div>
+        <p v-if="!moreInfo" style="white-space: pre-line" class="collection-description text-body-1">
+          {{ collection.description.split('\r\n\r\n')[0] }}
+        </p>
+      </div>
       <div
         @click="routeToCollection()"
       >
@@ -23,7 +23,10 @@
         </p>
       </div>
     </div>
-    <div class="collection-image primary" />
+
+    <div class="collection-image primary" :style="{'--background-image':`url(${image})`}">
+      <v-img v-if="image" :src="image" />
+    </div>
   </div>
 </template>
 
@@ -31,24 +34,27 @@
 
 import { mapActions, mapGetters } from 'vuex';
 import * as collection from 'postcss-selector-parser';
+import axios from 'axios';
 
 export default {
 
   name: 'CollectionBox',
   props: ['collection'],
-  data(){
-    return{
-      moreInfo:false,
-    }
+  data() {
+    return {
+      moreInfo: false,
+      collectionDetails: undefined,
+    };
   },
 
   async mounted() {
     const p = await this.$api.Entities.get_api_0_3_entity__id__({
       id_: this.collection.id,
     });
+    this.collectionDetails = p.body.features[0];
   },
   methods: {
-    ...mapActions('query', ['searchByFilterId','setCodes']),
+    ...mapActions('query', ['searchByFilterId', 'setCodes']),
     routeToCollection() {
       this.setCodes('artifact');
       this.searchByFilterId(this.collection.id);
@@ -60,6 +66,9 @@ export default {
   },
   computed: {
     ...mapGetters('query', ['getQuery']),
+    image() {
+      return this.collectionDetails?.depictions?.[0]?.url;
+    },
   },
 };
 </script>
@@ -82,6 +91,5 @@ export default {
   margin: 20px;
   max-width: 600px;
 }
-
 
 </style>
