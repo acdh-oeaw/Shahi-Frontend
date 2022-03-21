@@ -30,7 +30,6 @@
               </p>
               <p
                 class="primary--text go-to-map-button"
-                text
                 @click="scrollMeTo('map')"
               >
                 Discover on Map
@@ -41,7 +40,7 @@
             </v-sheet>
           </v-col>
           <v-col cols="12" md="6" class="d-flex justify-center">
-            <ImageViewer :images="picture" />
+            <ImageViewer v-if="!!images && images.length !== 0" :images="images" />
           </v-col>
         </v-row>
       </div>
@@ -175,7 +174,7 @@ export default {
           return r;
         }, {});
     },
-    picture() {
+    images() {
       return this.item.features[0].depictions;
     },
   },

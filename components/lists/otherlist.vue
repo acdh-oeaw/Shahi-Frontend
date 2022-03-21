@@ -71,12 +71,15 @@
                   color="grey lighten-2"
                 >
                   <v-img
+                    v-if="!!item.features[0].depictions && !!item.features[0].depictions.length !== 0"
 
                     max-width="100%"
-                    :src="demoImageLinks[id(item)%2]"
-                    :lazy-src="demoThumbnailLinks[id(item)%2]"
+                    :src="item.features[0].depictions[0].url"
                     alt="IMAGE"
                   />
+                  <p v-else class="text-body-1 ma-auto">
+                    No image available
+                  </p>
                 </v-card>
               </v-col>
               <v-col cols="12" sm="8" md="9" class="px-5">

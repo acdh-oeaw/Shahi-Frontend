@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div v-if="notFound">No records found.</div>
+    <div v-if="notFound">
+      No records found.
+    </div>
     <div v-else-if="!loading" class="mt-15 mx-5 gallery-columns" :style="cssVars">
       <div v-for="(item, index) in items" :key="index" class="gallery-column">
         <div class="gallery-content">
@@ -9,10 +11,10 @@
           </p>
 
           <v-img
+            v-if="!!item.features[0].depictions && !!item.features[0].depictions.length !== 0"
             class="ma-3"
             height="100%"
-            :src="demoImageLinks[id(item)%2]"
-            :lazy-src="demoThumbnailLinks[id(item)%2]"
+            :src="item.features[0].depictions[0].url"
             alt="IMAGE"
           />
         </div>
@@ -36,9 +38,9 @@
     <v-pagination
       class="ma-6"
       :value="parseInt(options.page)"
-      @input="newPage"
       :length="Math.floor(totalItems / options.itemsPerPage)"
       :total-visible="7"
+      @input="newPage"
     />
   </div>
 </template>
@@ -101,8 +103,8 @@ export default {
         .map((x) => x.label)
         .join(', ');
     },
-    newPage(page){
-      this.$router.replace({name: this.$route.name, query: {...this.$route.query,page:page}})
+    newPage(page) {
+      this.$router.replace({ name: this.$route.name, query: { ...this.$route.query, page } });
     },
   },
   computed: {
