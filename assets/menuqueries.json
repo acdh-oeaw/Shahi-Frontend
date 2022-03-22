@@ -11,7 +11,7 @@
   },
   {
     "icon": "mdi-account-group",
-    "text": "Archaeological Objects",
+    "text": "Stationary  Objects",
     "systemClass":"artifact",
     "id": 1095
 

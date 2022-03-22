@@ -4,10 +4,12 @@
       <div
         v-for="(item, index) in filteredItems"
         :key="index"
-        :class="`collage-image collage-image-${index+1}`"
-        :style="{'--background-image':`url(${item.features[0].depictions[0].url})`}"
+        :class="`collage-image-${index+1} d-flex align-center justify-center`"
+
         @click="$router.push(`/single/${id(item)}`)"
-      />
+      >
+        <img class="collage-image"  style="max-height: 100%;max-width:100%" :src="item.features[0].depictions[0].url">
+      </div>
     </div>
   </div>
 </template>
@@ -82,115 +84,115 @@ export default {
 }
 
 .collage-image {
-  position: absolute;
+  box-shadow: 0 0.7em 1em 1px rgba(0, 0, 0, 0.2);
+
   cursor: pointer;
   font-size: 18px;
-  box-shadow: 0 0.5em 0.6em 1px rgba(0, 0, 0, 0.2);
-
-  background: var(--background-image) no-repeat center center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  transition: all 100ms ease;
+  transition: all 100ms ease-in-out;
 }
 
 .collage-image:hover {
-  box-shadow: 0 0.7em 1em 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.7em 1em 1px rgba(0, 0, 0, 0.2),
+  0 0.7em 1em 1px rgba(0, 0, 0, 0.2);
   transform: translateY(-0.2em) scale(1.02);
 }
-
+div[class^="collage-image-"]{
+  position: absolute;
+}
 .collage-image-1 {
-  width: 8.225em;
-  height: 9.375em;
+  max-width: 8.225em;
+  max-height: 9.375em;
 }
 
 .collage-image-2 {
   top: 1.25em;
   left: 9.375em;
-  width: 7.8125em;
-  height: 10.9375em;
+  max-width: 7.8125em;
+  max-height:  6.25em;
 }
 
 .collage-image-3 {
-  top: 10.625em;
-  left: -1.875em;
+  top: 8.625em;
+  left: -0.875em;
   width: 10.625em;
-  height: 6.25em;
+  height: 7.25em;
 }
 
 .collage-image-4 {
   top: -2.5em;
   left: -8.75em;
-  width: 7.5em;
-  height: 6.25em;
+  max-width: 7.5em;
+  max-height: 6.25em;
 }
 
 .collage-image-5 {
   top: 5em;
   left: -8.125em;
-  width: 7.5em;
-  height: 5em;
+  max-width: 7.5em;
+  max-height: 5em;
 }
 
 .collage-image-6 {
   top: -7.5em;
   left: -0.625em;
-  width: 7.5em;
-  height: 5.9375em;
+  max-width: 7.5em;
+  max-height: 5.9375em;
 }
 
 .collage-image-7 {
   top: -10em;
   left: 8.75em;
-  width: 9.375em;
-  height: 9.375em;
+  max-width: 9.375em;
+  max-height: 9.375em;
 }
 
 .collage-image-8 {
   top: 13.75em;
   left: 10em;
-  width: 11.25em;
-  height: 7.5em;
+  max-width: 11.25em;
+  max-height: 7.5em;
 }
 
 .collage-image-9 {
   top: 12.5em;
   left: -11.25em;
-  width: 8.75em;
-  height: 7.5em;
+  max-width: 8.75em;
+  max-height: 7.5em;
 }
+
 .collage-image-10 {
   top: 6em;
   left: 18em;
-  width: 10em;
-  height: 6.5em;
+  max-width: 10em;
+  max-height: 6.5em;
 }
 
 .collage-image-11 {
   top: -5em;
   left: 19em;
-  width: 6.9em;
-  height: 10em;
+  max-width: 6.9em;
+  max-height: 10em;
 }
 
 .collage-image-12 {
   top: -2.5em;
   left: -16.5em;
-  width: 7em;
-  height: 7em;
+  max-width: 7em;
+  max-height: 7em;
 }
+
 .collage-image-13 {
   top: 5em;
   left: -15em;
-  width: 6em;
-  height: 7em;
+  max-width: 6em;
+  max-height: 7em;
 }
+
 .collage-image-14 {
   top: -10em;
   left: -10em;
-  width: 8.5em;
-  height: 7em;
+  max-width: 8.5em;
+  max-height: 7em;
 }
 
 </style>

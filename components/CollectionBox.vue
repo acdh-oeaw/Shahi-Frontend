@@ -25,7 +25,7 @@
     </div>
 
     <div class="collection-image primary" :style="{'--background-image':`url(${image})`}">
-      <v-img v-if="image" :src="image" />
+      <v-img height="100%" v-if="image" :src="image" />
     </div>
   </div>
 </template>
