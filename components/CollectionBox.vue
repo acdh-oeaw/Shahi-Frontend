@@ -5,7 +5,7 @@
         {{ collection.name }}
       </p>
       <div class="description">
-        <p v-if="!moreInfo" style="white-space: pre-line" class="collection-description text-body-1">
+        <p v-if="!moreInfo && !!collection.description" style="white-space: pre-line" class="collection-description text-body-1">
           {{ collection.description.split('\r\n\r\n')[0] }}
         </p>
       </div>

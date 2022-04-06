@@ -16,10 +16,10 @@
     </div>
 
     <div class="page-content">
-      <p class="title-2">
+      <p v-if="!!collection.description" class="title-2">
         Description
       </p>
-      <p style="white-space: pre-line" class="text-body-1">
+      <p v-if="!!collection.description" style="white-space: pre-line" class="text-body-1">
         {{ collection.description }}
       </p>
       <p class="title-2">
