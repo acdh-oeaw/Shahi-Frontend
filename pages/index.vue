@@ -48,7 +48,7 @@
                 class="splashtext-btn"
                 @click="closed = !closed"
               >
-                Discover the Kingdoms
+                Explore Map
               </v-btn>
             </v-col>
             <v-col>
