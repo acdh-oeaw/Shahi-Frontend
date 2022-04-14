@@ -1,16 +1,12 @@
 <template>
   <div style="height: 100%;width: 100%">
     <div v-if="loading" class="loadScreen d-flex align-center justify-center">
-      <v-progress-circular
-        :size="200"
-        color="primary"
-        indeterminate
-      />
+      <v-progress-circular :size="200" color="primary" indeterminate />
     </div>
 
     <qmap :geojsonitems="visibleArtifacts" />
 
-    <div class="timeline elevation-4 relative" :class="{show:useTimeline}">
+    <div class="timeline elevation-4 relative" :class="{ show: useTimeline }">
       <v-btn v-if="useTimeline" icon @click="useTimeline = false">
         <v-icon size="23">
           mdi-close
@@ -27,24 +23,13 @@
             <p class="text-center text-body-1 ma-0 mt-7 pa-0">
               {{ timeLabels[time] }}
             </p>
-            <v-slider
-
-              v-model="time"
-              :max="12"
-              step="1"
-              ticks="always"
-              tick-size="3"
-            />
+            <v-slider v-model="time" :max="12" step="1" ticks="always" tick-size="3" />
           </v-col>
         </v-row>
       </transition>
     </div>
-    <div
-      :title="showPolygons ? 'hide polygons' : 'show polygons'"
-      class="showploygons elevation-4"
-      :class="{active: !showPolygons}"
-      @click="showPolygons = !showPolygons"
-    >
+    <div :title="showPolygons ? 'hide polygons' : 'show polygons'" class="showploygons elevation-4"
+      :class="{ active: !showPolygons }" @click="showPolygons = !showPolygons">
       <v-icon size="23">
         mdi-vector-polygon
       </v-icon>
@@ -102,8 +87,23 @@ export default {
       const p = await this.$api.Entities.get_api_0_3_query_({
         view_classes: this.getQuery?.view_classes,
         search: this.getQuery?.search,
-        limit: 99999,
+        limit: 100,
+        page: 1,
+        show: ['when','geometry']
       });
+
+      await Promise.all(Array.from({ length: p.body.pagination.totalPages }, async (x, i) => {
+        const q = await this.$api.Entities.get_api_0_3_query_({
+          view_classes: this.getQuery?.view_classes,
+          search: this.getQuery?.search,
+          limit: 100,
+          page: i,
+          show: ['when','geometry']
+
+        });
+        localItems = [...localItems, ...q.body.results.map((x) => x.features[0])];
+      }));
+
       localItems = [...localItems, ...p.body.results.map((x) => x.features[0])];
       localItems = localItems.map((x) => ({
         ...x,
@@ -144,7 +144,6 @@ export default {
 </script>
 
 <style>
-
 .mapcontainer {
   width: 100%;
   height: 100%;
@@ -244,6 +243,7 @@ a.showploygons {
   0% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
@@ -256,13 +256,13 @@ a.showploygons {
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 4991;
 }
-
 </style>
 <style>
-.map-detail-link{
+.map-detail-link {
   transition: all 100ms ease-in-out;
 }
-.map-detail-link:hover{
+
+.map-detail-link:hover {
   font-weight: bold;
 }
 </style>
