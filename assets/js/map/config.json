@@ -1,0 +1,17 @@
+{
+  "map": {
+    "controls": {
+      "zoomlvl": true,
+      "layer": true,
+      "geonames": false,
+      "locate": false,
+      "opacity": true
+    },
+    "leafletOptions": {
+      "maxZoom": 10,
+      "minZoom": 7,
+      "zoom": 8,
+      "center": [32.20815, 67.92847]
+    }
+  }
+}
