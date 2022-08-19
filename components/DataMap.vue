@@ -78,7 +78,7 @@ export default {
   methods: {
     ...mapActions('entity', ['addToPlaces', 'addToArtifacts', 'setArtifactsLoaded', 'setPlacesLoaded']),
     dateStringToYear(date) {
-      return parseInt(date.split('-')[0], 10);
+      return parseInt(date?.split('-')[0], 10);
     },
     async loadArtifacts() {
       if (this.loading) return;
