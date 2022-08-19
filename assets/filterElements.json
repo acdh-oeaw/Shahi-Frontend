@@ -108,6 +108,14 @@
         "values": []
       },
       {
+        "label": "Place of Production",
+        "en": "Place of Production",
+        "type": "multiple",
+        "id": "2625",
+        "kind": "type",
+        "values": []
+      },
+      {
         "label": "Begin/End",
         "en": "Begin/End",
         "type": "time",
