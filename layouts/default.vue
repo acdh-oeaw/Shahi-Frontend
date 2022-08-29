@@ -1,100 +1,67 @@
 <template>
   <v-app light>
-    <v-navigation-drawer
-
-      v-model="$store.state.app.queryDrawer"
-      class="ontop"
-      :disable-resize-watcher="true"
-      clipped
-      app
-      color="grey lighten-4"
-    >
-      <v-list dense class="grey lighten-4">
-        <v-list-item
-          :to="{
-            'name': $route.name.startsWith('data-') ? $route.name : 'data-list-q',
-            'query': {
-              'entities': getFavorites()
-            }}"
-          @click="$store.commit('app/closeQueryDrawer')"
-        >
-          <v-list-item-action>
-            <v-icon>mdi-star</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title class="grey--text">
-              Favorites
-            </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <template v-for="(item, i) in items">
-          <v-row v-if="item.heading" :key="i" align="center">
-            <v-col cols="6">
-              <v-subheader v-if="item.heading">
-                {{ item.heading }}
-              </v-subheader>
-            </v-col>
-            <v-col cols="6" class="text-right" />
-          </v-row>
-          <v-divider v-else-if="item.divider" :key="i" dark class="my-4" />
-
-          <v-list-item
-            v-else
-            :key="i"
-            link
-            @click="clickOnItem(item)"
-          >
-            <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title class="grey--text">
-                {{ item.text }}
-              </v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </template>
-      </v-list>
-    </v-navigation-drawer>
     <v-expand-transition>
-      <v-app-bar app clipped-left style="z-index:9999">
-        <v-app-bar-nav-icon @click="$store.commit('app/toggleQueryDrawer')" />
-        <nuxt-link to="/" @click="$store.commit('app/closeQueryDrawer')">
-          <div class="logocaption d-none d-md-flex">
-            <img
-              class="barlogo ml-1 mr-1"
-              alt="logo"
-              src="/ShahiDatabase_logo.png"
-            >
+      <v-app-bar app style="z-index:9999" extension-height="40px" elevation="0" height="64px">
+        <div class="d-flex align-center justify-center" style="width: 100%">
+          <nuxt-link to="/" @click="$store.commit('app/closeQueryDrawer')" class="mr-auto">
+            <div class="logo caption d-none d-md-flex">
+              <img
+                class="barlogo"
+                alt="logo"
+                src="/ShahiDatabase_logo.png"
+              >
+            </div>
+          </nuxt-link>
+          <querysearch style="max-width: 700px" class="mx-sm-5"/>
+          <div class="ml-auto">
+            <nuxt-link class="nav-link mr-5" to="/collections">
+              <v-icon v-if="$vuetify.breakpoint.smAndDown">$artifact</v-icon>
+              <span v-else>Collections</span>
+            </nuxt-link>
+            <nuxt-link class="nav-link mr-5" to="/sourcebook">
+              <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-book-open-variant</v-icon>
+
+              <span v-else>Sourcebook</span>
+            </nuxt-link>
+            <nuxt-link class="nav-link mr-5" to="/bibliography">
+              <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-file-find</v-icon>
+
+              <span v-else>Bibliography</span>
+            </nuxt-link>
+            <nuxt-link class="nav-link" to="/team">
+              <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-account-group</v-icon>
+
+              <span v-else> Team</span>
+            </nuxt-link>
           </div>
-        </nuxt-link>
+        </div>
+        <template v-slot:extension>
+          <div class="d-flex align-center justify-space-between text-overline mx-1 "
+               style="  overflow: auto;white-space: nowrap;">
+            <div>
+              <div
+                v-for="(item,index) in navBarItems"
+                :key="index"
+                class="text-caption d-inline-block navigation-item"
+                @click="clicked(item)"
+              >
+                {{ item.text }}
+              </div>
+              <div
+                class="text-caption d-inline-block navigation-item ml-15"
 
-        <querysearch />
-        <v-spacer />
+                @click="toFavs"
+              >
+                Favorites
+              </div>
+            </div>
 
-        <nuxt-link class="nav-link mr-5" to="/collections">
-        <v-icon v-if="$vuetify.breakpoint.smAndDown" >$artifact</v-icon>
-          <span v-else>Collections</span>
-        </nuxt-link>
-        <nuxt-link class="nav-link mr-5" to="/sourcebook">
-        <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-book-open-variant</v-icon>
-
-         <span v-else>Sourcebook</span>
-        </nuxt-link>
-        <nuxt-link class="nav-link mr-5" to="/bibliography">
-        <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-file-find</v-icon>
-
-          <span v-else>Bibliography</span>
-        </nuxt-link>
-        <nuxt-link class="nav-link" to="/team">
-          <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-account-group</v-icon>
-
-          <span v-else> Team</span>
-        </nuxt-link>
+          </div>
+        </template>
       </v-app-bar>
     </v-expand-transition>
     <v-main>
-      <nuxt />
+      <nuxt/>
     </v-main>
     <div class="grey lighten-3 ">
       <div style="max-width: 1600px" class="ma-auto">
@@ -117,7 +84,7 @@
           </svg>
           Contact
         </v-row>
-        <v-divider class="my-3" />
+        <v-divider class="my-3"/>
         <v-row class="mx-2">
           <v-col
             cols="12"
@@ -170,7 +137,7 @@
             </div>
           </v-col>
         </v-row>
-        <v-divider class="my-3" />
+        <v-divider class="my-3"/>
         <v-row no-gutters>
           <v-col cols="12" class="text-center">
             <a href="https://www.univie.ac.at/" target="_blank">
@@ -210,7 +177,7 @@
               ></a>
           </v-col>
         </v-row>
-        <v-divider class="my-3" />
+        <v-divider class="my-3"/>
 
         <div class="text-center text-caption">
           © Copyright OEAW |
@@ -224,7 +191,7 @@
 </template>
 <script>
 import favorites from '@/mixins/favorites';
-import { mapActions, mapGetters } from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 import querysearch from '~/components/querysearch.vue';
 
 export default {
@@ -235,7 +202,8 @@ export default {
   data() {
     return {
       drawer: false,
-      items: [{ heading: 'Sample Queries' }].concat(
+      navBarItems: this.$store.state.app.menuitems,
+      items: [{heading: 'Sample Queries'}].concat(
         this.$store.state.app.menuitems,
       ),
       title: '',
@@ -279,9 +247,29 @@ export default {
       });
       this.open = false;
     },
+    clicked(item) {
+      this.setCodes(item.systemClass);
+
+      this.searchByFilterId(item.id);
+      let name = 'data-list-q';
+      if (this.$route.name.startsWith('data-')) name = this.$route.name;
+
+      this.$router.push({
+        name,
+        query: this.getQuery,
+      });
+    },
+    toFavs() {
+      this.$router.push({
+        name: this.$route.name,
+        query: {
+          entities: this.getFavorites(),
+        },
+      });
+    },
   },
   head() {
-    return { title: this.title };
+    return {title: this.title};
   },
 };
 </script>
@@ -309,7 +297,7 @@ td {
 }
 
 .barlogo {
-  height: 30px;
+  height: 35px;
   top: 2px;
   position: relative;
 }
@@ -341,13 +329,44 @@ a.helpdesk-button {
   transition: background-color ease 0.2s, color ease 0.2s;
 }
 
-.nav-link{
+.nav-link {
   opacity: 0.8;
-  padding:3px;
+  padding: 3px;
   transition: 100ms;
 }
 
-.nav-link:hover{
+.nav-link:hover {
   opacity: 1;
 }
+
+
+.navigation-item {
+  position: relative;
+  font-size: 14px !important;
+  margin: 0 7px;
+  cursor: pointer;
+  transition: all ease 100ms;
+}
+
+.navigation-item::before {
+  position: absolute;
+  bottom: 0;
+  content: "";
+  height: 1px;
+  width: 0;
+  background: black;
+  transition: all ease-in-out 200ms;
+
+
+}
+
+.navigation-item:hover::before {
+  position: absolute;
+  bottom: 0;
+  content: "";
+  height: 1px;
+  width: 100%;
+  background: black;
+}
+
 </style>

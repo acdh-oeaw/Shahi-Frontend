@@ -1,28 +1,9 @@
 <template>
   <div>
-    <div class="elevation-1 d-flex align-center justify-space-between  nav secondary darken-2">
-      <div>
-        <div
-          v-for="(item,index) in navBarItems"
-          :key="index"
-          class="text-caption d-inline-block navigation-item"
-          @click="clicked(item)"
-        >
-          {{ item.text }}
-        </div>
-        <div
-          class="text-caption d-inline-block navigation-item ml-15"
 
-          @click="toFavs"
-        >
-          Favorites
-        </div>
-      </div>
-      <div>
-        <view-toggler class="float-right mr-3" />
-      </div>
+    <div class="p-sticky" style="position:sticky;top:104px;z-index: 9999" >
+      <view-toggler />
     </div>
-
     <collection-header v-if="$route.query.collection" :items="items" />
 
     <nuxt-child :items="items" :total-items="totalItems" :not-found="notFound" />
@@ -110,26 +91,8 @@ export default {
       searchByFilterId: 'query/searchByFilterId',
       setCodes: 'query/setCodes',
     }),
-    clicked(item) {
-      this.setCodes(item.systemClass);
 
-      this.searchByFilterId(item.id);
-      let name = 'data-list-q';
-      if (this.$route.name.startsWith('data-')) name = this.$route.name;
 
-      this.$router.push({
-        name,
-        query: this.getQuery,
-      });
-    },
-    toFavs() {
-      this.$router.push({
-        name: this.$route.name,
-        query: {
-          entities: this.getFavorites(),
-        },
-      });
-    },
   },
   computed: {
     ...mapGetters('query', ['getQuery']),
@@ -149,25 +112,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.nav {
-  position: sticky;
-  top: 64px;
-  z-index: 500;
-
-}
-
-.navigation-item {
-  height: 100%;
-  font-size: 14px !important;
-  padding: 13px 3px;
-  margin: 0 7px;
-  cursor: pointer;
-  transition: all ease 100ms;
-}
-
-.navigation-item:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-</style>

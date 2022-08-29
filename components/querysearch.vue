@@ -11,7 +11,7 @@
     multiple
     :search-input.sync="globalSearch"
     @click="open = !open || !globalSearch"
-
+    placeholder="search the database"
     @keydown.enter.stop="searchKeydownEnter = !searchKeydownEnter"
     ref="searchField"
   >

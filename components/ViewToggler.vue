@@ -10,15 +10,15 @@
       <v-btn-toggle
         v-model="view"
         dense
-        class="hidden-sm-and-down"
-        background-color="secondary"
+        class="hidden-sm-and-down d-flex flex-row"
+        tile
+
       >
         <v-btn
-          outlined
-          color="primary"
           v-for="item in $store.state.app.viewelements"
           :key="item.route"
           :value="item.route"
+          class="flex-grow-1"
         >
           {{ item.en }}
         </v-btn>
@@ -27,7 +27,6 @@
         <v-menu>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-
               v-bind="attrs"
               icon
               v-on="on"
