@@ -111,7 +111,7 @@ export const actions = {
             logicalOperator: 'AND',
             logicalOperatorInside: typeID.logicalOperator.toUpperCase(),
           }));
-          if (orBlock.length > 0) orBlock.[0].logicalOperator = 'OR';
+          if (orBlock.length > 0) orBlock[0].logicalOperator = 'OR';
           searchArray = [...searchArray, ...orBlock];
         });
         return searchArray;
