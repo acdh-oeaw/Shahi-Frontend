@@ -12,6 +12,7 @@
         dense
         class="hidden-sm-and-down d-flex flex-row"
         tile
+        dark
 
       >
         <v-btn
@@ -23,35 +24,7 @@
           {{ item.en }}
         </v-btn>
       </v-btn-toggle>
-      <div class="hidden-md-and-up">
-        <v-menu>
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn
-              v-bind="attrs"
-              icon
-              v-on="on"
-            >
-              <v-icon>mdi-view-list</v-icon>
-            </v-btn>
-          </template>
-          <v-btn-toggle
-            background-color="secondary"
 
-            v-model="view"
-          >
-            <v-btn
-              color="primary"
-              outlined
-
-              v-for="item in $store.state.app.viewelements"
-              :key="item.route"
-              :value="item.route"
-            >
-              {{ item.en }}
-            </v-btn>
-          </v-btn-toggle>
-        </v-menu>
-      </div>
     </div>
   </v-fade-transition>
 </template>

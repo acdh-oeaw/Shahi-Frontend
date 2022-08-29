@@ -1,6 +1,6 @@
 <template>
   <div>
-    <gallery :filter="query" :total-items="totalItems" :not-found="notFound" :items="items" />
+    <gallery :filter="query" :total-items="totalItems" :not-found="notFound" :items="items" class="pb-4"/>
 
   </div>
 </template>

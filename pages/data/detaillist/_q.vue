@@ -1,6 +1,6 @@
 <template>
   <div>
-  <otherlist :filter="query" :items="items" :total-items="totalItems" :not-found="notFound"></otherlist>
+  <otherlist :filter="query" :items="items" :total-items="totalItems" :not-found="notFound" class="pb-4"></otherlist>
   </div>
 </template>
 

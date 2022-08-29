@@ -1,12 +1,13 @@
 <template>
   <div>
-
-    <div class="p-sticky" style="position:sticky;top:104px;z-index: 9999" >
-      <view-toggler />
-    </div>
     <collection-header v-if="$route.query.collection" :items="items" />
 
-    <nuxt-child :items="items" :total-items="totalItems" :not-found="notFound" />
+    <div class="p-sticky" style="position:sticky;top:calc( 100vh - 36px);z-index: 9999" >
+      <view-toggler />
+    </div>
+    <div style="position:relative; top:-36px">
+    <nuxt-child style="min-height: calc(100vh - 110px)" :items="items" :total-items="totalItems" :not-found="notFound" />
+    </div>
   </div>
 </template>
 
