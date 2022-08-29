@@ -26,6 +26,7 @@
     "@nuxtjs/axios": "^5.11.0",
     "@nuxtjs/netlify-files": "1.2.0",
     "@types/leaflet": "^1.7.11",
+    "core-js": "^3.25.0",
     "d3": "^7.6.1",
     "d3-tip": "^0.9.1",
     "leaflet": "^1.8.0",
@@ -34,7 +35,7 @@
     "nuxt-leaflet": "0.0.27",
     "ol": "^7.0.0",
     "pdfobject": "^2.2.8",
-    "sass-loader": "^13.0.2",
+    "sass-loader": "^10.1.1",
     "swagger-client": "^3.18.5",
     "typeface-roboto": "^1.1.13",
     "v-viewer": "^1.6.4",
@@ -56,6 +57,7 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-nuxt": "^3.2.0",
-    "eslint-plugin-react": "^7.31.1"
+    "eslint-plugin-react": "^7.31.1",
+    "webpack": "^4.0.0"
   }
 }
