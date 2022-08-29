@@ -1,12 +1,5 @@
 <template>
-  <v-fade-transition>
-    <div
-      v-if="
-        ['data-list-q', 'data-map-q', 'data-detaillist-q', 'data-gallery-q'].includes(
-          $route.name
-        )
-      "
-    >
+
       <v-btn-toggle
         v-model="view"
         dense
@@ -25,8 +18,6 @@
         </v-btn>
       </v-btn-toggle>
 
-    </div>
-  </v-fade-transition>
 </template>
 
 <script>
@@ -40,10 +31,8 @@ export default {
   watch: {
     view: {
       handler(name) {
-        this.$router.push({
-          name,
-          query: this.$route.query,
-        });
+        this.$emit('input',name)
+
       },
       immediate: true,
     },

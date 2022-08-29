@@ -34,10 +34,10 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'CollectionHeader',
-  props: ['items'],
+  props: ['items','id'],
   computed: {
     collection() {
-      return this.getTypeById(this.$route.query.collection);
+      return this.getTypeById(this.id);
     },
     ...mapGetters('app', [
       'getTypeById',

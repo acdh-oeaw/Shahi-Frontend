@@ -1,18 +1,18 @@
 [
     {
         "en": "Table",
-        "route": "data-list-q"
+        "route": "list"
     },
     {
         "en":"List",
-        "route":"data-detaillist-q"
+        "route":"detaillist"
     },
     {
         "en": "Map",
-        "route": "data-map-q"
+        "route": "map"
     },
     {
         "en": "Gallery",
-        "route": "data-gallery-q"
+        "route": "gallery"
     }
 ]
