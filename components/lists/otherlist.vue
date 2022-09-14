@@ -84,7 +84,9 @@
               </v-col>
               <v-col cols="12" sm="8" md="9" class="px-5">
                 <v-card v-if="item.features[0].descriptions" outlined class="my-3">
-                  <v-card-text class="text-body-1">
+                  <v-card-text class="text-caption py-2">
+                    <tooltip-icon :text="$store.state.app.tableheaders['wide'].find(x => x.text === 'Category of Authenticity').description" />
+
                     Category of Authenticity:
                     <span
                       v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity')"
@@ -93,11 +95,10 @@
                     >
                       {{ getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity').label }}
                     </span>
+
                   </v-card-text>
-                  <v-card-text style="white-space: pre-line" class="text-body-1">
-                    {{
-                      item.features[0].descriptions[0].value
-                    }}
+                  <v-card-text  class="text-body-1 py-2">
+                    {{item.features[0].descriptions[0].value}}
                   </v-card-text>
                 </v-card>
                 <div class="card-columns" :style="cssVars">
