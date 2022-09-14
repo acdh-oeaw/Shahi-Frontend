@@ -1,19 +1,28 @@
 <template>
   <div>
     <div class="">
-      <v-img
-        class="white shadow scale clickable"
-        contain
-        max-width="450px"
-        :src="primaryImage.url"
-        @click="!!images && images.length !== 0 ? show() : viewMode=true"
-      />
-      <p class="mt-3 primary--text go-to-map-button" text @click="!!images && images.length !== 0 ? show() : viewMode=true">
-        All Images
-        <v-icon class="ma-n1">
-          mdi-chevron-right
-        </v-icon>
-      </p>
+      <div>
+        <v-img
+          class="white shadow scale clickable d-flex align-end"
+          contain
+          max-width="450px"
+          :src="primaryImage.url"
+          @click="!!images && images.length !== 0 ? show() : viewMode=true"
+        />
+        <p style="max-width: 450px" class="text-caption text-left secondary lighten-1 pa-2 d-flex flex-column">
+          <span class="font-weight-bold">{{ primaryImage.license }}</span>
+          <span> {{ imageDescriptions[primaryImage['@id'].split('/').at(-1)] }}</span>
+          <span class="mt-3 primary--text go-to-map-button" text
+                @click="!!images && images.length !== 0 ? show() : viewMode=true">
+          All Images
+          <v-icon class="ma-n1">
+            mdi-chevron-right
+          </v-icon>
+        </span>
+        </p>
+
+      </div>
+
     </div>
     <client-only>
       <div v-if="viewMode" class="wrapper">
@@ -23,7 +32,7 @@
               mdi-close
             </v-icon>
           </v-btn>
-          <IIIFImageViewer style="height:100%;width:100%" :image-info-url="primaryImage.url" />
+          <!--<IIIFImageViewer style="height:100%;width:100%" :image-info-url="primaryImage.url"/>-->
           <div class="image-picker">
             <div v-for="i in 5" :key="i" class="image-preview">
               <v-img
@@ -52,6 +61,7 @@ export default {
     return {
       viewMode: false,
       initZoom: 0,
+      imageDescriptions: {},
       iiifOptions: {
         tileFormat: 'jpg',
         tileSize: 310,
@@ -68,17 +78,57 @@ export default {
       return Math.ceil(Math.random() * 3);
     },
     primaryImage() {
-      return this.images?.[0] || { url: `https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${this.$route.params.id % 2 + 1}/1.jp2/full/500,/0/default.png` };
+      return this.images?.[0] || {url: `https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${this.$route.params.id % 2 + 1}/1.jp2/full/500,/0/default.png`};
     },
+    imagesWithData() {
+      return this.images.map(i => ({src: i.url, title: 'hallo'}))
+    }
   },
   methods: {
     show() {
+      const that = this;
+      let init = true;
       this.$viewerApi({
-        images: this.images.map((x) => x.url),
+        images: this.imagesWithData,
+        options: {
+          rotatable: false, scalable: false, title: false, viewed(e) {
+            const id = that.images[e.detail.index]['@id'].split('/').at(-1);
+            const innerHTML = `<span>${that.images[e.detail.index].license || ''}</span><span>${that.imageDescriptions[id] || ''}</span>`
+            let div = document.createElement('div');
+            div.classList.add('viewer-title');
+            div.classList.add('custom-viewer-title');
+
+            let viewFooter = document.querySelector(".viewer-footer");
+            if (init) {
+              viewFooter.prepend(div);
+              init = false
+            }
+            viewFooter.firstChild.innerHTML = innerHTML
+          }
+        }
       });
     },
   },
-};
+  watch: {
+    images: {
+      async handler() {
+        for (const image of this.images) {
+          const p = await this.$api.Entities.get_api_0_3_entity__id__({
+            id_: image['@id'].split('/').at(-1),
+            show: 'description'
+          });
+          this.imageDescriptions = {
+            ...this.imageDescriptions,
+            [image['@id'].split('/').at(-1)]: p?.body?.features?.[0]?.descriptions?.[0]?.value
+          }
+        }
+      },
+      immediate: true,
+      deep: true,
+    }
+  }
+}
+;
 </script>
 
 <style scoped>
@@ -163,5 +213,16 @@ html, body {
 
 .clickable:hover {
   opacity: 1 !important;
+}
+
+</style>
+<style>
+
+.viewer-container {
+  z-index: 9999 !important;
+}
+.custom-viewer-title{
+  display: flex;
+  flex-direction: column;
 }
 </style>
