@@ -62,11 +62,13 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import bib from '../../assets/bib.json';
 
 export default {
   name: 'Bibliography',
   data() {
     return {
+      bib:bib,
       search: '',
       page: 1,
     };
@@ -79,12 +81,9 @@ export default {
     },
   },
   computed: {
-    ...mapGetters('app', [
-      'getBibliography',
-    ]),
     filteredList() {
       const search = this.normalizeString(this.search) || '';
-      const a = this.getBibliography
+      const a = this.bib
         .filter((x) => this.normalizeString(x?.title)?.includes(search)
           || this.normalizeString(x?.publisher)?.includes(search)
           || x?.author?.some((a) => this.normalizeString(a?.family)?.includes(search))

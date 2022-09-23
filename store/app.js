@@ -4,8 +4,6 @@ import tableheaders from '../assets/tableheaders.json';
 import templateprops from '../assets/templateprops.json';
 import filterelements from '../assets/filterElements.json';
 import viewelements from '../assets/viewElements.json';
-import team from '../assets/team.json';
-import bib from '../assets/bib.json';
 
 /* eslint-disable no-param-reassign,no-shadow */
 export const state = () => ({
@@ -17,13 +15,10 @@ export const state = () => ({
   templateprops,
   filterelements,
   viewelements,
-  team,
-  bib,
 });
 
 export const getters = {
   getCurrentFiltersFlat: (s) => s.filterelements.find((item) => item.selected === true).items.flatMap((x) => x.values),
-  getBibliography: (s) => s.bib,
   getCollections: (s) => s.filterelements[0].items.find((item) => item.id === '1969'),
   getTypeById: (s) => (id) => s.filterelements[0].items.find((item) => item.id === '1969').values.find((item) => item.id === parseInt(id)),
   getSystemClassForFilter: (s) => s.filterelements.find((item) => item.selected === true).systemClass,
