@@ -5,24 +5,19 @@
     </div>
     <div v-else-if="!loading" class="mt-15 mx-5 gallery-columns" :style="cssVars">
       <div v-for="(item, index) in items" :key="index" class="gallery-column">
-        <div class="gallery-content">
-          <p class="text-center">
+        <div class="gallery-content px-1">
+          <p class="text-center text-h6">
             {{ item.features[0].properties.title }}
           </p>
 
-          <v-img
-            v-if="!!item.features[0].depictions && !!item.features[0].depictions.length !== 0"
-            class="ma-3"
-            height="100%"
-            :src="item.features[0].depictions[0].url"
-            alt="IMAGE"
-          />
+          <image-card :item="item"></image-card>
+
         </div>
-        <favorite-icon :id="id(item)" />
+        <favorite-icon :id="id(item)"/>
         <nuxt-link
           :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}`"
         >
-          <div class="gallery-background" />
+          <div class="gallery-background"/>
         </nuxt-link>
       </div>
     </div>
@@ -46,12 +41,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import {mapGetters} from 'vuex';
 import favorites from '@/mixins/favorites.js';
 import favoriteIcon from '@/components/FavoriteIcon.vue';
 
 export default {
-  components: { favoriteIcon },
+  components: {favoriteIcon},
   mixins: [favorites],
   props: {
     filter: {
@@ -104,7 +99,7 @@ export default {
         .join(', ');
     },
     newPage(page) {
-      this.$router.replace({ name: this.$route.name, query: { ...this.$route.query, page } });
+      this.$router.replace({name: this.$route.name, query: {...this.$route.query, page}});
     },
   },
   computed: {

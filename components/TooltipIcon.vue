@@ -1,12 +1,11 @@
 <template>
   <v-tooltip
-
     right
     max-width="400px"
   >
     <template v-slot:activator="{ on, attrs }">
       <v-icon
-        class="ml-1"
+        small
         :color="color"
         v-bind="attrs"
         v-on="on"
