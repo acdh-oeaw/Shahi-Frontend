@@ -1,75 +1,41 @@
 {
   "wide": [
     {
+      "text": "Class",
+      "value": "features[0].systemClass",
+      "column": "class_code",
+      "width": "20px",
+      "visible": true
+    },
+    {
       "text": "Title",
       "align": "start",
       "sortable": true,
       "value": "features[0].properties.title",
       "column": "name",
       "width": "200px",
-      "visible":true
+      "visible": true
     },
     {
       "text": "Description",
       "value": "features[0].description[0].value",
       "column": "description",
       "width": "300px",
-      "visible":true
+      "visible": true
     },
     {
       "text": "Begin/From",
       "value": "features[0].when.timespans[0].start.earliest",
       "column": "begin_from",
       "width": "50px",
-      "visible":true
+      "visible": true
     },
     {
       "text": "End/To",
-      "value": "features[0].when.timespans[0].end.earliest",
-      "column": "end_from",
+      "value": "features[0].when.timespans[0].end.latest",
+      "column": "end_to",
       "width": "50px",
-      "visible":true
-    },
-    {
-      "text": "Material",
-      "value": "features[0].type.material",
-      "column": "material",
-      "width": "50px",
-      "sortable": false,
-      "visible":true
-    },
-    {
-      "text": "Materials",
-      "value": "features[0].type.materials",
-      "column": "materials",
-      "width": "50px",
-      "sortable": false
-    },
-    {
-      "text": "Category of Authenticity",
-      "value": "features[0].type.categoryofauthenticity",
-      "column": "material",
-      "width": "50px",
-      "sortable": false,
-      "visible":true,
-      "description":"Only objects that the art history team could unanimously categorize as authentic are included in the corpus of Shahi visual and material culture. Strict selection criteria have been used to assess the authenticity of each object. We defined three categories of authenticity. In the database, each object is identified as belonging to either category A or B. Category C objects are not included."
-    },
-    {
-      "text": "Dimensions",
-      "value": "features[0].type.dimensions",
-      "column": "dimensions",
-      "width": "50px",
-      "visible":true,
-
-      "sortable": false
-    },
-    {
-      "text": "Favorites",
-      "value": "favorites",
-      "column": "favorites",
-      "width": "50px",
-      "visible":true,
-      "sortable": false
+      "visible": true
     }
   ],
   "artifact": [
@@ -80,28 +46,28 @@
       "value": "features[0].properties.title",
       "column": "name",
       "width": "200px",
-      "visible":true
+      "visible": true
     },
     {
       "text": "Description",
       "value": "features[0].descriptions[0].value",
       "column": "description",
       "width": "300px",
-      "visible":true
+      "visible": true
     },
     {
       "text": "Begin/From",
       "value": "features[0].when.timespans[0].start.earliest",
       "column": "begin_from",
       "width": "50px",
-      "visible":true
+      "visible": true
     },
     {
       "text": "End/To",
       "value": "features[0].when.timespans[0].end.earliest",
       "column": "end_from",
       "width": "50px",
-      "visible":true
+      "visible": true
     },
     {
       "text": "Material",
@@ -109,7 +75,7 @@
       "column": "material",
       "width": "50px",
       "sortable": false,
-      "visible":true
+      "visible": true
     },
     {
       "text": "Materials",
@@ -124,16 +90,15 @@
       "column": "material",
       "width": "50px",
       "sortable": false,
-      "visible":true,
-      "description":"Only objects that the art history team could unanimously categorize as authentic are included in the corpus of Shahi visual and material culture. Strict selection criteria have been used to assess the authenticity of each object. We defined three categories of authenticity. In the database, each object is identified as belonging to either category A or B. Category C objects are not included."
+      "visible": true,
+      "description": "Only objects that the art history team could unanimously categorize as authentic are included in the corpus of Shahi visual and material culture. Strict selection criteria have been used to assess the authenticity of each object. We defined three categories of authenticity. In the database, each object is identified as belonging to either category A or B. Category C objects are not included."
     },
     {
       "text": "Dimensions",
       "value": "features[0].type.dimensions",
       "column": "dimensions",
       "width": "50px",
-      "visible":true,
-
+      "visible": true,
       "sortable": false
     },
     {
@@ -141,7 +106,7 @@
       "value": "favorites",
       "column": "favorites",
       "width": "50px",
-      "visible":true,
+      "visible": true,
       "sortable": false
     }
   ],
@@ -153,28 +118,28 @@
       "value": "features[0].properties.title",
       "column": "name",
       "width": "200px",
-      "visible":true
+      "visible": true
     },
     {
       "text": "Description",
       "value": "features[0].description[0].value",
       "column": "description",
       "width": "300px",
-      "visible":true
+      "visible": true
     },
     {
       "text": "Begin/From",
       "value": "features[0].when.timespans[0].start.earliest",
       "column": "begin_from",
       "width": "50px",
-      "visible":true
+      "visible": true
     },
     {
       "text": "End/To",
       "value": "features[0].when.timespans[0].end.earliest",
       "column": "end_from",
       "width": "50px",
-      "visible":true
+      "visible": true
     },
     {
       "text": "Kingdoms",
@@ -182,14 +147,14 @@
       "column": "kingdoms",
       "width": "50px",
       "sortable": false,
-      "visible":true
+      "visible": true
     },
     {
       "text": "Favorites",
       "value": "favorites",
       "column": "favorites",
       "width": "50px",
-      "visible":true,
+      "visible": true,
       "sortable": false
     }
   ],

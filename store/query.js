@@ -1,15 +1,15 @@
 export const state = () => ({
   filters: [],
-  codes: 'artifact',
+  codes: 'wide',
 
 });
 export const getters = {
   getFiltersFlat: (s) => s.filters.flatMap((x) => x.items),
   getFilters: (s) => s.filters,
-  getCurrentSystemClass: (s) => s.codes,
+  getCurrentSystemClass: (s) => Array.isArray(s.codes) ? 'wide' : s.codes,
   getQuery: (s) => {
     const query = {
-      view_classes: s.codes || 'artifact',
+      view_classes: s.codes || ['artifact', 'place'],
       search: [],
       filter: [],
     };

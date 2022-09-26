@@ -203,12 +203,15 @@ export default {
     },
   },
   watch: {
-    getCurrentSystemClass(){
-      this.selectedHeaders = this.$store.state.app.tableheaders[this.getCurrentSystemClass].filter((x) => x.visible);
-    }
+    getCurrentSystemClass() {
+      console.log('hejo',this.getCurrentSystemClass,);
+      this.selectedHeaders = this.$store.state.app.tableheaders[this.getCurrentSystemClass]
+        .filter((x) => x.visible);
+    },
   },
   created() {
-    this.selectedHeaders = this.$store.state.app.tableheaders[this.getCurrentSystemClass].filter((x) => x.visible);
+    this.selectedHeaders = this.$store.state.app.tableheaders[this.getCurrentSystemClass]
+      .filter((x) => x.visible);
   },
   methods: {
     ...mapActions({

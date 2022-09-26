@@ -44,6 +44,7 @@ export const getters = {
     filterObject.filter = filterList;
     return filterObject;
   },
+  getFilterById: (s, getters) => (id) => getters.getCurrentFiltersFlat?.find((x) => x.id === id),
   getIconBySystemClass: (s) => (c) => s.classes.find((item) => item.systemClass === c).icon,
   getLabelBySystemClass: (s) => ({
     c,

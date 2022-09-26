@@ -1,9 +1,157 @@
 [
+  {
+    "en": "All",
+    "systemClass": null,
+    "selected": true,
+    "items": [
+      {
+        "en": "Name",
+        "label": "name",
+        "type": "text",
+        "kind": "filter",
+        "values": [
+          {
+            "en": "Name",
+            "id": "name",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "like",
+            "type": "name"
+          }
+        ]
+      },
+      {
+        "en": "Description",
+        "label": "description",
+        "type": "text",
+        "kind": "filter",
+        "values": [
+          {
+            "en": "Description",
+            "id": "description",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "like",
+            "type": "description"
+          }
+        ]
+      },
+      {
+        "label": "Material",
+        "en": "Material",
+        "type": "multiple",
+        "id": "119",
+        "kind": "type",
+        "values": []
+      },
+      {
+        "label": "Technique",
+        "en": "Technique",
+        "type": "multiple",
+        "id": "183",
+        "kind": "type",
+        "values": []
+      },
+      {
+        "label": "Artifact",
+        "en": "Artifact",
+        "type": "multiple",
+        "id": "107",
+        "kind": "type",
 
+        "values": []
+      },
+      {
+        "label": "Category of Authenticity",
+        "en": "Category of Authenticity",
+        "type": "multiple",
+        "id": "1090",
+        "kind": "type",
+        "description":"Only objects that the art history team could unanimously categorize as authentic are included in the corpus of Shahi visual and material culture. Strict selection criteria have been used to assess the authenticity of each object. We defined three categories of authenticity. In the database, each object is identified as belonging to either category A or B. Category C objects are not included.",
+        "values": []
+      },
+      {
+        "label": "Religious affiliation",
+        "en": "Religious affiliation",
+        "type": "multiple",
+        "id": "112",
+        "kind": "type",
+
+        "values": []
+      },
+      {
+        "label": "Period",
+        "en": "Period",
+        "type": "multiple",
+        "id": "185",
+        "kind": "type",
+
+        "values": []
+      },
+      {
+        "label": "Dimensions",
+        "en": "Dimensions",
+        "type": "multiple",
+        "id": "104",
+        "kind": "type",
+
+        "values": []
+      },
+      {
+        "label": "Collections",
+        "en": "Collections",
+        "type": "multiple",
+        "id": "1969",
+        "kind": "type",
+
+        "values": []
+      },
+      {
+        "label": "Place of Production",
+        "en": "Place of Production",
+        "type": "multiple",
+        "id": "2625",
+        "kind": "type",
+        "values": []
+      },
+      {
+        "label": "Kingdom",
+        "en": "Kingdom",
+        "type": "multiple",
+        "id": "1747",
+        "kind": "type",
+        "values": []
+      },
+      {
+        "label": "Begin/End",
+        "en": "Begin/End",
+        "type": "time",
+        "kind": "filter",
+        "values": [
+          {
+            "en": "Begin",
+            "id": "begin_from",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "greaterThanEqual",
+            "type":"begin"
+          },
+          {
+            "en": "End",
+            "id": "end_from",
+            "value": "",
+            "concatOperator": "and",
+            "logicalOperator": "lesserThanEqual",
+            "type":"end"
+          }
+        ]
+      }
+    ]
+  },
   {
     "en": "Artifacts",
     "systemClass": "artifact",
-    "selected": true,
+    "selected": false,
     "items": [
       {
         "en": "Name",

@@ -17,7 +17,7 @@
     </template>
     <menu-window style="max-height:90vh; overflow:auto">
       <!--System Classes-->
-      <v-card-text>
+      <v-card-text v-if="false">
         <v-btn
           v-for="(systemClass, index) in filterElements"
           :key="index"
@@ -39,8 +39,9 @@
             Current filters:
           </p>
           <v-chip v-for="filter in currentFilters" :key="filter.id" label small class="mr-2 mb-2">
-            <span>{{ filter.en }}</span>
-            <span v-if="filter.type==='name' || filter.type =='description'">:{{ filter.value }}</span>
+            <span class="text--secondary">{{filter.superType}}:</span>
+            <span v-if="filter.type==='name' || filter.type =='description'" class="font-weight-bold ml-1">{{ filter.value }}</span>
+            <span v-else class="font-weight-bold ml-1"> {{ filter.en }}</span>
             <v-icon
               class="pl-2"
               small
@@ -223,18 +224,21 @@
       <!--Global Search-->
       <div v-else>
         <v-card-text>
-          <p class="text-caption">
+          <p class="text-body-1">
             Hit enter to search by Name:
             <v-chip label small>
-              {{ globalSearch }}
+              "{{ globalSearch }}"
             </v-chip>
           </p>
           <v-divider color="secondary"/>
         </v-card-text>
-        <v-card-text class="ma-0 py-0">
-          <p class="text-caption">
+        <v-card-text class="ma-0 py-0 d-flex justify-space-between">
+          <p class="text-body-1">
             Search by types:
           </p>
+          <div>
+            <v-chip label small @click="selectAll">Select All</v-chip>
+          </div>
         </v-card-text>
         <v-card-text
           class=" hidden"
@@ -254,7 +258,7 @@
                 :class="item.value ? 'filter-element-clicked' : ''"
                 @click="selectItem(item)"
               >
-                <span>{{ item.en }} </span>
+                <span><span class="text--secondary">{{item.superType}}:</span> {{ item.en }} </span>
 
                 <v-icon
                   v-if="item.value"
@@ -303,22 +307,28 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('app', ['getFilterObject', 'getSystemClassForFilter']),
+    ...mapGetters('app', ['getFilterObject', 'getSystemClassForFilter','getFilterById']),
     ...mapGetters('query', ['getQuery']),
     propertySelectedClassAndSelectedAndSearchKeyword() {
       return `${this.selectedClass}|${this.selected}|${this.searchKeyword}|${this.reloadItems}`;
     },
     ...mapGetters('query', ['getCurrentSystemClass', 'getFiltersFlat']),
     currentFilters() {
-      return this.filterElements[this.selectedClass].items
-        .flatMap((x) => x.values)
+      console.log('wasgeht',this.filterElements[this.selectedClass].items)
+      return this.filterElements[this.selectedClass]?.items
+        ?.flatMap((y) => y.values.map(x=> ({
+          id: x.id, en: x.en, value: x.value, type: x.type,operator:x.logicalOperator, superType: y.en
+        })))
         .filter((x) => x.value)
-        .map((x) => ({
-          id: x.id, en: x.en, value: x.value, type: x.type,operator:x.logicalOperator
-        }));
     },
   },
   watch: {
+    currentFilters: {
+      handler(ne, old) {
+        console.log('geändert', ne, old);
+      },
+      deep: true
+    },
     async searchKeydownEnter() {
       this.filterElements[this.selectedClass].items.find(x => x.label === 'name').values[0].value = this.globalSearch;
       await new Promise((resolve) => {
@@ -333,7 +343,7 @@ export default {
       if (this.globalSearch) {
         this.open = true;
         this.searchedTypes = this.filterElements[this.selectedClass].items
-          .reduce((dict, item) => [...dict, ...item.values], [])
+          .flatMap((x) => x.values.map(y => ({ ...y, superType: x.en })))
           .filter((element) => element.en.toLowerCase().includes(this.globalSearch.toLowerCase()))
           .map((element) => {
             const e = {...element};
@@ -352,6 +362,7 @@ export default {
     },
     '$store.state.app.filterelements': {
       handler() {
+        console.log('dagehtwas')
         this.filterElements = JSON.parse(
           JSON.stringify(this.$store.state.app.filterelements),
         );
@@ -448,22 +459,23 @@ export default {
       );
       if (this.$route.name.startsWith('data-')) this.updateFiltersFromUrl(this.$route.query);
     },
-    selectItem(item) {
+    selectItem(item, value = undefined) {
       if (typeof item.value === 'string' || item.value instanceof String) item.value = '';
 
-      else item.value = !item.value;
+      else item.value = value || !item.value;
 
       this.filterElements[this.selectedClass].items
         .reduce((dict, element) => [...dict, ...element.values], []).find((x) => x.id === item.id)
         .value = item.value;
     },
+    selectAll() {
+      this.searchedTypes.forEach(x => this.selectItem(x,true));
+    },
     search() {
-      this.setCodes(this.filterElements[this.selectedClass].systemClass);
       this.setSearch(this.currentFilters);
 
-      let name = 'data-map-q';
+      let name = 'data-list-q';
       if (this.$route.name.startsWith('data-')) name = this.$route.name;
-
       this.$router.push({
         name,
         query: this.getQuery,
