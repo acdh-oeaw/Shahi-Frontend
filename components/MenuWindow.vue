@@ -1,6 +1,9 @@
 <template>
   <div  class="window sb5 elevation-4">
-    <slot />
+    <div style="max-height:90vh; overflow:auto" class="pa-5">
+      <slot />
+
+    </div>
   </div>
 </template>
 
@@ -30,7 +33,6 @@ export default {
 .window {
   margin-top: 8px;
   border: 4px solid #b7bf96;
-  padding: 20px;
   background-color:white;
   position: relative;
 

@@ -4,11 +4,11 @@
       v-if="!active"
       icon
       @click.prevent="add"
-      style="z-index: 200"
+      :style="`z-index: ${zIndex}`"
     >
       <v-icon>mdi-star</v-icon>
     </v-btn>
-    <v-btn v-else icon style="z-index: 200" @click.prevent="remove">
+    <v-btn v-else icon :style="`z-index: ${zIndex}`" @click.prevent="remove">
       <v-icon color="yellow darken-3">
         mdi-star
       </v-icon>
@@ -26,6 +26,9 @@ export default {
     id: {
       default: 0,
     },
+    zIndex:{
+      default:0,
+    }
   },
   data() {
     return {
@@ -42,6 +45,12 @@ export default {
       this.addArtifact(this.id);
     },
   },
+  watch:{
+    id:{
+      handler(){ this.active =  this.isInFavs(this.id)},
+      immediate: true,
+    }
+  }
 };
 </script>
 

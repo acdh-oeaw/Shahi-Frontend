@@ -66,13 +66,13 @@
               </v-col>
               <v-col cols="12" sm="8" md="9" class="px-5">
                 <v-card v-if="item.features[0].descriptions" outlined class="my-3">
-                  <v-card-text class="text-caption py-2">
+                  <v-card-text class="text-caption py-2"
+                               v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity')">
                     <tooltip-icon
-                      :text="$store.state.app.tableheaders['wide'].find(x => x.text === 'Category of Authenticity').description"/>
+                      :text="$store.state.app.tableheaders['artifact'].find(x => x.text === 'Category of Authenticity').description"/>
 
                     Category of Authenticity:
                     <span
-                      v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity')"
                       class="clickable"
                       @click="searchByFilterId(parseInt(getFirstTypeByKeyword(item.features[0].types,'Category of Authenticity').identifier.split('/').splice(-1)[0]))"
                     >

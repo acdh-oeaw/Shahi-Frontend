@@ -1,7 +1,7 @@
 export const state = () => ({
   filters: [],
-  codes: 'wide',
-
+  codes: ['artifact', 'place'],
+  entities:[],
 });
 export const getters = {
   getFiltersFlat: (s) => s.filters.flatMap((x) => x.items),
@@ -9,7 +9,7 @@ export const getters = {
   getCurrentSystemClass: (s) => Array.isArray(s.codes) ? 'wide' : s.codes,
   getQuery: (s) => {
     const query = {
-      view_classes: s.codes || ['artifact', 'place'],
+      view_classes: s.codes,
       search: [],
       filter: [],
     };
@@ -61,6 +61,9 @@ export const mutations = {
   setCodes(state, value) {
     state.codes = value;
   },
+  setEntities(state, value) {
+    state.entities = value;
+  },
   removeFilter(state, id) {
     state.filters = state.filters.map((x) => ({ ...x, items: x.items.filter((y) => y.id !== id) }));
   },
@@ -83,12 +86,12 @@ export const actions = {
     commit('setFilters', value);
   },
   setCodes({ commit }, value) {
-    commit('app/setSelectedFilterClass', value, { root: true });
+    //commit('app/setSelectedFilterClass', value, { root: true });
     commit('setCodes', value);
   },
   updateFiltersFromUrl({ commit, rootGetters }, q) {
     if (q?.view_classes) commit('setCodes', q?.view_classes);
-    commit('app/setSelectedFilterClass', q?.view_classes, { root: true });
+    //commit('app/setSelectedFilterClass', q?.view_classes, { root: true });
     if (q.search) {
       const getFilterDetailsFromID = (id) => {
         const allFilters = rootGetters['app/getCurrentFiltersFlat'];
@@ -120,6 +123,7 @@ export const actions = {
       const filtersFromURl = getFiltersfromSearchString(q.search);
 
       commit('setFilters', filtersFromURl);
+      commit('setEntities', q.entities);
     }
   },
 

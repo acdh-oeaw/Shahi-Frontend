@@ -1,9 +1,8 @@
 <template>
   <div>
-    <v-row no-gutters>
-      <v-spacer />
-      <v-spacer />
+    <div class="d-flex justify-end px-2">
       <v-select
+        style="max-width: 600px"
         v-if="items.length !== 0"
         v-model="selectedHeaders"
         class="mt-5"
@@ -13,6 +12,7 @@
         multiple
         outlined
         return-object
+
       >
         <template v-slot:selection="{ item, index }">
           <v-chip v-if="index < 2" small>
@@ -24,7 +24,7 @@
           >(+{{ selectedHeaders.length - 2 }} others)</span>
         </template>
       </v-select>
-    </v-row>
+    </div>
     <p v-if="notFound" class="text-body-1 ma-5">
       No records found.
     </p>
@@ -43,7 +43,7 @@
     >
       <template v-slot:header.features[0].type.categoryofauthenticity="{ header }">
         {{ header.text }}
-        <tooltip-icon :text="header.description" />
+        <tooltip-icon :text="header.description"/>
       </template>
 
       <template v-slot:top="{ pagination, options, updateOptions }">
@@ -75,8 +75,8 @@
         <span v-if="!!item.features[0].when.timespans[0].start.earliest">
           {{
             item.features[0].when.timespans[0].start.earliest
-              .split("-")[0]
-              .replace(/^0+/, "")
+              ?.split("-")[0]
+              ?.replace(/^0+/, "")
           }}
         </span>
       </template>
@@ -193,7 +193,6 @@ export default {
             r[key] = [...(r[key] || ''), a];
             return r;
           }, {});
-        const end = new Date().getTime();
         return item;
       });
     },

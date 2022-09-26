@@ -233,20 +233,6 @@ export default {
     onScroll(e) {
       this.windowTop = window.top.scrollY; /* or: e.target.documentElement.scrollTop */
     },
-    clickOnItem(item) {
-      this.$store.commit('app/closeQueryDrawer');
-      this.$store.commit('app/setSelectedFilterClass', item.systemClass);
-      this.setCodes(item.systemClass);
-      this.searchByFilterId(item.id);
-      let name = 'data-list-q';
-      if (this.$route.name.startsWith('data-')) name = this.$route.name;
-
-      this.$router.push({
-        name,
-        query: this.getQuery,
-      });
-      this.open = false;
-    },
     clicked(item) {
       this.setCodes(item.systemClass);
 

@@ -6,7 +6,7 @@
       offset-y
       bottom
       left
-      content-class="elevation-0 rounded-0 pa-5 pt-2"
+      content-class="elevation-0 rounded-0 pa-5 pt-2 filter-window"
       transition="slide-y-transition"
       max-width="100vw"
       class="transition"
@@ -17,7 +17,7 @@
           mdi-tune
         </v-icon>
       </template>
-      <menu-window style="min-width:500px">
+      <menu-window>
         <p class="text-h5">
           Connect your filters logically
         </p>
@@ -94,17 +94,17 @@
         </div>
       </menu-window>
     </v-menu>
-    <info-window ref="infoWindow" message="Customize your filter with logical operators." target="#icon" />
+    <info-window ref="infoWindow" message="Customize your filter with logical operators." target="#icon"/>
   </div>
 </template>
 
 <script>
 import draggable from 'vuedraggable';
-import { mapGetters, mapActions } from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
 
 export default {
   name: 'LogicalOperatorEditor',
-  components: { draggable },
+  components: {draggable},
   data() {
     return {
       open: false,
@@ -113,15 +113,16 @@ export default {
           id: 1, items: ['a', 'b', 'c'], logicalOperator: 'AND', logicalOperatorInside: 'OR',
         }],
       filters: [],
-      steps: [{ target: '#icon', content: 'add some logic to your search' }],
+      steps: [{target: '#icon', content: 'add some logic to your search'}],
 
     };
   },
   async mounted() {
-    if(!localStorage.getItem('seenLogicInfo')){
-    setTimeout(() => {
-      this.$refs.infoWindow.show();
-    }, 2000);}
+    if (!localStorage.getItem('seenLogicInfo')) {
+      setTimeout(() => {
+        this.$refs.infoWindow.show();
+      }, 2000);
+    }
   },
   methods: {
     ...mapActions(
@@ -176,12 +177,12 @@ export default {
         },
         immediate: true,
         deep:
-true,
+          true,
       },
     open() {
       this.$refs.infoWindow.hide();
-      if(!localStorage.getItem('seenLogicInfo'))
-        localStorage.setItem('seenLogicInfo',true)
+      if (!localStorage.getItem('seenLogicInfo'))
+        localStorage.setItem('seenLogicInfo', true)
     },
   }
   ,
@@ -194,7 +195,7 @@ true,
   background-color: rgba(0, 0, 0, 0.08);
   border-radius: 4px;
   min-height: 50px;
-  max-width: 500px;
+  max-width: 100%;
   position: relative;
 }
 

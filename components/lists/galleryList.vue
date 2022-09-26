@@ -13,7 +13,7 @@
           <image-card :item="item"></image-card>
 
         </div>
-        <favorite-icon :id="id(item)"/>
+        <favorite-icon :id="id(item)" zIndex="15"/>
         <nuxt-link
           :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}`"
         >

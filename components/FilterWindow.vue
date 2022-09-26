@@ -5,7 +5,7 @@
     offset-y
     bottom
     left
-    content-class="elevation-0 rounded-0 pa-5 pt-2"
+    content-class="elevation-0 rounded-0 pa-5 pt-2 filter-window"
     transition="slide-y-transition"
     max-width="100vw"
     class="transition"
@@ -15,7 +15,7 @@
         mdi-filter
       </v-icon>
     </template>
-    <menu-window style="max-height:90vh; overflow:auto">
+    <menu-window>
       <!--System Classes-->
       <v-card-text v-if="false">
         <v-btn
@@ -39,8 +39,9 @@
             Current filters:
           </p>
           <v-chip v-for="filter in currentFilters" :key="filter.id" label small class="mr-2 mb-2">
-            <span class="text--secondary">{{filter.superType}}:</span>
-            <span v-if="filter.type==='name' || filter.type =='description'" class="font-weight-bold ml-1">{{ filter.value }}</span>
+            <span class="text--secondary">{{ filter.superType }}:</span>
+            <span v-if="filter.type==='name' || filter.type =='description'"
+                  class="font-weight-bold ml-1">{{ filter.value }}</span>
             <span v-else class="font-weight-bold ml-1"> {{ filter.en }}</span>
             <v-icon
               class="pl-2"
@@ -258,7 +259,7 @@
                 :class="item.value ? 'filter-element-clicked' : ''"
                 @click="selectItem(item)"
               >
-                <span><span class="text--secondary">{{item.superType}}:</span> {{ item.en }} </span>
+                <span><span class="text--secondary">{{ item.superType }}:</span> {{ item.en }} </span>
 
                 <v-icon
                   v-if="item.value"
@@ -304,31 +305,26 @@ export default {
       query: {},
       searchKeyword: '',
       searchedTypes: [],
+      attachTo: "asd"
     };
   },
   computed: {
-    ...mapGetters('app', ['getFilterObject', 'getSystemClassForFilter','getFilterById']),
+    ...mapGetters('app', ['getFilterObject', 'getSystemClassForFilter', 'getFilterById']),
     ...mapGetters('query', ['getQuery']),
     propertySelectedClassAndSelectedAndSearchKeyword() {
       return `${this.selectedClass}|${this.selected}|${this.searchKeyword}|${this.reloadItems}`;
     },
     ...mapGetters('query', ['getCurrentSystemClass', 'getFiltersFlat']),
     currentFilters() {
-      console.log('wasgeht',this.filterElements[this.selectedClass].items)
+      console.log('wasgeht', this.filterElements[this.selectedClass].items)
       return this.filterElements[this.selectedClass]?.items
-        ?.flatMap((y) => y.values.map(x=> ({
-          id: x.id, en: x.en, value: x.value, type: x.type,operator:x.logicalOperator, superType: y.en
+        ?.flatMap((y) => y.values.map(x => ({
+          id: x.id, en: x.en, value: x.value, type: x.type, operator: x.logicalOperator, superType: y.en
         })))
         .filter((x) => x.value)
     },
   },
   watch: {
-    currentFilters: {
-      handler(ne, old) {
-        console.log('geändert', ne, old);
-      },
-      deep: true
-    },
     async searchKeydownEnter() {
       this.filterElements[this.selectedClass].items.find(x => x.label === 'name').values[0].value = this.globalSearch;
       await new Promise((resolve) => {
@@ -343,7 +339,7 @@ export default {
       if (this.globalSearch) {
         this.open = true;
         this.searchedTypes = this.filterElements[this.selectedClass].items
-          .flatMap((x) => x.values.map(y => ({ ...y, superType: x.en })))
+          .flatMap((x) => x.values.map(y => ({...y, superType: x.en})))
           .filter((element) => element.en.toLowerCase().includes(this.globalSearch.toLowerCase()))
           .map((element) => {
             const e = {...element};
@@ -372,8 +368,8 @@ export default {
     },
     '$store.state.query.filters': {
       handler() {
-        this.filterElements
-          .find((x) => x.systemClass === this.getCurrentSystemClass)?.items.forEach((item) => {
+        console.log(this.getCurrentSystemClass, this.f)
+        this.filterElements[0].items.forEach((item) => {
           item.values.forEach((value) => {
             const match = this.getFiltersFlat.find((setFilter) => setFilter.id === value.id);
             if (match) value.value = match.value;
@@ -420,13 +416,13 @@ export default {
     }),
     async loadAllTypesFromBackend() {
       const p = await this.$api.Nodes.get_api_0_3_type_tree_();
-          const typeTree  = Object.values(p.body.typeTree);
+      const typeTree = Object.values(p.body.typeTree);
 
       this.filterElements.forEach((filterElement) => {
         filterElement.items.forEach((item) => {
           if (item.id) {
-            const thisType = typeTree.find((x)=> x.id.toString() === item.id)
-            if(thisType)
+            const thisType = typeTree.find((x) => x.id.toString() === item.id)
+            if (thisType)
               item.en = thisType.name;
             const allTypes = typeTree.filter((x) => x.root
               .includes(parseInt(item.id, 10)));
@@ -469,9 +465,13 @@ export default {
         .value = item.value;
     },
     selectAll() {
-      this.searchedTypes.forEach(x => this.selectItem(x,true));
+      this.searchedTypes.forEach(x => this.selectItem(x, true));
     },
     search() {
+      if (this.globalSearch && this.currentFilters?.length === 0) {
+        this.filterElements[this.selectedClass].items.find(x => x.label === 'name').values[0].value = this.globalSearch
+      }
+      this.setCodes(['place', 'artifact']);
       this.setSearch(this.currentFilters);
 
       let name = 'data-list-q';
@@ -519,5 +519,13 @@ export default {
 
 .expand-icon-expanded {
   transform: rotate(180deg);
+}
+
+.filter-window {
+  top: 50px !important;
+  left: 0 !important;
+  right: 0 !important;
+  max-width: 850px !important;
+  margin: auto;
 }
 </style>

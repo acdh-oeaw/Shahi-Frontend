@@ -30,6 +30,7 @@ export default {
         first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
         view_classes: this.query?.view_classes,
         search: this.query?.search,
+        entities:this.query?.entities,
         column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
         sort: sortDesc[0] ? 'desc' : 'asc',
       });

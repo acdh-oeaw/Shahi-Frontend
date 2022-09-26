@@ -10,10 +10,10 @@
     append-icon=""
     multiple
     :search-input.sync="globalSearch"
-    @click="open = !open || !globalSearch"
     placeholder="search the database"
     @keydown.enter.stop="searchKeydownEnter = !searchKeydownEnter"
     ref="searchField"
+    data-app
   >
     <template v-slot:append>
       <logical-operator-editor v-if="getFiltersFlat.length > 1" class="mr-4"/>
