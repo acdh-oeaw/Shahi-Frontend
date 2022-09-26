@@ -27,7 +27,7 @@
                   <p class="ma-0 pa-0">
                     {{ item.features[0].properties.title }}
                   </p>
-                  <favorite-icon :id="id(item)" class="float-right" />
+                  <favorite-icon :id="id(item)" class="float-right"/>
                   <p v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Artifact')" class="text-caption pa-0 ma-0">
                     {{ getFirstTypeByKeyword(item.features[0].types, 'Artifact').label }}
                     <span
@@ -62,30 +62,13 @@
             </nuxt-link>
             <v-row no-gutters>
               <v-col cols="12" sm="4" md="3">
-                <v-card
-                  height="100%"
-                  rounded="0"
-                  class="d-flex align-center pa-sm-2"
-                  :class="{'borderBottom': $vuetify.breakpoint.xs}"
-                  elevation="0"
-                  color="grey lighten-2"
-                >
-                  <v-img
-                    v-if="!!item.features[0].depictions && !!item.features[0].depictions.length !== 0"
-
-                    max-width="100%"
-                    :src="item.features[0].depictions[0].url"
-                    alt="IMAGE"
-                  />
-                  <p v-else class="text-body-1 ma-auto">
-                    No image available
-                  </p>
-                </v-card>
+                <image-card color="grey lighten-2" :item="item"></image-card>
               </v-col>
               <v-col cols="12" sm="8" md="9" class="px-5">
                 <v-card v-if="item.features[0].descriptions" outlined class="my-3">
                   <v-card-text class="text-caption py-2">
-                    <tooltip-icon :text="$store.state.app.tableheaders['wide'].find(x => x.text === 'Category of Authenticity').description" />
+                    <tooltip-icon
+                      :text="$store.state.app.tableheaders['wide'].find(x => x.text === 'Category of Authenticity').description"/>
 
                     Category of Authenticity:
                     <span
@@ -97,8 +80,8 @@
                     </span>
 
                   </v-card-text>
-                  <v-card-text  class="text-body-1 py-2">
-                    {{item.features[0].descriptions[0].value}}
+                  <v-card-text class="text-body-1 py-2">
+                    {{ item.features[0].descriptions[0].value }}
                   </v-card-text>
                 </v-card>
                 <div class="card-columns" :style="cssVars">
@@ -153,7 +136,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 
 export default {
   props: {
@@ -224,7 +207,7 @@ export default {
   },
   watch: {
     items() {
-      window.scrollTo({ top: 0 });
+      window.scrollTo({top: 0});
     },
   },
   methods: {
@@ -272,7 +255,7 @@ export default {
         }, {});
     },
     newPage(page) {
-      this.$router.replace({ name: this.$route.name, query: { ...this.$route.query, page } });
+      this.$router.replace({name: this.$route.name, query: {...this.$route.query, page}});
     },
     searchType(id) {
       this.searchByFilterId(id);
