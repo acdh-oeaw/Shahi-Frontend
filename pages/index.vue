@@ -17,7 +17,7 @@
     >
 
       <div v-if="!closed" class="white" style="width:100%; ">
-        <div  style="max-width:1000px;margin:auto;" class="pa-5">
+        <div style="max-width:1000px;margin:auto;" class="pa-5">
           <p class="text-h4 text-sm-h2">Shahi Kingdoms Database</p>
 
           <p class="text-body-1">
@@ -66,17 +66,17 @@
 
 
       </div>
-       <v-btn
-          v-else
-          fab
-          @click="
+      <v-btn
+        v-else
+        fab
+        @click="
             initialized = true;
             closed = !closed;
           "
-          color="secondary"
-        >
-          <v-icon>mdi-information-variant</v-icon>
-        </v-btn>
+        color="secondary"
+      >
+        <v-icon>mdi-information-variant</v-icon>
+      </v-btn>
     </v-layout>
     <v-fab-transition>
       <v-btn
@@ -90,10 +90,11 @@
 
         class="database-btn"
       >
-        <v-icon>mdi-database</v-icon></v-btn
+        <v-icon>mdi-database</v-icon>
+      </v-btn
       >
     </v-fab-transition>
-    <div class="bgmap"  :class="{ darkened: !closed}">
+    <div class="bgmap" :class="{ darkened: !closed}">
       <qmap
         :geojsonitems="items"
         :options="{ zoomControl: false }"
@@ -121,7 +122,7 @@ export default {
   },
   watch: {
     closed() {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({top: 0, behavior: "smooth"});
     },
   },
   async mounted() {
@@ -137,6 +138,7 @@ body,
 html {
   height: 100%;
 }
+
 .splashtext {
   position: absolute;
   left: 0;
@@ -151,20 +153,23 @@ html {
   max-height: 100%;
 
 }
-.full-height{
-  min-height:calc(100vh - 64px);
+
+.full-height {
+  min-height: calc(100vh - 64px);
 }
-.gilgit-background{
-        background-image:url("../assets/gilgit_banner.jpg");
-background-position: center;
-background-repeat: no-repeat;
-background-size: cover;
+
+.gilgit-background {
+  background-image: url("../assets/gilgit_banner.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 
 .topOffset {
   transform: translateY(5rem);
 }
+
 .animation-closed {
   animation-name: close;
   animation-duration: 500ms;
@@ -214,11 +219,14 @@ background-size: cover;
   transition: all 300ms ease;
   transition-delay: 500ms;
 }
+
 .slide-fade-leave-active {
   transition: all 100ms ease;
 }
+
 .slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
+  /* .slide-fade-leave-active below version 2.1.8 */
+{
   opacity: 0;
   height: 0px;
 }
