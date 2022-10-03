@@ -99,7 +99,7 @@
                 title="ACDH Logo"
               ></a>
           </v-col>
-          <v-col cols="12" sm="6">
+          <v-col cols="12" sm="3">
             <div>
               <p>
                 ACDH-CH
@@ -110,7 +110,7 @@
                 Austrian Academy of Sciences
               </p>
               <p>
-                Sonnenfelsgasse 19,
+                Bäckerstraße 13,
                 <br>
                 1010 Vienna
               </p>
@@ -118,6 +118,23 @@
                 T: +43 1 51581-2200
                 <br>
                 E: <a href="mailto:acdh@oeaw.ac.at">acdh@oeaw.ac.at</a>
+              </p>
+            </div>
+          </v-col>
+          <v-col cols="12" sm="3">
+            <div>
+              <p>
+                FWF Shahi Project Team Vienna
+              </p>
+              <p>
+                Garnisongasse 13,
+                <br>
+                Univeritätscampus Hof 9,
+                <br>
+                1090 Vienna
+              </p>
+              <p>
+                T: +43 1 4277 42323
               </p>
             </div>
           </v-col>

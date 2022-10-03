@@ -19,7 +19,10 @@
       <div v-if="!closed" class="white" style="width:100%; ">
         <div style="max-width:1000px;margin:auto;" class="pa-5">
           <p class="text-h4 text-sm-h2">Shahi Kingdoms Database</p>
-
+          <p class="text-body1">
+            For more information and current activities, visit the project page:
+            <a class="blue--text" href="https://shahimaterialculture.univie.ac.at" target="_blank">shahimaterialculture.univie.ac.at</a>
+          </p>
           <p class="text-body-1">
             The Shahi Kingdoms Database presents comprehensive primary source
             material--archaeological sites, artifacts, coins, inscriptions--for
