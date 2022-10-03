@@ -35,9 +35,10 @@
         <p>
           <span class="bib-title font-weight-bold">{{ item.title }}</span>
           <span v-if="!!item['collection-title']">In: {{ item['collection-title'] }},</span>
+          <span v-if="!!item['collection-title']">In: {{ item['collection-title'] }},</span>
           <span v-if="!!item['container-title']">In: {{ item['container-title'] }},</span>
           <span v-if="!!item['editor'] && item['editor'].length !== 0">
-            edited by {{ item['editor'].map(x => `${x.family} ${x.given}`).join(',') }}
+            edited by {{ item['editor'].map(x => x.family ? `${x.family} ${x.given}` : x.literal).join(',')  }}
           </span>
         </p>
         <p>
@@ -49,6 +50,8 @@
             ].filter(Boolean).join(', ')
           }}
         </p>
+        <p class="text-body-2">{{item['event-place']}}</p>
+
       </div>
     </div>
 
