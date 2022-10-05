@@ -1,6 +1,7 @@
 <template>
   <div v-if="item">
     <single-artifact v-if="itemType === 'stationary' || itemType === 'portable'" :item="item"></single-artifact>
+    <single-archeological-site v-else-if="itemType === 'archeological site'" :item="item"></single-archeological-site>
     <single-page-layout v-else :item="item"></single-page-layout>
   </div>
 </template>

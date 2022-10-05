@@ -8,10 +8,10 @@
         </v-col>
 
         <v-col v-if="item?.relation('crm:P52 has current owner')" cols="6" class="d-block d-flex flex-column mb-3">
-          <span class="text-body-2 text--secondary ">Current location + Inventory number</span>
+          <span class="text-body-2 text--secondary ">Current location</span>
           <span class="text-body-1 font-weight-bold">{{
               item?.relation('crm:P52 has current owner')?.label
-            }} <span class="text--secondary text-body-1">{{ getInventoryNumber(item)?.relationDescription }}</span></span>
+            }} <span v-if="getInventoryNumber(item)?.relationDescription" class="text--secondary text-body-1">({{ getInventoryNumber(item)?.relationDescription }})</span></span>
         </v-col>
       </v-row>
 
