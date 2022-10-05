@@ -2,7 +2,8 @@ name: workflows starter
 # env: is empty, see setup-env and the outputs there
 on:
   push: 
-    branches: [ $default-branch ]
+    branches:
+      - main
 jobs:
   setup_workflow_env:
     runs-on: ubuntu-latest
