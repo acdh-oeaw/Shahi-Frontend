@@ -1,15 +1,13 @@
 <template>
   <div>
-    <div class="">
-      <div>
-        <v-img
+    <div class="d-inline-block">
+        <img
           class="white shadow scale clickable d-flex align-end"
-          contain
-          max-width="450px"
+          style="max-width: 450px; max-height: 450px;"
           :src="primaryImage.url"
           @click="!!images && images.length !== 0 ? show() : viewMode=true"
         />
-        <p style="max-width: 450px" class="text-caption text-left secondary lighten-1 pa-2 d-flex flex-column">
+        <p style="width: 0; min-width: 100%" class="text-caption text-left secondary lighten-1 pa-2 d-flex flex-column">
           <span class="font-weight-bold">{{ primaryImage.license }}</span>
           <span> {{ imageDescriptions[primaryImage['@id'].split('/').at(-1)] }}</span>
           <span class="mt-3 primary--text go-to-map-button" text
@@ -20,10 +18,8 @@
           </v-icon>
         </span>
         </p>
-
-      </div>
-
     </div>
+
     <client-only>
       <div v-if="viewMode" class="wrapper">
         <div class="viewer">
