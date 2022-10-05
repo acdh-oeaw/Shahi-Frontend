@@ -21,7 +21,7 @@ export const getters = {
 
     filtergroup.forEach((search) => {
       if (search && search.length > 0) {
-        const searchers = [{ typeName: 'type', filterCategory: 'typeID', valueProperty: 'id' },
+        const searchers = [{ typeName: 'type', filterCategory: 'typeIDWithSubs', valueProperty: 'id' },
           { typeName: 'name', filterCategory: 'entityName', valueProperty: 'value' },
           { typeName: 'begin', filterCategory: 'beginFrom', valueProperty: 'value' },
           { typeName: 'end', filterCategory: 'endFrom', valueProperty: 'value' },
@@ -109,7 +109,7 @@ export const actions = {
         let searchArray = [];
         searchString.forEach((searchParamater) => {
           const content = (JSON.parse(searchParamater));
-          const orBlock = content.typeID.map((typeID) => ({
+          const orBlock = content.typeIDWithSubs.map((typeID) => ({
             items: typeID.values.map((id) => getFilterDetailsFromID(id)),
             logicalOperator: 'AND',
             logicalOperatorInside: typeID.logicalOperator.toUpperCase(),
