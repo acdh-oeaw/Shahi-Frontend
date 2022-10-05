@@ -1,18 +1,12 @@
 <template>
-  <section v-if="collection">
-    <div class="collection-header secondary darken-1">
-      <div class="page-content">
-        <div class="d-flex justify-space-around">
-          <div class="collection-header-left d-flex align-center">
-            <p class="title-1 mt-n15">
+  <section v-if="collection" >
+    <div class="collection-header secondary darken-1" style="position: relative;">
+      <image-collage :collection-id="id" :items="items" class="images" style="z-index: 0" />
+      <v-sheet height="100%" color="transparent" class="page-content d-flex align-center">
+            <p class="title-1" style="z-index: 1; width: 50%">
               {{ collection.en }}
             </p>
-          </div>
-          <div class="collection-header-right">
-            <image-collage :items="items" />
-          </div>
-        </div>
-      </div>
+      </v-sheet>
     </div>
 
     <div class="page-content">
@@ -49,20 +43,25 @@ export default {
 <style scoped>
 .collection-header {
   height: 600px;
-  width: 100vw;
   overflow: hidden;
 }
 .page-content{
 }
-.collection-header >>> .title-1{
-  margin-top: 160px;
-}
+
 .collection-header-left{
   max-width: 500px;
 }
 
 .collection-header-right{
+  position: absolute;
   width: calc(100% - 500px);
+}
+
+.images{
+  position:absolute;
+  right:0;
+  top:50%;
+  translate:0 -50%;
 }
 
 </style>

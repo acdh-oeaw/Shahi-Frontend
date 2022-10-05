@@ -43,6 +43,7 @@ import ImageButton from '@/components/ImageButton';
 import qmap from '~/components/map';
 
 export default {
+  props:['customQuery'],
   components: {
     qmap,
   },
@@ -85,8 +86,8 @@ export default {
       this.loading = true;
       let localItems = [];
       const p = await this.$api.Entities.get_api_0_3_query_({
-        view_classes: this.getQuery?.view_classes,
-        search: this.getQuery?.search,
+        view_classes: this.customQuery?.view_classes || this.getQuery?.view_classes,
+        search: this.customQuery?.search || this.getQuery?.search,
         limit: 100,
         page: 1,
         show: ['when','geometry']

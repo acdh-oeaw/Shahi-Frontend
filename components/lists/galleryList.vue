@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div style="position: relative;">
+    <div id="list-anchor" style="position: absolute; top: -200px; left: 0"></div>
     <div v-if="notFound">
       No records found.
     </div>
@@ -100,6 +101,8 @@ export default {
     },
     newPage(page) {
       this.$router.replace({name: this.$route.name, query: {...this.$route.query, page}});
+      document.getElementById("list-anchor").scrollIntoView({block: 'start'});
+
     },
   },
   computed: {
