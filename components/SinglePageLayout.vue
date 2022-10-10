@@ -44,9 +44,7 @@
     </v-sheet>
     <v-sheet class="page-content mt-5 mb-10 px-5">
       <slot :item="item" name="details">
-        <p class="title-3">
-          Details
-        </p>
+        <p class="title-3">Details</p>
         <div class="type-columns" v-if="!!item.types" no-gutters>
           <div v-for="(type, index) in types" :key="index" cols="12" sm="5">
             <div v-if="type[0].supertype !== 'Material composition' || type.every(x => x.value !== 0)"
@@ -74,6 +72,17 @@
             </nuxt-link>
           </div>
         </div>
+      </slot>
+      <slot name="bibliography">
+        <div v-if="!!bibliography && bibliography.length !==0">
+          <p class="title-3 mb-1">Bibliography</p>
+          <p class="my-1" v-for="b in bibliography" :key="b.relationTo">
+            <bibliography-paragraph :id="b.relationTo.split('/').at(-1)" v-slot="{item}">
+              {{item}}
+            </bibliography-paragraph>
+          </p>
+        </div>
+
       </slot>
     </v-sheet>
   </v-sheet>
@@ -107,6 +116,9 @@ export default {
     images() {
       return this.item.depictions;
     },
+    bibliography(){
+      return this.item?.relations.filter(x => x.relationSystemClass	=== "bibliography")
+    }
   },
 
   created() {
