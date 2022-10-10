@@ -1,9 +1,11 @@
 <template>
-  <div v-show="!loading" class="text-right image-collage" style="max-width: 50%">
+  <v-slide-x-reverse-transition>
+  <div v-if="!loading" class="text-right image-collage" style="width: 800px">
     <div class="image-overlay"></div>
     <img height="180" class="pa-0 img d-inline-block" v-for="image in items" :src="`${image}?image_size=thumbnail`"/>
 
   </div>
+  </v-slide-x-reverse-transition>
 </template>
 
 <script>
@@ -21,18 +23,20 @@ export default {
       });
       // eslint-disable-next-line prefer-destructuring
       this.items = [];
-      this.items = p.body.results.map(x => x.features[0]?.depictions?.[0]?.url).filter(Boolean).slice(0, 15);
+      this.items = p.body.results.map(x => x.features[0]?.depictions?.[0]?.url).filter(Boolean).slice(0, 17);
       this.totalItems = p.body.pagination.entities;
     } catch (err) {
       console.log(err);
     }
+
+    await new Promise(resolve => setTimeout(resolve, 1000))
     this.loading = false;
   },
   data() {
     return {
       items: [],
       totalItems: 0,
-      loading:false,
+      loading:true,
     };
   },
 

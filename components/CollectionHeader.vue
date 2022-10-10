@@ -2,14 +2,17 @@
   <section v-if="collection" >
     <div class="collection-header secondary darken-1" style="position: relative;">
       <image-collage :collection-id="id" :items="items" class="images" style="z-index: 0" />
-      <v-sheet height="100%" color="transparent" class="page-content d-flex align-center">
-            <p class="title-1" style="z-index: 1; width: 50%">
+      <v-container style="height: 100%">
+      <v-sheet height="100%" color="transparent" max-width="max(50%,500px)" class="ma-0 page-content d-flex align-center">
+            <p class="title-1" style="z-index: 1;">
               {{ collection.en }}
             </p>
       </v-sheet>
+      </v-container>
     </div>
 
     <div class="page-content">
+      <v-container>
       <p v-if="!!collection.description" class="title-2">
         Description
       </p>
@@ -19,6 +22,7 @@
       <p class="title-2">
         Artifacts
       </p>
+      </v-container>
     </div>
   </section>
 </template>
