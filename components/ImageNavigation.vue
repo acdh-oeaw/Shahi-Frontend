@@ -23,7 +23,7 @@
           </div>
         </v-col>
         <v-col cols="12" sm="6">
-          <ImageButton :to="{'name':'index','path':'/','params':{'showMap':true}}" icon="mdi-map-marker">
+          <ImageButton to="/data/map?view_classes=place&view_classes=artifact" icon="mdi-map-marker">
             Explore the Map
           </ImageButton>
         </v-col>

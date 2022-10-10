@@ -49,7 +49,8 @@
         </p>
         <div class="type-columns" v-if="!!item.types" no-gutters>
           <div v-for="(type, index) in types" :key="index" cols="12" sm="5">
-            <div v-if="type[0].supertype !== 'Material composition' || type.every(x => x.value !== 0)" class="type-column">
+            <div v-if="type[0].supertype !== 'Material composition' || type.every(x => x.value !== 0)"
+                 class="type-column">
               <span class="text--secondary text-overline">{{ type[0].supertype }}:</span>
               <div class="mb-2 mt-n2">
                 <p class="ma-0 pa-0 text-body-1" v-for="t in type" :key="type.identifier">
@@ -62,9 +63,15 @@
               </div>
 
             </div>
-            <div v-else-if="type.every(x => x.value != 0)">
-
-            </div>
+          </div>
+          <div class="single-map" v-if="!!item.geometry && !!item.geometry.coordinates">
+            <qmap :geojsonitems="[item]"/>
+            <nuxt-link class="primary--text go-to-map-button" to="/data/map?view_classes=place&view_classes=artifact">
+              Discover on Map
+              <v-icon class="ml-n1">
+                mdi-chevron-right
+              </v-icon>
+            </nuxt-link>
           </div>
         </div>
       </slot>
@@ -83,7 +90,7 @@ export default {
     qmap,
     ImageViewer,
   },
-  props:['item'],
+  props: ['item'],
   computed: {
     types() {
       if (!this.item.types) return [];
@@ -177,5 +184,17 @@ export default {
 }
 
 
+.single-map .leaflet-control {
+  display: none !important;
+}
+
+</style>
+
+<style>
+.single-map {
+  height: 400px;
+  width: 400px;
+  z-index: 0;
+}
 </style>
 

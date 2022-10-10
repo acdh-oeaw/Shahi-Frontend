@@ -2,9 +2,9 @@
   <single-page-layout :item="item">
     <template #description>
       <v-row>
-        <v-col v-if="item?.type('Place of production')" cols="auto" class="d-block d-flex flex-column mb-3 flex-wrap">
+        <v-col v-if="item?.getType('Place of production')" cols="auto" class="d-block d-flex flex-column mb-3 flex-wrap">
           <span class="text-body-2 text--secondary">Place of production</span>
-          <span class="text-body-1 font-weight-bold">{{ item?.type('Place of production')?.label }}</span>
+          <span class="text-body-1 font-weight-bold">{{ item?.getType('Place of production')?.label }}</span>
         </v-col>
 
         <v-col v-if="item?.relation('crm:P52 has current owner')" cols="6" class="d-block d-flex flex-column mb-3">
@@ -18,6 +18,7 @@
       <p class="text-body-1 align-item-end" style="white-space: pre-line">
         {{ item.descriptions[0]?.value }}
       </p>
+
     </template>
   </single-page-layout>
 </template>

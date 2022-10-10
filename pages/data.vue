@@ -5,8 +5,8 @@
     <div class="p-sticky" style="position:sticky;top:calc( 100vh - 36px);z-index: 9999" >
       <view-toggler v-model="view"/>
     </div>
-    <div style="position:relative; top:-36px">
-    <nuxt-child style="min-height: calc(100vh - 110px)" :items="items" :total-items="totalItems" :not-found="notFound" />
+    <div style="position:relative; top:-36px; min-height: calc(100vh - 110px)">
+    <nuxt-child style="min-height: calc(100vh - 140px)" :items="items" :total-items="totalItems" :not-found="notFound" />
     </div>
   </div>
 </template>
