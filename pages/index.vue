@@ -197,7 +197,7 @@ html {
 }
 
 .bgmap {
-  height: calc(100vh - 64px);
+  height: calc(100vh - 104px);
   width: 100%;
 
   position: absolute;

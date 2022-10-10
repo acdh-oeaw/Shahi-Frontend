@@ -25,14 +25,14 @@
     </v-row>
     <p />
     <div v-for="item in filteredList.slice(page,page+20)" :key="item.id" class="text-body-1 mb-4">
-      <p v-if="!!item.author" class="font-weight-bold">
+      <p v-if="!!item.author" class="ma-0 font-weight-bold">
         {{ item.author.map(x => [x.family, x.given, x.literal].filter(Boolean).join(', ')).join('; ') }}
         <span v-if="!!item.issued && !!item.issued['date-parts']" class="text--secondary">
           {{ item.issued['date-parts'][0][0] }}
         </span>
       </p>
       <div class="ml-3 text--secondary">
-        <p>
+        <p class="ma-0">
           <span class="bib-title font-weight-bold">{{ item.title }}</span>
           <span v-if="!!item['collection-title']">In: {{ item['collection-title'] }},</span>
           <span v-if="!!item['collection-title']">In: {{ item['collection-title'] }},</span>
@@ -41,7 +41,7 @@
             edited by {{ item['editor'].map(x => x.family ? `${x.family} ${x.given}` : x.literal).join(',')  }}
           </span>
         </p>
-        <p>
+        <p class="ma-0">
           {{
             [
               item.volume ? `Volume: ${item.volume}` : null,
@@ -50,7 +50,7 @@
             ].filter(Boolean).join(', ')
           }}
         </p>
-        <p class="text-body-2">{{item['event-place']}}</p>
+        <p class="text-body-2 ma-0">{{item['event-place']}}</p>
 
       </div>
     </div>
