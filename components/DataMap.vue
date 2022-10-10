@@ -29,8 +29,8 @@
       </transition>
     </div>
     <div :title="showPolygons ? 'hide polygons' : 'show polygons'" class="showploygons elevation-4"
-      :class="{ active: !showPolygons }" @click="showPolygons = !showPolygons">
-      <v-icon size="23">
+      :class="{ active: showPolygons }" @click="showPolygons = !showPolygons">
+      <v-icon size="23" :color="showPolygons ? 'primary' : ''">
         mdi-vector-polygon
       </v-icon>
     </div>
@@ -39,7 +39,6 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import ImageButton from '@/components/ImageButton';
 import qmap from '~/components/map';
 
 export default {
@@ -49,7 +48,7 @@ export default {
   },
   data() {
     return {
-      showPolygons: true,
+      showPolygons: false,
       useTimeline: false,
       loading: false,
       toggler: 1,
@@ -201,7 +200,10 @@ a.showploygons {
 }
 
 .showploygons.active {
-  filter: brightness(90%);
+  background: linear-gradient(145deg, #a3a3a3, #c2c2c2);
+  box-shadow:  20px 20px 60px #9a9a9a,
+  -20px -20px 60px #d0d0d0;
+
 }
 
 .showploygons:hover {
