@@ -10,6 +10,8 @@ export function dtoToEntity(dtoEntity){
 
 export function useGetType(entity){
   if(entity?.crmClass === "crm:E18 Physical Thing") return "archeological site";
+  if(entity?.types?.some(x => x.label === 'Coin')) return "coin";
   if(entity?.types?.some(x => x.label === 'Stationary' || x.hierarchy.startsWith('Artifact > Stationary'))) return "stationary";
   if(entity?.types?.some(x => x.label === 'Portable' || x.hierarchy.startsWith('Artifact > Portable'))) return "portable";
+  if(entity?.types?.some(x => x.label === 'Inscriptions' || x.hierarchy.startsWith('Artifact > Information carrier'))) return "inscription";
 }
