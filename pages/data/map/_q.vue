@@ -25,7 +25,7 @@ export default {
 <style scoped>
 .data_map{
   width:100%;
-  height:calc(100vh - 110px);
+  height:calc(100vh - 146px);
   position:relative;
 }
 </style>

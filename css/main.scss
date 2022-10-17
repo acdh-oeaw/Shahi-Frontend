@@ -44,8 +44,18 @@ $heading-font-family : 'Noto Serif Display';
   font-family: $heading-font-family;
   font-size: 30px;
   margin-top: 2rem;
+  line-height: 120%;
   @include md {
     font-size: 40px;
+  }
+}
+
+.title-3{
+  font-family: $heading-font-family;
+  font-size: 20px;
+  margin-top: 2rem;
+  @include md {
+    font-size: 30px;
   }
 }
 .clickable{

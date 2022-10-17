@@ -1,5 +1,6 @@
 <template>
-  <div class="mt-4">
+  <div class="mt-4" style="position: relative;">
+    <div id="list-anchor" style="position: absolute; top: -200px; left: 0"></div>
     <p v-if="notFound" class="text-body-1 ma-5">
       No records found.
     </p>
@@ -205,11 +206,6 @@ export default {
       };
     },
   },
-  watch: {
-    items() {
-      window.scrollTo({top: 0});
-    },
-  },
   methods: {
     ...mapActions({
       searchByFilterId: 'query/searchByFilterId',
@@ -256,6 +252,8 @@ export default {
     },
     newPage(page) {
       this.$router.replace({name: this.$route.name, query: {...this.$route.query, page}});
+      document.getElementById("list-anchor").scrollIntoView({block: 'start'});
+
     },
     searchType(id) {
       this.searchByFilterId(id);
@@ -272,8 +270,6 @@ export default {
 };
 </script>
 <style scoped>
-.list-element:hover {
-}
 
 .list-element {
   transition: all 0.1s;

@@ -1,20 +1,44 @@
 <template>
   <div>
     <collection-header :id="$route.params.q" :items="items"/>
+      <view-toggler v-model="view"/>
     <list
+      v-if="view==='list'"
       :items="items"
       :total-items="totalItems"
       :not-found="notFound"
     />
+    <otherlist
+      v-if="view==='detaillist'"
+      :items="items"
+      :total-items="totalItems"
+      :not-found="notFound"
+    />
+    <div class="data_map"
+         v-if="view==='map'">
+      <dataMap :customQuery="customQuery" />
+    </div>
+    <gallery-list
+      v-if="view==='gallery'"
+      :items="items"
+      :total-items="totalItems"
+      :not-found="notFound"
+    />
+    <view-toggler v-model="view"/>
+
+
+
   </div>
 </template>
 
 <script>
 import list from "~/components/lists/list";
+import Otherlist from "@/components/lists/otherlist";
+import GalleryList from "@/components/lists/galleryList";
 
 export default {
   name: "q_.vue",
-  components: {list},
+  components: {GalleryList, Otherlist, list},
   async fetch() {
     this.loading = true;
     const {
@@ -69,6 +93,12 @@ export default {
 
   },
   computed: {
+    customQuery(){
+      return {
+        view_classes:"artifact",
+        search:`{"typeIDWithSubs":[{"operator":"equal","logicalOperator":"or","values":[${this.$route.params.q}]}]}`
+      }
+    },
     options() {
       return {
         sortBy: [],
@@ -84,5 +114,10 @@ export default {
 </script>
 
 <style scoped>
-
+.data_map{
+  width:100%;
+  height:calc(100vh - 110px);
+  position:relative;
+}
 </style>
+

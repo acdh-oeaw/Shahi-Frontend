@@ -37,7 +37,7 @@ export default {
         });
       },
       deep: true,
-      immediate: true,
+      immediate: false,
     },
   },
   beforeDestroy() {
@@ -48,7 +48,7 @@ export default {
   mounted() {
     this.$nextTick(function () {
       const coreComponent = document.getElementById('map-container');
-      this.map = new MapViewerComponent(coreComponent, config, {
+      this.map = new MapViewerComponent(coreComponent, config,this.correctDataFormat.features.length !== 0 ? this.correctDataFormat : {
         "type": "FeatureCollection",
         "features": [
           {
@@ -67,11 +67,11 @@ export default {
       this.map.on('init', (el) => {
       });
       this.map.on('featureSelected', (el) => {
-        console.log('[mapviewer-component event: feature selected]:', el);
+        //console.log('[mapviewer-component event: feature selected]:', el);
       });
       this.map.on('mapStateChanged', (el) => {
         if (el) {
-          console.log(`[mapviewer-component event: mapStateChanged]: ${JSON.stringify(el)}`);
+        //  console.log(`[mapviewer-component event: mapStateChanged]: ${JSON.stringify(el)}`);
         }
       });
     });

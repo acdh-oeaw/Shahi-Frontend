@@ -25,7 +25,7 @@ export default {
   name: 'ViewToggler',
   data() {
     return {
-      view: undefined,
+      view: 'list',
     };
   },
   watch: {
