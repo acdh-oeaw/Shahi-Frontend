@@ -3,7 +3,7 @@
     <collection-header v-if="$route.query.collection" :id="$route.query.collection" :items="items" />
 
     <div class="p-sticky" style="position:sticky;top:calc( 100vh - 36px);z-index: 9999" >
-      <view-toggler v-model="view"/>
+      <view-toggler :value="$route.path.split('/').at(-1)" @input="viewChange"  />
     </div>
     <div style="position:relative; top:-36px; min-height: calc(100vh - 110px)">
     <nuxt-child style="min-height: calc(100vh - 140px)" :items="items" :total-items="totalItems" :not-found="notFound" />
@@ -85,12 +85,6 @@ export default {
       },
       deep: true,
     },
-    view(){
-      this.$router.push({
-        name:`data-${this.view || 'list'}-q`,
-        query: this.$route.query,
-      });
-    }
   },
   mounted() {
     window.scrollTo({ top: 0 });
@@ -100,8 +94,12 @@ export default {
       searchByFilterId: 'query/searchByFilterId',
       setCodes: 'query/setCodes',
     }),
-
-
+    viewChange(target){
+      this.$router.push({
+        name:`data-${target || 'list'}-q`,
+        query: this.$route.query,
+      });
+    }
   },
   computed: {
     ...mapGetters('query', ['getQuery']),

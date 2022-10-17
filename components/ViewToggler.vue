@@ -23,10 +23,14 @@
 <script>
 export default {
   name: 'ViewToggler',
+  props: ['value'],
   data() {
     return {
       view: 'list',
     };
+  },
+  mounted(){
+    this.view = this.value || this.view;
   },
   watch: {
     view: {

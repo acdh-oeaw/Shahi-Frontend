@@ -12,18 +12,22 @@
               >
             </div>
           </nuxt-link>
-          <querysearch style="max-width: 700px" class="mx-sm-5"/>
-          <div class="ml-auto">
-            <nuxt-link class="nav-link mr-5" to="/collections">
+          <querysearch style="max-width: 700px" class="mx-sm-5 "/>
+          <div class="ml-auto text-right">
+            <nuxt-link class="nav-link mr-md-2 " to="/data/map?view_classes=place&view_classes=artifact">
+              <v-icon color="black" v-if="$vuetify.breakpoint.smAndDown">mdi-map</v-icon>
+              <span v-else>Map</span>
+            </nuxt-link>
+            <nuxt-link class="nav-link mr-md-2" to="/collections">
               <v-icon v-if="$vuetify.breakpoint.smAndDown">$artifact</v-icon>
               <span v-else>Collections</span>
             </nuxt-link>
-            <nuxt-link class="nav-link mr-5" to="/sourcebook">
+            <nuxt-link class="nav-link mr-md-2" to="/sourcebook">
               <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-book-open-variant</v-icon>
 
               <span v-else>Sourcebook</span>
             </nuxt-link>
-            <nuxt-link class="nav-link mr-5" to="/bibliography">
+            <nuxt-link class="nav-link mr-md-2" to="/bibliography">
               <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-file-find</v-icon>
 
               <span v-else>Bibliography</span>
@@ -85,10 +89,66 @@
           Contact
         </v-row>
         <v-divider class="my-3"/>
+        <v-row class="mx-2 text-body-1">
+          <v-col
+            cols="12"
+            sm="4"
+          >
+            <p class="font-weight-bold">Shahi Kingdoms Project</p>
+
+            <p class="text-body-2 mb-2">FWF Stand-alone Project P-31246 “Cultural Formation and Transformation: Shahi
+              Art and Architecture from Afghanistan to the West Tibetan Frontier at the Dawn of the Islamic Era”
+              (2018-2022)</p>
+            <p class="text-body-2 mb-2">FWF Stand-alone Digital Publication Grant PUD 26-G “Shahi Kingdoms Digital
+              Publication and Research Platform” (2021-2024)</p>
+            <p class="text-body-2 mb-2">Holzhausen-Legat Grant “Creating a Digital Research Platform: Primary Source
+              Material for the Shahi Kingdoms” (2021)"</p>
+
+          </v-col>
+
+          <v-col cols="12" sm="4">
+            <div>
+              <p class="font-weight-bold">
+                FWF Shahi Project Team Vienna
+              </p>
+              <p class="text-body-2">
+                Garnisongasse 13,
+                <br>
+                Univeritätscampus Hof 9,
+                <br>
+                1090 Vienna
+              </p>
+              <p class="text-body-2">
+                T: +43 1 4277 42323
+              </p>
+            </div>
+          </v-col>
+          <v-col cols="12" sm="4">
+            <p class="font-weight-bold">
+              <nuxt-link to="/team">Shahi Project Team</nuxt-link>
+            </p>
+            <p class="text-body-2 mb-2">
+              <span class="text--secondary d-block">Univ.-Prof. Dr. Deborah Klimburg-Salter</span>
+              <a href="mailto:deborah.klimburg-salter@univie.ac.at">deborah.klimburg-salter@univie.ac.at</a></p>
+            <p class="text-body-2 mb-2">
+              <span class="text--secondary d-block">HR Doz. Dr. Michael Alram</span>
+              <a href="mailto:Michael.Alram@oeaw.ac.at">Michael.Alram@oeaw.ac.at</a></p>
+            <p class="text-body-2 mb-2">
+              <span class="text--secondary d-block">Doz. Mag. Dr. Klaus Vondrovec</span>
+              <a href="mailto:Klaus.Vondrovec@khm.at">Klaus.Vondrovec@khm.at</a></p>
+            <p class="text-body-2 mb-2">
+              <span class="text--secondary d-block">Dr. Natasha Kimmet</span>
+              <a href="mailto:natasha.kimmet@univie.ac.at">natasha.kimmet@univie.ac.at</a></p>
+            <p class="text-body-2 mb-1">
+              <span class="text--secondary d-block">Mag.phil. Gosia Lenko</span>
+              <a href="mailto:malgorzata.lenko@univie.ac.at">malgorzata.lenko@univie.ac.at</a></p>
+          </v-col>
+        </v-row>
+        <v-divider class="my-3"/>
         <v-row class="mx-2">
           <v-col
             cols="12"
-            sm="3"
+            sm="4"
           >
             <a href="https://www.oeaw.ac.at/acdh/acdh-ch-home" target="_blank">
               <img
@@ -99,49 +159,35 @@
                 title="ACDH Logo"
               ></a>
           </v-col>
-          <v-col cols="12" sm="3">
+          <v-col cols="12" sm="4">
             <div>
               <p>
-                ACDH-CH
+                <span class="font-weight-bold">ACDH-CH</span>
                 <br>
+                <span class="text-body-2">
                 Austrian Centre for Digital Humanities <br>
                 and Cultural Heritage
                 <br>
                 Austrian Academy of Sciences
+                </span>
               </p>
-              <p>
+              <p class="text-body-2">
                 Bäckerstraße 13,
                 <br>
                 1010 Vienna
               </p>
-              <p>
+              <p class="text-body-2">
                 T: +43 1 51581-2200
                 <br>
                 E: <a href="mailto:acdh@oeaw.ac.at">acdh@oeaw.ac.at</a>
               </p>
             </div>
           </v-col>
-          <v-col cols="12" sm="3">
-            <div>
-              <p>
-                FWF Shahi Project Team Vienna
-              </p>
-              <p>
-                Garnisongasse 13,
-                <br>
-                Univeritätscampus Hof 9,
-                <br>
-                1090 Vienna
-              </p>
-              <p>
-                T: +43 1 4277 42323
-              </p>
-            </div>
-          </v-col>
-          <v-col cols="12" sm="3">
+
+          <v-col cols="12" sm="4">
             <div class="textwidget custom-html-widget">
-              <h6>HELPDESK</h6>
-              <p>
+              <p class="font-weight-bold text-body-1">HELPDESK</p>
+              <p class="text-body-2">
                 ACDH-CH runs a helpdesk offering advice for questions related to
                 various digital humanities topics.
               </p>
@@ -230,7 +276,7 @@ export default {
   computed: {
     ...mapGetters('query', ['getQuery']),
     hideOnMainPage() {
-      return this.$route.name != 'index' || this.windowTop >= 300;
+      return this.$route.name !== 'index' || this.windowTop >= 300;
     },
   },
   async mounted() {
@@ -247,7 +293,7 @@ export default {
       searchByFilterId: 'query/searchByFilterId',
       setCodes: 'query/setCodes'
     }),
-    onScroll(e) {
+    onScroll() {
       this.windowTop = window.top.scrollY; /* or: e.target.documentElement.scrollTop */
     },
     clicked(item) {
@@ -332,15 +378,6 @@ a.helpdesk-button {
   transition: background-color ease 0.2s, color ease 0.2s;
 }
 
-.nav-link {
-  opacity: 0.8;
-  padding: 3px;
-  transition: 100ms;
-}
-
-.nav-link:hover {
-  opacity: 1;
-}
 
 
 .navigation-item {
@@ -361,6 +398,33 @@ a.helpdesk-button {
   transition: all ease-in-out 200ms;
 
 
+}
+
+
+
+.nav-link {
+  position: relative;
+  opacity: 0.8;
+  padding: 3px;
+}
+
+.nav-link::before{
+  position: absolute;
+  bottom: 0;
+  content: "";
+  height: 1px;
+  width: 0;
+  background: black;
+  transition: all ease-in-out 200ms;
+}
+
+.nav-link:hover::before {
+  position: absolute;
+  bottom: 0;
+  content: "";
+  height: 1px;
+  width: 100%;
+  background: black;
 }
 
 .navigation-item:hover::before {
