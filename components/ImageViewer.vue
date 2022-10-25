@@ -4,7 +4,7 @@
         <img
           class="white shadow scale clickable d-flex align-end"
           style="max-width: 450px; max-height: 450px;"
-          :src="primaryImage.url"
+          :src="primaryImage.url.replace('http://','https://')"
           @click="!!images && images.length !== 0 ? show() : viewMode=true"
         />
         <p style="width: 0; min-width: 100%" class="text-caption text-left secondary lighten-1 pa-2 d-flex flex-column">
@@ -77,7 +77,7 @@ export default {
       return this.images?.[0] || {url: `https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${this.$route.params.id % 2 + 1}/1.jp2/full/500,/0/default.png`};
     },
     imagesWithData() {
-      return this.images.map(i => ({src: i.url, title: 'hallo'}))
+      return this.images.map(i => ({src: i.url.replace('http://','https://'), title: 'hallo'}))
     }
   },
   methods: {
