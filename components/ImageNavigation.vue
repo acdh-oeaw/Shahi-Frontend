@@ -28,7 +28,7 @@
           </ImageButton>
         </v-col>
         <v-col cols="12" sm="6">
-          <ImageButton to="/data/list?view_classes=artifact" icon="$artifact">
+          <ImageButton to="/data/list?view_classes=artifact&view_classes=place" icon="$artifact">
             Search the Database
           </ImageButton>
         </v-col>
