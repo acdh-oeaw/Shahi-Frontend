@@ -21,21 +21,24 @@
       "value": "features[0].descriptions[0].value",
       "column": "description",
       "width": "300px",
-      "visible": true
+      "visible": true,
+      "sortable": false
     },
     {
       "text": "Begin/From",
       "value": "features[0].when.timespans[0].start.earliest",
-      "column": "begin_from",
+      "column": "beginFrom",
       "width": "50px",
-      "visible": true
+      "visible": true,
+      "sortable": false
     },
     {
       "text": "End/To",
       "value": "features[0].when.timespans[0].end.earliest",
-      "column": "end_to",
+      "column": "endFrom",
       "width": "50px",
-      "visible": true
+      "visible": true,
+      "sortable": false
     },
     {
       "text": "Material",
@@ -101,21 +104,24 @@
       "value": "features[0].descriptions[0].value",
       "column": "description",
       "width": "300px",
-      "visible": true
+      "visible": true,
+      "sortable": false
     },
     {
       "text": "Begin/From",
       "value": "features[0].when.timespans[0].start.earliest",
       "column": "begin_from",
       "width": "50px",
-      "visible": true
+      "visible": true,
+      "sortable": false
     },
     {
       "text": "End/To",
       "value": "features[0].when.timespans[0].end.earliest",
       "column": "end_from",
       "width": "50px",
-      "visible": true
+      "visible": true,
+      "sortable": false
     },
     {
       "text": "Material",

@@ -34,6 +34,8 @@
       :items="itemsWithType"
       :options.sync="options"
       :server-items-length="totalItems"
+      @update:options="updateQuery"
+
       :loading="loading"
       :calculate-widths="true"
       :footer-props="{
@@ -46,13 +48,14 @@
         <tooltip-icon :text="header.description"/>
       </template>
 
-      <template v-slot:top="{ pagination, options, updateOptions }">
+      <template v-slot:top="{ pagination, options,updateOptions }">
         <v-data-footer
+          @update:options="updateOptions"
+
           :pagination="pagination"
           :options="options"
           :items-per-page-options="itemsPerPageOptions"
           show-first-last-page
-          @update:options="updateOptions"
         />
       </template>
       <template v-slot:item.features[0].properties.title="{ item }">
@@ -154,7 +157,7 @@ export default {
           sortBy: [],
           sortDesc: [],
           page: this.$route.query.page || 1,
-          itemsPerPage: this.$route.query.itemsperpage || 10,
+          itemsPerPage: this.$route.query.itemsPerPage || 10,
         };
       },
       set(newValue) {
@@ -203,7 +206,6 @@ export default {
   },
   watch: {
     getCurrentSystemClass() {
-      console.log('hejo',this.getCurrentSystemClass,);
       this.selectedHeaders = this.$store.state.app.tableheaders[this.getCurrentSystemClass]
         .filter((x) => x.visible);
     },
@@ -229,6 +231,19 @@ export default {
         query: this.getQuery,
       });
     },
+    updateQuery(options){
+      const query = {
+        page: options.page,
+        itemsPerPage: options.itemsPerPage,
+        sortBy:options.sortBy.map(x => this.getSortColumnByPath(x)),
+        sort:options.sortDesc.map(x => x ? 'desc' : 'asc')
+
+
+      }
+      console.log(query)
+      this.$router.replace({ name: this.$route.name, query: {...this.$route.query, ...query}})
+
+    }
   },
 
 };

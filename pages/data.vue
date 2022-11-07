@@ -21,7 +21,7 @@ export default {
   async fetch() {
     this.loading = true;
     const {
-      sortBy, sortDesc, page, itemsPerPage,
+      sortBy, sort, page, itemsPerPage,
     } = this.options;
     try {
       // eslint-disable-next-line no-underscore-dangle
@@ -31,8 +31,8 @@ export default {
         view_classes: this.query?.view_classes,
         search: this.query?.search,
         entities:this.query?.entities,
-        column: sortBy ? this.getSortColumnByPath(sortBy[0]) : null,
-        sort: sortDesc[0] ? 'desc' : 'asc',
+        sort: sort,
+        column: sortBy
       });
       // eslint-disable-next-line prefer-destructuring
       this.items = [];
@@ -106,10 +106,10 @@ export default {
     options: {
       get() {
         return {
-          sortBy: [],
-          sortDesc: [],
+          sortBy:  this.$route.query.sortBy || [],
+          sort: this.$route.query.sort || [],
           page: this.$route.query.page || 1,
-          itemsPerPage: this.$route.query.itemsperpage || 10,
+          itemsPerPage: this.$route.query.itemsPerPage || 10,
         };
       },
     },
