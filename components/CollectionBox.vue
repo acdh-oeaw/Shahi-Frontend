@@ -33,7 +33,7 @@
     </div>
 
     <div class="collection-image primary" :style="{'--background-image':`url(${image})`}">
-      <v-img height="100%" v-if="image" :src="image.url"/>
+      <v-img height="100%" v-if="image" :src="image.url.replace('http://','https://')"/>
     </div>
   </div>
 </template>
