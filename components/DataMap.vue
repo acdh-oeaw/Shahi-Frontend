@@ -115,7 +115,6 @@ export default {
       }));
       this.loading = false;
       this.items = localItems;
-      console.log(this.items);
     },
   },
   computed: {

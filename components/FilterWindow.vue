@@ -316,7 +316,6 @@ export default {
     },
     ...mapGetters('query', ['getCurrentSystemClass', 'getFiltersFlat']),
     currentFilters() {
-      console.log('wasgeht', this.filterElements[this.selectedClass].items)
       return this.filterElements[this.selectedClass]?.items
         ?.flatMap((y) => y.values.map(x => ({
           id: x.id, en: x.en, value: x.value, type: x.type, operator: x.logicalOperator, superType: y.en
@@ -358,7 +357,6 @@ export default {
     },
     '$store.state.app.filterelements': {
       handler() {
-        console.log('dagehtwas')
         this.filterElements = JSON.parse(
           JSON.stringify(this.$store.state.app.filterelements),
         );
