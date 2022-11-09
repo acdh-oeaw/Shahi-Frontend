@@ -28,22 +28,29 @@
       <span class="text-body-2 text--secondary ">
         See Also
       </span>
-          <nuxt-link class="text-body-2 d-block" v-for="i in seeAlso" :key="i.relationTo"
+          <nuxt-link class="text-body-2 d-block go-to-map-button" v-for="i in seeAlso" :key="i.relationTo"
                      :to="i.relationTo.split('/').at(-1)">
-            {{ i.label }} {{ i.relationSystemClass }}
+            {{ i.label }}
           </nuxt-link>
         </div>
         <div v-if="!!relatedArtifacts && relatedArtifacts.length !== 0" class="mt-auto">
 
-      <span class="text-body-2 text--secondary ">
-        Related Artifacts
+      <span class="d-block text-body-2 text--secondary mb-1" role="button" @click="expanded = !expanded">
+        Related Artifacts <v-icon :style="`rotate:${expanded ? '90deg' : '0deg'}`">mdi-chevron-right</v-icon>
       </span>
-          <nuxt-link class="text-body-2 d-block" v-for="i in relatedArtifacts" :key="i.relationTo"
-                     :to="i.relationTo.split('/').at(-1)">
-            {{ i.label }} {{ i.relationSystemClass }}
-          </nuxt-link>
+          <v-expand-transition>
+            <div v-if="expanded">
+              <v-chip label small color="secondary mr-2 mb-2" v-for="i in relatedArtifacts" :key="i.relationTo">
+                <nuxt-link class=" text-body-2 go-to-map-button"
+                           :to="i.relationTo.split('/').at(-1)">
+                  {{ i.label }}
+                </nuxt-link>
+              </v-chip>
+            </div>
+          </v-expand-transition>
         </div>
       </div>
+
     </template>
   </single-page-layout>
 </template>
@@ -52,6 +59,11 @@
 export default {
   name: "SingleArtifact",
   props: ['item'],
+  data() {
+    return {
+      expanded: false,
+    }
+  },
   methods: {
     getInventoryNumber(item) {
       return item.relations.find(x => x.relationType === "crm:P67i is referred to by" && x.label === "Inventory number")
