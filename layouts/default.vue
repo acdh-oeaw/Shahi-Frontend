@@ -2,6 +2,7 @@
   <v-app light>
     <v-expand-transition>
       <v-app-bar app style="z-index:9999" extension-height="40px" elevation="0" height="64px">
+        <v-app-bar-nav-icon @click="drawer=true" class="d-md-none"></v-app-bar-nav-icon>
         <div class="d-flex align-center justify-center" style="width: 100%">
           <nuxt-link to="/" @click="$store.commit('app/closeQueryDrawer')" class="mr-auto">
             <div class="logo caption d-none d-md-flex">
@@ -39,25 +40,22 @@
             </nuxt-link>
           </div>
         </div>
-        <template v-slot:extension>
-          <div class="d-flex align-center justify-space-between text-overline mx-1 "
-               style="  overflow: auto;white-space: nowrap;">
-            <div>
-              <div
-                v-for="(item,index) in navBarItems"
-                :key="index"
-                class="text-caption d-inline-block navigation-item"
-                @click="clicked(item)"
-              >
-                {{ item.text }}
-              </div>
-              <div
-                class="text-caption d-inline-block navigation-item ml-15"
+        <template v-if="$vuetify.breakpoint.mdAndUp" v-slot:extension>
+          <div class="d-none d-md-flex flex-wrap align-center  text-overline mx-1" style="width: 100%; overflow: auto">
+            <div
+              v-for="(item,index) in navBarItems"
+              :key="index"
+              class="text-caption d-inline-block navigation-item"
+              @click="clicked(item)"
+            >
+              {{ item.text }}
+            </div>
+            <div
+              class="text-caption d-inline-block navigation-item ml-auto"
 
-                @click="toFavs"
-              >
-                Favorites
-              </div>
+              @click="toFavs"
+            >
+              Favorites
             </div>
 
           </div>
@@ -66,6 +64,7 @@
     </v-expand-transition>
     <v-main>
       <nuxt/>
+
     </v-main>
     <div class="grey lighten-3 ">
       <div style="max-width: 1600px" class="ma-auto">
@@ -250,6 +249,47 @@
         </div>
       </div>
     </div>
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      app
+      temporary
+      style="z-index:9999999999"
+    >
+
+      <v-list>
+        <v-list-item>
+          <v-list-item-icon>
+              <v-icon @click="drawer=false">mdi-chevron-left</v-icon></v-list-item-icon>
+        </v-list-item>
+
+        <v-list-item to="/" class="">
+          <v-list-item-icon>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-icon>
+          <v-list-item-title>Home</v-list-item-title>
+        </v-list-item>
+        <v-divider></v-divider>
+
+        <v-list-item v-for="(item,index) in navBarItems"
+                     :key="index"
+                     class="text-caption"
+                     @click="clicked(item)">
+          <v-list-item-icon>
+            <v-icon>mdi-magnify</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-subtitle>{{ item.text }}</v-list-item-subtitle>
+        </v-list-item>
+        <v-list-item class="text-caption" @click="toFavs">
+          <v-list-item-icon>
+            <v-icon>mdi-star</v-icon>
+          </v-list-item-icon>
+
+          <v-list-item-subtitle>Favorites</v-list-item-subtitle>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
   </v-app>
 </template>
 <script>
@@ -306,9 +346,9 @@ export default {
       this.$router.push({
         name,
         query: {
-          view_classes:item.query.view_classes,
-          search:JSON.stringify(item.query.search),
-          page:1
+          view_classes: item.query.view_classes,
+          search: JSON.stringify(item.query.search),
+          page: 1
         },
       });
     },
@@ -383,7 +423,6 @@ a.helpdesk-button {
 }
 
 
-
 .navigation-item {
   position: relative;
   font-size: 14px !important;
@@ -405,14 +444,13 @@ a.helpdesk-button {
 }
 
 
-
 .nav-link {
   position: relative;
   opacity: 0.8;
   padding: 3px;
 }
 
-.nav-link::before{
+.nav-link::before {
   position: absolute;
   bottom: 0;
   content: "";

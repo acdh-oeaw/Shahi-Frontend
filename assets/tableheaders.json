@@ -91,6 +91,13 @@
   ],
   "artifact": [
     {
+      "text": "Class",
+      "value": "features[0].systemClass",
+      "column": "class_code",
+      "width": "20px",
+      "visible": true
+    },
+    {
       "text": "Title",
       "align": "start",
       "sortable": true,
@@ -165,6 +172,13 @@
     }
   ],
   "place": [
+    {
+      "text": "Class",
+      "value": "features[0].systemClass",
+      "column": "class_code",
+      "width": "20px",
+      "visible": true
+    },
     {
       "text": "Title",
       "align": "start",

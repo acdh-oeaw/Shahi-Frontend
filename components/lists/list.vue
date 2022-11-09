@@ -58,6 +58,23 @@
           show-first-last-page
         />
       </template>
+      <template v-slot:item.features[0].systemClass="{ item }">
+        <v-tooltip right>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon
+              color="primary"
+              dark
+              v-bind="attrs"
+              v-on="on"
+            >
+              {{getIconBySystemClass(item.features[0].systemClass).trim()}}
+            </v-icon>
+          </template>
+          <span>
+              {{ getLabelBySystemClass({ c: item.features[0].systemClass, l: 'en' }) }}
+            </span>
+        </v-tooltip>
+      </template>
       <template v-slot:item.features[0].properties.title="{ item }">
         <nuxt-link
           :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}`"
