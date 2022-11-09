@@ -22,7 +22,7 @@ export default {
   props: ['item'],
   computed: {
     seeAlso() {
-      return this.item.relations?.filter(x => ['feature', 'stratigraphic_unit'].includes(x.relationSystemClass));
+      return this.item.relations?.filter(x => x.relationType.startsWith('crm:P46'));
     }
   }
 }

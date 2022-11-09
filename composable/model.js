@@ -1,9 +1,9 @@
 export function dtoToEntity(dtoEntity){
   let item  = dtoEntity.features[0]
-  item.getType = (hierarchy) => item.types.find(x => x.hierarchy.split(' > ')[0] === hierarchy);
-  item.getTypes = (hierarchy) => item.types.filter(x => x.hierarchy.split(' > ')[0] === hierarchy);
-  item.relation = (relationType) => item.relations.find(x => x.relationType === relationType);
-  item.getRelations = (relationType) => item.relations.filter(x => x.relationType === relationType);
+  item.getType = (hierarchy) => item.types?.find(x => x.hierarchy.split(' > ')[0] === hierarchy);
+  item.getTypes = (hierarchy) => item.types?.filter(x => x.hierarchy.split(' > ')[0] === hierarchy);
+  item.relation = (relationType) => item.relations?.find(x => x.relationType === relationType);
+  item.getRelations = (relationType) => item.relations?.filter(x => x.relationType === relationType);
 
   return item;
 }

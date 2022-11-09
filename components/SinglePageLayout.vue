@@ -3,7 +3,7 @@
     <v-sheet class="secondary darken-1 ">
       <div class="page-content pa-5 ">
         <v-row no-gutters>
-          <v-col cols="12" sm="7" class="pa-3">
+          <v-col cols="12" sm="7" class="pa-3 d-flex flex-column">
             <slot :item="item" name="title">
               <p class="title-2 mb-0">
                 {{ item.properties.title }}
@@ -34,7 +34,7 @@
               </p>
             </slot>
           </v-col>
-          <v-col cols="auto" class="ma-sm-auto">
+          <v-col cols="auto" class="mt-sm-15">
             <slot :item="item" name="image">
               <ImageViewer v-if="!!images && images.length !== 0" :images="images"/>
             </slot>
@@ -102,13 +102,13 @@ export default {
   props: ['item'],
   computed: {
     types() {
-      if (!this.item.types) return [];
+      if (!this.item?.types) return [];
       return this.item.types
-        .map((x) => {
+        ?.map((x) => {
           [x.supertype] = x.hierarchy.split(' > ');
           return x;
         })
-        .reduce((r, a) => {
+        ?.reduce((r, a) => {
           r[a.supertype] = [...(r[a.supertype] || []), a];
           return r;
         }, {});
