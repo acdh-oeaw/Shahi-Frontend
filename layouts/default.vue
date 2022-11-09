@@ -297,15 +297,19 @@ export default {
       this.windowTop = window.top.scrollY; /* or: e.target.documentElement.scrollTop */
     },
     clicked(item) {
-      this.setCodes(item.systemClass);
+      this.setCodes(item.query.view_classes);
 
-      this.searchByFilterId(item.id);
+      //this.searchByFilterId(item.id);
       let name = 'data-list-q';
       if (this.$route.name.startsWith('data-')) name = this.$route.name;
 
       this.$router.push({
         name,
-        query: this.getQuery,
+        query: {
+          view_classes:item.query.view_classes,
+          search:JSON.stringify(item.query.search),
+          page:1
+        },
       });
     },
     toFavs() {

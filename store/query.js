@@ -112,7 +112,7 @@ export const actions = {
           const orBlock = content.typeIDWithSubs.map((typeID) => ({
             items: typeID.values.map((id) => getFilterDetailsFromID(id)),
             logicalOperator: 'AND',
-            logicalOperatorInside: typeID.logicalOperator.toUpperCase(),
+            logicalOperatorInside: typeID?.logicalOperator?.toUpperCase() || 'OR',
           }));
           if (orBlock.length > 0) orBlock[0].logicalOperator = 'OR';
           searchArray = [...searchArray, ...orBlock];

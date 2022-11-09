@@ -2,36 +2,157 @@
   {
     "icon": "mdi-shape",
     "text": "All Artifacts",
-    "systemClass":"artifact"
+    "systemClass": "artifact",
+    "query": {
+      "view_classes": "artifact"
+    }
   },
   {
     "icon": "mdi-account-group",
     "text": "Archaeological Sites",
-    "systemClass":"place"
+    "systemClass": [
+      "place"
+    ],
+    "query": {
+      "view_classes": [
+        "artifact",
+        "place"
+      ],
+      "search": {
+        "entitySystemClass": [
+          {
+            "operator": "equal",
+            "values": [
+              "Place"
+            ]
+          }
+        ],
+        "typeIDWithSubs": [
+          {
+            "operator": "equal",
+            "values": [
+              2667,
+              1599,
+              1087,
+              1094,
+              2362
+            ],
+            "logicalOperator": "or"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "icon": "mdi-account-group",
+    "text": "Stationary  Structures",
+    "systemClass": "artifact",
+    "id": 1095,
+    "query": {
+      "view_classes": [
+        "artifact",
+        "place"
+      ],
+      "search": {
+        "typeIDWithSubs": [
+          {
+            "operator": "equal",
+            "values": [
+              2667
+            ]
+          }
+        ]
+      }
+    }
   },
   {
     "icon": "mdi-account-group",
     "text": "Stationary  Objects",
-    "systemClass":"artifact",
-    "id": 1095
-
+    "systemClass": [
+      "artifact",
+      "place"
+    ],
+    "id": 1095,
+    "query": {
+      "view_classes": [
+        "artifact",
+        "place"
+      ],
+      "search": {
+        "typeIDWithSubs": [
+          {
+            "operator": "equal",
+            "values": [
+              1599,
+              1087,
+              1094,
+              2362
+            ],
+            "logicalOperator": "or"
+          }
+        ]
+      }
+    }
   },
   {
     "icon": "mdi-text-box",
     "text": "Portable Objects",
-    "systemClass":"artifact",
-    "id": 118
+    "systemClass": [
+      "artifact"
+    ],
+    "id": 118,
+    "query": {
+      "view_classes": "artifact",
+      "search": {
+        "typeIDWithSubs": [
+          {
+            "operator": "equal",
+            "values": [
+              118
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "icon": "mdi-map-marker",
+    "text": "Information Carries",
+    "systemClass": "artifact",
+    "id": 3,
+    "query": {
+      "view_classes": "artifact",
+      "search": {
+        "typeIDWithSubs": [
+          {
+            "operator": "equal",
+            "values": [
+              3
+            ]
+          }
+        ]
+      }
+    }
   },
   {
     "icon": "mdi-calendar",
     "text": "Coins",
-    "systemClass":"artifact",
-    "id": 108
-  },
-  {
-    "icon": "mdi-map-marker",
-    "text": "Inscriptions",
-    "systemClass":"artifact",
-    "id":3
+    "systemClass": [
+      "artifact"
+    ],
+    "id": 108,
+    "query": {
+      "view_classes": "artifact",
+      "search": {
+        "typeIDWithSubs": [
+          {
+            "operator": "equal",
+            "values": [
+              108
+            ]
+          }
+        ]
+      }
+    }
   }
 ]
