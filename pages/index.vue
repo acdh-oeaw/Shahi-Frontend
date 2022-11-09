@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ImageNavigation />
+    <ImageNavigation/>
     <div class="text-justify pa-10 page-content">
       <h1 class="title-1 font-weight-light text-left mb-10">Shahi Kingdoms Database</h1>
 
@@ -41,18 +41,20 @@
             <p class="text-h6 mt-15">(1) Archaeological sites</p>
             <p class="text-subtitle-1">1.a. Stationary structures</p>
             <ul class="text-body-2">
-              <li>Constructed</li>
-              <li>Rock-carved</li>
+              <li>constructed</li>
+              <li>rock-carved</li>
             </ul>
             <p class="text-subtitle-1">1.b. Stationary objects</p>
             <ul class="text-body-2">
-              <li>Cult object</li>
-              <li>Architectural element</li>
-              <li>Architectural decoration</li>
+              <li>cult object</li>
+              <li>architectural element</li>
+              <li>architectural decoration</li>
+              <li>clay-based</li>
+              <li>painting</li>
             </ul>
             <p
               class="primary--text go-to-map-button mt-5"
-              @click="$router.push('/data/list?view_classes=artifact&type_id=1095')"
+              @click="searchSites"
             >
               Search for sites in the database
               <v-icon class="ml-n1 mb-1">mdi-chevron-right</v-icon>
@@ -65,20 +67,22 @@
               All objects have been determined to be authentic based on our criteria for identifying
               authentic objects (see “Categories of Authenticity” below).
             </p>
-            <p class="text-subtitle-1">2.a. Statue</p>
+            <p class="text-subtitle-1">2.a. Statues</p>
             <ul class="text-body-2 mb-1">
-              <li>Metal</li>
-              <li>Clay-based</li>
-              <li>Stone</li>
-              <li>Wood</li>
+              <li>metal</li>
+              <li>clay-based</li>
+              <li>stone</li>
+              <li>wood</li>
             </ul>
-            <p class="text-subtitle-1 mb-1">2.b. Painting</p>
-            <p class="text-subtitle-1 mb-1">2.c. Coins and medals</p>
-            <p class="text-subtitle-1 mb-1">2.d. Jewelry</p>
-            <p class="text-subtitle-1 mb-1">2.e. Utensil</p>
+            <p class="text-subtitle-1">2.b. Coins and medals</p>
+            <ul class="text-body-2 mb-1">
+              <a href="#coins" class="go-to-map-button primary--text">see more below</a>
+            </ul>
+            <p class="text-subtitle-1 mb-1">2.c. Jewelry</p>
+            <p class="text-subtitle-1 mb-1">2.d. Utensil</p>
             <p
               class="primary--text go-to-map-button mt-5"
-              @click="$router.push('/data/list?view_classes=artifact&type_id=118')"
+              @click="searchPortableObjects"
             >
               Search for portable objects in the database
               <v-icon class="ml-n1 mb-1">mdi-chevron-right</v-icon>
@@ -86,7 +90,7 @@
           </div>
         </v-col>
         <v-col cols="12" sm="4" md="5">
-          <v-img contain position="center center" src="/site.jpg" />
+          <v-img contain position="center center" src="/site.jpg"/>
           <p
             class="text-caption text-left secondary lighten-1 pa-2"
           >Barikot, Swat, Photo courtesy of Luca Maria Olivieri</p>
@@ -95,37 +99,44 @@
       <v-row>
         <v-col cols="12" sm="4" md="3">
           <div>
-            <v-img position="center center" height="300px" src="/Uma_Maheshvara_Original.jpg" />
+            <v-img position="center center" height="300px" src="/Uma_Maheshvara_Original.jpg"/>
           </div>
           <p
             class="text-caption text-left secondary lighten-1 pa-2"
-          >Uma Maheshvara, Tepe Skandar, Afghanistan, excavated in Temple A, 7th century, H. 81.5 cm, Photo by courtesy of The Committee of the Kyoto University Scientific Mission to Central Asia (Institute for Research in Humanities, Kyoto University)</p>
+          >Uma Maheshvara, Tepe Skandar, Afghanistan, excavated in Temple A, 7th century, H. 81.5 cm, Photo by courtesy
+            of The Committee of the Kyoto University Scientific Mission to Central Asia (Institute for Research in
+            Humanities, Kyoto University)</p>
         </v-col>
         <v-col cols="12" sm="4" md="3">
           <div>
-            <v-img position="center center" height="300px" src="/bddhist_devotee_original.jpg" />
+            <v-img position="center center" height="300px" src="/bddhist_devotee_original.jpg"/>
           </div>
           <p
             class="text-caption text-left secondary lighten-1 pa-2"
-          >Head of a Buddhist devotee or bodhisattva, Ambaran (Akhnur), Historical Northwest India, c. 6th/7th century, Red clay, accidentally fired, 14 x 10 x 11.5 cm, Photo: © The Government Museum and Art Gallery, Chandigarh, 02961</p>
+          >Head of a Buddhist devotee or bodhisattva, Ambaran (Akhnur), Historical Northwest India, c. 6th/7th century,
+            Red clay, accidentally fired, 14 x 10 x 11.5 cm, Photo: © The Government Museum and Art Gallery, Chandigarh,
+            02961</p>
         </v-col>
         <v-col cols="12" sm="4" md="3">
           <div>
-            <v-img position="center center" height="300px" src="/Budda_original.jpg" />
+            <v-img position="center center" height="300px" src="/Budda_original.jpg"/>
           </div>
           <p
             class="text-caption text-left secondary lighten-1 pa-2"
-          >Buddha Shakyamuni and Adorants on Mount Meru, Kashmir, India c. 700, Bronze with silver and copper inlay, 33.7 x 24.1 x 12.1 cm, Photo: © The Norton Simon Foundation</p>
+          >Buddha Shakyamuni and Adorants on Mount Meru, Kashmir, India c. 700, Bronze with silver and copper inlay,
+            33.7 x 24.1 x 12.1 cm, Photo: © The Norton Simon Foundation</p>
         </v-col>
         <v-col cols="12" sm="4" md="3">
           <div>
-            <v-img position="center center" height="300px" src="/fragment_cupola_original.jpg" />
+            <v-img position="center center" height="300px" src="/fragment_cupola_original.jpg"/>
           </div>
           <p
             class="text-caption text-left secondary lighten-1 pa-2"
-          >Fragment of cupola mural painting, Kakrak, Hindu Kush, Afghanistan, early 8th century, National Museum of Afghanistan, inv. no. 05-5-122, Photo: Susanne Novotny, 2005, WHAV</p>
+          >Fragment of cupola mural painting, Kakrak, Hindu Kush, Afghanistan, early 8th century, National Museum of
+            Afghanistan, inv. no. 05-5-122, Photo: Susanne Novotny, 2005, WHAV</p>
         </v-col>
       </v-row>
+      <div id="coins" style="position: relative;top:-180px"></div>
       <p class="text-body-1">
         The largest and most significant category of artifacts are the coins struck in various
         mints throughout the Shahi kingdoms. They provide the chronological and political framework for the Shahi
@@ -158,7 +169,8 @@
           />
           <p
             class="text-caption text-left secondary lighten-1 pa-2"
-          >Chorasan Tegin Shah (after 680 – around 738 CE), Drachm (silver), minted in Kabulistan?, Photo after pro.geo.univie.ac.at/projects/khm/coins/coin105</p>
+          >Chorasan Tegin Shah (after 680 – around 738 CE), Drachm (silver), minted in Kabulistan?, Photo after
+            pro.geo.univie.ac.at/projects/khm/coins/coin105</p>
         </v-col>
         <v-col cols="12" sm="6">
           <v-img
@@ -169,7 +181,8 @@
           />
           <p
             class="text-caption text-left secondary lighten-1 pa-2"
-          >Sandan (First half of the 8th century), Drachm, minted in Zabulistan or Kabulistan, Kunsthistorisches Museum Wien, inv. no. GR 41709</p>
+          >Sandan (First half of the 8th century), Drachm, minted in Zabulistan or Kabulistan, Kunsthistorisches Museum
+            Wien, inv. no. GR 41709</p>
         </v-col>
       </v-row>
       <div class="mr-15 database-element">
@@ -193,20 +206,25 @@
 
       <v-row>
         <v-col cols="12" sm="6">
-          <v-img src="/Stone_inscription_1.png" />
+          <v-img src="/Stone_inscription_1.png"/>
           <p class="text-caption text-left secondary lighten-1 pa-2">
             A śāradā inscription from the important Shahi archaeological site Barikot (Vajirasthāna) in Swat, Pakistan.
-            The inscription mentions the Hindu Shahi king Jayapāladeva (r. c. 964-1002 CE) and the area where a Shahi temple with a water tank has been excavated.
-            Photo: after von Hinüber 2020 in Callieri and Olivieri 2020: 53, fig. 18; Courtesy Lahore Museum and ISMEO Italian Archaeological Mission in Pakistan (Photo by Cristiano Moscatelli)
+            The inscription mentions the Hindu Shahi king Jayapāladeva (r. c. 964-1002 CE) and the area where a Shahi
+            temple with a water tank has been excavated.
+            Photo: after von Hinüber 2020 in Callieri and Olivieri 2020: 53, fig. 18; Courtesy Lahore Museum and ISMEO
+            Italian Archaeological Mission in Pakistan (Photo by Cristiano Moscatelli)
           </p>
         </v-col>
         <v-col cols="12" sm="6">
-          <v-img src="/csm_Sculpture_Inscription_2_6771efcad3.jpg" />
+          <v-img src="/csm_Sculpture_Inscription_2_6771efcad3.jpg"/>
           <p class="text-caption text-left secondary lighten-1 pa-2">
             Uma Maheshvara, Tepe Skandar, Afghanistan, excavated in Temple A, 7th century, Marble, H. 81.5 cm
-            A three-line inscription of 84 Brahmi letters (incl. punctuation marks), 5.8 cm x 43 cm (inscription only), located along upper part of the pedestal of the sculpture
-            Kuwayama (2002: 226-228) explains that ‘the inscription tells us that the name Śiva is given as Maheśvara and therefore the consort takes the name Uma.’
-            Photo by courtesy of The Committee of the Kyoto University Scientific Mission to Central Asia (Institute for Research in Humanities, Kyoto University).
+            A three-line inscription of 84 Brahmi letters (incl. punctuation marks), 5.8 cm x 43 cm (inscription only),
+            located along upper part of the pedestal of the sculpture
+            Kuwayama (2002: 226-228) explains that ‘the inscription tells us that the name Śiva is given as Maheśvara
+            and therefore the consort takes the name Uma.’
+            Photo by courtesy of The Committee of the Kyoto University Scientific Mission to Central Asia (Institute for
+            Research in Humanities, Kyoto University).
           </p>
         </v-col>
       </v-row>
@@ -215,9 +233,12 @@
       >Categories of Authenticity for Objects in the Shahi Kingdoms Database</p>
 
       <p class="text-body-1">
-        Only objects that the art history team could unanimously categorize as authentic are included in the corpus of Shahi
-        visual and material culture. Strict selection criteria have been used to assess the authenticity of each object. We
-        defined three categories of authenticity. In the database, each object is identified as belonging to either category
+        Only objects that the art history team could unanimously categorize as authentic are included in the corpus of
+        Shahi
+        visual and material culture. Strict selection criteria have been used to assess the authenticity of each object.
+        We
+        defined three categories of authenticity. In the database, each object is identified as belonging to either
+        category
         A or B. Category C objects are not included.
       </p>
 
@@ -229,9 +250,11 @@
         <span class="font-weight-bold">A1</span> Secure attribution: excavated objects from a trustworthy context
       </p>
       <p class="ml-3 text-body-1">
-        <span class="font-weight-bold">A2</span> Attributable with high confidence: objects with an early accession date (prior to WWI) in regional museums in
+        <span class="font-weight-bold">A2</span> Attributable with high confidence: objects with an early accession date
+        (prior to WWI) in regional museums in
         Afghanistan, Pakistan, and India, as well as objects photographed in situ in monastic and temple treasuries in
-        India; objects bearing inscriptions that indicate authenticity; objects for which objective technical analysis has
+        India; objects bearing inscriptions that indicate authenticity; objects for which objective technical analysis
+        has
         been conducted that indicates authenticity.
       </p>
 
@@ -240,7 +263,8 @@
       </p>
 
       <p class="text-body-1">
-        Objects in private and western museum collections without secure provenance, inscriptions, or objective technical
+        Objects in private and western museum collections without secure provenance, inscriptions, or objective
+        technical
         analysis. Comparative art historical analysis suggests confidence in their authenticity.
       </p>
 
@@ -250,7 +274,8 @@
 
       <p class="text-body-1">
         These objects are not included in the corpus. However, in our study of Shahi material culture they are used for
-        comparison with apparently authentic objects in order to better understand the historiography of the field and the
+        comparison with apparently authentic objects in order to better understand the historiography of the field and
+        the
         current market situation. We are aware that other art historians may come to different conclusions in some
         instances.
       </p>
@@ -265,6 +290,14 @@ export default {
   components: {
     ImageNavigation,
   },
+  methods:{
+    searchSites(){
+      this.$router.push('/data/list?view_classes=artifact&view_classes=place&search={"entitySystemClass":[{"operator":"equal","values":["Place"]}],"typeIDWithSubs":[{"operator":"equal","values":[2667, 1599, 1087, 1094, 2362],"logicalOperator":"or"}]}')
+    },
+    searchPortableObjects(){
+      this.$router.push('/data/list?view_classes=artifact&view_classes=place&search={"typeIDWithSubs"%3A[{"operator"%3A"equal","values"%3A[118]}]}')
+    }
+  }
 };
 </script>
 
@@ -280,3 +313,4 @@ ul {
   max-width: 1200px;
 }
 </style>
+
