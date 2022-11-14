@@ -19,6 +19,24 @@
           </v-col>
         </v-row>
       </div>
+      <div v-if="!!relatedArtifacts && relatedArtifacts.length !== 0" class="mt-auto">
+
+      <span class="d-block text-body-2 text--secondary mb-1" role="button" @click="expanded = !expanded">
+        Related Artifacts <v-icon :style="`rotate:${expanded ? '90deg' : '0deg'}`">mdi-chevron-right</v-icon>
+      </span>
+        <v-expand-transition>
+          <div v-if="expanded">
+            <v-chip label small color="secondary mr-2 mb-2" v-for="i in relatedArtifacts" :key="i.relationTo">
+              <nuxt-link class=" text-body-2 go-to-map-button"
+                         :to="i.relationTo.split('/').at(-1)">
+                {{ i.label }}
+              </nuxt-link>
+            </v-chip>
+          </div>
+        </v-expand-transition>
+      </div>
+
+
       <p class="text-body-1" style="white-space: pre-line">
         {{ item.descriptions[0]?.value }}
       </p>
@@ -33,22 +51,8 @@
             {{ i.label }}
           </nuxt-link>
         </div>
-        <div v-if="!!relatedArtifacts && relatedArtifacts.length !== 0" class="mt-auto">
 
-      <span class="d-block text-body-2 text--secondary mb-1" role="button" @click="expanded = !expanded">
-        Related Artifacts <v-icon :style="`rotate:${expanded ? '90deg' : '0deg'}`">mdi-chevron-right</v-icon>
-      </span>
-          <v-expand-transition>
-            <div v-if="expanded">
-              <v-chip label small color="secondary mr-2 mb-2" v-for="i in relatedArtifacts" :key="i.relationTo">
-                <nuxt-link class=" text-body-2 go-to-map-button"
-                           :to="i.relationTo.split('/').at(-1)">
-                  {{ i.label }}
-                </nuxt-link>
-              </v-chip>
-            </div>
-          </v-expand-transition>
-        </div>
+
       </div>
 
     </template>
