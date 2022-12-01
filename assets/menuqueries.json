@@ -117,7 +117,7 @@
   },
   {
     "icon": "mdi-map-marker",
-    "text": "Information Carries",
+    "text": "Information Carrier",
     "systemClass": "artifact",
     "id": 3,
     "query": {

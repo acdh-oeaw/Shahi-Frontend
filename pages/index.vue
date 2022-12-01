@@ -49,8 +49,10 @@
               <li>cult object</li>
               <li>architectural element</li>
               <li>architectural decoration</li>
+              <ul class="mt-0">
               <li>clay-based</li>
               <li>painting</li>
+              </ul>
             </ul>
             <p
               class="primary--text go-to-map-button mt-5"
