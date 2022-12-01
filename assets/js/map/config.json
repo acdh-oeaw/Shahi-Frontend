@@ -2,10 +2,10 @@
   "map": {
     "controls": {
       "zoomlvl": true,
-      "layer": true,
+      "layers": true,
       "geonames": false,
       "locate": false,
-      "opacity": true
+      "opacities": true
     },
     "leafletOptions": {
       "maxZoom": 10,

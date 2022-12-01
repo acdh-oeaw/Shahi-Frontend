@@ -85,5 +85,8 @@ export default {
 
 <style>
 @import "@/assets/js/map/mapviewer-component.css";
-
+.clusterSymbolStyling{
+  box-sizing: unset!important;
+  color:white!important;
+}
 </style>
