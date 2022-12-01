@@ -45,7 +45,7 @@
     <v-sheet class="page-content mt-5 mb-10 px-5">
       <slot :item="item" name="details">
         <p class="title-3">Details</p>
-        <div class="type-columns" v-if="!!item.types" no-gutters>
+        <div :class="!!item.types ? 'type-columns' : ''" v-if="" no-gutters>
           <div v-for="(type, index) in types" :key="index" cols="12" sm="5">
             <div v-if="type[0].supertype !== 'Material composition' || type.every(x => x.value !== 0)"
                  class="type-column">
@@ -62,14 +62,15 @@
 
             </div>
           </div>
+
           <div class="single-map" v-if="!!item.geometry && !!item.geometry.coordinates">
-            <qmap :geojsonitems="[item]"/>
-            <nuxt-link class="primary--text go-to-map-button" to="/data/map?view_classes=place&view_classes=artifact">
-              Discover on Map
+            <qmap :center="mapCenter" :geojsonitems="[item]"/>
+            <v-btn text class="primary--text go-to-map-button ml-0 pl-0" @click=backToMap()>
+              Back to Map
               <v-icon class="ml-n1">
                 mdi-chevron-right
               </v-icon>
-            </nuxt-link>
+            </v-btn>
           </div>
         </div>
       </slot>
@@ -118,6 +119,12 @@ export default {
     },
     bibliography(){
       return this.item?.relations.filter(x => x.relationSystemClass	=== "bibliography")
+    },
+    mapCenter(){
+      if(!this.item?.geometry?.coordinates) return undefined;
+      if(Array.isArray( this.item?.geometry?.coordinates[0])) return undefined;
+      return [this.item?.geometry?.coordinates[1],this.item?.geometry?.coordinates[0]]
+
     }
   },
 
@@ -125,6 +132,15 @@ export default {
     this.closeAll();
   },
   methods: {
+    backToMap(){
+      this.$router.push({
+        path:"/data/map",
+        query:{
+          view_classes:["place","artifact"],
+          center:this.mapCenter
+        }
+      })
+    },
     scrollMeTo(refName) {
       const el = this.$el.getElementsByClassName(refName)[0];
       el?.scrollIntoView({behavior: 'smooth', block: 'end'});

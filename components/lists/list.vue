@@ -257,7 +257,6 @@ export default {
 
 
       }
-      console.log(query)
       this.$router.replace({ name: this.$route.name, query: {...this.$route.query, ...query}})
 
     }

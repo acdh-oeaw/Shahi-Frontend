@@ -342,12 +342,14 @@ export default {
       //this.searchByFilterId(item.id);
       let name = 'data-list-q';
       if (this.$route.name.startsWith('data-')) name = this.$route.name;
-
+      const search = Array.isArray(item.query.search) ?
+        item.query.search.map(x => JSON.stringify(x))
+        : JSON.stringify(item.query.search)
       this.$router.push({
         name,
         query: {
           view_classes: item.query.view_classes,
-          search: JSON.stringify(item.query.search),
+          search,
           page: 1
         },
       });

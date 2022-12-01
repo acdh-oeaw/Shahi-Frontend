@@ -81,6 +81,7 @@ export default {
       handler() {
         // this.itemIndex = [];
         // this.options.page = 1;
+        if(this.$route.name === "data-map-q") return;
         this.$fetch();
       },
       deep: true,

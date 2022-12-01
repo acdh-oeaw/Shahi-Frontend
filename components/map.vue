@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import MapViewerComponent from '@/assets/js/map/mapviewer.js';
+
 import {mapActions, mapGetters} from 'vuex';
 import config from '../assets/js/map/config.json';
 
@@ -15,10 +15,15 @@ export default {
       type: Array,
       default: () => [],
     },
+    center:{
+      type:Array,
+      default: () => undefined,
+    }
   },
   data() {
     return {
       map: undefined,
+      MapViewerComponent:undefined,
     };
   },
   computed: {
@@ -47,31 +52,30 @@ export default {
   },
   mounted() {
     this.$nextTick(function () {
+      this.MapViewerComponent = require('../assets/js/map/mapviewer-component')
       const coreComponent = document.getElementById('map-container');
-      this.map = new MapViewerComponent(coreComponent, config,this.correctDataFormat.features.length !== 0 ? this.correctDataFormat : {
+      const conf = JSON.parse(JSON.stringify(config));
+      if(this.center || this.$route.query?.center) {
+        conf.map.leafletOptions.center = this.center || this.$route.query?.center?.map(x => parseFloat(x));
+        conf.map.leafletOptions.zoom = 9;
+      }
+
+      this.map = new this.MapViewerComponent(coreComponent, conf,this.correctDataFormat.features.length !== 0 ? this.correctDataFormat : {
         "type": "FeatureCollection",
         "features": [
-          {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-              "type": "Point",
-              "coordinates": [
-                66.37939453125,
-                32.38923910985902
-              ]
-            }
-          },
+
         ]
       });
       this.map.on('init', (el) => {
       });
+      const routeToPath = (path) => this.$router.push(path);
+      this.map.on('featureLink', (el) => {
+        if(el) routeToPath(el)
+      });
       this.map.on('featureSelected', (el) => {
-        //console.log('[mapviewer-component event: feature selected]:', el);
       });
       this.map.on('mapStateChanged', (el) => {
         if (el) {
-        //  console.log(`[mapviewer-component event: mapStateChanged]: ${JSON.stringify(el)}`);
         }
       });
     });
@@ -80,6 +84,6 @@ export default {
 </script>
 
 <style>
-@import "@/assets/js/map/mapviewer.css";
+@import "@/assets/js/map/mapviewer-component.css";
 
 </style>

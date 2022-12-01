@@ -48,6 +48,7 @@ export default {
   },
   data() {
     return {
+      query:{},
       showPolygons: false,
       useTimeline: false,
       loading: false,
@@ -77,32 +78,30 @@ export default {
   },
   methods: {
     ...mapActions('entity', ['addToPlaces', 'addToArtifacts', 'setArtifactsLoaded', 'setPlacesLoaded']),
+    ...mapActions('map', ['saveGeoItems']),
     dateStringToYear(date) {
       return parseInt(date?.split('-')[0], 10);
     },
     async loadArtifacts() {
       if (this.loading) return;
       this.loading = true;
+      const localItems = (this.isSearchForAll &&this.isAlreadyLoaded) ?
+        this.getGeoData :
+        await this.loadAllFromApi()
+      this.loading = false;
+      this.items = localItems;
+    },
+    async loadAllFromApi(){
       let localItems = [];
+
       const p = await this.$api.Entities.get_api_0_3_query_({
-        view_classes: this.customQuery?.view_classes || this.getQuery?.view_classes,
-        search: this.customQuery?.search || this.getQuery?.search,
-        limit: 100,
+        view_classes: this.customQuery?.view_classes || this.query?.view_classes,
+        search: this.customQuery?.search || this.query?.search,
+        limit: 0,
         page: 1,
         show: ['when','geometry']
       });
 
-      await Promise.all(Array.from({ length: p.body.pagination.totalPages }, async (x, i) => {
-        const q = await this.$api.Entities.get_api_0_3_query_({
-          view_classes: this.getQuery?.view_classes,
-          search: this.getQuery?.search,
-          limit: 100,
-          page: i,
-          show: ['when','geometry']
-
-        });
-        localItems = [...localItems, ...q.body.results.map((x) => x.features[0])];
-      }));
 
       localItems = [...localItems, ...p.body.results.map((x) => x.features[0])];
       localItems = localItems.map((x) => ({
@@ -113,13 +112,19 @@ export default {
           linkTitle: `<span class="text-body-1">${x.properties.title}</span> <br/> <span class="map-detail-link text-body-2">Details</span>`,
         },
       }));
-      this.loading = false;
-      this.items = localItems;
-    },
+      if(this.isSearchForAll) this.saveGeoItems(localItems);
+      return localItems
+    }
   },
   computed: {
     ...mapGetters('entity', ['getPlaces', 'getArtifacts', 'getArtifactsLoaded', 'getPlaceLoaded']),
     ...mapGetters('query', ['getQuery']),
+    ...mapGetters('map', ['isAlreadyLoaded',"getGeoData"]),
+    isSearchForAll(){
+      return (this.customQuery?.search || this.query?.search || [])?.length === 0
+      && (this.customQuery?.view_classes || this.query?.view_classes) !== 'artifact'
+      && (this.customQuery?.view_classes || this.query?.view_classes) !== 'place'
+    },
     visibleArtifacts() {
       const year = (this.time + 1) * 100;
       const localItems = this.items.filter((x) => this.showPolygons || x?.geometry?.type !== 'Polygon');
@@ -131,11 +136,17 @@ export default {
   },
 
   watch: {
-    getQuery: {
+    '$route.query': {
       handler(s) {
-        this.loadArtifacts();
+        this.query = s;
       },
       immediate: true,
+      deep: true,
+    },
+    query: {
+      handler() {
+        this.loadArtifacts();
+      },
       deep: true,
     },
   },

@@ -10,8 +10,8 @@
     "leafletOptions": {
       "maxZoom": 10,
       "minZoom": 7,
-      "zoom": 8,
-      "center": [32.20815, 67.92847]
+      "zoom": 7,
+      "center": [34.683333,69.683333]
     }
   }
 }

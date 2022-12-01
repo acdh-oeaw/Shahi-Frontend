@@ -18,7 +18,7 @@
         "artifact",
         "place"
       ],
-      "search": {
+      "search": [{
         "entitySystemClass": [
           {
             "operator": "equal",
@@ -26,8 +26,8 @@
               "Place"
             ]
           }
-        ],
-        "typeIDWithSubs": [
+        ]},
+        {"typeIDWithSubs": [
           {
             "operator": "equal",
             "values": [
@@ -39,10 +39,10 @@
             ],
             "logicalOperator": "or"
           }
-        ]
+        ]}]
       }
     }
-  },
+  ,
   {
     "icon": "mdi-account-group",
     "text": "Stationary  Structures",

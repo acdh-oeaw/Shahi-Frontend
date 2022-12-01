@@ -15,7 +15,6 @@ export default {
         id_: this.id,
       });
       // eslint-disable-next-line prefer-destructuring
-      console.log(p.body)
       this.bib = p.body?.features[0]?.descriptions?.[0]?.value
     } catch (err) {
       console.log(err);

@@ -366,7 +366,6 @@ export default {
     },
     '$store.state.query.filters': {
       handler() {
-        console.log(this.getCurrentSystemClass, this.f)
         this.filterElements[0].items.forEach((item) => {
           item.values.forEach((value) => {
             const match = this.getFiltersFlat.find((setFilter) => setFilter.id === value.id);
