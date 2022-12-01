@@ -1,3 +1,18 @@
+/*!*********************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/attributionCustom.css ***!
+  \*********************************************************************************/
+.mapviewer-map .leaflet-control-attribution-display {
+  font-size: 150%;
+  line-height: 30px;
+  text-align: center;
+  display: inline-block;
+  background-color: white;
+  
+}
+
+/*!***************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/zoomDisplay.css ***!
+  \***************************************************************************/
 .mapviewer-map .leaflet-control-zoom-display {
   width: 30px;
   height: 30px;
@@ -7,11 +22,16 @@
   background-color: white;
 }
 
+/*!***************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/controlMenu.css ***!
+  \***************************************************************************/
 .leaflet-control-menu .leaflet-control-menu-content {
-    margin-top: -1px;
+    margin-top: 0px;
     margin-left: 36px;
+    /* height: 28px; */
     position: fixed;
     padding: 15px;
+    padding-bottom: 10px;
     width: auto;
     background-color: white;
     display: block;
@@ -21,10 +41,14 @@
     display: none;
 }
 
+.leaflet-control-menu .leaflet-control-menu-content p {
+    margin: 0.5em 0;
+}
+
 .leaflet-control-menu-content-header {
     font-size: 100%;
     font-weight: 800;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #494b4e;
     text-transform: uppercase;
 }
 
@@ -41,6 +65,7 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
+    color: #494b4e;
 }
 
 .leaflet-control-menu.control-layers input, .leaflet-control-menu.control-grids input {
@@ -82,6 +107,7 @@
 
 .leaflet-control-menu.control-layers .control-layers-header-images {
     margin-left: 10px;
+    margin-top: -5px;
     float: right;
 }
 
@@ -91,7 +117,7 @@
 
 .multiply-control {
     padding-top: 5px;
-    border-top: 1.25px solid black
+    border-top: 1px solid #494b4e;
 }
 
 /* ###################################### */
@@ -99,6 +125,57 @@
 /* Opacity Control */
 
 /* ###################################### */
+
+/* created with http://danielstern.ca/range.css/?ref=css-tricks#/ */
+
+input[type=range] {
+    width: 100%;
+    margin: 11px 0;
+    background-color: transparent;
+    -webkit-appearance: none;
+  }
+
+  .layer-control-opacity {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px !important;
+    border-radius: 6px;
+    -webkit-box-shadow: inset 0px 0px 0px 1.5px rgba(73,75,78,1);
+    -moz-box-shadow: inset 0px 0px 0px 1.5px rgba(73,75,78,1);
+    box-shadow: inset 0px 0px 0px 1.5px rgba(73,75,78,1);
+    background-color: white;
+  }
+  
+  .layer-control-opacity::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1.5px solid #494b4e;
+    border-radius: 0px;
+    box-sizing: content-box;
+    background-color: #c9caca;
+    cursor: pointer;
+    z-index: 9999999;
+  }
+  .layer-control-opacity::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    border: 1.5px solid #494b4e;
+    border-radius: 0px;
+    background-color: #c9caca;
+    cursor: pointer;
+  }
+
+  /*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
+  how to remove the virtical space around the range input in IE*/
+  @supports (-ms-ime-align:auto) {
+    /* Pre-Chromium Edge only styles, selector taken from hhttps://stackoverflow.com/a/32202953/7077589 */
+    input[type=range] {
+      margin: 0;
+      /*Edge starts the margin from the thumb, not the track as other browsers do*/
+    }
+  }  
 
 .opacity-control .leaflet-control-menu-content-body {
     margin-top: 0px;
@@ -110,6 +187,35 @@
 
 .layer-control-opacity {
     direction: rtl
+}
+
+.leaflet-bar.leaflet-control-menu-content.bottomleft {
+    margin-top: 24px;
+}
+
+.opacity-control {
+    height: 28px;
+}
+
+.leaflet-control-menu-content-body > div:nth-child(1) {
+    padding-left: 7px;
+    padding-right: 10px;
+}   
+
+/* ###################################### */
+
+/* vetorLayer Control */
+
+/* ###################################### */
+#chooseJson { 
+    border-top: 1px solid black;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#clearMapContainer {
+    border-top: 1px solid black;
+    padding-top: 5px;
 }
 
 /* ###################################### */
@@ -153,7 +259,7 @@
 }
 
 .gpx-type {
-    width: 12px;
+    width: 15px;
     height: 12px;
 }
 
@@ -193,6 +299,167 @@
 .elevCoords .leaflet-control-menu-content-body {
     margin: 0px !important;
 }
+
+/* ###################################### */
+
+/* Cluster Control */
+
+/* ###################################### */
+.leaflet-control-cluster a {
+    background-color:white;
+}
+.leaflet-control-cluster.active a {
+    /* background-color:#B2B2DC; */
+    background-color:white !important;
+}
+.edit a{
+    background-color: rgb(203, 123, 123, 0.5) !important;
+}
+/* .done a{
+    background-color: rgba(123, 203, 152, 0.5) !important;
+} */
+
+/* Cluster Styling */
+.clusterSymbolStyling {
+    width: 30px !important;
+    height: 30px !important;
+    margin-left: -19.5px !important;
+    margin-top: -19.5px !important;
+    line-height: 30px;
+    color: white;
+    font-weight: bold;
+    border: 5px solid #ffffff40;
+    border-radius: 20px;
+    background-color: #E0211C;
+    text-align: center;
+    font-size: 12px;
+    opacity: 0.9 !important;
+}
+
+.clusterSymbolStyling_click { /* not in use yet */
+    width: 30px !important;
+    height: 30px !important;
+    margin-left: -19.5px !important;
+    margin-top: -19.5px !important;
+    line-height: 30px;
+    color: white;
+    font-weight: bold;
+    border: 5px solid #ffffff40;
+    border-radius: 20px;
+    background-color: #E0211C;
+    text-align: center;
+    font-size: 12px;
+    opacity: 0.3 !important;
+}
+
+/* ########### */
+
+.leaflet-touch .leaflet-bar a:last-child {
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+/* ###################################### */
+
+/* Controller placing */
+
+/* ###################################### */
+
+/* .topleft {
+
+} */
+
+.topright {
+    right: 250px;
+}
+
+.bottomleft {
+    transform: translateY(-87%);
+}
+
+.bottomright {
+    transform: translate(calc(-100% - 10px), -87%);
+    margin-left: 0 !important;
+}
+
+.mapviewer-component .leaflet-right {
+    height: auto !important;
+    padding-bottom: 30px;
+}
+
+.fixed {
+    position: fixed;
+    top: 52px;
+    left: 46px;
+    margin-left: 0px !important;
+    right: auto;
+}
+/*!*********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css ***!
+  \*********************************************************************************************************************/
+.marker-cluster-small {
+	background-color: rgba(181, 226, 140, 0.6);
+	}
+.marker-cluster-small div {
+	background-color: rgba(110, 204, 57, 0.6);
+	}
+
+.marker-cluster-medium {
+	background-color: rgba(241, 211, 87, 0.6);
+	}
+.marker-cluster-medium div {
+	background-color: rgba(240, 194, 12, 0.6);
+	}
+
+.marker-cluster-large {
+	background-color: rgba(253, 156, 115, 0.6);
+	}
+.marker-cluster-large div {
+	background-color: rgba(241, 128, 23, 0.6);
+	}
+
+	/* IE 6-8 fallback colors */
+.leaflet-oldie .marker-cluster-small {
+	background-color: rgb(181, 226, 140);
+	}
+.leaflet-oldie .marker-cluster-small div {
+	background-color: rgb(110, 204, 57);
+	}
+
+.leaflet-oldie .marker-cluster-medium {
+	background-color: rgb(241, 211, 87);
+	}
+.leaflet-oldie .marker-cluster-medium div {
+	background-color: rgb(240, 194, 12);
+	}
+
+.leaflet-oldie .marker-cluster-large {
+	background-color: rgb(253, 156, 115);
+	}
+.leaflet-oldie .marker-cluster-large div {
+	background-color: rgb(241, 128, 23);
+}
+
+.marker-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+	}
+.marker-cluster div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	text-align: center;
+	border-radius: 15px;
+	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	}
+.marker-cluster span {
+	line-height: 30px;
+	}
+/*!********************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/leaflet-geonames/L.Control.Geonames.css ***!
+  \********************************************************************************************************/
 .leaflet-top.leaflet-center {
     left: 10px;
     right: 10px;
@@ -309,6 +576,9 @@
         transform: rotate(359deg)
     }
 }
+/*!*****************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/leaflet/dist/leaflet.css ***!
+  \*****************************************************************************************/
 /* required styles */
 
 .leaflet-pane,
@@ -356,7 +626,10 @@
 	}
 /* .leaflet-container svg: reset svg max-width decleration shipped in Joomla! (joomla.org) 3.x */
 /* .leaflet-container img: map is broken in FF if you have max-width: 100% on tiles */
-.leaflet-container .leaflet-overlay-pane svg,
+.leaflet-container .leaflet-overlay-pane svg {
+	max-width: none !important;
+	max-height: none !important;
+	}
 .leaflet-container .leaflet-marker-pane img,
 .leaflet-container .leaflet-shadow-pane img,
 .leaflet-container .leaflet-tile-pane img,
@@ -364,6 +637,8 @@
 .leaflet-container .leaflet-tile {
 	max-width: none !important;
 	max-height: none !important;
+	width: auto;
+	padding: 0;
 	}
 
 .leaflet-container.leaflet-touch-zoom {
@@ -477,9 +752,6 @@
 
 /* zoom and fade animations */
 
-.leaflet-fade-anim .leaflet-tile {
-	will-change: opacity;
-	}
 .leaflet-fade-anim .leaflet-popup {
 	opacity: 0;
 	-webkit-transition: opacity 0.2s linear;
@@ -494,9 +766,10 @@
 	    -ms-transform-origin: 0 0;
 	        transform-origin: 0 0;
 	}
-.leaflet-zoom-anim .leaflet-zoom-animated {
+svg.leaflet-zoom-animated {
 	will-change: transform;
-	}
+}
+
 .leaflet-zoom-anim .leaflet-zoom-animated {
 	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
 	   -moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
@@ -562,13 +835,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 .leaflet-container {
 	background: #ddd;
-	outline: 0;
+	outline-offset: 1px;
 	}
 .leaflet-container a {
 	color: #0078A8;
-	}
-.leaflet-container a.leaflet-active {
-	outline: 2px solid orange;
 	}
 .leaflet-zoom-box {
 	border: 2px dotted #38f;
@@ -578,7 +848,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 /* general typography */
 .leaflet-container {
-	font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 1.5;
 	}
 
 
@@ -588,8 +861,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
 	border-radius: 4px;
 	}
-.leaflet-bar a,
-.leaflet-bar a:hover {
+.leaflet-bar a {
 	background-color: #fff;
 	border-bottom: 1px solid #ccc;
 	width: 26px;
@@ -606,7 +878,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	background-repeat: no-repeat;
 	display: block;
 	}
-.leaflet-bar a:hover {
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
 	background-color: #f4f4f4;
 	}
 .leaflet-bar a:first-child {
@@ -659,12 +932,12 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	border-radius: 5px;
 	}
 .leaflet-control-layers-toggle {
-	background-image: url(./assets/layers.png);
+	background-image: url(917f2af27772fce79b7e.png);
 	width: 36px;
 	height: 36px;
 	}
 .leaflet-retina .leaflet-control-layers-toggle {
-	background-image: url(./assets/layers-2x.png);
+	background-image: url(bfc85a7e2ff7a7daa42c.png);
 	background-size: 26px 26px;
 	}
 .leaflet-touch .leaflet-control-layers-toggle {
@@ -696,6 +969,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	}
 .leaflet-control-layers label {
 	display: block;
+	font-size: 13px;
+	font-size: 1.08333em;
 	}
 .leaflet-control-layers-separator {
 	height: 0;
@@ -704,8 +979,8 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	}
 
 /* Default icon URLs */
-.leaflet-default-icon-path {
-	background-image: url(./assets/marker-icon.png);
+.leaflet-default-icon-path { /* used only in path-guessing heuristic, see L.Icon.Default */
+	background-image: url(311294c838cf73d11a8c.png);
 	}
 
 
@@ -713,23 +988,24 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 .leaflet-container .leaflet-control-attribution {
 	background: #fff;
-	background: rgba(255, 255, 255, 0.7);
+	background: rgba(255, 255, 255, 0.8);
 	margin: 0;
 	}
 .leaflet-control-attribution,
 .leaflet-control-scale-line {
 	padding: 0 5px;
 	color: #333;
+	line-height: 1.4;
 	}
 .leaflet-control-attribution a {
 	text-decoration: none;
 	}
-.leaflet-control-attribution a:hover {
+.leaflet-control-attribution a:hover,
+.leaflet-control-attribution a:focus {
 	text-decoration: underline;
 	}
-.leaflet-container .leaflet-control-attribution,
-.leaflet-container .leaflet-control-scale {
-	font-size: 11px;
+.leaflet-control-attribution svg {
+	display: inline !important;
 	}
 .leaflet-left .leaflet-control-scale {
 	margin-left: 5px;
@@ -742,7 +1018,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	border-top: none;
 	line-height: 1.1;
 	padding: 2px 5px 1px;
-	font-size: 11px;
 	white-space: nowrap;
 	overflow: hidden;
 	-moz-box-sizing: border-box;
@@ -785,17 +1060,22 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	border-radius: 12px;
 	}
 .leaflet-popup-content {
-	margin: 13px 19px;
-	line-height: 1.4;
+	margin: 13px 24px 13px 20px;
+	line-height: 1.3;
+	font-size: 13px;
+	font-size: 1.08333em;
+	min-height: 1px;
 	}
 .leaflet-popup-content p {
-	margin: 18px 0;
+	margin: 17px 0;
+	margin: 1.3em 0;
 	}
 .leaflet-popup-tip-container {
 	width: 40px;
 	height: 20px;
 	position: absolute;
 	left: 50%;
+	margin-top: -1px;
 	margin-left: -20px;
 	overflow: hidden;
 	pointer-events: none;
@@ -806,6 +1086,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	padding: 1px;
 
 	margin: -10px auto 0;
+	pointer-events: auto;
 
 	-webkit-transform: rotate(45deg);
 	   -moz-transform: rotate(45deg);
@@ -822,19 +1103,18 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	position: absolute;
 	top: 0;
 	right: 0;
-	padding: 4px 4px 0 0;
 	border: none;
 	text-align: center;
-	width: 18px;
-	height: 14px;
-	font: 16px/14px Tahoma, Verdana, sans-serif;
-	color: #c3c3c3;
+	width: 24px;
+	height: 24px;
+	font: 16px/24px Tahoma, Verdana, sans-serif;
+	color: #757575;
 	text-decoration: none;
-	font-weight: bold;
 	background: transparent;
 	}
-.leaflet-container a.leaflet-popup-close-button:hover {
-	color: #999;
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus {
+	color: #585858;
 	}
 .leaflet-popup-scrolled {
 	overflow: auto;
@@ -851,9 +1131,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
 	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
 	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
-	}
-.leaflet-oldie .leaflet-popup-tip-container {
-	margin-top: -1px;
 	}
 
 .leaflet-oldie .leaflet-control-zoom,
@@ -889,7 +1166,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	pointer-events: none;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
 	}
-.leaflet-tooltip.leaflet-clickable {
+.leaflet-tooltip.leaflet-interactive {
 	cursor: pointer;
 	pointer-events: auto;
 	}
@@ -950,6 +1227,19 @@ svg.leaflet-image-layer.leaflet-interactive path {
 	border-right-color: #fff;
 	}
 
+/* Printing */
+	
+@media print {
+	/* Prevent printers from removing background-images of controls. */
+	.leaflet-control {
+		-webkit-print-color-adjust: exact;
+		color-adjust: exact;
+		}
+	}
+
+/*!*******************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/map.css ***!
+  \*******************************************************************/
 .mapviewer-component-map {
     margin: 0;
     padding: 0;
@@ -958,7 +1248,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 .mapviewer-component-map .leaflet-overlay-pane {
-    mix-blend-mode: multiply;
+    mix-blend-mode: normal;
 }
 .mapviewer-component .leaflet-control-layers-base label.disabled {
     display: none;
@@ -983,6 +1273,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
     border: inherit;
     border-radius: 0;
     background: white;
+    color: #494b4e;
 }
 .mapviewer-component .leaflet-touch .leaflet-bar a:first-child {
     border-top: none;
@@ -1010,7 +1301,7 @@ svg.leaflet-image-layer.leaflet-interactive path {
 .mapviewer-component  .leaflet-control-zoom-display {
     width: 28px;
     height: 28px;
-    font-size: 150%;
+    font-size: 115%;
     line-height: 30px;
     text-align: center;
 }
@@ -1097,9 +1388,9 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 
 .leaflet-geonames-icon {
-    background: transparent no-repeat center center;
-    /*src: https://material.io/icons/#ic_search*/
-    background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPHBhdGggZD0iTTE1LjUgMTRoLS43OWwtLjI4LS4yN0MxNS40MSAxMi41OSAxNiAxMS4xMSAxNiA5LjUgMTYgNS45MSAxMy4wOSAzIDkuNSAzUzMgNS45MSAzIDkuNSA1LjkxIDE2IDkuNSAxNmMxLjYxIDAgMy4wOS0uNTkgNC4yMy0xLjU3bC4yNy4yOHYuNzlsNSA0Ljk5TDIwLjQ5IDE5bC00Ljk5LTV6bS02IDBDNy4wMSAxNCA1IDExLjk5IDUgOS41UzcuMDEgNSA5LjUgNSAxNCA3LjAxIDE0IDkuNSAxMS45OSAxNCA5LjUgMTR6Ii8+ICAgIDxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=);
+    background-repeat: no-repeat;
+    background-size: 28px 28px;    /*src: https://material.io/icons/#ic_search*/
+    /* background-image: url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjMDAwMDAwIiBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPHBhdGggZD0iTTE1LjUgMTRoLS43OWwtLjI4LS4yN0MxNS40MSAxMi41OSAxNiAxMS4xMSAxNiA5LjUgMTYgNS45MSAxMy4wOSAzIDkuNSAzUzMgNS45MSAzIDkuNSA1LjkxIDE2IDkuNSAxNmMxLjYxIDAgMy4wOS0uNTkgNC4yMy0xLjU3bC4yNy4yOHYuNzlsNSA0Ljk5TDIwLjQ5IDE5bC00Ljk5LTV6bS02IDBDNy4wMSAxNCA1IDExLjk5IDUgOS41UzcuMDEgNSA5LjUgNSAxNCA3LjAxIDE0IDkuNSAxMS45OSAxNCA5LjUgMTR6Ii8+ICAgIDxwYXRoIGQ9Ik0wIDBoMjR2MjRIMHoiIGZpbGw9Im5vbmUiLz48L3N2Zz4=); */
 }
 
 .leaflet-geonames-icon-working {
@@ -1108,6 +1399,37 @@ svg.leaflet-image-layer.leaflet-interactive path {
     animation: spin 2s infinite linear;
 }
 
+.leaflet-control-locate a {
+    background-repeat: no-repeat;
+    background-size: 28px 28px;
+}
+.leaflet-control-locate.active a,
+.leaflet-control-cluster.active a {
+    background-color:#B2B2DC;
+    background-repeat: no-repeat;
+    background-size: 28px 28px;
+}
+
+.leaflet-control-zoom-out, .leaflet-control-zoom-in {
+    font-weight: 100;
+}
+
+
+.featureLink {
+    background-color: white;
+    border: 0px;
+    text-decoration: underline;
+    padding: 0;
+    cursor: pointer;
+}
+
+.featureLink:hover {
+    opacity: 0.8; 
+}
+  
+/*!***********************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/css/default.css ***!
+  \***********************************************************************/
 .mapviewer-component {
     margin: 0;
     padding: 0;
@@ -1119,67 +1441,3 @@ div.mapviewer-component .material-icons {
     text-align: center !important;
     font-size: 20px !important;
 }
-
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Material Icons'), local('MaterialIcons-Regular'), url(./assets/MaterialIcons-Regular.woff2) format('woff2'), url(./assets/MaterialIcons-Regular.woff) format('woff'), url(./assets/MaterialIcons-Regular.ttf) format('truetype');
-}
-
-.material-icons {
-  direction: ltr;
-  display: inline-block;
-  font-family: 'Material Icons';
-  font-feature-settings: 'liga';
-  font-style: normal;
-  font-size: 24px;
-  font-weight: normal;
-  letter-spacing: normal;
-  line-height: 1;
-  text-rendering: optimizeLegibility;
-  text-transform: none;
-  white-space: nowrap;
-  word-wrap: normal;
-
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-feature-settings: 'liga';
-  -webkit-font-smoothing: antialiased;
-}
-@font-face {
-  font-family: 'Material Icons';
-  font-style: normal;
-  font-weight: 400;
-  src: url(./assets/MaterialIcons-Regular.eot); /* For IE6-8 */
-  src: local('Material Icons'),
-       local('MaterialIcons-Regular'),
-       url(./assets/MaterialIcons-Regular.woff2) format('woff2'),
-       url(./assets/MaterialIcons-Regular.woff) format('woff'),
-       url(./assets/MaterialIcons-Regular.ttf) format('truetype');
-}
-
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
-  display: inline-block;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
-  font-feature-settings: 'liga';
-}
-
