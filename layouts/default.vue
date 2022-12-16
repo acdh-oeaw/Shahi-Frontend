@@ -117,8 +117,11 @@
                 <br>
                 1090 Vienna
               </p>
-              <p class="text-body-2">
-                T: +43 1 4277 42323
+              <p class="text-body-2 mb-0">
+                <a href="https://shahimaterialculture.univie.ac.at/">https://shahimaterialculture.univie.ac.at/</a>
+              </p>
+              <p class="text-body-2 mt-0">
+                <a href="mailto:fwf.shahi.project@gmail.com">fwf.shahi.project@gmail.com</a>
               </p>
             </div>
           </v-col>

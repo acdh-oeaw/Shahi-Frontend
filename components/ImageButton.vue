@@ -6,7 +6,7 @@
   >
     <div style="position: relative; width: 100%; height: 100%">
       <div class="btn-icon" v-if="icon">
-        <v-icon  size="140">
+        <v-icon  size="120">
       {{ icon }}
       </v-icon>
       </div>
@@ -36,7 +36,7 @@ export default {
   margin: 10px 10px;
   background-color: rgba(255, 255, 255, 0.5) !important;
   transition: all 100ms linear;
-  min-height: 80px;
+  min-height: 70px;
 
 }
 

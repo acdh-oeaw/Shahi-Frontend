@@ -2,26 +2,20 @@
   <v-img
     :height="$vuetify.breakpoint.xs ? '50vh' : '100%'"
     style="background: linear-gradient(to bottom, #727076 0%, #dbdad8 100%);"
-    :src="$vuetify.breakpoint.xs ? '' : '/header.png'"
-    class="block"
+    :src="$vuetify.breakpoint.mdAndUp ? '/header.jpg' : ''"
+    class="d-flex align-center"
   >
+    <div style="max-width: 700px" class="ma-auto">
+    <p class="text-center mb-1" :class="title"  style="color: #423f35" >Cultural Formation and Transformation:
+    </p>
+    <p class="title-3 text-center mt-0" style="font-size: 1.6em"> Art and Architecture from Afghanistan to the West Tibetan Frontier at the Dawn of the Islamic Era
+    </p>
     <div :class="{'navigation-btns': $vuetify.breakpoint.smAndUp}">
       <v-row
         no-gutters
-        class="d-flex justify-center"
+        class="d-flex justify-center mt-15"
       >
-        <v-col
-          cols="12"
-          class="d-flex align-center align-sm-start justify-center justify-sm-end "
-        >
-          <div
-            class="image-header text-h3 text-center pa-2 mt-10 hidden-sm-and-up"
-          >
-            <p class="text-h3">
-              Shahi Kingdoms Database
-            </p>
-          </div>
-        </v-col>
+
         <v-col cols="12" sm="6">
           <ImageButton to="/data/map?view_classes=place&view_classes=artifact" icon="mdi-map-marker">
             Explore the Map
@@ -32,7 +26,23 @@
             Search the Database
           </ImageButton>
         </v-col>
+        <v-col cols="12" sm="4">
+          <ImageButton to="/collections" style="min-height: 50px">
+            Collections
+          </ImageButton>
+        </v-col>
+        <v-col cols="12" sm="4">
+          <ImageButton to="/sourcebook" style="min-height: 50px">
+            Sourcebook
+          </ImageButton>
+        </v-col>
+        <v-col cols="12" sm="4">
+          <ImageButton to="/team" style="min-height: 50px">
+            Team
+          </ImageButton>
+        </v-col>
       </v-row>
+    </div>
     </div>
   </v-img>
 </template>
@@ -94,9 +104,9 @@ export default {
     };
   },
   computed: {
-    size() {
+    title() {
       const size = {
-        xs: 'small', sm: 'small', lg: 'large', xl: 'x-large',
+        xs: 'title-2', sm: 'title-2', md: 'title-2', lg: 'title-1', xl: 'title-1',
       }[this.$vuetify.breakpoint.name];
       return size ? { [size]: true } : {};
     },
@@ -106,18 +116,7 @@ export default {
 
 <style scoped>
 
-.navigation-btns {
-  max-width: 600px;
-  position: absolute;
-  bottom: 6vw;
-  right: 0;
-  left: 0;
-  display: block;
-  margin: 0 auto;
 
-}
 .block{
-  display: block;
-  width: 100%;
 }
 </style>
