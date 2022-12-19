@@ -84,7 +84,6 @@ export default {
   watch: {
     '$route.query': {
       handler(s) {
-        console.log(this.options)
         this.$fetch();
       },
       immediate: true,

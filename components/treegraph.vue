@@ -103,7 +103,6 @@ export default {
       this.update(this.root);
     },
     initDrawer() {
-      console.log('init drawer');
       this.newNodeName = '';
       this.nodeId = '';
       this.nodeName = '';
