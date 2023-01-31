@@ -48,8 +48,7 @@ export default {
       // eslint-disable-next-line no-underscore-dangle
       const p = await this.$api.Entities.get_api_0_3_type_entities__id__({
         id_: this.$route.params.q,
-
-        limit: itemsPerPage,
+        limit: 0,
         page: page,
         sort: sortDesc[0] ? 'desc' : 'asc',
       });
@@ -75,17 +74,18 @@ export default {
       notFound: false,
       totalItems: 0,
       itemIndex: [],
+      typeTree: undefined,
 
     }
   },
   mounted() {
-    this.$fetch();
+    //this.$fetch();
   },
   watch: {
     '$route.query': {
       handler(s) {
         console.log(this.options)
-        this.$fetch();
+        //this.$fetch();
       },
       immediate: true,
       deep: true,

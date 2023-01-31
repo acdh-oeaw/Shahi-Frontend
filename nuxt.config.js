@@ -1,5 +1,5 @@
 import colors from 'vuetify/es5/util/colors';
-
+import axios from 'axios';
 export default {
   server: {
     port: process.env.PORT || 3000,
@@ -9,12 +9,12 @@ export default {
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
   */
-  ssr: false,
+  ssr: true,
   /*
   ** Nuxt target
   ** See https://nuxtjs.org/api/configuration-target
   */
-  target: 'server',
+  target: 'static',
   /*
   ** Headers of the page
   ** See https://nuxtjs.org/api/configuration-head
@@ -36,12 +36,21 @@ export default {
         src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
 
       },
-  ]
+    ]
   },
   generate: {
+    routes() {
+      return axios.get('https://shahi.openatlas.eu/api/0.3/query/?view_classes=artifact&view_classes=place&limit=0&show=none').then(res => {
+        return res.data.results.map(entity => {
+          return '/single/' + entity.features[0]['@id'].split('/').pop()
+        })
+      })
+    },
+    crawler: true,
     fallback: true,
     exclude: [
       /^\/list/,
+      /^\/collections/,
       /^\/map/,
     ],
   },
@@ -60,7 +69,6 @@ export default {
   */
   plugins: [
     '@/plugins/api.js',
-    { src: '@/node_modules/d3/dist/d3.js', ssr: false },
   ],
   /*
   ** Auto import components
@@ -74,6 +82,7 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/vuetify',
     '@nuxtjs/netlify-files',
+    '@nuxt/image',
   ],
   /*
   ** Nuxt.js modules
@@ -82,7 +91,6 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt/content
-    '@nuxt/content',
     'nuxt-leaflet',
   ],
   /*
@@ -118,6 +126,7 @@ export default {
     },
     defaultAssets: false,
   },
+  image: { domains: ['shahi.openatlas.eu'] },
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/

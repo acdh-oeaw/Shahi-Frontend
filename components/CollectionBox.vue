@@ -11,8 +11,7 @@
             {{ collection.description.split('\r\n\r\n')[0] }}
           </p>
         </div>
-        <div
-          @click="routeToCollection()"
+        <nuxt-link :to="`/collections/${this.collection.id}`"
         >
           <p
             class=" primary--text go-to-map-button mt-3"
@@ -22,7 +21,7 @@
               mdi-chevron-right
             </v-icon>
           </p>
-        </div>
+        </nuxt-link>
         <div>
         </div>
       </div>
@@ -31,10 +30,7 @@
         <p class="ma-0 pa-0">{{ licenseDescription }}</p>
       </div>
     </div>
-
-    <div class="collection-image primary" :style="{'--background-image':`url(${image})`}">
-      <v-img height="100%" v-if="image" :src="image.url.replace('http://','https://')"/>
-    </div>
+      <nuxt-img class="collection-image primary" v-if="image" :src="image.url.replace('http://','https://')"/>
   </div>
 </template>
 
@@ -47,6 +43,20 @@ export default {
 
   name: 'CollectionBox',
   props: ['collection'],
+  async fetch(){
+    const p = await this.$api.Entities.get_api_0_3_entity__id__({
+      id_: this.collection.id,
+    });
+    this.collectionDetails = p.body.features[0];
+    if (!this.image) return;
+
+    const q = await this.$api.Entities.get_api_0_3_entity__id__({
+      id_: this.image['@id'].split('/').at(-1),
+      show: 'description'
+    });
+    this.licenseDescription = q?.body?.features?.[0]?.descriptions?.[0]?.value
+
+  },
   data() {
     return {
       moreInfo: false,
@@ -56,10 +66,7 @@ export default {
   },
 
   async mounted() {
-    const p = await this.$api.Entities.get_api_0_3_entity__id__({
-      id_: this.collection.id,
-    });
-    this.collectionDetails = p.body.features[0];
+
   },
   methods: {
     ...mapActions('query', ['searchByFilterId', 'setCodes']),
@@ -74,18 +81,6 @@ export default {
     },
   },
   watch: {
-    collectionDetails: {
-      async handler() {
-        if (!this.image) return;
-
-        const q = await this.$api.Entities.get_api_0_3_entity__id__({
-          id_: this.image['@id'].split('/').at(-1),
-          show: 'description'
-        });
-        this.licenseDescription = q?.body?.features?.[0]?.descriptions?.[0]?.value
-      },
-      deep: true,
-    }
   }
 };
 </script>

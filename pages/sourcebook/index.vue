@@ -63,17 +63,17 @@
 <script>
 export default {
   name: 'Index',
+  async fetch(){
+    const p = await this.$api.Entities.get_api_0_3_entity__id__({
+      id_: 2267,
+    });
+    this.sourcebook = p.body.features[0];
+  },
   data() {
     return {
       tab: null,
       sourcebook: undefined,
     };
-  },
-  async mounted() {
-    const p = await this.$api.Entities.get_api_0_3_entity__id__({
-      id_: 2267,
-    });
-    this.sourcebook = p.body.features[0];
   },
 };
 </script>

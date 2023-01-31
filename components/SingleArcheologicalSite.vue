@@ -7,7 +7,7 @@
         See also
       </span>
       <nuxt-link class="text-body-2 d-block" v-for="i in seeAlso" :key="i.relationTo"
-                 :to="i.relationTo.split('/').at(-1)">
+                 :to="'/' + i.relationTo.split('/').at(-1)">
         {{ i.label }}
       </nuxt-link>
       </div>

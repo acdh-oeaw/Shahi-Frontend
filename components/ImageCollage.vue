@@ -1,11 +1,8 @@
 <template>
-  <v-slide-x-reverse-transition>
-  <div v-if="!loading" class="text-right image-collage" style="width: 800px">
+  <div class="text-right image-collage" style="width: 800px">
     <div class="image-overlay"></div>
-    <img height="180" class="pa-0 img d-inline-block" v-for="image in items" :src="`${image}?image_size=thumbnail`.replace('http://','https://')"/>
-
+    <nuxt-img style="height:180px" class="pa-0 img d-inline-block" v-for="image in items" :src="`${image}`"/>
   </div>
-  </v-slide-x-reverse-transition>
 </template>
 
 <script>
@@ -18,7 +15,7 @@ export default {
       // eslint-disable-next-line no-underscore-dangle
       const p = await this.$api.Entities.get_api_0_3_type_entities__id__({
         id_: this.collectionId,
-        limit: 0,
+        limit: 20,
         show: 'depictions'
       });
       // eslint-disable-next-line prefer-destructuring
@@ -29,7 +26,6 @@ export default {
       console.log(err);
     }
 
-    await new Promise(resolve => setTimeout(resolve, 1000))
     this.loading = false;
   },
   data() {

@@ -49,7 +49,7 @@ export default {
   transition: all 100ms linear;
 }
 
-.navigation-btn >>> .v-btn__content {
+.navigation-btn :deep(v-btn__content) {
   position: relative;
   max-width: 350px;
   height: 100%;

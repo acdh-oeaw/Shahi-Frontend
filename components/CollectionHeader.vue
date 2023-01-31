@@ -1,23 +1,23 @@
 <template>
-  <section v-if="collection" >
+  <section  >
     <div class="collection-header secondary darken-1" style="position: relative;">
-      <image-collage :collection-id="id" :items="items" class="images" style="z-index: 0" />
+      <image-collage :collection-id="id" class="images" style="z-index: 0" />
       <v-container style="height: 100%">
       <v-sheet height="100%" color="transparent" max-width="max(50%,500px)" class="ma-0 page-content d-flex align-center">
-            <p class="title-1" style="z-index: 1;">
-              {{ collection.en }}
+            <p v-if="!!item" class="title-1" style="z-index: 1;">
+              {{ item.properties.title }}
             </p>
       </v-sheet>
       </v-container>
     </div>
 
-    <div class="page-content">
+    <div class="page-content" v-if="!!item">
       <v-container>
-      <p v-if="!!collection.description" class="title-2">
+      <p v-if="!!item.descriptions" class="title-2">
         Description
       </p>
-      <p v-if="!!collection.description" style="white-space: pre-line" class="text-body-1">
-        {{ collection.description }}
+      <p v-if="!!item.descriptions" style="white-space: pre-line" class="text-body-1">
+        {{ item.descriptions[0].value }}
       </p>
       <p class="title-2">
         Artifacts
@@ -31,12 +31,21 @@
 import { mapGetters } from 'vuex';
 
 export default {
+  async fetch(){
+    const i = await this.$api.Entities.get_api_0_3_entity__id__({
+        id_: this.$route.params.q,
+        show:'none'
+      });
+      this.item = i.body?.features[0]
+  },
   name: 'CollectionHeader',
   props: ['items','id'],
+  data(){
+    return{
+      item:undefined
+    }
+  },
   computed: {
-    collection() {
-      return this.getTypeById(this.id);
-    },
     ...mapGetters('app', [
       'getTypeById',
     ]),

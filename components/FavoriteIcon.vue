@@ -32,7 +32,7 @@ export default {
   },
   data() {
     return {
-      active: this.isInFavs(this.id),
+      active: false,
     };
   },
   methods: {
@@ -47,7 +47,7 @@ export default {
   },
   watch:{
     id:{
-      handler(){ this.active =  this.isInFavs(this.id)},
+      handler(){ this.active =  false},
       immediate: true,
     }
   }

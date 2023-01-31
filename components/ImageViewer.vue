@@ -1,46 +1,20 @@
 <template>
   <div>
     <div class="d-inline-block">
-        <img
-          class="white shadow scale clickable d-flex align-end"
-          style="max-width: 450px; max-height: 450px;"
-          :src="primaryImage.url.replace('http://','https://')"
-          @click="!!images && images.length !== 0 ? show() : viewMode=true"
-        />
-        <p style="width: 0; min-width: 100%" class="text-caption text-left secondary lighten-1 pa-2 d-flex flex-column">
-          <span class="font-weight-bold">{{ primaryImage.license }}</span>
-          <span> {{ imageDescriptions[primaryImage['@id'].split('/').at(-1)] }}</span>
-          <span class="mt-3 primary--text go-to-map-button" text
-                @click="!!images && images.length !== 0 ? show() : viewMode=true">
+      <nuxt-img class="white shadow scale clickable d-flex align-end" style="max-width: 450px; max-height: 450px;"
+        :src="primaryImage.url" @click="show()" />
+      <p style="width: 0; min-width: 100%" class="text-caption text-left secondary lighten-1 pa-2 d-flex flex-column">
+        <span class="font-weight-bold">{{ primaryImage.license }}</span>
+        <span> {{ imageDescriptions[primaryImage['@id'].split('/').at(-1)] }}</span>
+        <span class="mt-3 primary--text go-to-map-button" text
+          @click="show()">
           All Images
           <v-icon class="ma-n1">
             mdi-chevron-right
           </v-icon>
         </span>
-        </p>
+      </p>
     </div>
-
-    <client-only>
-      <div v-if="viewMode" class="wrapper">
-        <div class="viewer">
-          <v-btn class="closeIcon" icon @click="viewMode=false">
-            <v-icon color="white">
-              mdi-close
-            </v-icon>
-          </v-btn>
-          <!--<IIIFImageViewer style="height:100%;width:100%" :image-info-url="primaryImage.url"/>-->
-          <div class="image-picker">
-            <div v-for="i in 5" :key="i" class="image-preview">
-              <v-img
-                height="100%"
-                :src="`https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${$route.params.id%2 +1}/${i}.jp2/full/120,/0/default.png`"
-                @click="selected = `https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${$route.params.id%2 +1}/${i}.jp2/info.json`"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </client-only>
   </div>
 </template>
 
@@ -53,32 +27,32 @@ Vue.use(VueViewer);
 export default {
   name: 'ImageViewer',
   props: ['images'],
+  async fetch() {
+    for (const image of this.images) {
+      const p = await this.$api.Entities.get_api_0_3_entity__id__({
+        id_: image['@id'].split('/').at(-1),
+        show: 'description'
+      });
+      this.imageDescriptions = {
+        ...this.imageDescriptions,
+        [image['@id'].split('/').at(-1)]: p?.body?.features?.[0]?.descriptions?.[0]?.value
+      }
+    }
+    this.imagesWithData = this.images.map(i => ({ src: this.$img(i.url) }))
+
+  },
   data() {
     return {
       viewMode: false,
       initZoom: 0,
       imageDescriptions: {},
-      iiifOptions: {
-        tileFormat: 'jpg',
-        tileSize: 310,
-      },
-      manifest: 'https://shahi-img.acdh-dev.oeaw.ac.at/iviif/presentation/hk-shahi/manifest',
-      infoUrl: 'https://stacks.stanford.edu/image/iiif/hg676jb4964%2F0380_796-44/info.json',
-      demoImages: ['http://localhost:8182/iiif/3/sculpture1.tif/',
-        'http://localhost:8182/iiif/3/sculpture2.jpg/'],
-      selected: `https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${this.$route.params.id % 2 + 1}/1.jp2/info.json`,
+      imagesWithData: []
     };
   },
   computed: {
-    id() {
-      return Math.ceil(Math.random() * 3);
-    },
     primaryImage() {
-      return this.images?.[0] || {url: `https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/${this.$route.params.id % 2 + 1}/1.jp2/full/500,/0/default.png`};
+      return this.images?.[0] 
     },
-    imagesWithData() {
-      return this.images.map(i => ({src: i.url.replace('http://','https://'), title: 'hallo'}))
-    }
   },
   methods: {
     show() {
@@ -104,32 +78,14 @@ export default {
         }
       });
     },
-  },
-  watch: {
-    images: {
-      async handler() {
-        for (const image of this.images) {
-          const p = await this.$api.Entities.get_api_0_3_entity__id__({
-            id_: image['@id'].split('/').at(-1),
-            show: 'description'
-          });
-          this.imageDescriptions = {
-            ...this.imageDescriptions,
-            [image['@id'].split('/').at(-1)]: p?.body?.features?.[0]?.descriptions?.[0]?.value
-          }
-        }
-      },
-      immediate: true,
-      deep: true,
-    }
   }
 }
-;
+  ;
 </script>
 
 <style scoped>
-
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
 }
@@ -210,14 +166,13 @@ html, body {
 .clickable:hover {
   opacity: 1 !important;
 }
-
 </style>
 <style>
-
 .viewer-container {
   z-index: 9999 !important;
 }
-.custom-viewer-title{
+
+.custom-viewer-title {
   display: flex;
   flex-direction: column;
 }

@@ -294,6 +294,10 @@ export default {
     openWindow: {type: Boolean},
     searchKeydownEnter: {type: Boolean, default: false},
   },
+  async fetch(){
+    const p = await this.$api.Nodes.get_api_0_3_type_tree_();
+    this.typeTree = Object.values(p.body.typeTree);
+  },
   data() {
     return {
       color: 'lightgrey',
@@ -305,7 +309,8 @@ export default {
       query: {},
       searchKeyword: '',
       searchedTypes: [],
-      attachTo: "asd"
+      attachTo: "asd",
+      typeTree:[]
     };
   },
   computed: {
@@ -412,9 +417,8 @@ export default {
       setCodes: 'query/setCodes',
     }),
     async loadAllTypesFromBackend() {
-      const p = await this.$api.Nodes.get_api_0_3_type_tree_();
-      const typeTree = Object.values(p.body.typeTree);
-
+      
+      const typeTree = this.typeTree
       this.filterElements.forEach((filterElement) => {
         filterElement.items.forEach((item) => {
           if (item.id) {

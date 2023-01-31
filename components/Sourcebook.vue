@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     async getPdf() {
-      const p = await axios.get(this.pages[this.page].url.replace('http:','https:'), {
+      const p = await axios.get(this.pages[this.page].url, {
         responseType: "blob",
       });
       this.pdf = URL.createObjectURL(p.data);
