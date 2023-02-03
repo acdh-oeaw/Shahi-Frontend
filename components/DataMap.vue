@@ -108,7 +108,7 @@ export default {
         ...x,
         properties: {
           ...x.properties,
-          link: `/single/${x['@id'].split('/').pop()}`,
+          link: `/single/${x['@id'].split('/').pop()}/`,
           linkTitle: `<span class="text-body-1">${x.properties.title}</span> <br/> <span class="map-detail-link text-body-2">Details</span>`,
         },
       }));

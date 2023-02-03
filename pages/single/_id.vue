@@ -1,6 +1,6 @@
 <template>
   <div v-if="item">
-    <single-artifact  :item="item"></single-artifact>
+    <single-page-layout  :item="item"></single-page-layout>
   </div>
 </template>
 
@@ -35,7 +35,3 @@ export default {
   }
 };
 </script>
-
-<style>
-
-</style>
