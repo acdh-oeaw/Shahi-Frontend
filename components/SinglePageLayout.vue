@@ -53,7 +53,7 @@
               <v-expand-transition>
                 <div v-if="expanded">
                   <v-chip label small color="secondary mr-2 mb-2" v-for="i in relatedArtifacts" :key="i.relationTo">
-                    <nuxt-link class=" text-body-2 go-to-map-button" :to="i.relationTo.split('/').at(-1)">
+                    <nuxt-link class=" text-body-2 go-to-map-button" :to="'/single/' + i.relationTo.split('/').at(-1)">
                       {{ i.label }}
                     </nuxt-link>
                   </v-chip>

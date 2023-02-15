@@ -89,7 +89,7 @@
 
 <script>
 export default {
-  name: 'IndexVue',
+  name: 'team',
   data() {
     return {
       team: [

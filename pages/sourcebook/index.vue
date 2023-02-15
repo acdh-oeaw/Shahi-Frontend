@@ -62,7 +62,7 @@
 
 <script>
 export default {
-  name: 'Index',
+  name: 'sourcebook-index',
   async fetch(){
     const p = await this.$api.Entities.get_api_0_3_entity__id__({
       id_: 2267,

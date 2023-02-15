@@ -26,19 +26,21 @@
 <script>
 export default {
   name: "ImageCard",
+  async fetch(){
+    if(!this.item.features[0].depictions?.[0]) return
+    const p = await this.$api.Entities.get_api_0_3_entity__id__({
+      id_: this.item.features[0].depictions?.[0]['@id'].split('/').at(-1),
+      show: 'description'
+    });
+    this.description = p?.body?.features?.[0]?.descriptions?.[0]?.value
+  
+  },
   props: ['item', 'color'],
   data() {
     return {
       description: ''
     }
   },
-  async mounted() {
-    const p = await this.$api.Entities.get_api_0_3_entity__id__({
-      id_: this.item.features[0]['@id'].split('/').at(-1),
-      show: 'description'
-    });
-    this.description = p?.body?.features?.[0]?.descriptions?.[0]?.value
-  }
 }
 </script>
 

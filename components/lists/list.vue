@@ -77,7 +77,7 @@
       </template>
       <template v-slot:item.features[0].properties.title="{ item }">
         <nuxt-link
-          :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}`"
+          :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]}/`"
         >
           {{ item.features[0].properties.title }}
         </nuxt-link>

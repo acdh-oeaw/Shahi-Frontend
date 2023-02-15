@@ -1,7 +1,9 @@
 <template>
+  <div>
   <div v-if="item">
-    <single-page-layout  :item="item"></single-page-layout>
+    <single-page-layout  :item="item.features[0]"></single-page-layout>
   </div>
+</div>
 </template>
 
 <script>
@@ -10,6 +12,7 @@
 import {dtoToEntity, useGetType} from "@/composable/model";
 
 export default {
+  name: "_id.vue",
   async fetch() {
     this.loading = true;
     // eslint-disable-next-line no-underscore-dangle
@@ -17,7 +20,7 @@ export default {
       id_: this.$route.params.id,
     });
     // eslint-disable-next-line prefer-destructuring
-    this.item = dtoToEntity(p.body);
+    this.item = p.body;
 
     // await this.fetchRelated();
     this.loading = false;

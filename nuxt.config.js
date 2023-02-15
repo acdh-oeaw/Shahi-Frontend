@@ -38,8 +38,9 @@ export default {
     ]
   },
   generate: {
+    routes:['/single/5178/'],
     routes() {
-      return axios.get('https://shahi.openatlas.eu/api/0.3/query/?view_classes=artifact&view_classes=place&limit=0&show=none').then(res => {
+      return axios.get('https://shahi.openatlas.eu/api/0.3/query/?view_classes=artifact&view_classes=place&limit=20&show=none').then(res => {
         return res.data.results.map(entity => {
           return '/single/' + entity.features[0]['@id'].split('/').pop()
         })
