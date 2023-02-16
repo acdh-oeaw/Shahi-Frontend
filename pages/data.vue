@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ items }}
     <collection-header v-if="$route.query.collection" :id="$route.query.collection" :items="items" />
 
     <div class="p-sticky" style="position:sticky;top:calc( 100vh - 36px);z-index: 9999" >
@@ -18,35 +19,9 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'DataVue',
   mixins: [favorites],
-  async fetch() {
-    this.loading = true;
-    const {
-      sortBy, sort, page, itemsPerPage,
-    } = this.options;
-    try {
-      // eslint-disable-next-line no-underscore-dangle
-      const p = await this.$api.Entities.get_api_0_3_query_({
-        limit: itemsPerPage,
-        first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
-        view_classes: this.query?.view_classes,
-        search: this.query?.search,
-        entities:this.query?.entities,
-        sort: sort,
-        column: sortBy
-      });
-      // eslint-disable-next-line prefer-destructuring
-      this.items = [];
-
-      this.items = p.body.results;
-      this.notFound = false;
-
-      this.itemIndex = p.body.pagination.index;
-      this.totalItems = p.body.pagination.entities;
-    } catch (err) {
-      console.log(err);
-      this.notFound = true;
-    }
-    this.loading = false;
+  async asyncData ({ params, error, payload }) {
+    if (payload) return { items: payload }
+    else return { items: {} }  
   },
   data() {
     return {
@@ -82,7 +57,7 @@ export default {
         // this.itemIndex = [];
         // this.options.page = 1;
         if(this.$route.name === "data-map-q") return;
-        this.$fetch();
+        //this.$fetch();
       },
       deep: true,
     },

@@ -17,7 +17,7 @@ export default {
     list,
   },
   mixins: [queries],
-  props: ['items', 'totalItems','notFound'],
+  props: ['items','totalItems','notFound'],
   data() {
     return {
       query: {},
