@@ -10,6 +10,11 @@ import Gallery from '~/components/lists/galleryList.vue';
 import queries from '~/mixins/queries';
 
 export default {
+  async asyncData ({ params, error, payload }) {
+    console.log(payload,'HEYJAA')
+    if (payload) return { items: payload }
+    else return { items: {} }  
+  },
   components: {
     Gallery
   },

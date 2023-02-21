@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="d-flex justify-end px-2">
+      {{ items }}
       <v-select
         style="max-width: 600px"
         v-if="items.length !== 0"
@@ -12,7 +13,6 @@
         multiple
         outlined
         return-object
-
       >
         <template v-slot:selection="{ item, index }">
           <v-chip v-if="index < 2" small>
@@ -35,7 +35,6 @@
       :options.sync="options"
       :server-items-length="totalItems"
       @update:options="updateQuery"
-
       :loading="loading"
       :calculate-widths="true"
       :footer-props="{
@@ -200,7 +199,7 @@ export default {
     ...mapGetters('query', ['getQuery','getCurrentSystemClass']),
 
     itemsWithType() {
-      if (this.items.length === 0) return [];
+      if (!!this.items || this.items.length === 0) return [];
 
       return this.items.map((item) => {
         item.features[0].type = item.features[0].types

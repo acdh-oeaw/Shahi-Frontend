@@ -1,6 +1,5 @@
 <template>
   <div>
-    {{ items }}
     <collection-header v-if="$route.query.collection" :id="$route.query.collection" :items="items" />
 
     <div class="p-sticky" style="position:sticky;top:calc( 100vh - 36px);z-index: 9999" >
@@ -26,7 +25,6 @@ export default {
   data() {
     return {
       navBarItems: this.$store.state.app.menuitems,
-      items: [],
       loading: true,
       notFound: false,
       totalItems: 0,

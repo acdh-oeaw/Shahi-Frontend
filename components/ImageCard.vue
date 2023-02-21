@@ -9,9 +9,9 @@
 
   >
     <div v-if="!!item.features[0].depictions && !!item.features[0].depictions.length !== 0" style="max-width: 100%">
-      <v-img
-        max-width="100%"
-        :src="item.features[0].depictions[0].url.replace('http://','https://')"
+      <nuxt-img
+        style="max-width: 100%;"
+        :src="item.features[0].depictions[0].url"
         alt="IMAGE"
       />
       <p class="text-caption my-0 font-weight-bold">{{ item.features[0].depictions[0].license }}</p>

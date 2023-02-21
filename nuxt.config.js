@@ -46,19 +46,21 @@ export default {
             payload: entity
           }
         })
-        const list = {
-          route: '/data/list',
+        const gallery = {
+          route: '/data/gallery',
           payload:res.data.results
         }
-        return [...singles, list]
+        const data = {
+          route: '/data',
+          payload:res.data.results
+        }
+        return [...singles, data, gallery]
       })
     },
     crawler: true,
     fallback: true,
     exclude: [
       /^\/collections/,
-      /^\/list/,
-      /^\/data/,
       /^\/map/,
     ],
   },
