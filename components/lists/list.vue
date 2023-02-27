@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="d-flex justify-end px-2">
-      {{ items }}
       <v-select
         style="max-width: 600px"
         v-if="items.length !== 0"
@@ -199,8 +198,9 @@ export default {
     ...mapGetters('query', ['getQuery','getCurrentSystemClass']),
 
     itemsWithType() {
+      console.log(1,this.items)
       if (!!this.items || this.items.length === 0) return [];
-
+      console.log(2)
       return this.items.map((item) => {
         item.features[0].type = item.features[0].types
           ?.map((x) => {

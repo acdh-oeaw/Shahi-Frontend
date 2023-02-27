@@ -24,15 +24,6 @@ export default {
       view: 'list',
     };
   },
-  watch: {
-    '$route.query': {
-      handler(s) {
-        this.query = s;
-      },
-      immediate: true,
-      deep: true,
-    },
-  },
   methods: {},
 };
 </script>

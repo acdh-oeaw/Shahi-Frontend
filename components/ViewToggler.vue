@@ -38,7 +38,6 @@ export default {
         this.$emit('input',name)
 
       },
-      immediate: true,
     },
     '$route.path': {
       handler(s) {

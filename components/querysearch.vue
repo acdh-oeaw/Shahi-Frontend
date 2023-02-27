@@ -129,18 +129,6 @@ export default {
     updateArray() {
       this.filterArray = this.getFiltersFlat;
     },
-
-    updateFilter(selectedProperty, value) {
-      this.$store.commit('app/updateFilterValue', {
-        selectedProperty,
-        value,
-      });
-      const {name} = this.$route;
-      this.$router.push({
-        name,
-        query: this.getFilterObject,
-      });
-    },
   }
   ,
 

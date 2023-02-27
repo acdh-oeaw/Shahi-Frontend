@@ -24,7 +24,7 @@
     </v-col>
     </v-row>
     <p />
-    <div v-for="item in filteredList.slice(page,page+20)" :key="item.id" class="text-body-1 mb-4">
+    <div v-for="item in filteredList.slice((page-1)*20,(page-1)*20+20)" :key="item.id" class="text-body-1 mb-4">
       <p v-if="!!item.author" class="ma-0 font-weight-bold">
         {{ item.author.map(x => [x.family, x.given, x.literal].filter(Boolean).join(', ')).join('; ') }}
         <span v-if="!!item.issued && !!item.issued['date-parts']" class="text--secondary">

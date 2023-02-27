@@ -1,7 +1,6 @@
 <template>
   <div>
     <gallery :filter="query" :total-items="totalItems" :not-found="notFound" :items="items" class="pb-4"/>
-
   </div>
 </template>
 
@@ -11,9 +10,8 @@ import queries from '~/mixins/queries';
 
 export default {
   async asyncData ({ params, error, payload }) {
-    console.log(payload,'HEYJAA')
-    if (payload) return { items: payload }
-    else return { items: {} }  
+    //if (payload) return { items: payload }
+    //else return { items: {} }  
   },
   components: {
     Gallery

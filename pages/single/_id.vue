@@ -12,7 +12,6 @@ import { dtoToEntity, useGetType } from "@/composable/model";
 export default {
   name: "_id.vue",
   async asyncData({ params, error, payload }) {
-    console.log(payload)
     if (payload && Object.keys(payload).length !== 0) return { item: payload };
     else {
       //this.loading = true;

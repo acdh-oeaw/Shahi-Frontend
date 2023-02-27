@@ -50,11 +50,11 @@ export default {
           route: '/data/gallery',
           payload:res.data.results
         }
-        const data = {
-          route: '/data',
+        const list = {
+          route: '/data/list',
           payload:res.data.results
         }
-        return [...singles, data, gallery]
+        return [...singles,list, gallery]
       })
     },
     crawler: true,
