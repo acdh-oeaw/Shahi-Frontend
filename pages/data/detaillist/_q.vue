@@ -15,7 +15,6 @@ export default {
   data() {
     return {
       query: {},
-      view: 'list'
     };
   },
   watch:{
@@ -27,7 +26,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-
-</style>
