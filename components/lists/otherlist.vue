@@ -5,59 +5,47 @@
       No records found.
     </p>
     <div v-else>
-      <v-card
-        v-for="(item, index) in items"
-        :key="index"
-        outlined
-        max-width="1500px"
-        class="ma-5"
-        style="overflow: hidden"
-      >
+      <v-card v-for="(item, index) in items" :key="index" outlined max-width="1500px" class="ma-5"
+        style="overflow: hidden">
         <v-row no-gutters>
           <v-col cols="12">
-            <nuxt-link
-              :to="`/single/${
-                item.features[0]['@id'].split('/').splice(-1)[0]
-              }`"
-            >
-              <v-hover v-slot="{hover}">
-                <v-card-title
-                  class="artifact-title secondary darken-3 d-block white--text"
-                  :class="hover ? 'lighten-1' : ''"
-                >
-                  <p class="ma-0 pa-0">
-                    {{ item.features[0].properties.title }}
-                  </p>
-                  <favorite-icon :id="id(item)" class="float-right"/>
-                  <p v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Artifact')" class="text-caption pa-0 ma-0">
-                    {{ getFirstTypeByKeyword(item.features[0].types, 'Artifact').label }}
-                    <span
-                      v-if="!!getFirstTypeByKeyword(item.features[0].types,'Artifact').subtype"
-                    >({{ getFirstTypeByKeyword(item.features[0].types, 'Artifact').subtype }})</span>
-                  </p>
-                  <p class="text-caption pa-0 ma-0">
-                    <span v-if="item.features[0].when.timespans[0].start.earliest">
-                      from
-                      {{
-                        item.features[0].when.timespans[0].start.earliest
-                          .split("-")[0]
-                          .replace(/^0+/, "")
-                      }}
-                    </span>
+            <nuxt-link :to="`/single/${item.features[0]['@id'].split('/').splice(-1)[0]
+              }`">
+              <v-hover v-slot="{ hover }">
+                <v-card-title class="artifact-title secondary darken-3 d-flex justify-space-between white--text"
+                  :class="hover ? 'lighten-1' : ''">
+                  <div>
+                    <p class="ma-0 pa-0">
+                      {{ item.features[0].properties.title }}
+                    </p>
+                    <p v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Artifact')" class="text-caption pa-0 ma-0">
+                      {{ getFirstTypeByKeyword(item.features[0].types, 'Artifact').label }}
+                      <span v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Artifact').subtype">({{
+                        getFirstTypeByKeyword(item.features[0].types, 'Artifact').subtype }})</span>
+                    </p>
+                    <p class="text-caption pa-0 ma-0">
+                      <span v-if="item.features[0].when.timespans[0].start.earliest">
+                        from
+                        {{
+                          item.features[0].when.timespans[0].start.earliest
+                            .split("-")[0]
+                            .replace(/^0+/, "")
+                        }}
+                      </span>
 
-                    <span
-                      v-if="
+                      <span v-if="
                         item.features[0].when.timespans[0].end.latest ||
-                          item.features[0].when.timespans[0].end.earliest
-                      "
-                    >to
-                      {{
                         item.features[0].when.timespans[0].end.earliest
-                          .split("-")[0]
-                          .replace(/^0+/, "")
-                      }}
-                    </span>
-                  </p>
+                      ">to
+                        {{
+                          item.features[0].when.timespans[0].end.earliest
+                            .split("-")[0]
+                            .replace(/^0+/, "")
+                        }}
+                      </span>
+                    </p>
+                  </div>
+                  <favorite-icon :id="id(item)" class="" />
                 </v-card-title>
               </v-hover>
             </nuxt-link>
@@ -65,18 +53,16 @@
               <v-col cols="12" sm="4" md="3">
                 <image-card color="grey lighten-2" :item="item"></image-card>
               </v-col>
-              <v-col cols="12" sm="8" md="9" class="px-5">
-                <v-card v-if="item.features[0].descriptions" outlined class="my-3">
+              <v-col class="px-5">
+                <v-card v-if="item.features[0].descriptions" flat class="my-3">
                   <v-card-text class="text-caption py-2"
-                               v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity')">
+                    v-if="!!getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity')">
                     <tooltip-icon
-                      :text="$store.state.app.tableheaders['artifact'].find(x => x.text === 'Category of Authenticity').description"/>
+                      :text="$store.state.app.tableheaders['artifact'].find(x => x.text === 'Category of Authenticity').description" />
 
                     Category of Authenticity:
-                    <span
-                      class="clickable"
-                      @click="searchByFilterId(parseInt(getFirstTypeByKeyword(item.features[0].types,'Category of Authenticity').identifier.split('/').splice(-1)[0]))"
-                    >
+                    <span class="clickable"
+                      @click="searchByFilterId(parseInt(getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity').identifier.split('/').splice(-1)[0]))">
                       {{ getFirstTypeByKeyword(item.features[0].types, 'Category of Authenticity').label }}
                     </span>
 
@@ -84,60 +70,43 @@
                   <v-card-text class="text-body-1 py-2">
                     {{ item.features[0].descriptions[0].value }}
                   </v-card-text>
-                </v-card>
-                <div class="card-columns" :style="cssVars">
-                  <div
-                    v-for="(typeGroup, i) in getOrderedTypes(
-                      item.features[0].types
-                    )"
-                    v-if="typeGroup[0].type !== 'Artifact' && typeGroup[0]
-                      .type !== 'Category of Authenticity'"
-                    :key="i + 2000"
-                    class="card-column"
-                  >
-                    <v-card class="mb-5" outlined>
-                      <v-card-title
-                        class="text-subtitle-2 justify-center secondary"
-                      >
-                        {{ typeGroup[0].type }}
-                      </v-card-title>
-                      <v-card-text>
-                        <p
-                          v-for="(type, idx) in typeGroup"
-                          :key="idx"
-                          class="ma-0 ml-5 pa-0"
-                        >
-                          <span
-                            class="clickable"
-                            @click="searchType(parseInt(type.id))"
-                          >
+                  <v-card-text class="text-body-1 py-2">
+
+
+                    <div class="card-columns" :style="cssVars">
+                      <div v-for="(typeGroup, i) in getOrderedTypes(
+                        item.features[0].types
+                      )" v-if="typeGroup[0].type !== 'Artifact' && typeGroup[0].type !== 'Category of Authenticity'"
+                        :key="i + 2000" class="card-column">
+                        <p class="text-body-1 font-weight-bold justify-center mb-0 mt-3">
+                          {{ typeGroup[0].type }}
+                        </p>
+                        <p v-for="(type, idx) in typeGroup" :key="idx" class="ma-0 pa-0">
+                          <span class="clickable" @click="searchType(parseInt(type.id))">
                             {{ type.label }}
                           </span>
-                          <span
-                            v-if="!!type.value"
-                          >: {{ type.value }} {{ type.unit }}</span>
+                          <span v-if="!!type.value">: {{ type.value }} {{ type.unit }}</span>
                         </p>
-                      </v-card-text>
-                    </v-card>
-                  </div>
-                </div>
+
+                      </div>
+                    </div>
+                  </v-card-text>
+
+                </v-card>
+
               </v-col>
             </v-row>
           </v-col>
         </v-row>
       </v-card>
-      <v-pagination
-        :value="parseInt(options.page)"
-        :length="Math.floor(totalItems / options.itemsPerPage)"
-        :total-visible="7"
-        @input="newPage"
-      />
+      <v-pagination :value="parseInt(options.page)" :length="Math.floor(totalItems / options.itemsPerPage)"
+        :total-visible="7" @input="newPage" />
     </div>
   </div>
 </template>
 
 <script>
-import {mapActions, mapGetters} from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -251,8 +220,8 @@ export default {
         }, {});
     },
     newPage(page) {
-      this.$router.replace({name: this.$route.name, query: {...this.$route.query, page}});
-      document.getElementById("list-anchor").scrollIntoView({block: 'start'});
+      this.$router.replace({ name: this.$route.name, query: { ...this.$route.query, page } });
+      document.getElementById("list-anchor").scrollIntoView({ block: 'start' });
 
     },
     searchType(id) {
@@ -270,7 +239,6 @@ export default {
 };
 </script>
 <style scoped>
-
 .list-element {
   transition: all 0.1s;
 }
@@ -283,10 +251,14 @@ export default {
 }
 
 .card-column {
-  -webkit-column-break-inside: avoid; /* Chrome, Safari */
-  page-break-inside: avoid; /* Theoretically FF 20+ */
-  break-inside: avoid-column; /* IE 11 */
-  overflow: hidden; /* Firefox */
+  -webkit-column-break-inside: avoid;
+  /* Chrome, Safari */
+  page-break-inside: avoid;
+  /* Theoretically FF 20+ */
+  break-inside: avoid-column;
+  /* IE 11 */
+  overflow: hidden;
+  /* Firefox */
 
 }
 
@@ -297,5 +269,4 @@ export default {
 .borderBottom {
   border-bottom: 1px solid grey !important
 }
-
 </style>
