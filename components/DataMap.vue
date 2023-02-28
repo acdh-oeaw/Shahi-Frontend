@@ -42,13 +42,13 @@ import { mapActions, mapGetters } from 'vuex';
 import qmap from '~/components/map';
 
 export default {
-  props:['customQuery'],
+  props: ['customQuery', 'items'],
   components: {
     qmap,
   },
   data() {
     return {
-      query:{},
+      query: {},
       showPolygons: false,
       useTimeline: false,
       loading: false,
@@ -68,11 +68,10 @@ export default {
         '13th Century',
         '14th Century',
       ],
-      items: [],
     };
   },
   mounted() {
-    this.loadArtifacts();
+    //this.loadArtifacts();
     // this.loadAllArtifacts();
     // this.loadAllPlaces();
   },
@@ -82,16 +81,29 @@ export default {
     dateStringToYear(date) {
       return parseInt(date?.split('-')[0], 10);
     },
+    mapItemsForMap(e) {
+      const localItems = e
+        .map((x) => x.features[0])
+        .map((x) => ({
+          ...x,
+          properties: {
+            ...x.properties,
+            link: `/single/${x['@id'].split('/').pop()}/`,
+            linkTitle: `<span class="text-body-1">${x.properties.title}</span>`,
+          },
+        }));
+      return localItems
+    },
     async loadArtifacts() {
       if (this.loading) return;
       this.loading = true;
-      const localItems = (this.isSearchForAll &&this.isAlreadyLoaded) ?
+      const localItems = (this.isSearchForAll && this.isAlreadyLoaded) ?
         this.getGeoData :
         await this.loadAllFromApi()
       this.loading = false;
       this.items = localItems;
     },
-    async loadAllFromApi(){
+    async loadAllFromApi() {
       let localItems = [];
 
       const p = await this.$api.Entities.get_api_0_3_query_({
@@ -99,35 +111,27 @@ export default {
         search: this.customQuery?.search || this.query?.search,
         limit: 0,
         page: 1,
-        show: ['when','geometry']
+        show: ['when', 'geometry']
       });
 
+      localItems = p.body.result.mapItemsForMap()
+      if (this.isSearchForAll) this.saveGeoItems(localItems);
 
-      localItems = [...localItems, ...p.body.results.map((x) => x.features[0])];
-      localItems = localItems.map((x) => ({
-        ...x,
-        properties: {
-          ...x.properties,
-          link: `/single/${x['@id'].split('/').pop()}/`,
-          linkTitle: `<span class="text-body-1">${x.properties.title}</span> <br/> <span class="map-detail-link text-body-2">Details</span>`,
-        },
-      }));
-      if(this.isSearchForAll) this.saveGeoItems(localItems);
-      return localItems
     }
   },
   computed: {
     ...mapGetters('entity', ['getPlaces', 'getArtifacts', 'getArtifactsLoaded', 'getPlaceLoaded']),
     ...mapGetters('query', ['getQuery']),
-    ...mapGetters('map', ['isAlreadyLoaded',"getGeoData"]),
-    isSearchForAll(){
+    ...mapGetters('map', ['isAlreadyLoaded', "getGeoData"]),
+    isSearchForAll() {
       return (this.customQuery?.search || this.query?.search || [])?.length === 0
-      && (this.customQuery?.view_classes || this.query?.view_classes) !== 'artifact'
-      && (this.customQuery?.view_classes || this.query?.view_classes) !== 'place'
+        && (this.customQuery?.view_classes || this.query?.view_classes) !== 'artifact'
+        && (this.customQuery?.view_classes || this.query?.view_classes) !== 'place'
     },
     visibleArtifacts() {
+      const localItems = this.mapItemsForMap(this.items)
       const year = (this.time + 1) * 100;
-      const localItems = this.items.filter((x) => this.showPolygons || x?.geometry?.type !== 'Polygon');
+      localItems.filter((x) => this.showPolygons || x?.geometry?.type !== 'Polygon');
       if (!this.useTimeline) return localItems;
       return localItems
         .filter((x) => this.dateStringToYear(x.when?.timespans?.[0]?.start.earliest) <= year)
@@ -145,7 +149,7 @@ export default {
     },
     query: {
       handler() {
-        this.loadArtifacts();
+        //this.loadArtifacts();
       },
       deep: true,
     },
@@ -211,8 +215,8 @@ a.showploygons {
 
 .showploygons.active {
   background: linear-gradient(145deg, #a3a3a3, #c2c2c2);
-  box-shadow:  20px 20px 60px #9a9a9a,
-  -20px -20px 60px #d0d0d0;
+  box-shadow: 20px 20px 60px #9a9a9a,
+    -20px -20px 60px #d0d0d0;
 
 }
 

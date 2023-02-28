@@ -5,7 +5,7 @@
       No records found.
     </div>
     <div v-else-if="!loading" class="mt-15 mx-5 gallery-columns" :style="cssVars">
-      <div v-for="(item, index) in items" :key="index" class="gallery-column">
+      <div v-for="(item, index) in filteredItems" :key="index" class="gallery-column">
         <div class="gallery-content px-1">
           <p class="text-center text-h6">
             {{ item.features[0].properties.title }}
@@ -108,6 +108,9 @@ export default {
           itemsPerPage: this.$route.query.itemsperpage || 20,
         };
       },
+    },
+    filteredItems(){
+      return this.items.slice((this.options.page-1)*20,(this.options.page-1)*20+20)
     },
     ...mapGetters('app', [
       'getTypesBySystemClass',

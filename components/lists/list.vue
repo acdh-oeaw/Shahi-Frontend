@@ -35,13 +35,14 @@
       :server-items-length="totalItems"
       @update:options="updateQuery"
       :loading="loading"
+      :items-per-page="20"
       :calculate-widths="true"
       :footer-props="{
         showFirstLastPage: true,
         'items-per-page-options': itemsPerPageOptions,
       }"
     >
-      <template v-slot:header.features[0].type.categoryofauthenticity="{ header }">
+      <template v-slot:header.features[0].typeDict.categoryofauthenticity="{ header }">
         {{ header.text }}
         <tooltip-icon :text="header.description"/>
       </template>
@@ -109,13 +110,13 @@
       </template>
       <template
         v-for="slot in $store.state.app.tableheaders[getCurrentSystemClass].filter((x) =>
-          x.value.startsWith('features[0].type')
+          x.value.startsWith('features[0].typeDict')
         )"
         v-slot:[`item.${slot.value}`]="{ item }"
       >
-        <div v-if="!!item.features[0].type">
+        <div v-if="!!item.features[0].typeDict">
           <span
-            v-for="(type, index) in item.features[0].type[slot.value.split('.')[2]]"
+            v-for="(type, index) in item.features[0].typeDict[slot.value.split('.')[2]]"
             :key="index"
             class="clickable"
             @click="searchType(parseInt(type.identifier
@@ -198,11 +199,9 @@ export default {
     ...mapGetters('query', ['getQuery','getCurrentSystemClass']),
 
     itemsWithType() {
-      console.log(1,this.items)
-      if (!!this.items || this.items.length === 0) return [];
-      console.log(2)
+      if (!this.items || this.items.length === 0) return [];
       return this.items.map((item) => {
-        item.features[0].type = item.features[0].types
+        item.features[0].typeDict = item.features[0].types
           ?.map((x) => {
             [x.supertype] = x.hierarchy.split(' > ');
             return x;

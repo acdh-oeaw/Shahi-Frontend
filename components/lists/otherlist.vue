@@ -5,7 +5,7 @@
       No records found.
     </p>
     <div v-else>
-      <v-card v-for="(item, index) in items" :key="index" outlined max-width="1500px" class="ma-5"
+      <v-card v-for="(item, index) in filteredItems" :key="index" outlined max-width="1500px" class="ma-5"
         style="overflow: hidden">
         <v-row no-gutters>
           <v-col cols="12">
@@ -132,15 +132,6 @@ export default {
   data() {
     return {
       loading: true,
-
-      demoImageLinks: [
-        'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/1/1.jp2/full/500,/0/default.jpg',
-        'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/2/1.jp2/full/500,/0/default.jpg',
-      ],
-      demoThumbnailLinks: [
-        'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/1/1.jp2/full/200,/0/default.jpg',
-        'https://shahi-img.acdh-dev.oeaw.ac.at/iiif/images/artefacts/2/1.jp2/full/200,/0/default.jpg',
-      ],
       itemsPerPageOptions: [10, 20, 50, 100],
       itemIndex: [],
     };
@@ -155,6 +146,9 @@ export default {
           itemsPerPage: this.$route.query.itemsperpage || 10,
         };
       },
+    },
+    filteredItems(){
+      return this.items.slice((this.options.page-1)*20,(this.options.page-1)*20+20)
     },
     ...mapGetters('app', [
       'getTypesBySystemClass',

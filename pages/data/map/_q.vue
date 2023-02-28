@@ -1,6 +1,6 @@
 <template>
   <div class="data_map">
-    <dataMap />
+    <dataMap :items="items" />
   </div>
 </template>
 

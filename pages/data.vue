@@ -1,6 +1,5 @@
 <template>
   <div>
-    <collection-header v-if="$route.query.collection" :id="$route.query.collection" :items="items" />
     <div class="p-sticky" style="position:sticky;top:calc( 100vh - 36px);z-index: 9999" >
       <view-toggler :value="$route.path.split('/').at(-1)" @input="viewChange"  />
     </div>
