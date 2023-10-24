@@ -129,9 +129,9 @@ export default {
         && (this.customQuery?.view_classes || this.query?.view_classes) !== 'place'
     },
     visibleArtifacts() {
-      const localItems = this.mapItemsForMap(this.items)
+      let localItems = this.mapItemsForMap(this.items)
       const year = (this.time + 1) * 100;
-      localItems.filter((x) => this.showPolygons || x?.geometry?.type !== 'Polygon');
+      localItems = localItems.filter((x) => this.showPolygons || x?.geometry?.type !== 'Polygon');
       if (!this.useTimeline) return localItems;
       return localItems
         .filter((x) => this.dateStringToYear(x.when?.timespans?.[0]?.start.earliest) <= year)
