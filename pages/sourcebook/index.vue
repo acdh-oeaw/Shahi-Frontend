@@ -68,6 +68,18 @@ export default {
       id_: 2267,
     });
     this.sourcebook = p.body.features[0];
+
+    // Edit the pages to link to the local url 
+    // The relevant property is the 'url' property which normally points to the openatlas api. The last part of the url is the id, preceeded by a slash.
+    // The sourcebooks will be put into a directory and named after the id.
+
+    for (let i = 0; i < this.sourcebook?.depictions?.length; i++) {
+      const element = this.sourcebook?.depictions?.[i];
+      const splitUrl = (String)(element.url).split('/');
+      const id = splitUrl[splitUrl.length - 1];
+      this.sourcebook.depictions[i].url = '/shahi_sourcebooks/' + id + '.pdf';
+    }
+
   },
   data() {
     return {
