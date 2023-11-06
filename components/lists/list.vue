@@ -200,7 +200,8 @@ export default {
 
     itemsWithType() {
       if (!this.items || this.items.length === 0) return [];
-      return this.items.map((item) => {
+
+      const mappedItems = this.items.map((item) => {
         item.features[0].typeDict = item.features[0].types
           ?.map((x) => {
             [x.supertype] = x.hierarchy.split(' > ');
@@ -213,6 +214,11 @@ export default {
           }, {});
         return item;
       });
+
+      if (this.options.page && this.options.itemsPerPage) {
+        return mappedItems.slice((this.options.page - 1) * this.options.itemsPerPage, (this.options.page - 1) * this.options.itemsPerPage + this.options.itemsPerPage);
+      }
+      else return mappedItems;
     },
     showHeaders() {
       return this.$store.state.app.tableheaders[this.getCurrentSystemClass]
