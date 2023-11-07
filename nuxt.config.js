@@ -40,6 +40,9 @@ export default {
   generate: {
     routes() {
       return axios.get('https://shahi.openatlas.eu/api/0.3/query/?view_classes=artifact&view_classes=place&limit=0').then(res => {
+        // TODO: Maybe here is a good place to replace all links to the images in the db with the local images.
+        // in entity.features[0].depections?.foreach(depiction => depiction.url = `link/to/local/dir/${depiction.url.slice(findIndex of last '/')}`)
+        // There might be an issue with the file extension, since I do not know that ahead of time, but I'll see. Let's hope it works without specifying.
         const singles =  res.data.results.map(entity => {
           return {
             route:'/single/' + entity.features[0]['@id'].split('/').pop(),
