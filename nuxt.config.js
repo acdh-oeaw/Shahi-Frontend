@@ -1,5 +1,6 @@
 import colors from 'vuetify/es5/util/colors';
 import axios from 'axios';
+
 export default {
   server: {
     port: process.env.PORT || 3000,
@@ -40,30 +41,38 @@ export default {
   generate: {
     routes() {
       return axios.get('https://shahi.openatlas.eu/api/0.3/query/?view_classes=artifact&view_classes=place&limit=0').then(async res => {
-        // TODO: Maybe here is a good place to replace all links to the images in the db with the local images.
-        // in entity.features[0].depections?.foreach(depiction => depiction.url = `link/to/local/dir/${depiction.url.slice(findIndex of last '/')}`)
-        // There might be an issue with the file extension, since I do not know that ahead of time, but I'll see. Let's hope it works without specifying.
+        const fs = require('fs');
+        const path = require('path');
 
-        console.log('Fetching depictions info...');
-        const depictionsInfo = await axios.get('https://shahi.openatlas.eu/api/0.4/licensed_file_overview/');
-        console.log('Finished fetching depictions info');
+        // Create a write stream to the log file
+        const logStream = fs.createWriteStream(path.join(__dirname, 'logs.txt'), { flags: 'a' });
 
-        console.log('Start mapping depictions...');
+        // Function to log messages to console and file
+        const log = (message) => {
+          console.log(message);
+          logStream.write(`${message}\n`);
+        };
+
+        log('Fetching depictions info...');
+        let depictionsInfo = (await axios.get('https://shahi.openatlas.eu/api/0.4/licensed_file_overview/')).data;
+        log('Finished fetching depictions info');
+
+        log('Start mapping depictions...');
         const remappedPayload = res.data.results.map((entity, index) => {
           // No images -> return entity as is
-          if(!entity.features[0].depictions || entity.features[0].depictions.length < 1)
+          if (!entity.features[0].depictions || entity.features[0].depictions.length < 1)
             return entity;
 
           // has images -> remap ever image url to the local image url
           const mappedEntity = entity;
-          console.log(`Mapping ${entity.features[0]['@id'].split('/').pop()}`);
+          log(`Mapping entity ${entity.features[0]['@id'].split('/').pop()}`);
 
           mappedEntity.features[0].depictions = mappedEntity.features[0].depictions.map(depiction => {
             const remappedDepiction = depiction;
             const id = depiction.url.split('/').pop();
-            if(!depictionsInfo[id] || !depictionsInfo[id].extension) {
-              console.log(`Can't read depiction ${id}`);
-              console.log(depictionsInfo[id]);
+            if (!depictionsInfo[id] || !depictionsInfo[id].extension) {
+              log(`Can't read depiction ${id}`);
+              log(depictionsInfo[id]);
               return remappedDepiction;
             }
             const extension = depictionsInfo[id].extension;
@@ -73,7 +82,7 @@ export default {
           })
           return mappedEntity;
         })
-        console.log('Finished mapping depictions.');
+        log('Finished mapping depictions.');
 
         // const singles =  remappedPayload.map(entity => {
         //   return {
@@ -83,22 +92,23 @@ export default {
         // })
         const gallery = {
           route: '/data/gallery',
-          payload:remappedPayload
+          payload: remappedPayload
         }
         const list = {
           route: '/data/list',
-          payload:remappedPayload
+          payload: remappedPayload
         }
 
         const detaillist = {
           route: '/data/detaillist',
-          payload:remappedPayload
+          payload: remappedPayload
         }
         const map = {
           route: '/data/map',
           payload:remappedPayload
         }
         // return [...singles,list, gallery, detaillist, map]
+
         return [list, gallery, detaillist, map]
 
       })
