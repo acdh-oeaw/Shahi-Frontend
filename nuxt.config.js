@@ -39,31 +39,70 @@ export default {
   },
   generate: {
     routes() {
-      return axios.get('https://shahi.openatlas.eu/api/0.3/query/?view_classes=artifact&view_classes=place&limit=0').then(res => {
-        const singles =  res.data.results.map(entity => {
-          return {
-            route:'/single/' + entity.features[0]['@id'].split('/').pop(),
-            payload: entity
-          }
+      return axios.get('https://shahi.openatlas.eu/api/0.3/query/?view_classes=artifact&view_classes=place&limit=0').then(async res => {
+        // TODO: Maybe here is a good place to replace all links to the images in the db with the local images.
+        // in entity.features[0].depections?.foreach(depiction => depiction.url = `link/to/local/dir/${depiction.url.slice(findIndex of last '/')}`)
+        // There might be an issue with the file extension, since I do not know that ahead of time, but I'll see. Let's hope it works without specifying.
+
+        console.log('Fetching depictions info...');
+        const depictionsInfo = await axios.get('https://shahi.openatlas.eu/api/0.4/licensed_file_overview/');
+        console.log('Finished fetching depictions info');
+        
+        depic
+        
+        console.log('Start mapping depictions...');
+        const remappedPayload = res.data.results.map((entity, index) => {
+          // No images -> return entity as is
+          if(!entity.features[0].depictions || entity.features[0].depictions.length < 1)
+            return entity;
+
+          // has images -> remap ever image url to the local image url
+          const mappedEntity = entity;
+          console.log(`Mapping ${entity.features[0]['@id'].split('/').pop()}`);
+          
+          mappedEntity.features[0].depictions = mappedEntity.features[0].depictions.map(depiction => {
+            const remappedDepiction = depiction;
+            const id = depiction.url.split('/').pop();
+            if(!depictionsInfo[id] || !depictionsInfo[id].extension) {
+              console.log(`Can't read depiction ${id}`);
+              console.log(depictionsInfo[id]);
+              return remappedDepiction;
+            }
+            const extension = depictionsInfo[id].extension;
+
+            remappedDepiction.url = `/entity_files/${id + extension}`
+            return remappedDepiction;
+          })
+          return mappedEntity;
         })
+        console.log('Finished mapping depictions.');
+
+        // const singles =  remappedPayload.map(entity => {
+        //   return {
+        //     route:'/single/' + entity.features[0]['@id'].split('/').pop(),
+        //     payload: entity
+        //   }
+        // })
         const gallery = {
           route: '/data/gallery',
-          payload:res.data.results
+          payload:remappedPayload
         }
         const list = {
           route: '/data/list',
-          payload:res.data.results
+          payload:remappedPayload
         }
         
         const detaillist = {
           route: '/data/detaillist',
-          payload:res.data.results
+          payload:remappedPayload
         }
         const map = {
           route: '/data/map',
-          payload:res.data.results
+          payload:remappedPayload
         }
-        return [...singles,list, gallery, detaillist, map]
+        // return [...singles,list, gallery, detaillist, map]
+        return [list, gallery, detaillist, map]
+
       })
     },
     crawler: true,
