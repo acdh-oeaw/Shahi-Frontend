@@ -47,9 +47,7 @@ export default {
         console.log('Fetching depictions info...');
         const depictionsInfo = await axios.get('https://shahi.openatlas.eu/api/0.4/licensed_file_overview/');
         console.log('Finished fetching depictions info');
-        
-        depic
-        
+
         console.log('Start mapping depictions...');
         const remappedPayload = res.data.results.map((entity, index) => {
           // No images -> return entity as is
@@ -59,7 +57,7 @@ export default {
           // has images -> remap ever image url to the local image url
           const mappedEntity = entity;
           console.log(`Mapping ${entity.features[0]['@id'].split('/').pop()}`);
-          
+
           mappedEntity.features[0].depictions = mappedEntity.features[0].depictions.map(depiction => {
             const remappedDepiction = depiction;
             const id = depiction.url.split('/').pop();
@@ -91,7 +89,7 @@ export default {
           route: '/data/list',
           payload:remappedPayload
         }
-        
+
         const detaillist = {
           route: '/data/detaillist',
           payload:remappedPayload
