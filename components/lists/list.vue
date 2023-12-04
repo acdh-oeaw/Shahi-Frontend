@@ -199,7 +199,7 @@ export default {
     ...mapGetters('query', ['getQuery','getCurrentSystemClass']),
 
     itemsWithType() {
-      if (!this.items || this.items.length === 0) return [];
+      if (!this.items || this.items.length === 0 || !Array.isArray(this.items)) return [];
 
       const mappedItems = this.items.map((item) => {
         item.features[0].typeDict = item.features[0].types

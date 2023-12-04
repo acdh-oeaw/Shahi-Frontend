@@ -16,9 +16,29 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'DataVue',
   mixins: [favorites],
-  async asyncData ({ params, error, payload }) {
-    if (payload) return { items: payload }
-    else return { items: {} }  
+  async asyncData({ params, error, payload, query }) {
+    console.log('asyncData')
+
+    if (payload) {
+      return { items: payload }
+    }
+    else return { items: {} }
+  },
+  computed: {
+    filteredBaseItems: function () {
+      const items = this.items;
+      const query = this.$route.query;
+      const view_classes = query?.view_classes;
+      if (view_classes) {
+        return items.filter(item => {
+          for (const systemClass of view_classes) {
+            if (item.features[0].systemClass === systemClass) return true;
+            return false;
+          }
+        });
+      }
+      else return items;
+    }
   },
   data() {
     return {
