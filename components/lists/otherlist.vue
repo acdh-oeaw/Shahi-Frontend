@@ -107,8 +107,10 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import filterItemsMixin from '~/mixins/filterItemsMixin';
 
 export default {
+  mixins: [filterItemsMixin],
   props: {
     filter: {
       type: Object,
@@ -148,7 +150,8 @@ export default {
       },
     },
     filteredItems(){
-      return this.items.slice((this.options.page-1)*20,(this.options.page-1)*20+20)
+      const localItems = this.filteredBaseItems;
+      return localItems.slice((this.options.page - 1) * 20, (this.options.page - 1) * 20 + 20)
     },
     ...mapGetters('app', [
       'getTypesBySystemClass',

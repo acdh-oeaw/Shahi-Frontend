@@ -2,13 +2,13 @@
   <v-row no-gutters>
     <v-col xs="0" lg="9">
       <div class="fullheight">
-        <qmap v-if="!this.loading" :geojsonitems="items" />
+        <qmap v-if="!this.loading" :geojsonitems="filteredBaseItems" />
       </div>
     </v-col>
     <v-col xs="12" lg="3">
       <v-data-table
         :headers="$store.state.app.tableheaders.narrow"
-        :items="items"
+        :items="filteredBaseItems"
         :options.sync="options"
         :server-items-length="totalItems"
         :loading="loading"
@@ -56,8 +56,10 @@
 <script>
 import { mapGetters } from 'vuex';
 import qmap from '~/components/map.vue';
+import filterItemsMixin from '~/mixins/filterItemsMixin';
 
 export default {
+  mixins: [filterItemsMixin],
   components: {
     qmap,
   },

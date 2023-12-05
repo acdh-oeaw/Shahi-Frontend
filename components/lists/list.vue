@@ -140,8 +140,10 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import filterItemsMixin from '~/mixins/filterItemsMixin';
 
 export default {
+  mixins: [filterItemsMixin],
   props: {
     items: {
       type: Array,
@@ -196,12 +198,13 @@ export default {
       'getSortColumnByPath',
       'getSystemClassForFilter',
       'getFilterList']),
-    ...mapGetters('query', ['getQuery','getCurrentSystemClass']),
-
+    ...mapGetters('query', ['getQuery', 'getCurrentSystemClass']),
     itemsWithType() {
-      if (!this.items || this.items.length === 0 || !Array.isArray(this.items)) return [];
 
-      const mappedItems = this.items.map((item) => {
+      const localItems = this.filteredBaseItems;
+      if (!localItems || localItems.length === 0 || !Array.isArray(localItems)) return [];
+
+      const mappedItems = localItems.map((item) => {
         item.features[0].typeDict = item.features[0].types
           ?.map((x) => {
             [x.supertype] = x.hierarchy.split(' > ');

@@ -45,10 +45,12 @@
 import {mapGetters} from 'vuex';
 import favorites from '@/mixins/favorites.js';
 import favoriteIcon from '@/components/FavoriteIcon.vue';
+import filterItemsMixin from '~/mixins/filterItemsMixin';
+
 
 export default {
   components: {favoriteIcon},
-  mixins: [favorites],
+  mixins: [favorites, filterItemsMixin],
   props: {
     filter: {
       type: Object,
@@ -74,7 +76,7 @@ export default {
       loading: false,
       itemsPerPageOptions: [10, 20, 50, 100],
       itemIndex: [],
-     
+
     };
   },
 
@@ -110,7 +112,8 @@ export default {
       },
     },
     filteredItems(){
-      return this.items.slice((this.options.page-1)*20,(this.options.page-1)*20+20)
+      const localItems = this.filteredBaseItems;
+      return localItems.slice((this.options.page - 1) * 20, (this.options.page - 1) * 20 + 20)
     },
     ...mapGetters('app', [
       'getTypesBySystemClass',
@@ -187,3 +190,4 @@ export default {
   background-color: lightgray;
 }
 </style>
+~/mixins/filterItemsMixin
