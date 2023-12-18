@@ -1,19 +1,20 @@
 <template>
   <div class="data_map">
-    <dataMap :items="items" />
+    <dataMap :items="filteredBaseItems" />
   </div>
 </template>
 
 <script>
 import dataMap from '~/components/DataMap';
 import queries from '~/mixins/queries';
+import filterItemsMixin from '~/mixins/filterItemsMixin';
 
 export default {
   components: {
     dataMap,
   },
   props:['items', 'totalItems'],
-  mixins: [queries],
+  mixins: [queries, filterItemsMixin],
   data() {
     return {
       query: {},
