@@ -32,7 +32,7 @@
       :headers="showHeaders"
       :items="itemsWithType"
       :options.sync="options"
-      :server-items-length="totalItems"
+      :server-items-length="filteredBaseItems.length"
       @update:options="updateQuery"
       :loading="loading"
       :items-per-page="20"
