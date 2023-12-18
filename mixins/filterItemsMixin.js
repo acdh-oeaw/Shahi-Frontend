@@ -5,6 +5,7 @@ export default {
       const query = this.$route.query;
       const view_classes = query?.view_classes;
 
+      // let searchValue = getSearchValuesForType(query, 'entityName')[0];
       let searchValue = getSearchValue(query);
 
       if(searchValue && searchValue.length > 0) {
@@ -50,3 +51,41 @@ function getSearchValue(query) {
     return JSON.parse(search).entityName?.[0].values[0] ?? '';
   }
 }
+
+function getSearchValuesForType(query, type) {
+  const search = query?.search;
+  if (!search) return [];
+
+  if (Array.isArray(search)) { 
+    if(search.length < 1) return [];
+    const parsedSearch = search.map(s => JSON.parse(s));
+
+    const filteredSearches = parsedSearch.filter(s => s[type] !== undefined);
+    console.log(filteredSearches);
+    const searchValues = filteredSearches.reduce((pre, curr) => {
+      console.log('curr', curr);
+      console.log('pre', pre);
+      const currValues = curr[type][0].values;
+      console.log('currValues', currValues);
+      if(Array.isArray(pre)){
+        const combined = pre.concat(currValues);
+        console.log('combined', combined);
+        return combined
+      }
+      return currValues;
+    });
+    console.log(searchValues);
+    return searchValues;
+
+  } 
+
+  return JSON.parse(search)[type]?.[0].values?? [];
+}
+
+const searchers = [
+  { typeName: 'type', filterCategory: 'typeIDWithSubs', valueProperty: 'id' },
+  { typeName: 'name', filterCategory: 'entityName', valueProperty: 'value' },
+  { typeName: 'begin', filterCategory: 'beginFrom', valueProperty: 'value' },
+  { typeName: 'end', filterCategory: 'endFrom', valueProperty: 'value' },
+  { typeName: 'description', filterCategory: 'entityDescription', valueProperty: 'value' }
+];
