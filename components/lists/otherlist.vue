@@ -99,7 +99,7 @@
           </v-col>
         </v-row>
       </v-card>
-      <v-pagination :value="parseInt(options.page)" :length="Math.floor(totalItems / options.itemsPerPage)"
+      <v-pagination :value="parseInt(options.page)" :length="Math.ceil(filteredBaseItems.length / options.itemsPerPage)"
         :total-visible="7" @input="newPage" />
     </div>
   </div>
@@ -151,7 +151,9 @@ export default {
     },
     filteredItems(){
       const localItems = this.filteredBaseItems;
-      return localItems.slice((this.options.page - 1) * 20, (this.options.page - 1) * 20 + 20)
+      const currentPage = this.options.page - 1;
+      const ipp = this.options.itemsPerPage;
+      return localItems.slice(currentPage * ipp, currentPage * ipp + ipp)
     },
     ...mapGetters('app', [
       'getTypesBySystemClass',
