@@ -1,14 +1,14 @@
 export default {
   computed: {
     filteredBaseItems: function () {
-      const items = this.items;
+      let items = this.items;
       const query = this.$route.query;
       const view_classes = query?.view_classes;
 
       let searchValue = getSearchValue(query);
 
       if(searchValue && searchValue.length > 0) {
-        return items.filter(item => {
+        items = items.filter(item => {
           const inTitle = item.features[0].properties.title.toLowerCase().includes(searchValue.toLowerCase());
           const inDescription = item.features[0].descriptions.find(desc => {
             return desc?.value?.toLowerCase().includes(searchValue.toLowerCase())}) !== undefined;
@@ -16,15 +16,12 @@ export default {
         });
       }
 
-      // console.log('view_classes', view_classes);
-      // if (view_classes) {
-      //   return items.filter(item => {
-      //     for (const systemClass of view_classes) {
-      //       if (item.features[0].systemClass === systemClass) return true;
-      //     }
-      //     return false;
-      //   });
-      // }
+      console.log('view_classes', view_classes);
+      if (view_classes) {
+        items = items.filter(item => {
+          return view_classes.includes(item.features[0].systemClass);
+        });
+      }
       
       return items;
     },
@@ -49,8 +46,8 @@ function getSearchValue(query) {
     if(search.length < 1) return "";
     const parsedSearch = search.map(s => {
       return JSON.parse(s)});
-    return parsedSearch[0].entityName[0].values[0];
+    return parsedSearch[0].entityName?.[0].values[0] ?? '';
   } else {
-    return JSON.parse(search).entityName[0].values[0];
+    return JSON.parse(search).entityName?.[0].values[0] ?? '';
   }
 }
