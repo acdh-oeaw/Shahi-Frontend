@@ -16,7 +16,6 @@ export default {
         });
       }
 
-      console.log('view_classes', view_classes);
       if (view_classes) {
         items = items.filter(item => {
           return view_classes.includes(item.features[0].systemClass);
