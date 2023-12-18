@@ -190,4 +190,3 @@ export default {
   background-color: lightgray;
 }
 </style>
-~/mixins/filterItemsMixin
