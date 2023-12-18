@@ -34,7 +34,7 @@
     <v-pagination
       class="ma-6"
       :value="parseInt(options.page)"
-      :length="Math.floor(totalItems / options.itemsPerPage)"
+      :length="Math.ceil(filteredBaseItems.length / options.itemsPerPage)"
       :total-visible="7"
       @input="newPage"
     />
