@@ -16,15 +16,15 @@ export default {
         });
       }
 
-      console.log('view_classes', view_classes);
-      if (view_classes) {
-        return items.filter(item => {
-          for (const systemClass of view_classes) {
-            if (item.features[0].systemClass === systemClass) return true;
-          }
-          return false;
-        });
-      }
+      // console.log('view_classes', view_classes);
+      // if (view_classes) {
+      //   return items.filter(item => {
+      //     for (const systemClass of view_classes) {
+      //       if (item.features[0].systemClass === systemClass) return true;
+      //     }
+      //     return false;
+      //   });
+      // }
       
       return items;
     },
