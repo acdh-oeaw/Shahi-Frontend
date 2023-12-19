@@ -40,7 +40,7 @@
             </nuxt-link>
           </div>
         </div>
-        <template v-if="$vuetify.breakpoint.mdAndUp" v-slot:extension>
+        <!-- <template v-if="$vuetify.breakpoint.mdAndUp" v-slot:extension>
           <div class="d-none d-md-flex flex-wrap align-center  text-overline mx-1" style="width: 100%; overflow: auto">
             <div
               v-for="(item,index) in navBarItems"
@@ -59,7 +59,7 @@
             </div>
 
           </div>
-        </template>
+        </template> -->
       </v-app-bar>
     </v-expand-transition>
     <v-main>

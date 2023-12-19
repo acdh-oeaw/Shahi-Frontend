@@ -1,6 +1,6 @@
 <template>
   <div class="nav elevation-1 grey lighten-3">
-    <v-btn
+    <!-- <v-btn
       v-for="(item,index) in items"
       :key="index"
       text
@@ -14,7 +14,7 @@
       @click="toFavs"
     >
       Favorites
-    </v-btn>
+    </v-btn> -->
   </div>
 </template>
 
