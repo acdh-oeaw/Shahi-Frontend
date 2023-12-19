@@ -10,13 +10,12 @@
     max-width="100vw"
     class="transition"
   >
-    <template v-slot:activator="{ on, attrs }">
+    <!-- <template v-slot:activator="{ on, attrs }">
       <v-icon v-bind="attrs" v-on="on">
         mdi-filter
       </v-icon>
-    </template>
-    <menu-window>
-      <!--System Classes-->
+    </template> -->
+    <!-- <menu-window>
       <v-card-text v-if="false">
         <v-btn
           v-for="(systemClass, index) in filterElements"
@@ -28,7 +27,6 @@
           {{ systemClass.en }}
         </v-btn>
       </v-card-text>
-      <!--Current Filters-->
       <v-expand-transition>
         <v-card-text
           v-if="currentFilters.length !=0"
@@ -53,10 +51,8 @@
           </v-chip>
         </v-card-text>
       </v-expand-transition>
-      <!--Normal Search-->
       <v-card-text v-if="!globalSearch" class="mt-1 pt-0">
         <v-row no-gutters>
-          <!--Select Supertype-->
           <v-col cols="12" sm="auto" style="min-width: 200px">
             <v-btn
               v-if="$vuetify.breakpoint.xsOnly"
@@ -93,7 +89,6 @@
               </v-list>
             </v-slide-y-transition>
           </v-col>
-          <!--Select Subtypes-->
           <v-col v-if="selectedClass !== undefined &&selected !== undefined" style="width: 500px">
             <v-slide-y-transition mode="out-in">
               <v-card v-if="!showSupertype || $vuetify.breakpoint.smAndUp" flat>
@@ -119,7 +114,6 @@
                 <v-card-text
                   style="overflow: auto; max-height: 370px"
                 >
-                  <!--Type search-->
                   <v-row
                     v-if="
                       filterElements[selectedClass].items[selected].type ===
@@ -182,7 +176,6 @@
                       </v-expand-transition>
                     </v-col>
                   </v-row>
-                  <!--String search-->
                   <v-row
                     v-if="
                       filterElements[selectedClass].items[selected].type ===
@@ -199,7 +192,6 @@
                       <v-text-field v-model="item.value" :label="item.en" @keydown.enter="search"/>
                     </v-col>
                   </v-row>
-                  <!--Time Search-->
                   <v-row
                     v-if="
                       filterElements[selectedClass].items[selected].type ===
@@ -222,7 +214,6 @@
           </v-col>
         </v-row>
       </v-card-text>
-      <!--Global Search-->
       <div v-else>
         <v-card-text>
           <p class="text-body-1">
@@ -280,7 +271,7 @@
         <v-icon>mdi-magnify</v-icon>
         Search
       </v-btn>
-    </menu-window>
+    </menu-window> -->
   </v-menu>
 </template>
 
@@ -417,7 +408,7 @@ export default {
       setCodes: 'query/setCodes',
     }),
     async loadAllTypesFromBackend() {
-      
+
       const typeTree = this.typeTree
       this.filterElements.forEach((filterElement) => {
         filterElement.items.forEach((item) => {

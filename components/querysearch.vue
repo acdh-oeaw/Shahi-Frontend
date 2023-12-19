@@ -16,7 +16,7 @@
     data-app
   >
     <template v-slot:append>
-      <logical-operator-editor v-if="getFiltersFlat.length > 1" class="mr-4"/>
+      <!-- <logical-operator-editor v-if="getFiltersFlat.length > 1" class="mr-4"/> -->
       <FilterWindow :search-keydown-enter="searchKeydownEnter" :global-search="globalSearch" :open-window="open"/>
     </template>
     <template v-slot:selection="{ attrs, item, parent, selected }">
