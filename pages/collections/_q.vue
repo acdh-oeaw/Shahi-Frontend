@@ -16,7 +16,7 @@
     />
     <div class="data_map"
          v-if="view==='map'">
-      <dataMap :customQuery="customQuery" />
+      <dataMap :items="items" />
     </div>
     <gallery-list
       v-if="view==='gallery'"
