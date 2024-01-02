@@ -45,6 +45,8 @@ $ npm run dev
 
 ## For Deployment
 
+Get all the media files from the backend and put them into the `/static/entity_files` folder. Their names should be the same as the entity ids in the database, followed by the file extension. For example, if the entity id is `123`, the image should be named `123.jpg`.
+
 Generate the project files to /dist
 ```
 $ npm run export

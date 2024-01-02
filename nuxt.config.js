@@ -84,33 +84,32 @@ export default {
         })
         log('Finished mapping depictions.');
 
-        // const singles =  remappedPayload.map(entity => {
-        //   return {
-        //     route:'/single/' + entity.features[0]['@id'].split('/').pop(),
-        //     payload: entity
-        //   }
-        // })
-        // const gallery = {
-        //   route: '/data/gallery',
-        //   payload: remappedPayload
-        // }
-        // const list = {
-        //   route: '/data/list',
-        //   payload: remappedPayload
-        // }
+        const singles =  remappedPayload.map(entity => {
+          return {
+            route:'/single/' + entity.features[0]['@id'].split('/').pop(),
+            payload: entity
+          }
+        })
+        const gallery = {
+          route: '/data/gallery',
+          payload: remappedPayload
+        }
+        const list = {
+          route: '/data/list',
+          payload: remappedPayload
+        }
 
-        // const detaillist = {
-        //   route: '/data/detaillist',
-        //   payload: remappedPayload
-        // }
-        // const map = {
-        //   route: '/data/map',
-        //   payload:remappedPayload
-        // }
-        // return [...singles,list, gallery, detaillist, map]
+        const detaillist = {
+          route: '/data/detaillist',
+          payload: remappedPayload
+        }
+        const map = {
+          route: '/data/map',
+          payload:remappedPayload
+        }
+        return [...singles,list, gallery, detaillist, map]
 
-        // return [list, gallery, detaillist, map]
-        return []
+        return [list, gallery, detaillist, map]
       })
     },
     crawler: true,
