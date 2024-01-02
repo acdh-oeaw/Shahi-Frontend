@@ -13,14 +13,15 @@ export default {
   name: "_id.vue",
   async asyncData({ params, error, payload }) {
     if (payload && Object.keys(payload).length !== 0) return { item: payload };
-    else {
-      //this.loading = true;
-      const p = await this.$api.Entities.get_api_0_3_entity__id__({
-        id_: this.$route.params.id,
-      });
-      //this.loading = false;
-      return { item: p.body };
-    }
+    // else {
+    //   //this.loading = true;
+    //   const p = await this.$api.Entities.get_api_0_3_entity__id__({
+    //     id_: this.$route.params.id,
+    //   });
+    //   //this.loading = false;
+    //   return { item: p.body };
+    // }
+    return { item: null };
   },
   data() {
     return {

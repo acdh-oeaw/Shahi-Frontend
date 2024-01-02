@@ -50,7 +50,7 @@ export default {
         // Function to log messages to console and file
         const log = (message) => {
           console.log(message);
-          logStream.write(`${message}\n`);
+          // logStream.write(`${message}\n`);
         };
 
         log('Fetching depictions info...');
@@ -90,27 +90,27 @@ export default {
         //     payload: entity
         //   }
         // })
-        const gallery = {
-          route: '/data/gallery',
-          payload: remappedPayload
-        }
-        const list = {
-          route: '/data/list',
-          payload: remappedPayload
-        }
+        // const gallery = {
+        //   route: '/data/gallery',
+        //   payload: remappedPayload
+        // }
+        // const list = {
+        //   route: '/data/list',
+        //   payload: remappedPayload
+        // }
 
-        const detaillist = {
-          route: '/data/detaillist',
-          payload: remappedPayload
-        }
-        const map = {
-          route: '/data/map',
-          payload:remappedPayload
-        }
+        // const detaillist = {
+        //   route: '/data/detaillist',
+        //   payload: remappedPayload
+        // }
+        // const map = {
+        //   route: '/data/map',
+        //   payload:remappedPayload
+        // }
         // return [...singles,list, gallery, detaillist, map]
 
-        return [list, gallery, detaillist, map]
-
+        // return [list, gallery, detaillist, map]
+        return []
       })
     },
     crawler: true,
