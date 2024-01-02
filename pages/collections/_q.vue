@@ -113,13 +113,25 @@ export default {
 
 
       const descriptions = await Promise.all(
-        this.items.map(item => {
-          if(!item.features[0].depictions?.[0]?.['@id']) return Promise.resolve(null);
-
-          return this.$api.Entities.get_api_0_3_entity__id__({
-            id_: item.features[0].depictions?.[0]['@id'].split('/').at(-1),
-            show: 'description'
-          })
+        this.items.map(async item => {
+            const depictionID = item.features[0].depictions?.[0]['@id'].split('/').at(-1);
+            if(!depictionID) return null;
+            try {
+              
+              const description = await this.$api.Entities.get_api_0_3_entity__id__({
+                id_: depictionID,
+                show: 'description'
+              });
+              return description;
+            } catch (error) {
+              if (error.response && error.response.status === 502) {
+                console.log(`Bad Gateway error for id: ${depictionID}`);
+              } else {
+                console.log(`Error for id: ${depictionID}`)
+                console.log(error);
+              }
+              return null;
+            }
         })
       );
 

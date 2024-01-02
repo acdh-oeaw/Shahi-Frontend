@@ -44,11 +44,10 @@ export default {
   props: ['item', 'color'],
   computed: {
     description(){
-      return ''
+      return this.item.features[0].depictions?.[0].description || ''
     }
   },
   mounted() {
-    console.log(this.item)
   },
 }
 </script>
