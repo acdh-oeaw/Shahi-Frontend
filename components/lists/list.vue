@@ -174,8 +174,8 @@ export default {
         return {
           sortBy: [],
           sortDesc: [],
-          page: this.$route.query.page || 1,
-          itemsPerPage: this.$route.query.itemsPerPage || 10,
+          page: this.$route.query?.page ?? 1,
+          itemsPerPage: this.$route.query?.itemsperpage ?? 10,
         };
       },
       set(newValue) {

@@ -106,8 +106,8 @@ export default {
         return {
           sortBy: [],
           sortDesc: [],
-          page: this.$route.query.page || 1,
-          itemsPerPage: this.$route.query.itemsperpage || 20,
+          page: this.$route.query?.page ?? 1,
+          itemsPerPage: this.$route.query?.itemsperpage ?? 20,
         };
       },
     },
