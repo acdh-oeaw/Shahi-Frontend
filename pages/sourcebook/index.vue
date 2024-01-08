@@ -70,7 +70,7 @@ export default {
     };
   },
   async mounted() {
-    const p = await this.$api.Entities.get_api_0_3_entity__id__({
+    const p = await this.$api.Entities.get_api_entity__id__({
       id_: 2267,
     });
     this.sourcebook = p.body.features[0];

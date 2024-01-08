@@ -56,7 +56,7 @@ export default {
   },
 
   async mounted() {
-    const p = await this.$api.Entities.get_api_0_3_entity__id__({
+    const p = await this.$api.Entities.get_api_entity__id__({
       id_: this.collection.id,
     });
     this.collectionDetails = p.body.features[0];
@@ -78,7 +78,7 @@ export default {
       async handler() {
         if (!this.image) return;
 
-        const q = await this.$api.Entities.get_api_0_3_entity__id__({
+        const q = await this.$api.Entities.get_api_entity__id__({
           id_: this.image['@id'].split('/').at(-1),
           show: 'description'
         });

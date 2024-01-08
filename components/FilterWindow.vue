@@ -412,7 +412,7 @@ export default {
       setCodes: 'query/setCodes',
     }),
     async loadAllTypesFromBackend() {
-      const p = await this.$api.Nodes.get_api_0_3_type_tree_();
+      const p = await this.$api.Nodes.get_api_type_tree_();
       const typeTree = Object.values(p.body.typeTree);
 
       this.filterElements.forEach((filterElement) => {

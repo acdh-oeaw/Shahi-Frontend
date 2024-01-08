@@ -109,7 +109,7 @@ export default {
     images: {
       async handler() {
         for (const image of this.images) {
-          const p = await this.$api.Entities.get_api_0_3_entity__id__({
+          const p = await this.$api.Entities.get_api_entity__id__({
             id_: image['@id'].split('/').at(-1),
             show: 'description'
           });

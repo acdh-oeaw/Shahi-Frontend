@@ -16,7 +16,7 @@ export default {
     this.loading = true;
     try {
       // eslint-disable-next-line no-underscore-dangle
-      const p = await this.$api.Entities.get_api_0_3_type_entities__id__({
+      const p = await this.$api.Entities.get_api_type_entities__id__({
         id_: this.collectionId,
         limit: 0,
         show: 'depictions'

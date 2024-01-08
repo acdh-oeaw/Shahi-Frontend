@@ -25,7 +25,7 @@ export default {
     } = this.options;
     try {
       // eslint-disable-next-line no-underscore-dangle
-      const p = await this.$api.Entities.get_api_0_3_query_({
+      const p = await this.$api.Entities.get_api_query_({
         limit: itemsPerPage,
         first: this.itemIndex[page - 1] ? this.itemIndex[page - 1].startId : null,
         view_classes: this.query?.view_classes,
