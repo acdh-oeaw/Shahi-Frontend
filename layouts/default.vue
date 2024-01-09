@@ -323,7 +323,7 @@ export default {
     },
   },
   async mounted() {
-    this.title = 'Shahi';
+    this.title = 'Shahi Kingdoms Database';
     window.addEventListener('scroll', this.onScroll);
   },
   beforeDestroy() {
