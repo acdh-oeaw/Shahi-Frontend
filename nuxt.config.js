@@ -31,7 +31,6 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/icon.ico' },
     ],
     script: [
-
       {
         src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
 
@@ -40,7 +39,7 @@ export default {
   },
   generate: {
     routes() {
-      return axios.get('https://shahi.openatlas.eu/api/0.3/query/?view_classes=artifact&view_classes=place&limit=0').then(async res => {
+      return axios.get('https://shahi.openatlas.eu/api/query/?view_classes=artifact&view_classes=place&limit=0').then(async res => {
         const fs = require('fs');
         const path = require('path');
 

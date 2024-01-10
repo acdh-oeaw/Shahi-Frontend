@@ -306,9 +306,9 @@ export default {
   },
   mixins: [favorites],
   async fetch(){
-    const content = await this.$api.Content.get_api_0_3_content_({});
-    this.$store.commit('app/setSiteName', content.body['site-name']);
-    this.title = content.body['site-name'];
+    const siteName = 'Shahi Kingdoms Database'
+    this.$store.commit('app/setSiteName', siteName);
+    this.title = siteName;
   },
   data() {
     return {

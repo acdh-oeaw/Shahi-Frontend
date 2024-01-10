@@ -18,7 +18,7 @@ import { mapGetters } from 'vuex';
 export default {
 
   async fetch(){
-    const p = await this.$api.Nodes.get_api_0_3_type_tree_();
+    const p = await this.$api.Nodes.get_api_type_tree_();
     const typeTree  = Object.values(p.body.typeTree);
     this.collections = typeTree.filter((x) => x?.root?.[0] === 1969);
   },

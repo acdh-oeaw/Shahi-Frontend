@@ -106,7 +106,7 @@ export default {
     async loadAllFromApi() {
       let localItems = [];
 
-      const p = await this.$api.Entities.get_api_0_3_query_({
+      const p = await this.$api.Entities.get_api_query_({
         view_classes: this.customQuery?.view_classes || this.query?.view_classes,
         search: this.customQuery?.search || this.query?.search,
         limit: 0,
