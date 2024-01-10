@@ -32,7 +32,7 @@ export default {
     ],
     script: [
       {
-        src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
+        src: 'https://code.jquery.com/jquery-3.7.1.min.js',
 
       },
     ]
