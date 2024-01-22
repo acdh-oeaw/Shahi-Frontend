@@ -40,16 +40,11 @@ export default {
   generate: {
     routes() {
       return axios.get('https://shahi.openatlas.eu/api/query/?view_classes=artifact&view_classes=place&limit=0').then(async res => {
-        const fs = require('fs');
-        const path = require('path');
 
-        // Create a write stream to the log file
-        const logStream = fs.createWriteStream(path.join(__dirname, 'logs.txt'), { flags: 'a' });
 
         // Function to log messages to console and file
         const log = (message) => {
           console.log(message);
-          // logStream.write(`${message}\n`);
         };
 
         log('Fetching depictions info...');
@@ -64,7 +59,6 @@ export default {
 
           // has images -> remap ever image url to the local image url
           const mappedEntity = entity;
-          log(`Mapping entity ${entity.features[0]['@id'].split('/').pop()}`);
 
           mappedEntity.features[0].depictions = mappedEntity.features[0].depictions.map(depiction => {
             const remappedDepiction = depiction;
@@ -107,10 +101,9 @@ export default {
           payload:remappedPayload
         }
         return [...singles,list, gallery, detaillist, map]
-
-        return [list, gallery, detaillist, map]
       })
     },
+    concurrency: 10,
     crawler: true,
     fallback: true,
     exclude: [
