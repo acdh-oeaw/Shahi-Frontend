@@ -34,7 +34,7 @@ export default {
     //   return
     // }
 
-    // const p = await this.$api.Entities.get_api_0_3_entity__id__({
+    // const p = await this.$api.Entities.get_api_entity__id__({
     //   id_: this.item.features[0].depictions?.[0]['@id'].split('/').at(-1),
     //   show: 'description'
     // });

@@ -32,7 +32,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   async fetch(){
-    const i = await this.$api.Entities.get_api_0_3_entity__id__({
+    const i = await this.$api.Entities.get_api_entity__id__({
         id_: this.$route.params.q,
       });
       this.item = i.body?.features[0]

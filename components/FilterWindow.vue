@@ -286,7 +286,7 @@ export default {
     searchKeydownEnter: {type: Boolean, default: false},
   },
   async fetch(){
-    const p = await this.$api.Nodes.get_api_0_3_type_tree_();
+    const p = await this.$api.Nodes.get_api_type_tree_();
     this.typeTree = Object.values(p.body.typeTree);
   },
   data() {

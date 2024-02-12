@@ -3,8 +3,7 @@
   "info": {
     "title": "OpenAtlas Api",
     "description": "This is the unstable version of the OpenAtlas API",
-    "termsOfService": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html",
-    "version": "0.3"
+    "termsOfService": "https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html"
   },
   "servers": [
     {
@@ -27,7 +26,7 @@
     }
   ],
   "paths": {
-    "/api/0.3/cidoc_class/{cidoc_class}": {
+    "/api/cidoc_class/{cidoc_class}": {
       "get": {
         "tags": [
           "Entities"
@@ -242,7 +241,7 @@
         }
       }
     },
-    "/api/0.3/classes/": {
+    "/api/classes/": {
       "get": {
         "tags": [
           "Content"
@@ -269,7 +268,7 @@
         }
       }
     },
-    "/api/0.3/content/": {
+    "/api/content/": {
       "get": {
         "tags": [
           "Content"
@@ -321,7 +320,7 @@
         }
       }
     },
-    "/api/0.3/entities_linked_to_entity/{id_}": {
+    "/api/entities_linked_to_entity/{id_}": {
       "get": {
         "tags": [
           "Entities"
@@ -536,7 +535,7 @@
         }
       }
     },
-    "/api/0.3/entity/{id_}": {
+    "/api/entity/{id_}": {
       "get": {
         "tags": [
           "Entities"
@@ -635,7 +634,7 @@
         }
       }
     },
-    "/api/0.3/geometric_entities/": {
+    "/api/geometric_entities/": {
       "get": {
         "tags": [
           "Content"
@@ -683,7 +682,7 @@
         }
       }
     },
-    "/api/0.3/latest/{latest}": {
+    "/api/latest/{latest}": {
       "get": {
         "tags": [
           "Entities"
@@ -782,7 +781,7 @@
         }
       }
     },
-    "/api/0.3/query/": {
+    "/api/query/": {
       "get": {
         "tags": [
           "Entities"
@@ -1061,7 +1060,7 @@
         }
       }
     },
-    "/api/0.3/subunits/{id_}": {
+    "/api/subunits/{id_}": {
       "get": {
         "tags": [
           "Nodes"
@@ -1135,7 +1134,7 @@
         }
       }
     },
-    "/api/0.3/system_class/{system_class}": {
+    "/api/system_class/{system_class}": {
       "get": {
         "tags": [
           "Entities"
@@ -1366,7 +1365,7 @@
         }
       }
     },
-    "/api/0.3/system_class_count/": {
+    "/api/system_class_count/": {
       "get": {
         "tags": [
           "Content"
@@ -1389,7 +1388,7 @@
         }
       }
     },
-    "/api/0.3/type_entities/{id_}": {
+    "/api/type_entities/{id_}": {
       "get": {
         "tags": [
           "Entities"
@@ -1604,7 +1603,7 @@
         }
       }
     },
-    "/api/0.3/type_entities_all/{id_}": {
+    "/api/type_entities_all/{id_}": {
       "get": {
         "tags": [
           "Entities"
@@ -1819,7 +1818,7 @@
         }
       }
     },
-    "/api/0.3/type_overview/": {
+    "/api/type_overview/": {
       "get": {
         "tags": [
           "Nodes"
@@ -1856,7 +1855,7 @@
         }
       }
     },
-    "/api/0.3/type_tree/": {
+    "/api/type_tree/": {
       "get": {
         "tags": [
           "Nodes"
@@ -1893,7 +1892,7 @@
         }
       }
     },
-    "/api/0.3/view_class/{view_class}": {
+    "/api/view_class/{view_class}": {
       "get": {
         "tags": [
           "Entities"
