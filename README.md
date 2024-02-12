@@ -1,5 +1,7 @@
 # Shahi Kingdoms Database
 
+This is the branch for the Static Site Generation (SSG), for a manual on how to use it see [here](SSG_Documentation.md)
+
 # About
 
 Shahi Kingdoms Database is a presentation webapp for the [Shahi](https://shahimaterialculture.univie.ac.at/) Project.
@@ -16,7 +18,7 @@ Please refer to the file COPYING in the root directory of this repository.
 
 All documentation and images unless otherwise noted are licensed under the terms of Creative Commons
 Attribution-ShareAlike 4.0 International License.
-To view a copy of this license, visit 
+To view a copy of this license, visit
 [http://creativecommons.org/licenses/by-sa/4.0/](http://creativecommons.org/licenses/by-sa/4.0/)
 
 # Technology
@@ -59,7 +61,7 @@ npm run start
 ```
 When you are serving the application from your own server (ie Apache) you need to configure it
 accordingly to avoid 404 responses on dynamically generated routes. Some examples can be found
-in the [Vue Router Documentation](https://router.vuejs.org/guide/essentials/history-mode.html#example-server-configurations) 
+in the [Vue Router Documentation](https://router.vuejs.org/guide/essentials/history-mode.html#example-server-configurations)
 
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
@@ -71,5 +73,5 @@ This repository is setup to bind to any address if the container is run in an en
 E. g. for the latest master branch image on Windows or Linux using docker you can run the service like this
 
 ```bash
-docker run --rm -it -p 8080:8080 -e PORT=8080 -e GITLAB_ENVIRONMENT_NAME=something registry.gitlab.com/acdh-oeaw/shahi/shahi-frontend/master 
+docker run --rm -it -p 8080:8080 -e PORT=8080 -e GITLAB_ENVIRONMENT_NAME=something registry.gitlab.com/acdh-oeaw/shahi/shahi-frontend/master
 ```
