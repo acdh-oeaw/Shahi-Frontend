@@ -21,8 +21,6 @@ jobs:
       APP_NAME: shahi-frontend
 # This together with the branch name is also used as the namespace to deploy to
       APP_ROOT: "/"
-      SERVICE_ID: "19381"
-      PUBLIC_URL: https://shahi.acdh.oeaw.ac.at
       POSTGRES_ENABLED: "false"
     steps:
       - run: "/bin/true"      
