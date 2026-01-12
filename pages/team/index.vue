@@ -5,11 +5,7 @@
     </h1>
 
     <p class="text-body-1">
-      Based at the University of Vienna, Austrian Academy of Sciences, and Art History Museum
-      Vienna, the Shahi project is directed by Univ.-Prof. Dr. Deborah Klimburg-Salter in cooperation with National
-      Research Partner HR Doz. Dr. Michael Alram, Doz. Dr. Klaus Vondrovec, Dr. Natasha Kimmet, Mag. Malgorzata Lenko,
-      and Aleksandra Apic, BA MA. This core team collaborates with a wider research network of over thirty scholars and
-      museum professionals.
+      Based at the University of Vienna, Austrian Academy of Sciences, and Art History Museum Vienna, the Shahi Project was directed by Univ.-Prof. Dr. Deborah Klimburg-Salter in cooperation with National Research Partner HR Doz. Dr. Michael Alram, Doz. Dr. Klaus Vondrovec, Dr. Natasha Kimmet, and Mag. Malgorzata Lenko. This core team collaborated with a wider research network of scholars, museum professionals, and digital humanities experts.
     </p>
     <v-row>
       <v-col
@@ -70,7 +66,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <p class="text-h5 mt-15">Partners</p>
+    <!-- <p class="text-h5 mt-15">Research Partners</p> -->
     <v-list v-for="partner in partners" :key="partner.name">
       <v-subheader class="text-h6">{{partner.name}}</v-subheader>
       <v-list-item v-for="(member,index) in partner.members" :key="index">
@@ -81,11 +77,12 @@
 
           <v-list-item-subtitle v-text="member.institute"></v-list-item-subtitle>
         </v-list-item-content>
-
       </v-list-item>
+      <v-list-item v-if="partner.htmlContent" v-html="partner.htmlContent" class="d-block"></v-list-item>
     </v-list>
   </v-container>
 </template>
+
 
 <script>
 export default {
@@ -150,60 +147,56 @@ export default {
             'Dr. Natasha Kimmet',
           references:
             [
-              'University of Vienna / Austrian Academy of Sciences',
+              'Eskenazi Museum of Art, Indiana University (previously University of Vienna / Austrian Academy of Sciences)',
             ],
           text:
             [
-              'Kimmet is an art historian of South Asia, Tibet, and the Himalayas. Her research interests include Buddhist art and architecture, the arts of Afghanistan and Historical Northwest India, vernacular architecture of Tibet and the Himalayas, and methodologies in borderland and cultural transfer studies. She completed her PhD at the University of Vienna with a dissertation offering the first documentation and historical examination of residential architecture on the high-altitude frontier of historical West Tibet (upper Kinnaur, India). Kimmet has presented the art of South Asia and the Himalayas to specialist and broad audiences. As 2015-2017 Curatorial Fellow at the Rubin Museum of Art, she curated ‘Monumental Lhasa: Fortress, Palace, Temple.’ Since 2011, she has taught Afghan art history and curatorial practice in the University of Vienna / National Museum of Afghanistan Kabul Museum Project. As Postdoctoral Researcher in the Shahi project, Kimmet’s research concentrates on Buddhist clay-based sculpture.a',
+              'Kimmet is an art historian of South Asia, Tibet, and the Himalayas. Her research interests include Buddhist art and architecture, the arts of Afghanistan and Historical Northwest India, vernacular architecture of Tibet and the Himalayas, and methodologies in borderland and cultural transfer studies. She completed her PhD at the University of Vienna with a dissertation offering the first documentation and historical examination of residential architecture on the high-altitude frontier of historical West Tibet (upper Kinnaur, India). Since 2024, she is Pamela Buell Curator of Asian Art at the Eskenazi Museum of Art at Indiana University. Previously, she was Curatorial Fellow at the Rubin Museum of Art (2015-2017) and taught Afghan art history and curatorial practice in the University of Vienna—National Museum of Afghanistan Kabul Museum Project (2018-2021). As Postdoctoral Researcher in the Shahi Project at the University of Vienna and the Austrian Academy of Sciences, Kimmet’s research concentrated on Buddhist clay-based sculpture. She is project manager of the Shahi Kingdoms Digital Research Platform and co-editor of the dual-format digital and print publication.',
             ],
           image:
             'https://shahimaterialculture.univie.ac.at/fileadmin/_processed_/csm_322_x_368_Kimmet_c3a0a92031.png',
         },
         {
           name:
-            'Mag.phil. Gosia Lenko',
+            'Mag.phil. Malgorzata Lenko',
           references:
             [
               'University of Vienna, Department of Art History',
             ],
           text:
             [
-              'Lenko is an art historian specializing in South and Southeast Asia. She is a PhD candidate at the University of Vienna’s Department of Art History where she received her MA with a thesis on the narrative art of Borobudur (Central Java) and Tabo (Himachal Pradesh). In the Shahi project, Lenko’s research focuses on the production and enhancement technologies of portable metal sculptures. She is also responsible for coordination of financial and administrative processes in the project.',
+              'Lenko is an art historian specializing in South and Southeast Asia. She is a PhD candidate at the University of Vienna’s Department of Art History where she received her MA with a thesis on the narrative Buddhist art of Borobudur (Central Java) and Tabo (Himachal Pradesh). In the Shahi Project, Lenko’s research focused on the production and enhancement technologies of portable metal sculptures. She managed the project’s financial and administrative processes and facilitated cooperation within the international network of collaborating scholars. She also contributed to the University of Vienna–National Museum of Afghanistan Kabul Museum Project (2018), overseeing selected administrative components. As Digital Editor, she was responsible for the development and integration of the project’s database and digital publication.',
             ],
         },
-        {
-          name:
-            'Aleksandra Apic, BA MA',
-          references:
-            [
-              'University of Vienna, Department of Art History / CIRDIS',
-            ],
-          text:
-            [
-              'Apic is an art historian and PhD candidate in Chinese art at the University of Vienna’s Department of Art History. She is particularly interested in the materials and technologies of early and medieval Buddhist metal sculptures in South and East Asia as reflected in her MA thesis about a unique Buddhist metal sculpture from Historical Northwest India. In the Shahi project, Apic coordinates visual resources for the Shahi Kingdoms Database.',
-            ],
-        },
+        // {
+        //   name:
+        //     'Aleksandra Apic, BA MA',
+        //   references:
+        //     [
+        //       'University of Vienna, Department of Art History / CIRDIS',
+        //     ],
+        //   text:
+        //     [
+        //       'Apic is an art historian and PhD candidate in Chinese art at the University of Vienna’s Department of Art History. She is particularly interested in the materials and technologies of early and medieval Buddhist metal sculptures in South and East Asia as reflected in her MA thesis about a unique Buddhist metal sculpture from Historical Northwest India. In the Shahi project, Apic coordinates visual resources for the Shahi Kingdoms Database.',
+        //     ],
+        // },
 
       ],
       partners: [
-        {
-          name: 'CIRDIS',
-          members: [
-            {
-              name: 'Dr. Verena Widorn',
-              institute: 'University of Vienna, Department of Art History / CIRDIS',
-              link: 'https://univie.academia.edu/VerenaWidorn',
-            },
-            {
-              name: 'Jürgen Schörflinger, BA',
-              institute: 'University of Vienna, CIRDIS',
-              link: 'https://ufind.univie.ac.at/en/person.html?id=32472',
-            },
+        // {
+        //   name: 'CIRDIS',
+        //   members: [
 
-          ],
-        },
+        //     {
+        //       name: 'Jürgen Schörflinger, BA',
+        //       institute: 'University of Vienna, CIRDIS',
+        //       link: 'https://ufind.univie.ac.at/en/person.html?id=32472',
+        //     },
+
+        //   ],
+        // },
         {
-          name: 'International Partners',
+          name: 'Research Partners',
           members: [
             {
               name: 'Prof. Dr. Minoru Inaba',
@@ -217,46 +210,7 @@ export default {
           ],
         },
         {
-          name: 'Partners for Technical and Materials Research',
-          members: [
-            {
-              name: 'Assoc. Prof. Dr. Yoko Taniguchi',
-              institute: 'University of Tsukuba, Research Center for West Asian Civilization',
-              link: '',
-            }, {
-              name: 'Prof. Dr. Shigeo Yamada',
-              institute: 'University of Tsukuba, Research Center for West Asian Civilization',
-              link: '',
-            }, {
-              name: 'Dr. Susanne Ebbinghaus',
-              institute: 'Harvard Art Museums',
-              link: 'https://scholar.harvard.edu/ebbinghaus/home',
-            }, {
-              name: 'Dr. Katherine Eremin',
-              institute: 'Harvard Art Museums',
-              link: '',
-            }, {
-              name: 'Beth Edelstein',
-              institute: 'Cleveland Museum of Art, Conservation Department',
-              link: '',
-            }, {
-              name: 'Colleen Snyder',
-              institute: 'Cleveland Museum of Art, Conservation Department',
-              link: '',
-            }, {
-              name: 'Dr. Katharina Uhlir',
-              institute: 'Kunsthistorisches Museum Wien (KHM), Department of Conservation Science',
-              link: '',
-            },
-            {
-              name: 'Rosa Heydenreich',
-              institute: 'Kunsthistorisches Museum Wien (KHM), Department of Conservation Science',
-              link: '',
-            },
-          ],
-        },
-        {
-          name: 'Project Consultants',
+          name: 'Research Consultants',
           members: [
             {
               name: 'Arturo Annucci, laurea Magistrale',
@@ -318,20 +272,25 @@ export default {
               link: 'https://univie.academia.edu/EhsanShavarebi',
             },
             {
+              name: 'Prof. Dr. Ingo Strauch',
+              institute: 'Université de Lausanne, Department of Slavic and South Asian Studies / Interdisciplinary Centre of Religious Studies',
+              link: 'https://applicationspub.unil.ch/interpub/noauth/php/Un/UnPers.php?PerNum=1138438&LanCode=8',
+            },
+            {
               name: 'Assoc. Prof. Dr. Yoko Taniguchi',
               institute: 'University of Tsukuba, Graduate School of Humanities and Anthropology',
               link: 'https://tsukuba.academia.edu/YokoTaniguchi',
             },
-            {
-              name: 'Dr. Luke Treadwelll',
-              institute: 'University of Oxford, Faculty of Oriental Studies',
-              link: 'https://www.orinst.ox.ac.uk/people/luke-treadwell',
-            },
-            {
-              name: 'Dr. Kurt Tropper',
-              institute: 'Austrian Academy of Sciences',
-              link: 'https://www.oeaw.ac.at/en/ikga/team/research/tropper-kurt',
-            },
+            // {
+            //   name: 'Dr. Luke Treadwelll',
+            //   institute: 'University of Oxford, Faculty of Oriental Studies',
+            //   link: 'https://www.orinst.ox.ac.uk/people/luke-treadwell',
+            // },
+            // {
+            //   name: 'Dr. Kurt Tropper',
+            //   institute: 'Austrian Academy of Sciences',
+            //   link: 'https://www.oeaw.ac.at/en/ikga/team/research/tropper-kurt',
+            // },
 
             {
               name: 'Prof. Dr. Leonard van der Kuijp',
@@ -344,36 +303,144 @@ export default {
               institute: 'University of Lausanne, Department of South Asian Studies',
               link: 'https://unil.academia.edu/No%C3%A9mieVerdon',
             },
-
+            {
+              name: 'Dr. Verena Widorn',
+              institute: 'University of Vienna, Department of Art History / CIRDIS',
+              link: 'https://univie.academia.edu/VerenaWidorn',
+            },
           ],
         },
         {
-          name: 'Digital Platform Development',
+          name: 'Materials and Technical Research Consultants',
           members: [
             {
-              name: 'Mag. phil. Ludwig Maximilian Breuer',
-              institute: 'Austrian Academy of Sciences, Austrian Centre for Digital Humanities and Cultural Heritage',
+              name: 'Assoc. Prof. Dr. Yoko Taniguchi',
+              institute: 'University of Tsukuba, Research Center for West Asian Civilization',
               link: '',
             }, {
-              name: 'Alexander Watzinger',
-              institute: 'Austrian Academy of Sciences, Austrian Centre for Digital Humanities and Cultural Heritage',
+              name: 'Prof. Dr. Shigeo Yamada',
+              institute: 'University of Tsukuba, Research Center for West Asian Civilization',
               link: '',
-            },{
-              name: 'Andreas Olschnögger, BSc',
-              institute: 'Austrian Academy of Sciences, Austrian Centre for Digital Humanities and Cultural Heritage',
+            }, {
+              name: 'Dr. Susanne Ebbinghaus',
+              institute: 'Harvard Art Museums',
+              link: 'https://scholar.harvard.edu/ebbinghaus/home',
+            }, {
+              name: 'Dr. Katherine Eremin',
+              institute: 'Harvard Art Museums',
+              link: '',
+            }, {
+              name: 'Beth Edelstein',
+              institute: 'Cleveland Museum of Art, Conservation Department',
+              link: '',
+            }, {
+              name: 'Colleen Snyder',
+              institute: 'Cleveland Museum of Art, Conservation Department',
+              link: '',
+            }, {
+              name: 'Dr. Katharina Uhlir',
+              institute: 'Kunsthistorisches Museum Wien (KHM), Department of Conservation Science',
+              link: '',
+            },
+            {
+              name: 'Rosa Heydenreich',
+              institute: 'Kunsthistorisches Museum Wien (KHM), Department of Conservation Science',
               link: '',
             },
           ],
         },
         {
-          name: 'Website',
+          name: "Publication Team",
+          htmlContent: `
+<span class="text-decoration-underline">Editors:</span> Natasha Kimmet and Noémie Verdon<br>
+
+<span class="text-decoration-underline">Senior content editors:</span> Deborah Klimburg-Salter and Michael Alram<br>
+
+<span class="text-decoration-underline">Digital editor:</span> Malgorzata Lenko<br>
+
+<span class="text-decoration-underline">Technical evaluation:</span> Austrian Centre for Digital Humanities and Cultural Heritage (ACDH-CH)<br>
+
+<span class="text-decoration-underline">Contributing authors:</span>
+<a href="https://www.oeaw.ac.at/m/alram-michael" target="_blank">Michael Alram</a>,
+<a href="https://cambridge.academia.edu/ArturoAnnucci" target="_blank">Arturo Annucci</a>,
+<a href="https://arthistory.uchicago.edu/graduate/profiles/casalini" target="_blank">Alice Casalini</a>,
+<a href="https://unior.academia.edu/AnnaFiligenzi" target="_blank">Anna Filigenzi</a>,
+<a href="https://khm-at.academia.edu/MartinaGriesser" target="_blank">Martina Griesser</a>,
+<a href="https://cardiff.academia.edu/AdamHardy" target="_blank">Adam Hardy</a>,
+<a href="https://sfp.ethz.ch/about-us/people/ph-d--students/heydenreich--rosa.html" target="_blank">Rosa Heydenreich</a>,
+<a href="https://www.phil.uni-wuerzburg.de/en/indologie/mitarbeiter/holz/" target="_blank">Kathrin Holz</a>,
+<a href="https://kdb.iimc.kyoto-u.ac.jp/profile/en.952dcc856ab2bee8.html" target="_blank">Minoru Inaba</a>,
+<a href="https://uni-erfurt.academia.edu/ElisaIori" target="_blank">Elisa Iori</a>,
+M. Jentsch, Robert Keck,
+<a href="https://upesh.academia.edu/GKhan" target="_blank">Gul Rahim Khan</a>,
+<a href="https://artmuseum.indiana.edu/about/staff/_curatorial/kimmet-natasha.html" target="_blank">Natasha Kimmet</a>,
+<a href="https://kunstgeschichte.univie.ac.at/personen/pensionierte-professoreninnen/klimburg-salter-deborah/" target="_blank">Deborah Klimburg-Salter</a>,
+Malgorzata Lenko,
+<a href="https://unior.academia.edu/MicheleMinardi" target="_blank">Michele Minardi</a>,
+<a href="https://www.unive.it/data/people/23204589/curriculum" target="_blank">Luca M. Olivieri</a>,
+<a href="https://www.oeaw.ac.at/en/oeai/institute/team/person/nikolaus-schindel" target="_blank">Nikolaus Schindel</a>,
+<a href="https://khm-at.academia.edu/EhsanShavarebi" target="_blank">Ehsan Shavarebi</a>,
+<a href="https://www.unil.ch/slas/ingostrauch" target="_blank">Ingo Strauch</a>,
+<a href="https://khm-at.academia.edu/KatharinaUhlir" target="_blank">Katharina Uhlir</a>,
+<a href="https://www.unil.ch/slas/fr/home/menuinst/collaborateursrices/collaborateurs-2/verdon-noemie.html" target="_blank">Noémie Verdon</a><br>
+
+<span class="text-decoration-underline">Copyeditor:</span> Gregory Weeks
+          `
+        },
+        {
+          name: 'Digital Platform Development Contributors',
           members: [
             {
-              name: 'Andrea Ennagi',
-              institute: 'University of Vienna, Department of Art History',
+              name: 'Aleksandra Apic, BA MA',
+              institute: 'University of Vienna, Department of Art History / CIRDIS',
               link: '',
-            }],
+            },
+            {
+              name: 'Mag. phil. Ludwig Maximilian Breuer',
+              institute: 'Austrian Academy of Sciences, Austrian Centre for Digital Humanities and Cultural Heritage',
+              link: '',
+            },
+            {
+              name: 'Mag. rer. nat. Daniel Nell',
+              institute: 'University of Vienna, Department of Geography and Regional Research',
+              link: '',
+            },
+            {
+              name: 'Uwe Niebuhr, MA',
+              institute: 'University of Vienna, CIRDIS',
+              link: '',
+            },
+            {
+              name: 'Andreas Olschnögger, BSc',
+              institute: 'Austrian Academy of Sciences, Austrian Centre for Digital Humanities and Cultural Heritage',
+              link: '',
+            },
+            {
+              name: 'Nina Richards, MA BSc',
+              institute: 'Austrian Academy of Sciences, Austrian Centre for Digital Humanities and Cultural Heritage',
+              link: '',
+            },
+            {
+              name: 'Mag. Sandrina Schwarz, BA',
+              institute: 'University of Vienna',
+              link: '',
+            },
+            {
+              name: 'Alexander Watzinger',
+              institute: 'Austrian Academy of Sciences, Austrian Centre for Digital Humanities and Cultural Heritage',
+              link: '',
+            },
+          ],
         },
+        // {
+        //   name: 'Website',
+        //   members: [
+        //     {
+        //       name: 'Andrea Ennagi',
+        //       institute: 'University of Vienna, Department of Art History',
+        //       link: '',
+        //     }],
+        // },
       ],
     };
   },

@@ -3,7 +3,7 @@
     <section class="header secondary darken-1 mb-10">
       <div class="page-content  d-flex align-center">
         <p class="title-1">
-          Sourcebook
+          Sourcebook for the Shahi Kingdoms
         </p>
       </div>
     </section>
@@ -11,18 +11,17 @@
     <section>
       <div class="sourcebook-body mb-15">
         <p class="text-body-1">
-          The Shahi project team has produced this collection of Sourcebook entries to inform each other of developments
-          in their own respective research and provide information pertaining to the cultural history of the Shahi
-          kingdoms to a wider audience. Each concise entry attempts to more precisely define a research problem or
-          summarize key sources and includes relevant bibliographic and digital references that can be cross-referenced
-          in the Shahi Kingdoms Database, Bibliographic Database, and scientific publication series of the project.
+          Edited by Natasha Kimmet and Deborah Klimburg-Salter with peer review by <nuxt-link to="/team" class="go-to-map-button primary--text">contributors</nuxt-link> to the Shahi Project.
         </p>
-        <p class="text-body-2">
-          *The Shahi Kingdoms Digital Research Platform employs two transliteration systems. To
-          ensure accessibility across scholarly disciplines and for general audiences, simplified phonetic
-          transcriptions are used for frequently-used terms on the platform (e.g., Shahi). Diacritics are employed in
-          individual scholars' contributions, such as Sourcebook entries (e.g., Śāhi).
+        <p class="text-body-1">
+          The <i>Sourcebook for the Shahi Kingdoms</i> is a compilation of short research entries. The <i>Sourcebook</i> developed out of the annual
+          project workshops in which the international contributing scholars informed each other of developments in their own respective research
+          and discussed the primary source materials underpinning their work. The resultant <i>Sourcebook</i> entries each attempt to more precisely define
+          a research problem or summarize key sources pertinent to the development of an integrated understanding of the cultural history of the Shahi
+          Kingdoms. The entries include relevant bibliographic and digital references that can be cross-referenced in the Shahi Kingdoms Database,
+          bibliography, and final digital publication.
         </p>
+
         <v-tabs
           v-model="tab"
           align-with-title

@@ -7,13 +7,17 @@
       for the cultural history of the Shahi Kingdoms
     </p>
     <p class="text-body-1">
-      This is an online resource of the Austrian Science Fund (FWF) project ‘Cultural Formation and Transformation:
-      Shahi Art and Architecture from Afghanistan to the West Tibetan Frontier at the Dawn of the Islamic Era’ (P-
-      31246) directed by Univ.-Prof. Dr. Deborah Klimburg-Salter in collaboration with National Research Partner HR
-      Doz. Dr. Michael Alram. The following list includes publications relevant for the study of the cultural history of
-      the Shahi Kingdoms compiled by the project core team and expanded through the contributions of Prof. Dr. Minoru
-      Inaba, Dr. Noémie Verdon (primary literary sources) and other project consultants.
-      Last update 08.11.2021
+      The following bibliography offers a comprehensive list of publications relevant for the study of the cultural history of the Shahi Kingdoms. Developed by the Shahi Project team and collaborating consultants, the bibliography is multidisciplinary in scope and encompasses primary literary sources in relevant languages and secondary literature.
+    </p>
+    <div class="text-h6 mt-2">External Digital Resources</div>
+    <p class="text-body-1">
+      These scholastically rigorous, accessible digital resources allow for further exploration of material relevant to the Shahi Kingdoms: <br>
+      <v-list>
+        <v-list-item style="min-height: 0;"><v-list-item-content class="pb-0"><a href="https://data1.geo.univie.ac.at/projects/dasantlitzdesfremden/index.html%3Flanguage=en.html" target="_blank">The Countenance of the Other: The Coins of the Huns and Western Turks in Central Asia and India (online project of the Kunsthistorisches Museum Wien)</a></v-list-item-content></v-list-item>
+      <v-list-item style="min-height: 0;"><v-list-item-content class="pb-0"><a href="https://ghazni.bdus.cloud/" target="_blank">Ghazni | Italian Archaeological Mission in Afghanistan: Buddhist and Islamic Archaeological Data from Ghazni, Afghanistan</a></v-list-item-content></v-list-item>
+      <v-list-item style="min-height: 0;"><v-list-item-content class="pb-0"><a href="https://haddaarcheodb.com/" target="_blank">Hadda Archéo Database</a></v-list-item-content></v-list-item>
+      <v-list-item style="min-height: 0;"><v-list-item-content class="pb-0"><a href="https://cirdis.univie.ac.at/documentation/western-himalaya-archive-vienna-whav" target="_blank">Western Himalaya Archive Vienna (WHAV)</a></v-list-item-content></v-list-item>
+      </v-list>
     </p>
     <v-row  align="center">
       <v-col cols="12" sm="">

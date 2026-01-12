@@ -1,12 +1,17 @@
 <template>
   <div>
     <section class="header secondary darken-1 mb-10">
-      <div class="page-content  d-flex align-center">
+      <div class="page-content d-flex align-center">
         <p class="title-1">
           Collections
         </p>
       </div>
     </section>
+    <section class="page-content mb-10">
+      <p class="text-body-1">
+          The following Collections highlight noteworthy categories of primary sources within the corpus of Shahi material culture. Each collection contains a brief description and all relevant primary source records in the Shahi Kingdoms Database. The collections were developed by members of the Shahi Project network.
+        </p>
+      </section>
     <section class="page-content">
       <CollectionBox v-for="item in collections" :key="item.id" :collection="item" />
     </section>

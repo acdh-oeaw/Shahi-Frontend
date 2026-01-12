@@ -2,142 +2,62 @@
   <div>
     <ImageNavigation/>
     <div class="text-justify pa-10 page-content">
+      <h1 class="title-1 font-weight-light text-left mb-10" style="font-size: 3rem">Shahi Kingdoms Research Project</h1>
       <p class="text-body-1">
-        The goal of the project "Cultural Formation and Transformation: Shahi Art and Architecture from Afghanistan to
-        the West Tibetan Frontier at the Dawn of the Islamic Era" is to define a narrative cultural history of the Shahi
-        kingdoms (7th to 10th century). Due to their extensive temporal and geographic parameters — extending from
-        Afghanistan to the borders of the Tibetan empire — the kingdoms played a pivotal role in the history of Inner
-        and South Asia. Despite its importance for the history of later Buddhist art and the formation of Islamic art,
-        the cultural history of this almost 300-year period has never been the focus of dedicated research.
+        The Shahi Kingdoms (7th to early 11th century CE) played a pivotal role in the history of Central, Inner, and South Asia, notably in the history of later Buddhist art and the formation of Islamic art.
+      </p>
+      <p class="text-body-1">
+        This platform reflects the collaborative research of a global team of scholars who worked together in the context of the Austrian Science Fund project (P-31246) “Cultural Formation and Transformation: Shahi Art and Architecture from Afghanistan to the West Tibetan Frontier at the Dawn of the Islamic Era.”
+      </p>
+      <p class="text-body-1">
+        The goal of the “Shahi Project” was—for the first time—to define a narrative cultural history of the Shahi Kingdoms. The project examined how exchanges of objects, technologies, and ideas combined with continuous mobility across a vast network of transnational trade routes, religious institutions, and mercantile sites enabled a distinctive visual culture to evolve and flourish throughout the Shahi Kingdoms, despite the simultaneous expansion of successive Muslim armies as well as the Tibetan empire in the northeast. The research considered political, economic, and cultural developments in relation to major—often interconnected—events like climate change and shifts in political alliances that resulted in changes to the centuries-old communication routes.
+      </p>
+      <p class="text-body-1">
+        The Shahi Project was a cooperation between the University of Vienna’s Department of Art History, the Austrian Academy of Sciences’ Department of Classical Studies at the Austrian Archaeological Institute, and the Art History Museum of Vienna’s Coin Cabinet and Conservation Science Department. The project was realized in collaboration with the Center for Interdisciplinary Research and Documentation of Inner and South Asian Cultural History (CIRDIS) at the University of Vienna; the University of Vienna’s Department of Geography and Regional Research; the Austrian Centre for Digital Humanities and Cultural Heritage at the Austrian Academy of Sciences; and a large network of scholars, museum professionals, and digital humanities experts based at institutions in the United States, Europe, and Asia.
+      </p>
+      <p class="text-body-1">
+        The project was funded by the Austrian Science Fund (stand-alone project P-31246) and the Austrian Academy of Sciences, with additional support from the Austrian Science Fund (digital publication grant PUD 26-G), Holzhausen-Legat (grant awarded in 2021), and the Austrian Archaeological Institute at the Austrian Academy of Sciences.
       </p>
 
+
+      <h2 class="title-1 font-weight-light text-left mb-10" style="font-size: 3rem">Shahi Kingdoms Digital Research Platform </h2>
       <p class="text-body-1">
-        This research makes a major contribution to digital humanities through the innovative methods used to explain
-        for the first time the cultural history of a vast area that is of tremendous geographic and temporal
-        significance (today within the modern states of Afghanistan, Pakistan, and India). A central element of our
-        research is to document and systematize comprehensive data, cross referencing the entire corpus of the material
-        culture of the vast Shahi kingdoms. The resultant database will be linked to the <strong>Digital Maps</strong>
-        of the Shahi
-        kingdoms and the Bibliographic Database (<strong>BibDB</strong>). Modern digital methods will allow the
-        quantitative and
-        qualitative analysis of primary sources (texts; inscriptions; numismatic, art historical, and archaeological
-        data) plus completely new data derived from the analysis of the materials and techniques of manufacture of three
-        groups of artifacts (<a href="#database" class="go-to-map-button primary--text">see Database</a>).
+       This platform, featuring the Shahi Kingdoms Database and integrated <a href="https://shahi.pubpub.org/" target="_blank" class="go-to-map-button primary--text">Digital Publication</a>, offers a major contribution to scholarship in Asian cultural history and the digital humanities by combining innovative multidisciplinary research with digital documentation and spatial visualization of cultural heritage. It is the first platform of its kind publishing comprehensive primary source material—artworks, coins, inscriptions, archaeological sites—for the Shahi Kingdoms together with groundbreaking research by a global team of prominent and emerging scholars working across Central, Inner, and South Asia.
+      </p>
+      <p class="text-body-1">
+       This open-source portal for documentation, research, and education features multiple core relational components: (1) The
+       <nuxt-link to="/data/list?view_classes=artifact&view_classes=place" class="go-to-map-button primary--text">Database</nuxt-link>
+       containing scientifically annotated records for the corpus of the material culture of the Shahi Kingdoms; cross-referenced
+       with (2) an <nuxt-link to="/data/map?view_classes=place&view_classes=artifact" class="go-to-map-button primary--text">interactive
+        geo-referenced map</nuxt-link>; (3) thematic <nuxt-link to="/collections" class="go-to-map-button primary--text">collections</nuxt-link> of
+        primary sources; (4) comprehensive <nuxt-link to="/bibliography" class="go-to-map-button primary--text">bibliography</nuxt-link>; and (5)
+         concise peer-reviewed articles in the <i><nuxt-link to="/sourcebook" class="go-to-map-button primary--text">Sourcebook for the Shahi Kingdoms</nuxt-link></i>.<br>
+       The platform opens new ways of presenting multidisciplinary scientific research and documentation of the original primary sources that have, until now, largely remained unpublished, hardly accessible (spread throughout remote archives and museums), and lost or destroyed in illicit antiquities trade and the conflicts that have plagued Afghanistan, Pakistan, and northern India for many decades. These tools allow researchers to study and understand the vast geographical, cultural, and temporal expanse of the Shahi Kingdoms as an integrated whole. The platform and publication are hoped to bring the Shahi Kingdoms to the attention of a broader audience and to foster object-focused education for scholars and museum professionals. <br>
+       The platform is an initiative of the Shahi Project in collaboration with technical experts at the Austrian Centre for Digital Humanities and Cultural Heritage (ACDH-CH) of the Austrian Academy of Sciences and cartographers at the University of Vienna’s Department of Geography and Regional Research.
       </p>
 
-      <p class="text-body-1">
-        Our research to date allows us to propose a chronological framework: sometime after 660, Kabul became the seat
-        of the Turk Shahi and the center of administration, succeeding Kapisa. Thus began the almost 300-year rule of
-        the Kabul Shahi. During the late 7th century, another member of the Kabul Shahi’s family was ruling in
-        Zabulistan. Southwest of Zabulistan, in Sistan, Arab cantonments were becoming stronger while the last remnants
-        of a Sasanian court were fading from the historical scene. By the mid-7th century there were at least 52
-        Buddhist cult sites in Kapisa-Kabul (Fussman et al. 2008). Hindu cult sites also date to this period (Tepe
-        Skandar, Khair Khana). The first half of the 8th century was the high point of artistic activity across the
-        Shahi kingdoms — Bamiyan, Kabul, Tapa Sardar (Ghazni), and Gilgit — while the Karkota dynasty, related to the
-        Turk Shahi, established itself in Kashmir. Despite the king’s nominal conversion to Islam in 812/813 CE, the
-        Turk Shahi continued to rule until a palace coup (the revolt of the chief minister) brought the Hindu Shahi to
-        power in circa the 820s. The two successive dynasties are known together as the Kabul Shahi. The Turk Shahi were
-        primarily patrons of Buddhism, and the “royal monasteries” at Tepe Narenj and Qol-e Tut continued until the
-        early Ghaznavid period (Paiman and Alram 2012: 38). Kabul remained a regional capital, but by the end of the 9th
-        century, Udabhandapura (modern Hund on the Indus River in Pakistan) had become the primary administrative
-        center. The current excavations at Barikot (Vajirasthana) in the Swat valley show a substantial continuity
-        between the two dynasties. The Kabul Shahi kingdoms fell to Mahmud of Ghazni in 1026. However, recent evidence
-        like the Śrī Haṃmīra bilingual inscription (Rodziadi Khaw 2015) demonstrates Hindu Shahi cult sites in Pakistan
-        also continued to be active through the time of Mahmud of Ghazni.
-      </p>
 
-      <p class="text-body-1">
-        We mention here only one research question: The impact of climate change on specific high altitude regions of
-        the Shahi kingdoms:
-      </p>
-      <p class="text-body-1">
-        Following a suggestion proposed by Di Cosmo, we will evaluate the possible impacts of the Late Antique Little
-        Ice Age (LALIA)—a long cooling period that occurred between 536 and 660 CE in the adjacent regions of Inner Asia
-        (Büntigen et al. 2016; Whittow 2019).
-        The Shahi project provides new multidisciplinary evidence for dramatic changes in the high-altitude valleys of
-        the Shahi kingdoms which suggest two models as a basis for our working hypothesis. The high mountain valley of
-        Swat in Pakistan experienced a collapse of agro-production with dramatic implications for the Buddhist society,
-        which began a long and inexorable decline around the mid-6th century (see <a
-        href="https://shahimaterialculture.univie.ac.at/fileadmin/user_upload/p_shahimaterialculture/sourcebook_entries/1_Olivieri_2020_LALIA_in_Shahi_Sourcebook.pdf"
-        class="go-to-map-button primary--text">Olivieri 2020</a> )
-      </p>
-      <p class="text-body-1">
-        The dramatic changes that can be identified in some high-altitude valleys may be attributed to the direct
-        effects of climate change on the ancient economies of these Himalayan double crop pocket zones which encouraged
-        the rapid growth of the mountain princely states. The economic expansion in the late 6th-early 7th century began
-        when the trans-national trade routes were re-routed, in part as a result of the negative impact of LALIA. A long
-        period of monumental building and artistic activity in the 7th century, followed by an extraordinary flourishing
-        of high quality artistic production in the first half of the 8th century, has been identified in the kingdoms of
-        Bamiyan and of the Palola Shahi at Gilgit and Bolor-Chilas.
-      </p>
-      <p class="text-body-1">
-        Additional primary evidence will be obtained, for the first time across the Shahi kingdoms, from the analysis of
-        the material and technical properties of coins and artifacts, both stationary and portable. This data analysis
-        should allow us to understand the relationships among the categories of primary sources for the study of Shahi
-        cultural history, thus allowing us to attempt to validate earlier hypotheses such as: The efficient use of
-        resources, raw materials, and artisans would be maximized if the coin mints and major metal sculpture workshops
-        could be located in proximity to one another. Qualitative data analysis of these two groups of objects might
-        demonstrate relationships which indicate the probable locations for specific mints and workshops.
-      </p>
-      <p class="text-body-1">
-        The transfer of objects, technologies, and ideas within the extensive Shahi kingdoms and along the network of
-        trans-national trade routes enabled a distinctive visual culture to evolve and flourish throughout the kingdoms.
-        We use diachronic and synchronic analytical methods to consider the relationship between innovative <a
-        href="https://shahimaterialculture.univie.ac.at/technology-and-society/" class="go-to-map-button primary--text">Technology
-        and Society</a>, visualized in the database. In order to increase the probable accuracy of the quantitative and
-        qualitative analyses, the database architecture and its contents will be periodically reviewed by project
-        consultants.
-      </p>
 
+      <h2 class="title-1 font-weight-light text-left mb-10" style="font-size: 3rem">Shahi Kingdoms Database</h2>
       <p class="text-body-1">
-        The Shahi project is funded by the Austrian Science Fund (project P-31246), and the Austrian Academy of
-        Sciences. The project is a cooperation between the University of Vienna—Department of Art History and CIRDIS;
-        the Austrian Academy of Sciences—Austrian Archaeological Institute, Department of Classical Studies; and the Art
-        History Museum, Vienna—Coin Cabinet and Conservation Science Department.
+        This database contains comprehensive primary source material for the Shahi Kingdoms, including artworks, coins, inscriptions, and archaeological sites. Each type of sources contributes critical information about the Shahi Kingdoms (see <nuxt-link to="/collections" class="go-to-map-button primary--text">Collections</nuxt-link>). By studying the corpus of primary sources collectively, we gain a more cohesive picture of the cultural history of this region.
       </p>
       <p class="text-body-1">
-        Additional support for the Shahi Kingdoms Database and dual-format digital and print publication is provided by
-        the Austrian Science Fund (grant PUD 26-G), Holzhausen-Legat (grant awarded in 2021), and the Austrian
-        Archaeological Institute at the Austrian Academy of Sciences.
-      </p>
-
-      <p class="text-caption">
-        *The Shahi Kingdoms Digital Research Platform employs two transliteration systems. To ensure accessibility
-        across scholarly disciplines and for general audiences, simplified phonetic transcriptions are used for
-        frequently-used terms on the platform (e.g., Shahi). Diacritics are employed in individual scholars'
-        contributions, such as Sourcebook entries (e.g., Śāhi).
-      </p>
-      <h1 class="title-1 font-weight-light text-left mb-10" style="font-size: 3rem">Shahi Kingdoms Database</h1>
-
-      <p class="text-body-1">
-        The Shahi Kingdoms Database presents comprehensive primary source material--archaeological sites, artifacts,
-        coins, inscriptions--for the Shahi kingdoms (c. 7th-10th centuries) which played a pivotal role in the history
-        of Central, Inner, and South Asia. The primary source material records are cross-referenced with an interactive
-        geo-referenced map, bibliographic references, and digital scientific articles.
-      </p>
-
-      <p class="text-body-1">
-        The database is an initiative of the interdisciplinary Austrian Science Fund (FWF) project P-31246 ‘Cultural
-        Formation and Transformation: Shahi Art and Architecture from Afghanistan to the West Tibetan Frontier at the
-        Dawn of the Islamic Era’ in cooperation with technical experts at the Austrian Academy of Sciences’ Austrian
-        Centre for Digital Humanities and Cultural Heritage (ACDH-CH) and cartographers at the University of Vienna’s
-        Department of Geography and Regional Research. It is co-financed by the FWF Shahi project, Austrian
-        Archaeological Institute, and Holzhausen-Legat.
+        The structure of the database is primarily geographical. All stationary objects have precise GPS coordinates and chronologies, where available. For the category of portable objects, the database is structured according to material. All objects have been determined to be authentic based on our criteria for identifying authentic objects (see <a href="#categories_of_authenticity">“Categories of Authenticity”</a> below).
       </p>
       <div id="database" style="position: relative;top:-180px"></div>
-      <p class="title-2">The Database</p>
 
+      <p class="title-2">Search the Database</p>
       <p class="text-body-1">
-        The Shahi Kingdoms Database presents comprehensive primary source material--archaeological sites, artifacts,
-        coins, inscriptions--for the Shahi kingdoms (c. 7th-10th centuries) which played a pivotal role in the history
-        of Central, Inner, and South Asia. The primary source material records are cross-referenced with an interactive
-        geo-referenced map, bibliographic references, and digital scientific articles.
+       To search the database, you can explore by category (see list below) or by entering a keyword in the search bar. Records can be viewed in table, list, map, or image gallery format.
       </p>
-
+      <p class="title-2">Explore the Map</p>
       <p class="text-body-1">
-        The structure of the database is primarily geographical. All stationary objects have precise GPS coordinates and
-        chronologies, where available. However, for the category of portable objects, the database is structured
-        according to material. The corpus of visual and material culture attributed to the Shahi period encompasses:
+       To explore the interactive map, click on the red dot symbols that indicate artifact and site records associated with a location. You can refine the records visible on the map according to a specific period by clicking the small clock icon in the upper right corner and then dragging the slider bar to different centuries.
+      </p>
+      <p class="title-2">The Shahi Corpus</p>
+      <p class="text-body-1">
+       The corpus of material culture attributed to the Shahi period encompasses:
       </p>
 
       <v-row>
@@ -166,21 +86,21 @@
 
           <div class="data-base-element">
             <p class="text-h6 mt-15">(2) Portable objects</p>
-            <p class="text-body-1">
+            <!-- <p class="text-body-1">
               All objects have been determined to be authentic based on our criteria for identifying
               authentic objects (see “Categories of Authenticity” below).
-            </p>
-            <p class="text-subtitle-1">2.a. Statues</p>
-            <ul class="text-body-2 mb-1">
+            </p> -->
+            <p class="text-subtitle-1 mb-1">2.a. Statues (in different media)</p>
+            <!-- <ul class="text-body-2 mb-1">
               <li>metal</li>
               <li>clay-based</li>
               <li>stone</li>
               <li>wood</li>
-            </ul>
-            <p class="text-subtitle-1">2.b. Coins and medals</p>
-            <ul class="text-body-2 mb-1">
+            </ul> -->
+            <p class="text-subtitle-1 mb-1">2.b. Coins and medals</p>
+            <!-- <ul class="text-body-2 mb-1">
               <a href="#coins" class="go-to-map-button primary--text">see more below</a>
-            </ul>
+            </ul> -->
             <p class="text-subtitle-1 mb-1">2.c. Jewelry</p>
             <p class="text-subtitle-1 mb-1">2.d. Utensil</p>
             <p
@@ -240,7 +160,7 @@
         </v-col>
       </v-row>
       <div id="coins" style="position: relative;top:-180px"></div>
-      <p class="text-body-1">
+      <!-- <p class="text-body-1">
         The largest and most significant category of artifacts are the coins struck in various
         mints throughout the Shahi kingdoms. They provide the chronological and political framework for the Shahi
         period. With their images and inscriptions, they give insight into the self-concept of their issuers. In
@@ -261,7 +181,7 @@
         This
         concerns also the role of foreign money, like Sasanian drachms, Muslim dirhams, and copper coins, which
         circulated within the Shahi kingdoms.
-      </p>
+      </p> -->
       <v-row>
         <v-col cols="12" sm="6">
           <v-img
@@ -289,15 +209,8 @@
         </v-col>
       </v-row>
       <div class="mr-15 database-element">
-        <p class="text-h6 mt-15">(3) Information carrier</p>
+        <p class="text-h6 mt-15">(3) Information carriers</p>
         <p class="text-subtitle-1">3.a. Inscriptions</p>
-
-        <p class="text-body-1">
-          Inscriptions that fit within the chronological and geographic parameters of the Shahi kingdoms offer a
-          critical
-          primary source for the region’s cultural history. The inscriptions will be contextualized to the degree
-          possible.
-        </p>
         <p
           class="primary--text go-to-map-button mt-5"
           @click="$router.push('/data/list?view_classes=artifact&type_id=3')"
@@ -331,34 +244,21 @@
           </p>
         </v-col>
       </v-row>
-      <p
-        class="text-h5 mt-15"
-      >Categories of Authenticity for Objects in the Shahi Kingdoms Database</p>
+      <h2 class="title-1 font-weight-light text-left mb-10" style="font-size: 3rem" id="categories_of_authenticity">Categories of Authenticity for Objects in the Shahi Kingdoms Database</h2>
 
       <p class="text-body-1">
-        Only objects that the art history team could unanimously categorize as authentic are included in the corpus of
-        Shahi
-        visual and material culture. Strict selection criteria have been used to assess the authenticity of each object.
-        We
-        defined three categories of authenticity. In the database, each object is identified as belonging to either
-        category
-        A or B. Category C objects are not included.
+        Only objects that the art history team could unanimously categorize as authentic are included in the corpus of Shahi visual and material culture. Strict selection criteria have been used to assess the authenticity of each object. We defined three categories of authenticity. In the database, each object is identified as belonging to either category A or B. Category C objects are not included.
       </p>
 
       <p class="text-h6">
-        <span class="mr-4 font-weight-bold">A</span> Authentic objects with firm attribution
+        <span class="mr-4 font-weight-bold">A</span> Authentic objects with secure attribution
       </p>
 
       <p class="ml-3 text-body-1">
-        <span class="font-weight-bold">A1</span> Secure attribution: excavated objects from a trustworthy context
+        <span class="font-weight-bold">A1</span> Secure attribution: excavated objects from a trustworthy archaeological context.
       </p>
       <p class="ml-3 text-body-1">
-        <span class="font-weight-bold">A2</span> Attributable with high confidence: objects with an early accession date
-        (prior to WWI) in regional museums in
-        Afghanistan, Pakistan, and India, as well as objects photographed in situ in monastic and temple treasuries in
-        India; objects bearing inscriptions that indicate authenticity; objects for which objective technical analysis
-        has
-        been conducted that indicates authenticity.
+        <span class="font-weight-bold">A2</span> Attributable with high confidence: objects with an early accession date (prior to WWI) in regional museums in Afghanistan, Pakistan, and India, as well as objects photographed in situ in monastic and temple treasuries in India; objects bearing inscriptions that indicate authenticity; objects that have undergone objective technical analysis that indicates authenticity.
       </p>
 
       <p class="text-h6">
@@ -366,21 +266,31 @@
       </p>
 
       <p class="text-body-1">
-        Objects in private and western museum collections without secure provenance, inscriptions, or objective
-        technical
-        analysis. Comparative art historical analysis suggests confidence in their authenticity.
+        Objects in private collections and Western museum collections without secure provenance, inscriptions, or objective technical analysis. Comparative visual analysis suggests confidence in their authenticity.
       </p>
 
       <p class="text-h6">
-        <span class="mr-4 font-weight-bold">C</span> Insecure and fake objects
+        <span class="mr-4 font-weight-bold">C</span> Insecure and inauthentic objects
       </p>
 
       <p class="text-body-1">
-        These objects are not included in the corpus. However, in our study of Shahi material culture they are used for
-        comparison with apparently authentic objects in order to better understand the historiography of the field and
-        the
-        current market situation. We are aware that other art historians may come to different conclusions in some
-        instances.
+        These objects are not included in the corpus. However, in our study of Shahi material culture they are used for comparison with apparently authentic objects in order to better understand the historiography of the field and the current market situation. We are aware that other art historians and scholars may come to different conclusions.
+      </p>
+
+      <h2 class="title-1 font-weight-light text-left mb-10" style="font-size: 3rem">The Publication</h2>
+      <p class="text-body-1">
+        <i>Exploring the Contributions of the Shahi Kingdoms to Inner and South Asia: The Dynamic Evolution of Primary Source Materials from the Hindukush to the Himalayas during the 7th-11th Century</i>, edited by Natasha Kimmet and Noémie Verdon with Deborah Klimburg-Salter and Michael Alram.<br>
+        Following methods of digital humanities as well as principles of open science, the <a href="https://shahi.pubpub.org/" target="_blank" class="go-to-map-button primary--text">Digital Publication</a> offers innovative approaches to the study of the Shahi Kingdoms.
+
+Published in conjunction with a printed volume, the digital publication presents the final scientific results of the Shahi Project in a unique, digitally enriched format. The text is linked with the primary source materials, maps, and other digital tools published by the project team on the digital platform. The digital publication is further contextualized through linking directly to related scholarly resources and interactive visual content.
+      </p>
+
+      <p class="text-body-1">Notes</p>
+      <p class="text-caption">
+        The Shahi Kingdoms Digital Research Platform employs two transliteration systems. To ensure accessibility across scholarly disciplines and for general audiences, simplified phonetic transcriptions are used for frequently-used terms on the platform (e.g., Shahi). Diacritics are employed in individual scholars' contributions, such as Sourcebook entries (e.g., Śāhi).
+      </p>
+      <p class="text-caption">
+        The images on this platform originate from open access sources. Each image is subject to the terms of the Creative Commons selected by the rights holder. The Shahi Project team appreciates the institutions and individuals who shared their images. This commitment to open access enables the development of resources such as this digital platform and supports research.
       </p>
     </div>
   </div>
