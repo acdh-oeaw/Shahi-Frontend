@@ -38,6 +38,11 @@
 
               <span v-else> Team</span>
             </nuxt-link>
+            <a class="nav-link" href="https://shahi.pubpub.org/" target="_blank">
+              <v-icon v-if="$vuetify.breakpoint.smAndDown" color="black">mdi-book</v-icon>
+
+              <span v-else>Publications</span>
+            </a>
           </div>
         </div>
         <template v-if="$vuetify.breakpoint.mdAndUp" v-slot:extension>

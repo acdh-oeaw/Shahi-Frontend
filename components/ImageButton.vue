@@ -1,6 +1,8 @@
 <template>
   <v-btn
     :to="to"
+    :href="href"
+    :target="target"
     class="navigation-btn"
     @click="$emit('click')"
   >
@@ -23,7 +25,7 @@
 <script>
 export default {
   name: 'ImageButton',
-  props: ['icon', 'to'],
+  props: ['icon', 'to', 'href', "target"],
 };
 </script>
 

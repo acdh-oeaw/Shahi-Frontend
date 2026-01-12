@@ -37,8 +37,8 @@
           </ImageButton>
         </v-col>
         <v-col cols="12" sm="4">
-          <ImageButton to="/team" style="min-height: 50px">
-            Team
+          <ImageButton href="https://shahi.pubpub.org/" style="min-height: 50px" target="_blank">
+            Publications
           </ImageButton>
         </v-col>
       </v-row>
